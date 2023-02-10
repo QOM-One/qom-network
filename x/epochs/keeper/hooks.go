@@ -17,8 +17,8 @@
 package keeper
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/QOM-One/QomApp/x/epochs/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 var _ types.EpochHooks = MultiEpochHooks{}

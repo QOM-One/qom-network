@@ -34,14 +34,14 @@ import (
 	ibcgotesting "github.com/cosmos/ibc-go/v6/testing"
 	"github.com/cosmos/ibc-go/v6/testing/mock"
 
+	evmos "github.com/QOM-One/QomApp/types"
 	"github.com/evmos/ethermint/crypto/ethsecp256k1"
 	ethermint "github.com/evmos/ethermint/types"
 	evmtypes "github.com/evmos/ethermint/x/evm/types"
-	evmos "github.com/QOM-One/QomApp/types"
 )
 
 // ChainIDPrefix defines the default chain ID prefix for Evmos test chains
-var ChainIDPrefix = "evmos_9000-"
+var ChainIDPrefix = "qom_7668378-"
 
 func init() {
 	ibcgotesting.ChainIDPrefix = ChainIDPrefix

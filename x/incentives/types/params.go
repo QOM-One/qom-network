@@ -20,8 +20,8 @@ import (
 	"errors"
 	"fmt"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	epochstypes "github.com/QOM-One/QomApp/x/epochs/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // ParamsKey params store key

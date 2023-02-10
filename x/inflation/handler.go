@@ -18,9 +18,9 @@ package inflation
 
 import (
 	errorsmod "cosmossdk.io/errors"
+	"github.com/QOM-One/QomApp/x/inflation/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/QOM-One/QomApp/x/inflation/types"
 )
 
 // NewHandler returns a handler for Inflation type messages.

@@ -176,7 +176,7 @@ func (suite *KeeperTestSuite) TestBondedRatio() {
 			if tc.isMainnet {
 				suite.ctx = suite.ctx.WithChainID("qom_766-1")
 			} else {
-				suite.ctx = suite.ctx.WithChainID("evmos_9999-666")
+				suite.ctx = suite.ctx.WithChainID("qom_9999-666")
 			}
 			tc.malleate()
 

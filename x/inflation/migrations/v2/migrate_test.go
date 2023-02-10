@@ -8,11 +8,11 @@ import (
 	v2 "github.com/QOM-One/QomApp/x/inflation/migrations/v2"
 	"github.com/QOM-One/QomApp/x/inflation/types"
 
+	v2types "github.com/QOM-One/QomApp/x/inflation/migrations/v2/types"
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/evmos/ethermint/app"
 	"github.com/evmos/ethermint/encoding"
-	v2types "github.com/QOM-One/QomApp/x/inflation/migrations/v2/types"
 	"github.com/stretchr/testify/require"
 )
 

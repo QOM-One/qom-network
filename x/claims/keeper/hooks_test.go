@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/QOM-One/QomApp/testutil"
+	"github.com/QOM-One/QomApp/x/claims/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/evmos/ethermint/tests"
-	"github.com/QOM-One/QomApp/testutil"
-	"github.com/QOM-One/QomApp/x/claims/types"
 )
 
 func (suite *KeeperTestSuite) TestAfterProposalVote() {

@@ -21,10 +21,10 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/QOM-One/QomApp/x/inflation/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	evm "github.com/evmos/ethermint/x/evm/types"
-	"github.com/QOM-One/QomApp/x/inflation/types"
 )
 
 var _ types.LegacyParams = &V2Params{}

@@ -18,9 +18,9 @@ package recovery
 
 import (
 	errorsmod "cosmossdk.io/errors"
+	"github.com/QOM-One/QomApp/x/recovery/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/QOM-One/QomApp/x/recovery/types"
 )
 
 // NewHandler returns a handler for recovery type messages.

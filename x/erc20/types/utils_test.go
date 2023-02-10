@@ -61,7 +61,7 @@ func TestEqualMetadata(t *testing.T) {
 			banktypes.Metadata{
 				Base:        "aqom",
 				Display:     "qom",
-				Name:        "Qom",
+				Name:        "QOM",
 				Symbol:      "QOM",
 				Description: "EVM, staking and governance denom of Qom",
 				DenomUnits: []*banktypes.DenomUnit{
@@ -79,9 +79,9 @@ func TestEqualMetadata(t *testing.T) {
 			banktypes.Metadata{
 				Base:        "aqom",
 				Display:     "qom",
-				Name:        "Qom",
+				Name:        "QOM",
 				Symbol:      "QOM",
-				Description: "EVM, staking and governance denom of QOM",
+				Description: "EVM, staking and governance denom of Qom",
 				DenomUnits: []*banktypes.DenomUnit{
 					{
 						Denom:    "aqom",
@@ -111,7 +111,7 @@ func TestEqualMetadata(t *testing.T) {
 			banktypes.Metadata{
 				Base:        "aqom",
 				Display:     "qom",
-				Name:        "Qom",
+				Name:        "QOM",
 				Symbol:      "QOM",
 				Description: "EVM, staking and governance denom of Qom",
 				DenomUnits: []*banktypes.DenomUnit{
@@ -129,7 +129,7 @@ func TestEqualMetadata(t *testing.T) {
 			banktypes.Metadata{
 				Base:        "aqom",
 				Display:     "qom",
-				Name:        "Qom",
+				Name:        "QOM",
 				Symbol:      "QOM",
 				Description: "EVM, staking and governance denom of Qom",
 				DenomUnits: []*banktypes.DenomUnit{
@@ -147,7 +147,7 @@ func TestEqualMetadata(t *testing.T) {
 			banktypes.Metadata{
 				Base:        "aqom",
 				Display:     "qom",
-				Name:        "Qom",
+				Name:        "QOM",
 				Symbol:      "QOM",
 				Description: "EVM, staking and governance denom of Qom",
 				DenomUnits: []*banktypes.DenomUnit{
@@ -157,7 +157,7 @@ func TestEqualMetadata(t *testing.T) {
 						Aliases:  []string{"atto qom"},
 					},
 					{
-						Denom:    "uevmos",
+						Denom:    "uqom",
 						Exponent: 12,
 						Aliases:  []string{"micro qom"},
 					},
@@ -170,7 +170,7 @@ func TestEqualMetadata(t *testing.T) {
 			banktypes.Metadata{
 				Base:        "aqom",
 				Display:     "qom",
-				Name:        "Qom",
+				Name:        "QOM",
 				Symbol:      "QOM",
 				Description: "EVM, staking and governance denom of Qom",
 				DenomUnits: []*banktypes.DenomUnit{

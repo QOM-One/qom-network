@@ -1,6 +1,10 @@
 package keeper_test
 
 import (
+	"github.com/QOM-One/QomApp/app"
+	inflationkeeper "github.com/QOM-One/QomApp/x/inflation/keeper"
+	v2types "github.com/QOM-One/QomApp/x/inflation/migrations/v2/types"
+	"github.com/QOM-One/QomApp/x/inflation/types"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -8,10 +12,6 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/evmos/ethermint/encoding"
-	"github.com/QOM-One/QomApp/app"
-	inflationkeeper "github.com/QOM-One/QomApp/x/inflation/keeper"
-	v2types "github.com/QOM-One/QomApp/x/inflation/migrations/v2/types"
-	"github.com/QOM-One/QomApp/x/inflation/types"
 )
 
 type mockSubspace struct {

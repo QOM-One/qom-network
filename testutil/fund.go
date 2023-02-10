@@ -17,9 +17,9 @@
 package testutil
 
 import (
+	inflationtypes "github.com/QOM-One/QomApp/x/inflation/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
-	inflationtypes "github.com/QOM-One/QomApp/x/inflation/types"
 )
 
 // FundAccount is a utility function that funds an account by minting and

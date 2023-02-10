@@ -23,9 +23,9 @@ import (
 	porttypes "github.com/cosmos/ibc-go/v6/modules/core/05-port/types"
 	"github.com/cosmos/ibc-go/v6/modules/core/exported"
 
-	clienttypes "github.com/cosmos/ibc-go/v6/modules/core/02-client/types"
 	"github.com/QOM-One/QomApp/ibc"
 	"github.com/QOM-One/QomApp/x/claims/keeper"
+	clienttypes "github.com/cosmos/ibc-go/v6/modules/core/02-client/types"
 )
 
 var _ porttypes.Middleware = &IBCMiddleware{}

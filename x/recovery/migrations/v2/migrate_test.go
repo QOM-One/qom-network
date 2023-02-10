@@ -5,13 +5,13 @@ import (
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"testing"
 
-	"github.com/cosmos/cosmos-sdk/testutil"
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/evmos/ethermint/encoding"
 	"github.com/QOM-One/QomApp/app"
 	v2 "github.com/QOM-One/QomApp/x/recovery/migrations/v2"
 	v2types "github.com/QOM-One/QomApp/x/recovery/migrations/v2/types"
 	"github.com/QOM-One/QomApp/x/recovery/types"
+	"github.com/cosmos/cosmos-sdk/testutil"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/evmos/ethermint/encoding"
 	"github.com/stretchr/testify/require"
 )
 

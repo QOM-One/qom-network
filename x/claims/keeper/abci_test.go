@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/QOM-One/QomApp/testutil"
+	"github.com/QOM-One/QomApp/x/claims/types"
+	vestingtypes "github.com/QOM-One/QomApp/x/vesting/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	distrtypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
@@ -11,9 +14,6 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/evmos/ethermint/tests"
 	ethermint "github.com/evmos/ethermint/types"
-	"github.com/QOM-One/QomApp/testutil"
-	"github.com/QOM-One/QomApp/x/claims/types"
-	vestingtypes "github.com/QOM-One/QomApp/x/vesting/types"
 )
 
 func (suite *KeeperTestSuite) TestEndBlock() {

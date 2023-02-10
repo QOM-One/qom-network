@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	ethermint "github.com/evmos/ethermint/types"
 	"github.com/QOM-One/QomApp/x/inflation/types"
+	ethermint "github.com/evmos/ethermint/types"
 )
 
 func (suite *KeeperTestSuite) TestPeriod() {

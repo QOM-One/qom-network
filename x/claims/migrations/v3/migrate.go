@@ -19,10 +19,10 @@ package v3
 import (
 	"github.com/cosmos/cosmos-sdk/codec"
 
-	storetypes "github.com/cosmos/cosmos-sdk/store/types"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	v3types "github.com/QOM-One/QomApp/x/claims/migrations/v3/types"
 	"github.com/QOM-One/QomApp/x/claims/types"
+	storetypes "github.com/cosmos/cosmos-sdk/store/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // MigrateStore migrates the x/claims module state from the consensus version 2 to

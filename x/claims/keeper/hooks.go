@@ -28,9 +28,9 @@ import (
 
 	evmtypes "github.com/evmos/ethermint/x/evm/types"
 
+	"github.com/QOM-One/QomApp/x/claims/types"
 	clienttypes "github.com/cosmos/ibc-go/v6/modules/core/02-client/types"
 	porttypes "github.com/cosmos/ibc-go/v6/modules/core/05-port/types"
-	"github.com/QOM-One/QomApp/x/claims/types"
 )
 
 var (

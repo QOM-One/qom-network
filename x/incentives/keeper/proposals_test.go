@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/evmos/ethermint/tests"
 	"github.com/QOM-One/QomApp/x/incentives/types"
+	"github.com/evmos/ethermint/tests"
 )
 
 func (suite KeeperTestSuite) TestRegisterIncentive() {

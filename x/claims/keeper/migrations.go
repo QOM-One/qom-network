@@ -17,9 +17,9 @@
 package keeper
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	v3 "github.com/QOM-One/QomApp/x/claims/migrations/v3"
 	"github.com/QOM-One/QomApp/x/claims/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // Migrator is a struct for handling in-place store migrations.

@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	epochstypes "github.com/QOM-One/QomApp/x/epochs/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 type ParamsTestSuite struct {

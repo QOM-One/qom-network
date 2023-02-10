@@ -3,10 +3,10 @@ package v3_test
 import (
 	"testing"
 
-	"github.com/cosmos/cosmos-sdk/testutil"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	v3 "github.com/QOM-One/QomApp/x/inflation/migrations/v3"
 	"github.com/QOM-One/QomApp/x/inflation/types"
+	"github.com/cosmos/cosmos-sdk/testutil"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 )
 

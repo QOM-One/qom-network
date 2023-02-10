@@ -1,9 +1,9 @@
 package keeper_test
 
 import (
+	"github.com/QOM-One/QomApp/x/claims/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
-	"github.com/QOM-One/QomApp/x/claims/types"
 )
 
 func (suite *KeeperTestSuite) TestUpdateParams() {

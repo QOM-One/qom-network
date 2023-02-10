@@ -1,10 +1,10 @@
 package v3_test
 
 import (
+	"github.com/QOM-One/QomApp/app"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/evmos/ethermint/encoding"
-	"github.com/QOM-One/QomApp/app"
 	"testing"
 
 	v3types "github.com/QOM-One/QomApp/x/erc20/migrations/v3/types"
@@ -12,9 +12,9 @@ import (
 	"github.com/QOM-One/QomApp/x/erc20/types"
 	"github.com/stretchr/testify/require"
 
+	"github.com/QOM-One/QomApp/x/erc20/migrations/v3"
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/QOM-One/QomApp/x/erc20/migrations/v3"
 )
 
 type mockSubspace struct {

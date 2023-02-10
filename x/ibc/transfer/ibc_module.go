@@ -17,9 +17,9 @@
 package transfer
 
 import (
+	"github.com/QOM-One/QomApp/x/ibc/transfer/keeper"
 	ibctransfer "github.com/cosmos/ibc-go/v6/modules/apps/transfer"
 	porttypes "github.com/cosmos/ibc-go/v6/modules/core/05-port/types"
-	"github.com/QOM-One/QomApp/x/ibc/transfer/keeper"
 )
 
 var _ porttypes.IBCModule = IBCModule{}

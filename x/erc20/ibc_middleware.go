@@ -25,9 +25,9 @@ import (
 	porttypes "github.com/cosmos/ibc-go/v6/modules/core/05-port/types"
 	"github.com/cosmos/ibc-go/v6/modules/core/exported"
 
-	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/QOM-One/QomApp/ibc"
 	"github.com/QOM-One/QomApp/x/erc20/keeper"
+	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 var _ porttypes.IBCModule = &IBCMiddleware{}

@@ -17,10 +17,10 @@
 package v3
 
 import (
-	storetypes "github.com/cosmos/cosmos-sdk/store/types"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	v3types "github.com/QOM-One/QomApp/x/erc20/migrations/v3/types"
 	"github.com/QOM-One/QomApp/x/erc20/types"
+	storetypes "github.com/cosmos/cosmos-sdk/store/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 var isTrue = []byte{0x01}

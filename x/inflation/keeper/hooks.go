@@ -19,11 +19,11 @@ package keeper
 import (
 	"fmt"
 
+	epochstypes "github.com/QOM-One/QomApp/x/epochs/types"
+	"github.com/QOM-One/QomApp/x/inflation/types"
 	"github.com/armon/go-metrics"
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	epochstypes "github.com/QOM-One/QomApp/x/epochs/types"
-	"github.com/QOM-One/QomApp/x/inflation/types"
 )
 
 // BeforeEpochStart: noop, We don't need to do anything here

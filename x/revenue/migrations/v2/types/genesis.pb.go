@@ -5,9 +5,9 @@ package types
 
 import (
 	fmt "fmt"
+	"github.com/QOM-One/QomApp/x/revenue/types"
 	github_com_cosmos_cosmos_sdk_types "github.com/cosmos/cosmos-sdk/types"
 	_ "github.com/cosmos/gogoproto/gogoproto"
-	"github.com/QOM-One/QomApp/x/revenue/types"
 	proto "github.com/gogo/protobuf/proto"
 	io "io"
 	math "math"

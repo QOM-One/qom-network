@@ -20,9 +20,9 @@ import (
 	"context"
 
 	errorsmod "cosmossdk.io/errors"
+	"github.com/QOM-One/QomApp/x/claims/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
-	"github.com/QOM-One/QomApp/x/claims/types"
 )
 
 // UpdateParams implements the gRPC MsgServer interface. When an UpdateParams

@@ -17,8 +17,8 @@
 package keeper
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/QOM-One/QomApp/x/inflation/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // GetEpochIdentifier gets the epoch identifier

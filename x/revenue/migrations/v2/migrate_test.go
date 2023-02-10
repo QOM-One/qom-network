@@ -5,10 +5,10 @@ import (
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"testing"
 
-	"github.com/evmos/ethermint/encoding"
 	v2 "github.com/QOM-One/QomApp/x/revenue/migrations/v2"
 	v2types "github.com/QOM-One/QomApp/x/revenue/migrations/v2/types"
 	"github.com/QOM-One/QomApp/x/revenue/types"
+	"github.com/evmos/ethermint/encoding"
 
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"

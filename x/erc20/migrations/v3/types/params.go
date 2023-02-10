@@ -19,8 +19,8 @@ package v3types
 import (
 	"fmt"
 
-	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/QOM-One/QomApp/x/erc20/types"
+	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 )
 
 var _ types.LegacyParams = &V3Params{}
