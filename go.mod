@@ -1,4 +1,4 @@
-module github.com/QOMQQ/QomApp
+module github.com/QOM-One/QomApp
 
 go 1.19
 

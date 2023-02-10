@@ -3,7 +3,7 @@ package qom.inflation.v1;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/QOMQQ/QomApp/x/inflation/types";
+option go_package = "github.com/QOM-One/QomApp/x/inflation/types";
 
 // InflationDistribution defines the distribution in which inflation is
 // allocated through minting on each epoch (staking, incentives, community). It

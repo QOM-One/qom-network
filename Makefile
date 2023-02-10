@@ -9,7 +9,7 @@ BINDIR ?= $(GOPATH)/bin
 QOM_BINARY = qomd
 QOM_DIR = qom
 BUILDDIR ?= $(CURDIR)/build
-HTTPS_GIT := https://github.com/QOMQQ/QomApp.git
+HTTPS_GIT := https://github.com/QOM-One/QomApp.git
 DOCKER := $(shell which docker)
 NAMESPACE := tharsishq
 PROJECT := qom
@@ -293,7 +293,7 @@ update-swagger-docs: statik
 .PHONY: update-swagger-docs
 
 godocs:
-	@echo "--> Wait a few seconds and visit http://localhost:6060/pkg/github.com/QOMQQ/QomApp/types"
+	@echo "--> Wait a few seconds and visit http://localhost:6060/pkg/github.com/QOM-One/QomApp/types"
 	godoc -http=:6060
 
 # Start docs site at localhost:8080
@@ -553,7 +553,7 @@ localnet-show-logstream:
 ###                                Releasing                                ###
 ###############################################################################
 
-PACKAGE_NAME:=github.com/QOMQQ/QomApp
+PACKAGE_NAME:=github.com/QOM-One/QomApp
 GOLANG_CROSS_VERSION  = v1.19
 GOPATH ?= '$(HOME)/go'
 release-dry-run:

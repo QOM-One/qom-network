@@ -41,7 +41,7 @@ The latest {{ $themeConfig.project.name }} [version](https://github.com/evmos/ev
 Clone and build {{ $themeConfig.project.name }} using `git`:
 
 ```bash
-git clone https://github.com/QOMQQ/QomApp.git
+git clone https://github.com/QOM-One/QomApp.git
 cd evmos
 git fetch
 git checkout <tag>

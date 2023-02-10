@@ -1,6 +1,6 @@
 FROM golang:1.19.5-bullseye AS build-env
 
-WORKDIR /go/src/github.com/QOMQQ/QomApp
+WORKDIR /go/src/github.com/QOM-One/QomApp
 
 RUN apt-get update -y
 RUN apt-get install git -y
@@ -16,7 +16,7 @@ RUN apt-get install ca-certificates jq -y
 
 WORKDIR /root
 
-COPY --from=build-env /go/src/github.com/QOMQQ/QomApp/build/qomd /usr/bin/qomd
+COPY --from=build-env /go/src/github.com/QOM-One/QomApp/build/qomd /usr/bin/qomd
 
 EXPOSE 26656 26657 1317 9090 8545 8546
 

@@ -200,7 +200,7 @@ wget -O $HOME/genesis.json https://archive.evmos.org/mainnet/genesis.json
 ### Install evmosd
 
 ```bash
-git clone https://github.com/QOMQQ/QomApp.git && \ 
+git clone https://github.com/QOM-One/QomApp.git && \ 
 cd evmos && \ 
 make install
 ```

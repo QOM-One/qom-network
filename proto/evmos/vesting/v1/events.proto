@@ -1,7 +1,7 @@
 syntax = "proto3";
 package qom.vesting.v1;
 
-option go_package = "github.com/QOMQQ/QomApp/x/vesting/types";
+option go_package = "github.com/QOM-One/QomApp/x/vesting/types";
 
 // EventCreateClawbackVestingAccount defines the event type
 // for creating a clawback vesting account
