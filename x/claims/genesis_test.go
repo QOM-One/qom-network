@@ -15,10 +15,10 @@ import (
 	"github.com/evmos/ethermint/tests"
 	feemarkettypes "github.com/evmos/ethermint/x/feemarket/types"
 
-	"github.com/evmos/evmos/v11/app"
-	"github.com/evmos/evmos/v11/testutil"
-	"github.com/evmos/evmos/v11/x/claims"
-	"github.com/evmos/evmos/v11/x/claims/types"
+	"github.com/QOM-One/QomApp/app"
+	"github.com/QOM-One/QomApp/testutil"
+	"github.com/QOM-One/QomApp/x/claims"
+	"github.com/QOM-One/QomApp/x/claims/types"
 )
 
 type GenesisTestSuite struct {
@@ -26,7 +26,7 @@ type GenesisTestSuite struct {
 
 	ctx sdk.Context
 
-	app     *app.Evmos
+	app     *app.Qom
 	genesis types.GenesisState
 }
 
@@ -37,7 +37,7 @@ func (suite *GenesisTestSuite) SetupTest() {
 	suite.app = app.Setup(false, feemarkettypes.DefaultGenesisState())
 	suite.ctx = suite.app.BaseApp.NewContext(false, tmproto.Header{
 		Height:          1,
-		ChainID:         "evmos_9000-1",
+		ChainID:         "qom_7668378-1",
 		Time:            time.Now().UTC(),
 		ProposerAddress: consAddress.Bytes(),
 
@@ -113,7 +113,7 @@ func (suite *GenesisTestSuite) TestClaimInitGenesis() {
 				},
 			},
 			func() {
-				coins := sdk.NewCoins(sdk.NewCoin("aevmos", sdk.NewInt(2_800)))
+				coins := sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewInt(2_800)))
 				err := testutil.FundModuleAccount(suite.ctx, suite.app.BankKeeper, types.ModuleName, coins)
 				suite.Require().NoError(err)
 			},
@@ -137,7 +137,7 @@ func (suite *GenesisTestSuite) TestClaimInitGenesis() {
 				},
 			},
 			func() {
-				coins := sdk.NewCoins(sdk.NewCoin("aevmos", sdk.NewInt(400)))
+				coins := sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewInt(400)))
 				err := testutil.FundModuleAccount(suite.ctx, suite.app.BankKeeper, types.ModuleName, coins)
 				suite.Require().NoError(err)
 			},
@@ -184,7 +184,7 @@ func (suite *GenesisTestSuite) TestClaimExportGenesis() {
 		},
 	}
 
-	coins := sdk.NewCoins(sdk.NewCoin("aevmos", sdk.NewInt(400)))
+	coins := sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewInt(400)))
 	err := testutil.FundModuleAccount(suite.ctx, suite.app.BankKeeper, types.ModuleName, coins)
 	suite.Require().NoError(err)
 

@@ -14,9 +14,9 @@ import (
 	ethermint "github.com/evmos/ethermint/types"
 	evm "github.com/evmos/ethermint/x/evm/types"
 
-	"github.com/evmos/evmos/v11/testutil"
-	"github.com/evmos/evmos/v11/x/incentives/types"
-	vestingtypes "github.com/evmos/evmos/v11/x/vesting/types"
+	"github.com/QOM-One/QomApp/testutil"
+	"github.com/QOM-One/QomApp/x/incentives/types"
+	vestingtypes "github.com/QOM-One/QomApp/x/vesting/types"
 )
 
 // ensureHooksSet tries to set the hooks on EVMKeeper, this will fail if the

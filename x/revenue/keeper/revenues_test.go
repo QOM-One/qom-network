@@ -6,7 +6,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/evmos/ethermint/tests"
-	"github.com/evmos/evmos/v11/x/revenue/types"
+	"github.com/QOM-One/QomApp/x/revenue/types"
 )
 
 func (suite *KeeperTestSuite) TestGetFees() {

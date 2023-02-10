@@ -7,7 +7,7 @@ import (
 	fmt "fmt"
 	github_com_cosmos_cosmos_sdk_types "github.com/cosmos/cosmos-sdk/types"
 	_ "github.com/cosmos/gogoproto/gogoproto"
-	"github.com/evmos/evmos/v11/x/revenue/types"
+	"github.com/QOM-One/QomApp/x/revenue/types"
 	proto "github.com/gogo/protobuf/proto"
 	io "io"
 	math "math"

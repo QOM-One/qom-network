@@ -25,7 +25,7 @@ import (
 
 	evmtypes "github.com/evmos/ethermint/x/evm/types"
 
-	"github.com/evmos/evmos/v11/x/revenue/types"
+	"github.com/QOM-One/QomApp/x/revenue/types"
 )
 
 var _ evmtypes.EvmHooks = Hooks{}

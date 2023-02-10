@@ -11,9 +11,9 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/evmos/ethermint/tests"
 	ethermint "github.com/evmos/ethermint/types"
-	"github.com/evmos/evmos/v11/testutil"
-	"github.com/evmos/evmos/v11/x/claims/types"
-	vestingtypes "github.com/evmos/evmos/v11/x/vesting/types"
+	"github.com/QOM-One/QomApp/testutil"
+	"github.com/QOM-One/QomApp/x/claims/types"
+	vestingtypes "github.com/QOM-One/QomApp/x/vesting/types"
 )
 
 func (suite *KeeperTestSuite) TestEndBlock() {

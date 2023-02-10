@@ -1,6 +1,6 @@
 package keeper_test
 
-import "github.com/evmos/evmos/v11/x/revenue/types"
+import "github.com/QOM-One/QomApp/x/revenue/types"
 
 func (suite *KeeperTestSuite) TestParams() {
 	params := suite.app.RevenueKeeper.GetParams(suite.ctx)

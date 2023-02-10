@@ -5,12 +5,12 @@ import (
 
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 
+	"github.com/QOM-One/QomApp/testutil"
 	"github.com/cosmos/cosmos-sdk/crypto/keys/secp256k1"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/evmos/ethermint/crypto/ethsecp256k1"
 	"github.com/evmos/ethermint/tests"
-	"github.com/evmos/evmos/v11/testutil"
 	"github.com/stretchr/testify/mock"
 
 	transfertypes "github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"
@@ -19,11 +19,11 @@ import (
 	ibcgotesting "github.com/cosmos/ibc-go/v6/testing"
 	ibcmock "github.com/cosmos/ibc-go/v6/testing/mock"
 
-	claimstypes "github.com/evmos/evmos/v11/x/claims/types"
-	incentivestypes "github.com/evmos/evmos/v11/x/incentives/types"
-	"github.com/evmos/evmos/v11/x/recovery/keeper"
-	"github.com/evmos/evmos/v11/x/recovery/types"
-	vestingtypes "github.com/evmos/evmos/v11/x/vesting/types"
+	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
+	incentivestypes "github.com/QOM-One/QomApp/x/incentives/types"
+	"github.com/QOM-One/QomApp/x/recovery/keeper"
+	"github.com/QOM-One/QomApp/x/recovery/types"
+	vestingtypes "github.com/QOM-One/QomApp/x/vesting/types"
 )
 
 func (suite *KeeperTestSuite) TestOnRecvPacket() {
@@ -53,7 +53,7 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 	expAck := ibcmock.MockAcknowledgement
 
 	coins := sdk.NewCoins(
-		sdk.NewCoin("aevmos", sdk.NewInt(1000)),
+		sdk.NewCoin("aqom", sdk.NewInt(1000)),
 		sdk.NewCoin(ibcAtomDenom, sdk.NewInt(1000)),
 		sdk.NewCoin(ibcOsmoDenom, sdk.NewInt(1000)),
 		sdk.NewCoin(erc20Denom, sdk.NewInt(1000)),
@@ -112,7 +112,7 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 		{
 			"fail - invalid sender - missing '1' ",
 			func() {
-				transfer := transfertypes.NewFungibleTokenPacketData(denom, "100", "evmos", ethsecpAddrCosmos, "")
+				transfer := transfertypes.NewFungibleTokenPacketData(denom, "100", "qom", ethsecpAddrCosmos, "")
 				bz := transfertypes.ModuleCdc.MustMarshalJSON(&transfer)
 				packet = channeltypes.NewPacket(bz, 100, transfertypes.PortID, sourceChannel, transfertypes.PortID, evmosChannel, timeoutHeight, 0)
 			},
@@ -361,7 +361,7 @@ func (suite *KeeperTestSuite) TestGetIBCDenomDestinationIdentifiers() {
 	}{
 		{
 			"invalid native denom",
-			"aevmos",
+			"aqom",
 			func() {},
 			true,
 			"", "",
@@ -583,7 +583,7 @@ func (suite *KeeperTestSuite) TestOnRecvPacketFailTransfer() {
 
 			// Fund receiver account with EVMOS
 			coins := sdk.NewCoins(
-				sdk.NewCoin("aevmos", sdk.NewInt(1000)),
+				sdk.NewCoin("aqom", sdk.NewInt(1000)),
 				sdk.NewCoin(ibcAtomDenom, sdk.NewInt(1000)),
 			)
 			err := testutil.FundAccount(suite.ctx, suite.app.BankKeeper, secpAddr, coins)

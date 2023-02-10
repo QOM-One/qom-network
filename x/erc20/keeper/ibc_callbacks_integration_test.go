@@ -6,17 +6,17 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/QOM-One/QomApp/contracts"
+	"github.com/QOM-One/QomApp/testutil"
+	teststypes "github.com/QOM-One/QomApp/types/tests"
+	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/x/erc20/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	transfertypes "github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"
 	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
 	"github.com/cosmos/ibc-go/v6/testing/simapp"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/evmos/evmos/v11/contracts"
-	"github.com/evmos/evmos/v11/testutil"
-	teststypes "github.com/evmos/evmos/v11/types/tests"
-	claimstypes "github.com/evmos/evmos/v11/x/claims/types"
-	"github.com/evmos/evmos/v11/x/erc20/types"
 	. "github.com/onsi/ginkgo/v2"
 )
 
@@ -50,13 +50,13 @@ var _ = Describe("Convert receiving IBC to Erc20", Ordered, func() {
 		Base:        claimstypes.DefaultClaimsDenom,
 		DenomUnits: []*banktypes.DenomUnit{
 			{
-				Denom:    teststypes.AevmosDenomtrace.BaseDenom,
+				Denom:    teststypes.AqomDenomtrace.BaseDenom,
 				Exponent: 0,
 			},
 		},
 		Name:    claimstypes.DefaultClaimsDenom,
 		Symbol:  erc20Symbol,
-		Display: teststypes.AevmosDenomtrace.BaseDenom,
+		Display: teststypes.AqomDenomtrace.BaseDenom,
 	}
 
 	BeforeEach(func() {
@@ -159,15 +159,15 @@ var _ = Describe("Convert receiving IBC to Erc20", Ordered, func() {
 			s.Require().Equal(aevmosInitialBalance.Amount.Int64()-amount, aevmosAfterBalance.Amount.Int64())
 
 			// check ibc aevmos coins balance on Osmosis
-			aevmosIBCBalanceBefore := s.IBCOsmosisChain.GetSimApp().BankKeeper.GetBalance(s.IBCOsmosisChain.GetContext(), senderAcc, teststypes.AevmosIbcdenom)
+			aevmosIBCBalanceBefore := s.IBCOsmosisChain.GetSimApp().BankKeeper.GetBalance(s.IBCOsmosisChain.GetContext(), senderAcc, teststypes.AqomIbcdenom)
 			s.Require().Equal(amount, aevmosIBCBalanceBefore.Amount.Int64())
 
 			// 2. Send aevmos IBC coins from Osmosis to Evmos
-			ibcCoinMeta := fmt.Sprintf("%s/%s", teststypes.AevmosDenomtrace.Path, teststypes.AevmosDenomtrace.BaseDenom)
-			s.SendBackCoins(s.pathOsmosisEvmos, s.IBCOsmosisChain, teststypes.AevmosIbcdenom, amount, sender, receiver, 1, ibcCoinMeta)
+			ibcCoinMeta := fmt.Sprintf("%s/%s", teststypes.AqomDenomtrace.Path, teststypes.AqomDenomtrace.BaseDenom)
+			s.SendBackCoins(s.pathOsmosisEvmos, s.IBCOsmosisChain, teststypes.AqomIbcdenom, amount, sender, receiver, 1, ibcCoinMeta)
 
 			// check ibc aevmos coins balance on Osmosis - should be zero
-			aevmosIBCSenderFinalBalance := s.IBCOsmosisChain.GetSimApp().BankKeeper.GetBalance(s.IBCOsmosisChain.GetContext(), senderAcc, teststypes.AevmosIbcdenom)
+			aevmosIBCSenderFinalBalance := s.IBCOsmosisChain.GetSimApp().BankKeeper.GetBalance(s.IBCOsmosisChain.GetContext(), senderAcc, teststypes.AqomIbcdenom)
 			s.Require().Equal(int64(0), aevmosIBCSenderFinalBalance.Amount.Int64())
 
 			// check aevmos balance after transfer - should be equal to initial balance
@@ -175,7 +175,7 @@ var _ = Describe("Convert receiving IBC to Erc20", Ordered, func() {
 			s.Require().Equal(aevmosInitialBalance.Amount.Int64(), aevmosFinalBalance.Amount.Int64())
 
 			// check IBC Coin balance - should be zero
-			ibcCoinsBalance := s.app.BankKeeper.GetBalance(s.EvmosChain.GetContext(), receiverAcc, teststypes.AevmosIbcdenom)
+			ibcCoinsBalance := s.app.BankKeeper.GetBalance(s.EvmosChain.GetContext(), receiverAcc, teststypes.AqomIbcdenom)
 			s.Require().Equal(int64(0), ibcCoinsBalance.Amount.Int64())
 
 			// Check ERC20 balances - should be zero

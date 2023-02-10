@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/evmos/evmos/v11/x/claims/types"
+	"github.com/QOM-One/QomApp/x/claims/types"
 
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -34,7 +34,7 @@ var _ types.LegacyParams = &V3Params{}
 
 var (
 	// DefaultClaimsDenom is aevmos
-	DefaultClaimsDenom = "aevmos"
+	DefaultClaimsDenom = "aqom"
 	// DefaultDurationUntilDecay is 1 month = 30.4375 days
 	DefaultDurationUntilDecay = 2629800 * time.Second
 	// DefaultDurationOfDecay is 2 months

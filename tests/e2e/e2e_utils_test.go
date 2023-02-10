@@ -35,7 +35,7 @@ func (s *IntegrationTestSuite) loadUpgradeParams() {
 		s.upgradeParams.TargetRepo = tharsisRepo
 	}
 
-	// If chain ID is not specified, 'evmos_9000-1' will be used in upgrade-init.sh
+	// If chain ID is not specified, 'qom_7668378-1' will be used in upgrade-init.sh
 	chID := os.Getenv("CHAIN_ID")
 	if chID == "" {
 		chID = defaultChainID

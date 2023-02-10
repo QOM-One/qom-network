@@ -10,13 +10,13 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/evmos/evmos/v11/tests/e2e/upgrade"
+	"github.com/QOM-One/QomApp/tests/e2e/upgrade"
 )
 
 const (
-	localRepository       = "evmos"
+	localRepository       = "qom"
 	localVersionTag       = "latest"
-	defaultChainID        = "evmos_9000-1"
+	defaultChainID        = "qom_7668378-1"
 	defaultManagerNetwork = "evmos-local"
 	tharsisRepo           = "tharsishq/evmos"
 	firstUpgradeHeight    = 25

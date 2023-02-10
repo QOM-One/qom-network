@@ -15,13 +15,13 @@ import (
 	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
 	ibcgotesting "github.com/cosmos/ibc-go/v6/testing"
 
-	ibctesting "github.com/evmos/evmos/v11/ibc/testing"
+	ibctesting "github.com/QOM-One/QomApp/ibc/testing"
 
+	"github.com/QOM-One/QomApp/app"
+	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
+	inflationtypes "github.com/QOM-One/QomApp/x/inflation/types"
+	"github.com/QOM-One/QomApp/x/recovery/types"
 	minttypes "github.com/cosmos/cosmos-sdk/x/mint/types"
-	"github.com/evmos/evmos/v11/app"
-	claimstypes "github.com/evmos/evmos/v11/x/claims/types"
-	inflationtypes "github.com/evmos/evmos/v11/x/inflation/types"
-	"github.com/evmos/evmos/v11/x/recovery/types"
 )
 
 type IBCTestingSuite struct {
@@ -60,11 +60,11 @@ func (suite *IBCTestingSuite) SetupTest() {
 	suite.coordinator.CommitNBlocks(suite.IBCCosmosChain, 2)
 
 	// Mint coins locked on the evmos account generated with secp.
-	coinEvmos := sdk.NewCoin("aevmos", sdk.NewInt(10000))
+	coinEvmos := sdk.NewCoin("aqom", sdk.NewInt(10000))
 	coins := sdk.NewCoins(coinEvmos)
-	err := suite.EvmosChain.App.(*app.Evmos).BankKeeper.MintCoins(suite.EvmosChain.GetContext(), inflationtypes.ModuleName, coins)
+	err := suite.EvmosChain.App.(*app.Qom).BankKeeper.MintCoins(suite.EvmosChain.GetContext(), inflationtypes.ModuleName, coins)
 	suite.Require().NoError(err)
-	err = suite.EvmosChain.App.(*app.Evmos).BankKeeper.SendCoinsFromModuleToAccount(suite.EvmosChain.GetContext(), inflationtypes.ModuleName, suite.IBCOsmosisChain.SenderAccount.GetAddress(), coins)
+	err = suite.EvmosChain.App.(*app.Qom).BankKeeper.SendCoinsFromModuleToAccount(suite.EvmosChain.GetContext(), inflationtypes.ModuleName, suite.IBCOsmosisChain.SenderAccount.GetAddress(), coins)
 	suite.Require().NoError(err)
 
 	// Mint coins on the osmosis side which we'll use to unlock our aevmos
@@ -86,11 +86,11 @@ func (suite *IBCTestingSuite) SetupTest() {
 	claimparams := claimstypes.DefaultParams()
 	claimparams.AirdropStartTime = suite.EvmosChain.GetContext().BlockTime()
 	claimparams.EnableClaims = true
-	suite.EvmosChain.App.(*app.Evmos).ClaimsKeeper.SetParams(suite.EvmosChain.GetContext(), claimparams)
+	suite.EvmosChain.App.(*app.Qom).ClaimsKeeper.SetParams(suite.EvmosChain.GetContext(), claimparams)
 
 	params := types.DefaultParams()
 	params.EnableRecovery = true
-	suite.EvmosChain.App.(*app.Evmos).RecoveryKeeper.SetParams(suite.EvmosChain.GetContext(), params)
+	suite.EvmosChain.App.(*app.Qom).RecoveryKeeper.SetParams(suite.EvmosChain.GetContext(), params)
 
 	suite.pathOsmosisEvmos = ibctesting.NewTransferPath(suite.IBCOsmosisChain, suite.EvmosChain) // clientID, connectionID, channelID empty
 	suite.pathCosmosEvmos = ibctesting.NewTransferPath(suite.IBCCosmosChain, suite.EvmosChain)

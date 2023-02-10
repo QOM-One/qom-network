@@ -9,8 +9,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/genutil/client/cli"
 	"github.com/stretchr/testify/require"
 
-	"github.com/evmos/evmos/v11/app"
-	evmosd "github.com/evmos/evmos/v11/cmd/evmosd"
+	"github.com/QOM-One/QomApp/app"
+	evmosd "github.com/QOM-One/QomApp/cmd/evmosd"
 )
 
 func TestInitCmd(t *testing.T) {
@@ -19,7 +19,7 @@ func TestInitCmd(t *testing.T) {
 		"init",       // Test the init cmd
 		"evmos-test", // Moniker
 		fmt.Sprintf("--%s=%s", cli.FlagOverwrite, "true"), // Overwrite genesis.json, in case it already exists
-		fmt.Sprintf("--%s=%s", flags.FlagChainID, "evmos_9000-1"),
+		fmt.Sprintf("--%s=%s", flags.FlagChainID, "qom_7668378-1"),
 	})
 
 	err := svrcmd.Execute(rootCmd, "evmosd", app.DefaultNodeHome)

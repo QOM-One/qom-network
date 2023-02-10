@@ -18,19 +18,19 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/spf13/cobra"
 
+	"github.com/QOM-One/QomApp/app"
+	"github.com/QOM-One/QomApp/tests/integration/ledger/mocks"
 	"github.com/evmos/ethermint/crypto/hd"
 	"github.com/evmos/ethermint/tests"
-	"github.com/evmos/evmos/v11/app"
-	"github.com/evmos/evmos/v11/tests/integration/ledger/mocks"
 	"github.com/stretchr/testify/suite"
 	"github.com/tendermint/tendermint/crypto/tmhash"
 	"github.com/tendermint/tendermint/version"
 
+	evmoskeyring "github.com/QOM-One/QomApp/crypto/keyring"
 	cosmosledger "github.com/cosmos/cosmos-sdk/crypto/ledger"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	clientkeys "github.com/evmos/ethermint/client/keys"
 	feemarkettypes "github.com/evmos/ethermint/x/feemarket/types"
-	evmoskeyring "github.com/evmos/evmos/v11/crypto/keyring"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmversion "github.com/tendermint/tendermint/proto/tendermint/version"
 	rpcclientmock "github.com/tendermint/tendermint/rpc/client/mock"
@@ -44,7 +44,7 @@ var s *LedgerTestSuite
 type LedgerTestSuite struct {
 	suite.Suite
 
-	app *app.Evmos
+	app *app.Qom
 	ctx sdk.Context
 
 	ledger       *mocks.SECP256K1
@@ -87,7 +87,7 @@ func (suite *LedgerTestSuite) SetupEvmosApp() {
 	suite.app = app.Setup(false, feemarkettypes.DefaultGenesisState())
 	suite.ctx = suite.app.BaseApp.NewContext(false, tmproto.Header{
 		Height:          1,
-		ChainID:         "evmos_9001-1",
+		ChainID:         "qom_766-1",
 		Time:            time.Now().UTC(),
 		ProposerAddress: consAddress.Bytes(),
 
@@ -132,7 +132,7 @@ func (suite *LedgerTestSuite) NewKeyringAndCtxs(krHome string, input io.Reader, 
 		WithUseLedger(true).
 		WithKeyring(kr).
 		WithClient(mocks.MockTendermintRPC{Client: rpcclientmock.Client{}}).
-		WithChainID("evmos_9000-13")
+		WithChainID("qom_7668378-13")
 
 	srvCtx := server.NewDefaultContext()
 	ctx := context.Background()

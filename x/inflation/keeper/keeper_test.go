@@ -19,9 +19,9 @@ import (
 
 	evm "github.com/evmos/ethermint/x/evm/types"
 
-	"github.com/evmos/evmos/v11/app"
-	epochstypes "github.com/evmos/evmos/v11/x/epochs/types"
-	"github.com/evmos/evmos/v11/x/inflation/types"
+	"github.com/QOM-One/QomApp/app"
+	epochstypes "github.com/QOM-One/QomApp/x/epochs/types"
+	"github.com/QOM-One/QomApp/x/inflation/types"
 )
 
 var denomMint = types.DefaultInflationDenom
@@ -30,7 +30,7 @@ type KeeperTestSuite struct {
 	suite.Suite
 
 	ctx            sdk.Context
-	app            *app.Evmos
+	app            *app.Qom
 	queryClientEvm evm.QueryClient
 	queryClient    types.QueryClient
 	consAddress    sdk.ConsAddress
@@ -61,7 +61,7 @@ func (suite *KeeperTestSuite) DoSetupTest(t require.TestingT) {
 	// setup context
 	suite.ctx = suite.app.BaseApp.NewContext(checkTx, tmproto.Header{
 		Height:          1,
-		ChainID:         "evmos_9001-1",
+		ChainID:         "qom_766-1",
 		Time:            time.Now().UTC(),
 		ProposerAddress: suite.consAddress.Bytes(),
 

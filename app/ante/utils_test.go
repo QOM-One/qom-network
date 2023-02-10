@@ -10,6 +10,8 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 
+	"github.com/QOM-One/QomApp/app"
+	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
 	client "github.com/cosmos/cosmos-sdk/client"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -19,8 +21,6 @@ import (
 	"github.com/evmos/ethermint/encoding"
 	evmtypes "github.com/evmos/ethermint/x/evm/types"
 	feemarkettypes "github.com/evmos/ethermint/x/feemarket/types"
-	"github.com/evmos/evmos/v11/app"
-	claimstypes "github.com/evmos/evmos/v11/x/claims/types"
 	abci "github.com/tendermint/tendermint/abci/types"
 	"github.com/tendermint/tendermint/crypto/tmhash"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
@@ -34,7 +34,7 @@ type AnteTestSuite struct {
 	suite.Suite
 
 	ctx   sdk.Context
-	app   *app.Evmos
+	app   *app.Qom
 	denom string
 }
 
@@ -47,7 +47,7 @@ func (suite *AnteTestSuite) SetupTest(isCheckTx bool) {
 	suite.app = app.Setup(isCheckTx, feemarkettypes.DefaultGenesisState())
 	suite.ctx = suite.app.BaseApp.NewContext(isCheckTx, tmproto.Header{
 		Height:          1,
-		ChainID:         "evmos_9001-1",
+		ChainID:         "qom_766-1",
 		Time:            time.Now().UTC(),
 		ProposerAddress: consAddress.Bytes(),
 

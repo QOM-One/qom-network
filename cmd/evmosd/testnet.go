@@ -60,9 +60,9 @@ import (
 	ethermint "github.com/evmos/ethermint/types"
 	evmtypes "github.com/evmos/ethermint/x/evm/types"
 
-	cmdcfg "github.com/evmos/evmos/v11/cmd/config"
-	evmoskr "github.com/evmos/evmos/v11/crypto/keyring"
-	"github.com/evmos/evmos/v11/testutil/network"
+	cmdcfg "github.com/QOM-One/QomApp/cmd/config"
+	evmoskr "github.com/QOM-One/QomApp/crypto/keyring"
+	"github.com/QOM-One/QomApp/testutil/network"
 )
 
 var (

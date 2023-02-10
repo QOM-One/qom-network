@@ -35,10 +35,10 @@ import (
 	ethermint "github.com/evmos/ethermint/types"
 	evm "github.com/evmos/ethermint/x/evm/types"
 
-	"github.com/evmos/evmos/v11/app"
-	"github.com/evmos/evmos/v11/contracts"
-	epochstypes "github.com/evmos/evmos/v11/x/epochs/types"
-	"github.com/evmos/evmos/v11/x/vesting/types"
+	"github.com/QOM-One/QomApp/app"
+	"github.com/QOM-One/QomApp/contracts"
+	epochstypes "github.com/QOM-One/QomApp/x/epochs/types"
+	"github.com/QOM-One/QomApp/x/vesting/types"
 )
 
 var (
@@ -71,7 +71,7 @@ type KeeperTestSuite struct {
 	suite.Suite
 
 	ctx              sdk.Context
-	app              *app.Evmos
+	app              *app.Qom
 	queryClientEvm   evm.QueryClient
 	queryClient      types.QueryClient
 	address          common.Address
@@ -119,7 +119,7 @@ func (suite *KeeperTestSuite) DoSetupTest(t require.TestingT) {
 	// Set Context
 	suite.ctx = suite.app.BaseApp.NewContext(checkTx, tmproto.Header{
 		Height:          1,
-		ChainID:         "evmos_9001-1",
+		ChainID:         "qom_766-1",
 		Time:            time.Now().UTC(),
 		ProposerAddress: suite.consAddress.Bytes(),
 

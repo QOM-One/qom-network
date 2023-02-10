@@ -15,9 +15,9 @@ import (
 	"github.com/evmos/ethermint/tests"
 	feemarkettypes "github.com/evmos/ethermint/x/feemarket/types"
 
-	"github.com/evmos/evmos/v11/app"
-	"github.com/evmos/evmos/v11/x/recovery"
-	"github.com/evmos/evmos/v11/x/recovery/types"
+	"github.com/QOM-One/QomApp/app"
+	"github.com/QOM-One/QomApp/x/recovery"
+	"github.com/QOM-One/QomApp/x/recovery/types"
 )
 
 type GenesisTestSuite struct {
@@ -25,7 +25,7 @@ type GenesisTestSuite struct {
 
 	ctx sdk.Context
 
-	app     *app.Evmos
+	app     *app.Qom
 	genesis types.GenesisState
 }
 
@@ -36,7 +36,7 @@ func (suite *GenesisTestSuite) SetupTest() {
 	suite.app = app.Setup(false, feemarkettypes.DefaultGenesisState())
 	suite.ctx = suite.app.BaseApp.NewContext(false, tmproto.Header{
 		Height:          1,
-		ChainID:         "evmos_9000-1",
+		ChainID:         "qom_7668378-1",
 		Time:            time.Now().UTC(),
 		ProposerAddress: consAddress.Bytes(),
 

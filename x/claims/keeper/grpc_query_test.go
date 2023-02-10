@@ -6,14 +6,14 @@ import (
 	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
+	"github.com/QOM-One/QomApp/testutil"
+	"github.com/QOM-One/QomApp/x/claims/types"
 	"github.com/evmos/ethermint/tests"
-	"github.com/evmos/evmos/v11/testutil"
-	"github.com/evmos/evmos/v11/x/claims/types"
 )
 
 func (suite *KeeperTestSuite) TestTotalUnclaimed() {
 	ctx := sdk.WrapSDKContext(suite.ctx)
-	coins := sdk.NewCoins(sdk.NewCoin("aevmos", sdk.NewInt(1000)))
+	coins := sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewInt(1000)))
 
 	testCases := []struct {
 		name       string

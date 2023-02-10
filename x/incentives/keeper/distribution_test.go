@@ -5,7 +5,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/evmos/evmos/v11/x/incentives/types"
+	"github.com/QOM-One/QomApp/x/incentives/types"
 )
 
 func (suite *KeeperTestSuite) TestDistributeIncentives() {

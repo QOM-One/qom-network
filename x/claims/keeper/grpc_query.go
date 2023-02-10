@@ -25,7 +25,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/evmos/evmos/v11/x/claims/types"
+	"github.com/QOM-One/QomApp/x/claims/types"
 )
 
 var _ types.QueryServer = Keeper{}

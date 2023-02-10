@@ -2,15 +2,15 @@ package keeper_test
 
 import (
 	"fmt"
-	"github.com/evmos/evmos/v11/x/inflation/types"
+	"github.com/QOM-One/QomApp/x/inflation/types"
 	"time"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	epochstypes "github.com/evmos/evmos/v11/x/epochs/types"
-	incentivestypes "github.com/evmos/evmos/v11/x/incentives/types"
+	epochstypes "github.com/QOM-One/QomApp/x/epochs/types"
+	incentivestypes "github.com/QOM-One/QomApp/x/incentives/types"
 )
 
 var (

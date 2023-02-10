@@ -12,6 +12,9 @@ import (
 	"github.com/evmos/ethermint/tests"
 	feemarkettypes "github.com/evmos/ethermint/x/feemarket/types"
 
+	"github.com/QOM-One/QomApp/app"
+	"github.com/QOM-One/QomApp/testutil"
+	"github.com/QOM-One/QomApp/x/claims/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -19,9 +22,6 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	evm "github.com/evmos/ethermint/x/evm/types"
-	"github.com/evmos/evmos/v11/app"
-	"github.com/evmos/evmos/v11/testutil"
-	"github.com/evmos/evmos/v11/x/claims/types"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 	abci "github.com/tendermint/tendermint/abci/types"
@@ -36,7 +36,7 @@ type KeeperTestSuite struct {
 
 	ctx sdk.Context
 
-	app            *app.Evmos
+	app            *app.Qom
 	queryClient    types.QueryClient
 	queryClientEvm evm.QueryClient
 	address        common.Address
@@ -75,7 +75,7 @@ func (suite *KeeperTestSuite) DoSetupTest(t require.TestingT) {
 	suite.app = app.Setup(false, feemarkettypes.DefaultGenesisState())
 	suite.ctx = suite.app.BaseApp.NewContext(false, tmproto.Header{
 		Height:          1,
-		ChainID:         "evmos_9001-1",
+		ChainID:         "qom_766-1",
 		Time:            time.Now().UTC(),
 		ProposerAddress: consAddress.Bytes(),
 

@@ -17,9 +17,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/evmos/evmos/v11/app"
-	claimstypes "github.com/evmos/evmos/v11/x/claims/types"
-	"github.com/evmos/evmos/v11/x/recovery/types"
+	"github.com/QOM-One/QomApp/app"
+	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/x/recovery/types"
 )
 
 var (
@@ -33,7 +33,7 @@ type KeeperTestSuite struct {
 
 	ctx sdk.Context
 
-	app         *app.Evmos
+	app         *app.Qom
 	queryClient types.QueryClient
 }
 
@@ -44,7 +44,7 @@ func (suite *KeeperTestSuite) SetupTest() {
 	suite.app = app.Setup(false, feemarkettypes.DefaultGenesisState())
 	suite.ctx = suite.app.BaseApp.NewContext(false, tmproto.Header{
 		Height:          1,
-		ChainID:         "evmos_9000-1",
+		ChainID:         "qom_7668378-1",
 		Time:            time.Now().UTC(),
 		ProposerAddress: consAddress.Bytes(),
 

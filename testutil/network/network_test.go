@@ -14,7 +14,7 @@ import (
 	"github.com/evmos/ethermint/server/config"
 	"github.com/evmos/ethermint/testutil/network"
 
-	evmosnetwork "github.com/evmos/evmos/v11/testutil/network"
+	evmosnetwork "github.com/QOM-One/QomApp/testutil/network"
 )
 
 type IntegrationTestSuite struct {

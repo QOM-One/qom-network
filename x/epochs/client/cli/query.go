@@ -25,7 +25,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/version"
 	"github.com/spf13/cobra"
 
-	"github.com/evmos/evmos/v11/x/epochs/types"
+	"github.com/QOM-One/QomApp/x/epochs/types"
 )
 
 // GetQueryCmd returns the cli query commands for this module

@@ -5,17 +5,17 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/evmos/evmos/v11/x/erc20/keeper"
+	"github.com/QOM-One/QomApp/x/erc20/keeper"
 
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 
 	"github.com/ethereum/go-ethereum/common"
 
+	"github.com/QOM-One/QomApp/testutil"
 	"github.com/cosmos/cosmos-sdk/crypto/keys/secp256k1"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/evmos/ethermint/crypto/ethsecp256k1"
-	"github.com/evmos/evmos/v11/testutil"
 
 	transfertypes "github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"
 	clienttypes "github.com/cosmos/ibc-go/v6/modules/core/02-client/types"
@@ -23,11 +23,11 @@ import (
 	ibcgotesting "github.com/cosmos/ibc-go/v6/testing"
 	ibcmock "github.com/cosmos/ibc-go/v6/testing/mock"
 
-	"github.com/evmos/evmos/v11/contracts"
-	claimstypes "github.com/evmos/evmos/v11/x/claims/types"
-	"github.com/evmos/evmos/v11/x/erc20/types"
-	inflationtypes "github.com/evmos/evmos/v11/x/inflation/types"
-	vestingtypes "github.com/evmos/evmos/v11/x/vesting/types"
+	"github.com/QOM-One/QomApp/contracts"
+	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/x/erc20/types"
+	inflationtypes "github.com/QOM-One/QomApp/x/inflation/types"
+	vestingtypes "github.com/QOM-One/QomApp/x/vesting/types"
 )
 
 var erc20Denom = "erc20/0xdac17f958d2ee523a2206206994597c13d831ec7"
@@ -103,7 +103,7 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 		{
 			name: "error - invalid sender (no '1')",
 			malleate: func() {
-				transfer := transfertypes.NewFungibleTokenPacketData(registeredDenom, "100", "evmos", ethsecpAddrCosmos, "")
+				transfer := transfertypes.NewFungibleTokenPacketData(registeredDenom, "100", "qom", ethsecpAddrCosmos, "")
 				bz := transfertypes.ModuleCdc.MustMarshalJSON(&transfer)
 				packet = channeltypes.NewPacket(bz, 100, transfertypes.PortID, sourceChannel, transfertypes.PortID, evmosChannel, timeoutHeight, 0)
 			},
@@ -394,7 +394,7 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 }
 
 func (suite *KeeperTestSuite) TestConvertCoinToERC20FromPacket() {
-	senderAddr := "evmos1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v"
+	senderAddr := "qom1x2w87cvt5mqjncav4lxy8yfreynn273xruy6dq"
 
 	testCases := []struct {
 		name     string
@@ -405,14 +405,14 @@ func (suite *KeeperTestSuite) TestConvertCoinToERC20FromPacket() {
 		{
 			name: "error - invalid sender",
 			malleate: func() transfertypes.FungibleTokenPacketData {
-				return transfertypes.NewFungibleTokenPacketData("aevmos", "10", "", "", "")
+				return transfertypes.NewFungibleTokenPacketData("aqom", "10", "", "", "")
 			},
 			expPass: false,
 		},
 		{
 			name: "pass - is base denom",
 			malleate: func() transfertypes.FungibleTokenPacketData {
-				return transfertypes.NewFungibleTokenPacketData("aevmos", "10", senderAddr, "", "")
+				return transfertypes.NewFungibleTokenPacketData("aqom", "10", senderAddr, "", "")
 			},
 			expPass: true,
 		},
@@ -613,7 +613,7 @@ func (suite *KeeperTestSuite) TestOnAcknowledgementPacket() {
 }
 
 func (suite *KeeperTestSuite) TestOnTimeoutPacket() {
-	senderAddr := "evmos1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v"
+	senderAddr := "qom1x2w87cvt5mqjncav4lxy8yfreynn273xruy6dq"
 
 	testCases := []struct {
 		name     string

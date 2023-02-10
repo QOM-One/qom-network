@@ -36,9 +36,9 @@ import (
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/evmos/evmos/v11/x/revenue/client/cli"
-	"github.com/evmos/evmos/v11/x/revenue/keeper"
-	"github.com/evmos/evmos/v11/x/revenue/types"
+	"github.com/QOM-One/QomApp/x/revenue/client/cli"
+	"github.com/QOM-One/QomApp/x/revenue/keeper"
+	"github.com/QOM-One/QomApp/x/revenue/types"
 )
 
 // type check to ensure the interface is properly implemented

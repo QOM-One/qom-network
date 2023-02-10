@@ -44,26 +44,26 @@ import (
 	evmtypes "github.com/evmos/ethermint/x/evm/types"
 	feemarkettypes "github.com/evmos/ethermint/x/feemarket/types"
 
-	"github.com/evmos/evmos/v11/app"
-	"github.com/evmos/evmos/v11/contracts"
-	ibctesting "github.com/evmos/evmos/v11/ibc/testing"
-	claimstypes "github.com/evmos/evmos/v11/x/claims/types"
-	"github.com/evmos/evmos/v11/x/erc20/types"
-	inflationtypes "github.com/evmos/evmos/v11/x/inflation/types"
+	"github.com/QOM-One/QomApp/app"
+	"github.com/QOM-One/QomApp/contracts"
+	ibctesting "github.com/QOM-One/QomApp/ibc/testing"
+	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/x/erc20/types"
+	inflationtypes "github.com/QOM-One/QomApp/x/inflation/types"
 
+	teststypes "github.com/QOM-One/QomApp/types/tests"
 	transfertypes "github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"
 	clienttypes "github.com/cosmos/ibc-go/v6/modules/core/02-client/types"
 	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
 	ibcgotesting "github.com/cosmos/ibc-go/v6/testing"
 	ibcgotestinghelpers "github.com/cosmos/ibc-go/v6/testing/simapp/helpers"
-	teststypes "github.com/evmos/evmos/v11/types/tests"
 )
 
 type KeeperTestSuite struct {
 	suite.Suite
 
 	ctx              sdk.Context
-	app              *app.Evmos
+	app              *app.Qom
 	queryClientEvm   evm.QueryClient
 	queryClient      types.QueryClient
 	address          common.Address
@@ -120,7 +120,7 @@ func (suite *KeeperTestSuite) DoSetupTest(t require.TestingT) {
 	suite.app = app.Setup(false, feemarkettypes.DefaultGenesisState())
 	suite.ctx = suite.app.BaseApp.NewContext(false, tmproto.Header{
 		Height:          1,
-		ChainID:         "evmos_9001-1",
+		ChainID:         "qom_766-1",
 		Time:            time.Now().UTC(),
 		ProposerAddress: consAddress.Bytes(),
 
@@ -253,9 +253,9 @@ func (suite *KeeperTestSuite) SetupIBCTest() {
 	suite.coordinator.CommitNBlocks(suite.IBCOsmosisChain, 2)
 	suite.coordinator.CommitNBlocks(suite.IBCCosmosChain, 2)
 
-	s.app = suite.EvmosChain.App.(*app.Evmos)
+	s.app = suite.EvmosChain.App.(*app.Qom)
 	evmParams := s.app.EvmKeeper.GetParams(s.EvmosChain.GetContext())
-	evmParams.EvmDenom = "aevmos"
+	evmParams.EvmDenom = "aqom"
 	s.app.EvmKeeper.SetParams(s.EvmosChain.GetContext(), evmParams)
 
 	// Increase max gas
@@ -273,7 +273,7 @@ func (suite *KeeperTestSuite) SetupIBCTest() {
 	_, err = s.app.EvmKeeper.GetCoinbaseAddress(suite.EvmosChain.GetContext(), sdk.ConsAddress(suite.EvmosChain.CurrentHeader.ProposerAddress))
 	suite.Require().NoError(err)
 	// Mint coins locked on the evmos account generated with secp.
-	coinEvmos := sdk.NewCoin("aevmos", sdk.NewInt(10000))
+	coinEvmos := sdk.NewCoin("aqom", sdk.NewInt(10000))
 	coins := sdk.NewCoins(coinEvmos)
 	err = s.app.BankKeeper.MintCoins(suite.EvmosChain.GetContext(), inflationtypes.ModuleName, coins)
 	suite.Require().NoError(err)
@@ -323,7 +323,7 @@ func (suite *KeeperTestSuite) SetupIBCTest() {
 	suite.Require().Equal("connection-0", suite.pathOsmosisEvmos.EndpointA.ConnectionID)
 	suite.Require().Equal("channel-0", suite.pathOsmosisEvmos.EndpointA.ChannelID)
 
-	coinEvmos = sdk.NewCoin("aevmos", sdk.NewInt(1000000000000000000))
+	coinEvmos = sdk.NewCoin("aqom", sdk.NewInt(1000000000000000000))
 	coins = sdk.NewCoins(coinEvmos)
 	err = s.app.BankKeeper.MintCoins(suite.EvmosChain.GetContext(), types.ModuleName, coins)
 	suite.Require().NoError(err)

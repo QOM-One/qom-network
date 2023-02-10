@@ -1,18 +1,18 @@
-// Copyright 2022 Evmos Foundation
-// This file is part of the Evmos Network packages.
+// Copyright 2022 Qom Foundation
+// This file is part of the Qom Network packages.
 //
-// Evmos is free software: you can redistribute it and/or modify
+// Qom is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The Evmos packages are distributed in the hope that it will be useful,
+// The Qom packages are distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the Evmos packages. If not, see https://github.com/evmos/evmos/blob/main/LICENSE
+// along with the Qom packages. If not, see https://github.com/evmos/evmos/blob/main/LICENSE
 
 package main
 
@@ -59,13 +59,13 @@ import (
 	servercfg "github.com/evmos/ethermint/server/config"
 	srvflags "github.com/evmos/ethermint/server/flags"
 
-	"github.com/evmos/evmos/v11/app"
-	cmdcfg "github.com/evmos/evmos/v11/cmd/config"
-	evmoskr "github.com/evmos/evmos/v11/crypto/keyring"
+	"github.com/QOM-One/QomApp/app"
+	cmdcfg "github.com/QOM-One/QomApp/cmd/config"
+	evmoskr "github.com/QOM-One/QomApp/crypto/keyring"
 )
 
 const (
-	EnvPrefix = "EVMOS"
+	EnvPrefix = "QOM"
 )
 
 // NewRootCmd creates a new root command for evmosd. It is called once in the
@@ -89,7 +89,7 @@ func NewRootCmd() (*cobra.Command, params.EncodingConfig) {
 
 	rootCmd := &cobra.Command{
 		Use:   app.Name,
-		Short: "Evmos Daemon",
+		Short: "Qom Daemon",
 		PersistentPreRunE: func(cmd *cobra.Command, _ []string) error {
 			// set the default command outputs
 			cmd.SetOut(cmd.OutOrStdout())
@@ -272,7 +272,7 @@ func (a appCreator) newApp(logger log.Logger, db dbm.DB, traceStore io.Writer, a
 		cast.ToUint32(appOpts.Get(sdkserver.FlagStateSyncSnapshotKeepRecent)),
 	)
 
-	evmosApp := app.NewEvmos(
+	evmosApp := app.NewQom(
 		logger, db, traceStore, true, skipUpgradeHeights,
 		cast.ToString(appOpts.Get(flags.FlagHome)),
 		cast.ToUint(appOpts.Get(sdkserver.FlagInvCheckPeriod)),
@@ -300,20 +300,20 @@ func (a appCreator) appExport(
 	logger log.Logger, db dbm.DB, traceStore io.Writer, height int64, forZeroHeight bool, jailAllowedAddrs []string,
 	appOpts servertypes.AppOptions,
 ) (servertypes.ExportedApp, error) {
-	var evmosApp *app.Evmos
+	var evmosApp *app.Qom
 	homePath, ok := appOpts.Get(flags.FlagHome).(string)
 	if !ok || homePath == "" {
 		return servertypes.ExportedApp{}, errors.New("application home not set")
 	}
 
 	if height != -1 {
-		evmosApp = app.NewEvmos(logger, db, traceStore, false, map[int64]bool{}, "", uint(1), a.encCfg, appOpts)
+		evmosApp = app.NewQom(logger, db, traceStore, false, map[int64]bool{}, "", uint(1), a.encCfg, appOpts)
 
 		if err := evmosApp.LoadHeight(height); err != nil {
 			return servertypes.ExportedApp{}, err
 		}
 	} else {
-		evmosApp = app.NewEvmos(logger, db, traceStore, true, map[int64]bool{}, "", uint(1), a.encCfg, appOpts)
+		evmosApp = app.NewQom(logger, db, traceStore, true, map[int64]bool{}, "", uint(1), a.encCfg, appOpts)
 	}
 
 	return evmosApp.ExportAppStateAndValidators(forZeroHeight, jailAllowedAddrs)

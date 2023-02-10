@@ -14,7 +14,7 @@ import (
 	"github.com/evmos/ethermint/tests"
 	"github.com/evmos/ethermint/x/evm/statedb"
 
-	"github.com/evmos/evmos/v11/x/revenue/types"
+	"github.com/QOM-One/QomApp/x/revenue/types"
 )
 
 func (suite *KeeperTestSuite) TestRegisterRevenue() {

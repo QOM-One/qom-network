@@ -11,9 +11,9 @@ import (
 	evmtypes "github.com/evmos/ethermint/x/evm/types"
 	"github.com/stretchr/testify/mock"
 
-	"github.com/evmos/evmos/v11/contracts"
-	"github.com/evmos/evmos/v11/x/erc20/keeper"
-	"github.com/evmos/evmos/v11/x/erc20/types"
+	"github.com/QOM-One/QomApp/contracts"
+	"github.com/QOM-One/QomApp/x/erc20/keeper"
+	"github.com/QOM-One/QomApp/x/erc20/types"
 )
 
 func (suite *KeeperTestSuite) TestQueryERC20() {

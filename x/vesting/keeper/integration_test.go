@@ -8,23 +8,23 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
+	"github.com/QOM-One/QomApp/app"
+	"github.com/QOM-One/QomApp/app/ante"
+	"github.com/QOM-One/QomApp/testutil"
 	"github.com/evmos/ethermint/encoding"
 	"github.com/evmos/ethermint/tests"
-	"github.com/evmos/evmos/v11/app"
-	"github.com/evmos/evmos/v11/app/ante"
-	"github.com/evmos/evmos/v11/testutil"
 
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 
+	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	sdkvesting "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	evmtypes "github.com/evmos/ethermint/x/evm/types"
-	claimstypes "github.com/evmos/evmos/v11/x/claims/types"
 
-	"github.com/evmos/evmos/v11/x/vesting/types"
+	"github.com/QOM-One/QomApp/x/vesting/types"
 )
 
 // Clawback vesting with Cliff and Lock. In this case the cliff is reached
@@ -32,7 +32,7 @@ import (
 // employee starts before mainnet launch (periodsCliff < lockupPeriod)
 
 // Example:
-// 21/10 Employee joins Evmos and vesting starts
+// 21/10 Employee joins Qom and vesting starts
 // 22/03 Mainnet launch
 // 22/09 Cliff ends
 // 23/02 Lock ends
@@ -212,7 +212,7 @@ var _ = Describe("Clawback Vesting Accounts", Ordered, func() {
 })
 
 // Example:
-// 21/10 Employee joins Evmos and vesting starts
+// 21/10 Employee joins Qom and vesting starts
 // 22/03 Mainnet launch
 // 22/09 Cliff ends
 // 23/02 Lock ends
@@ -524,7 +524,7 @@ func delegate(clawbackAccount *types.ClawbackVestingAccount, amount int64) error
 	addr, err := sdk.AccAddressFromBech32(clawbackAccount.Address)
 	s.Require().NoError(err)
 	//
-	val, err := sdk.ValAddressFromBech32("evmosvaloper1z3t55m0l9h0eupuz3dp5t5cypyv674jjn4d6nn")
+	val, err := sdk.ValAddressFromBech32("qomvaloper1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq8w6tlv")
 	s.Require().NoError(err)
 	delegateMsg := stakingtypes.NewMsgDelegate(addr, val, sdk.NewCoin(claimstypes.DefaultParams().ClaimsDenom, sdk.NewInt(amount)))
 	txBuilder.SetMsgs(delegateMsg)
