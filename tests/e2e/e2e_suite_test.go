@@ -180,7 +180,7 @@ func (s *IntegrationTestSuite) upgrade() {
 
 	node := upgrade.NewNode(s.upgradeParams.TargetRepo, s.upgradeParams.TargetVersion)
 	node.Mount(s.upgradeParams.MountPath)
-	node.SetCmd([]string{"evmosd", "start", fmt.Sprintf("--chain-id=%s", s.upgradeParams.ChainID)})
+	node.SetCmd([]string{"qomd", "start", fmt.Sprintf("--chain-id=%s", s.upgradeParams.ChainID)})
 	err = s.upgradeManager.RunNode(node)
 	s.Require().NoError(err, "can't mount and run upgraded node container")
 

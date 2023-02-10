@@ -10,24 +10,24 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/QOM-One/QomApp/app"
-	evmosd "github.com/QOM-One/QomApp/cmd/evmosd"
+	qomd "github.com/QOM-One/QomApp/cmd/qomd"
 )
 
 func TestInitCmd(t *testing.T) {
-	rootCmd, _ := evmosd.NewRootCmd()
+	rootCmd, _ := qomd.NewRootCmd()
 	rootCmd.SetArgs([]string{
-		"init",       // Test the init cmd
-		"evmos-test", // Moniker
+		"init",     // Test the init cmd
+		"qom-test", // Moniker
 		fmt.Sprintf("--%s=%s", cli.FlagOverwrite, "true"), // Overwrite genesis.json, in case it already exists
 		fmt.Sprintf("--%s=%s", flags.FlagChainID, "qom_7668378-1"),
 	})
 
-	err := svrcmd.Execute(rootCmd, "evmosd", app.DefaultNodeHome)
+	err := svrcmd.Execute(rootCmd, "qomd", app.DefaultNodeHome)
 	require.NoError(t, err)
 }
 
 func TestAddKeyLedgerCmd(t *testing.T) {
-	rootCmd, _ := evmosd.NewRootCmd()
+	rootCmd, _ := qomd.NewRootCmd()
 	rootCmd.SetArgs([]string{
 		"keys",
 		"add",
@@ -35,6 +35,6 @@ func TestAddKeyLedgerCmd(t *testing.T) {
 		fmt.Sprintf("--%s", flags.FlagUseLedger),
 	})
 
-	err := svrcmd.Execute(rootCmd, "EVMOSD", app.DefaultNodeHome)
+	err := svrcmd.Execute(rootCmd, "QOMD", app.DefaultNodeHome)
 	require.Error(t, err)
 }

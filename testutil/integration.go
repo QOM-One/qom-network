@@ -70,7 +70,7 @@ func SubmitProposal(
 // Delegate delivers a delegate tx
 func Delegate(
 	ctx sdk.Context,
-	appEvmos *app.Qom,
+	appQom *app.Qom,
 	priv *ethsecp256k1.PrivKey,
 	delegateAmount sdk.Coin,
 	validator stakingtypes.Validator,
@@ -83,13 +83,13 @@ func Delegate(
 	}
 
 	delegateMsg := stakingtypes.NewMsgDelegate(accountAddress, val, delegateAmount)
-	return DeliverTx(ctx, appEvmos, priv, delegateMsg)
+	return DeliverTx(ctx, appQom, priv, delegateMsg)
 }
 
 // Vote delivers a vote tx with the VoteOption "yes"
 func Vote(
 	ctx sdk.Context,
-	appEvmos *app.Qom,
+	appQom *app.Qom,
 	priv *ethsecp256k1.PrivKey,
 	proposalID uint64,
 	voteOption govv1beta1.VoteOption,
@@ -97,19 +97,19 @@ func Vote(
 	accountAddress := sdk.AccAddress(priv.PubKey().Address().Bytes())
 
 	voteMsg := govv1beta1.NewMsgVote(accountAddress, proposalID, voteOption)
-	return DeliverTx(ctx, appEvmos, priv, voteMsg)
+	return DeliverTx(ctx, appQom, priv, voteMsg)
 }
 
 // DeliverTx delivers a tx for a given set of msgs
 func DeliverTx(
 	ctx sdk.Context,
-	appEvmos *app.Qom,
+	appQom *app.Qom,
 	priv *ethsecp256k1.PrivKey,
 	msgs ...sdk.Msg,
 ) (abci.ResponseDeliverTx, error) {
 	encodingConfig := encoding.MakeConfig(app.ModuleBasics)
 	accountAddress := sdk.AccAddress(priv.PubKey().Address().Bytes())
-	denom := appEvmos.ClaimsKeeper.GetParams(ctx).ClaimsDenom
+	denom := appQom.ClaimsKeeper.GetParams(ctx).ClaimsDenom
 
 	txBuilder := encodingConfig.TxConfig.NewTxBuilder()
 
@@ -119,7 +119,7 @@ func DeliverTx(
 		return abci.ResponseDeliverTx{}, err
 	}
 
-	seq, err := appEvmos.AccountKeeper.GetSequence(ctx, accountAddress)
+	seq, err := appQom.AccountKeeper.GetSequence(ctx, accountAddress)
 	if err != nil {
 		return abci.ResponseDeliverTx{}, err
 	}
@@ -142,7 +142,7 @@ func DeliverTx(
 	}
 
 	// Second round: all signer infos are set, so each signer can sign.
-	accNumber := appEvmos.AccountKeeper.GetAccount(ctx, accountAddress).GetAccountNumber()
+	accNumber := appQom.AccountKeeper.GetAccount(ctx, accountAddress).GetAccountNumber()
 	signerData := authsigning.SignerData{
 		ChainID:       ctx.ChainID(),
 		AccountNumber: accNumber,
@@ -169,7 +169,7 @@ func DeliverTx(
 	}
 
 	req := abci.RequestDeliverTx{Tx: bz}
-	res := appEvmos.BaseApp.DeliverTx(req)
+	res := appQom.BaseApp.DeliverTx(req)
 	if res.Code != 0 {
 		return abci.ResponseDeliverTx{}, errorsmod.Wrapf(errortypes.ErrInvalidRequest, res.Log)
 	}
