@@ -1,7 +1,7 @@
 {
   "metadata": [
     {
-      "description": "The native staking and governance token of the Evmos chain",
+      "description": "The native staking and governance token of the Qom chain",
       "denom_units": [
         {
           "denom": "aevmos",

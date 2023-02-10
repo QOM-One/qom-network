@@ -48,7 +48,7 @@ Make sure you have installed all the dependencies mentioned in the **[Pre-requis
 - Run the `local_node.sh` script to start a local node
 
 ```bash
-git clone https://github.com/evmos/evmos.git
+git clone https://github.com/QOMQQ/QomApp.git
 cd evmos
 ./local_node.sh
 ```

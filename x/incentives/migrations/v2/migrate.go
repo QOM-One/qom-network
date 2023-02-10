@@ -17,11 +17,11 @@
 package v2
 
 import (
+	v2types "github.com/QOM-One/QomApp/x/incentives/migrations/v2/types"
+	"github.com/QOM-One/QomApp/x/incentives/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	v2types "github.com/QOM-One/QomApp/x/incentives/migrations/v2/types"
-	"github.com/QOM-One/QomApp/x/incentives/types"
 )
 
 // MigrateStore migrates the x/incentives module state from the consensus version 1 to

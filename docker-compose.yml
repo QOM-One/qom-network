@@ -2,53 +2,53 @@ version: '3'
 
 services:
   node0:
-    container_name: evmosnode0
-    image: "evmos/node"
+    container_name: qomnode0
+    image: "qom/node"
     ports:
       - "26656-26657:26656-26657"
     volumes:
-      - ./build/node0/evmosd:/evmos:Z
+      - ./build/node0/qomd:/qom:Z
     command:
-      - /evmosd start --home /evmos
+      - /qomd start --home /qom
     networks:
       localnet:
         ipv4_address: 192.167.10.2
 
   node1:
-    container_name: evmosnode1
-    image: "evmos/node"
+    container_name:  qomnode1
+    image: "qom/node"
     ports:
       - "26659-26660:26656-26657"
     volumes:
-      - ./build/node1/evmosd:/evmos:Z
+      - ./build/node1/qomd:/qom:Z
     command:
-      - /evmosd start --home /evmos
+      - /qomd start --home /qom
     networks:
       localnet:
         ipv4_address: 192.167.10.3
 
   node2:
-    container_name: evmosnode2
-    image: "evmos/node"
+    container_name: qomnode2
+    image: "qom/node"
     ports:
       - "26661-26662:26656-26657"
     volumes:
-      - ./build/node2/evmosd:/evmos:Z
+      - ./build/node2/qomd:/qom:Z
     command:
-      - /evmosd start --home /evmos
+      - /qomd start --home /qom
     networks:
       localnet:
         ipv4_address: 192.167.10.4
 
   node3:
-    container_name: evmosnode3
-    image: "evmos/node"
+    container_name: qomnode3
+    image: "qom/node"
     ports:
       - "26663-26664:26656-26657"
     volumes:
-      - ./build/node3/evmosd:/evmos:Z
+      - ./build/node3/qomd:/qom:Z
     command:
-      - /evmosd start --home /evmos
+      - /qomd start --home /qom
     networks:
       localnet:
         ipv4_address: 192.167.10.5

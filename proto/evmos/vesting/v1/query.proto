@@ -1,17 +1,17 @@
 syntax = "proto3";
-package evmos.vesting.v1;
+package qom.vesting.v1;
 
 import "cosmos/base/v1beta1/coin.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 
-option go_package = "github.com/evmos/evmos/v11/x/vesting/types";
+option go_package = "github.com/QOMQQ/QomApp/x/vesting/types";
 
 // Query defines the gRPC querier service.
 service Query {
   // Balances retrieves the unvested, vested and locked tokens for a vesting account
   rpc Balances(QueryBalancesRequest) returns (QueryBalancesResponse) {
-    option (google.api.http).get = "/evmos/vesting/v1/balances/{address}";
+    option (google.api.http).get = "/qom/vesting/v1/balances/{address}";
   }
 }
 

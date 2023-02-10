@@ -12,6 +12,9 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
+	"github.com/QOM-One/QomApp/app"
+	"github.com/QOM-One/QomApp/testutil"
+	"github.com/QOM-One/QomApp/x/revenue/types"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
@@ -20,9 +23,6 @@ import (
 	"github.com/evmos/ethermint/encoding"
 	"github.com/evmos/ethermint/tests"
 	evmtypes "github.com/evmos/ethermint/x/evm/types"
-	"github.com/QOM-One/QomApp/app"
-	"github.com/QOM-One/QomApp/testutil"
-	"github.com/QOM-One/QomApp/x/revenue/types"
 
 	authsigning "github.com/cosmos/cosmos-sdk/x/auth/signing"
 
