@@ -9,7 +9,7 @@ require (
 	github.com/cosmos/cosmos-proto v1.0.0-beta.1
 	github.com/cosmos/cosmos-sdk v0.46.8
 	github.com/cosmos/go-bip39 v1.0.0
-	github.com/cosmos/gogoproto v1.4.3
+	github.com/cosmos/gogoproto v1.4.4
 	github.com/cosmos/ibc-go/v6 v6.1.0
 	github.com/ethereum/go-ethereum v1.10.26
 	github.com/evmos/ethermint v0.21.0
@@ -31,7 +31,7 @@ require (
 	github.com/tendermint/tm-db v0.6.7
 	go.opencensus.io v0.24.0
 	google.golang.org/genproto v0.0.0-20221118155620-16455021b5e6
-	google.golang.org/grpc v1.52.0
+	google.golang.org/grpc v1.52.3
 	google.golang.org/protobuf v1.28.2-0.20220831092852-f930b1dc76e8
 )
 
