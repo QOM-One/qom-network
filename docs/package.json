@@ -1,7 +1,7 @@
 {
   "name": "docs",
   "version": "1.0.0",
-  "description": "Evmos Documentation",
+  "description": "QOM Documentation",
   "main": "index.js",
   "scripts": {
     "serve": "trap 'exit 0' SIGINT; vuepress dev --no-cache",

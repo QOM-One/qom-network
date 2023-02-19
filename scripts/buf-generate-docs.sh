@@ -22,16 +22,16 @@ fi
 # below are the module addresses (directories containing `buf.yaml` files)
 # paths are relative to the scripts/ directory
 THIRDPARTYPROTO="../third_party/proto/"
-EVMOSPROTO="../proto/"
+QOMPROTO="../proto/"
 
 # first, push the third party module and documentation as dependencies (order matters)
 buf push $THIRDPARTYPROTO
 
 # update the dependencies
-buf mod update $EVMOSPROTO
+buf mod update $QOMPROTO
 
 # then, push the evmos proto module and documentation 
-buf push $EVMOSPROTO
+buf push $QOMPROTO
 
 # two commit addresses should be printed to the command line
 # the evmos documentation will have links to the third party documentation
