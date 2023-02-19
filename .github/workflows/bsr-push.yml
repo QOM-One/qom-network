@@ -11,12 +11,11 @@ on:
 
 jobs:
   push:
-#    runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: bufbuild/buf-setup-action@v1.13.1
+      - uses: bufbuild/buf-setup-action@1.14.0
       # Push Evmos protos to the Buf Schema Registry
-      - uses: bufbuild/buf-push-action@v1.13.1
+      - uses: bufbuild/buf-push-action@v1.1.1
         with:
           buf_token: ${{ secrets.BUF_TOKEN }}
