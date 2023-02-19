@@ -6,7 +6,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y $PACKAGES
 
 # Set working directory for the build
-WORKDIR /go/src/github.com/evmos/evmos
+WORKDIR /go/src/github.com/QOM-One/QomApp
 
 # Add source files
 COPY . .
@@ -22,10 +22,10 @@ WORKDIR /
 RUN apt-get update
 
 # Copy over binaries from the build-env
-COPY --from=build-env /go/src/github.com/evmos/evmos/build/evmosd /
-COPY --from=build-env /go/src/github.com/evmos/evmos/scripts/start-docker.sh /
+COPY --from=build-env /go/src/github.com/QOM-One/QomApp /
+COPY --from=build-env /go/src/github.com/QOM-One/QomApp/scripts/start-docker.sh /
 
 EXPOSE 26656 26657 1317 9090 8545 8546
 
-# Run evmosd by default, omit entrypoint to ease using container with evmosd
+# Run qomd by default, omit entrypoint to ease using container with qomd
 ENTRYPOINT ["/bin/bash", "-c"]

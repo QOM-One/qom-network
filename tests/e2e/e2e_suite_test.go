@@ -164,7 +164,7 @@ func (s *IntegrationTestSuite) upgrade() {
 	buildDir := strings.Split(s.upgradeParams.MountPath, ":")[0]
 
 	s.T().Log("exporting state to local...")
-	// export node .evmosd to local build/
+	// export node .qomd to local build/
 	err = s.upgradeManager.ExportState(buildDir)
 	s.Require().NoError(err, "can't export node container state to local")
 

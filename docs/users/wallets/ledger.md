@@ -86,13 +86,13 @@ To use your Ledger with the Evmos CLI, first connect your device to your compute
 Then, connect your Ledger to the CLI with `keys add` command, and select a name for your device:
 
 ```
-evmosd keys add NAME --ledger
+qomd keys add NAME --ledger
 ```
 
 **Example:**
 
 ```
-evmosd keys add myledger --ledger
+qomd keys add myledger --ledger
 
 - address: evmos1hnmrdr0jc2ve3ycxft0gcjjtrdkncpmmkeamf9
   name: myledger
@@ -105,7 +105,7 @@ To sign any transaction, simply append `--from myledger` to the end of the comma
 **Example:**
 
 ```
-evmosd tx bank send myledger evmos1hnmrdr0jc2ve3ycxft0gcjjtrdkncpmmkeamf9 100000aevmos --fees 2000aevmos --from myledger
+qomd tx bank send myledger evmos1hnmrdr0jc2ve3ycxft0gcjjtrdkncpmmkeamf9 100000aevmos --fees 2000aevmos --from myledger
 ```
 
 Now, you can use your Ledger as you would normally interact with the CLI.

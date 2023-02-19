@@ -8,7 +8,7 @@ A user can query the `x/incentives` module using the CLI, JSON-RPC, gRPC or REST
 
 ## CLI
 
-Find below a list of `evmosd` commands added with the `x/incentives` module. You can obtain the full list by using the `evmosd -h` command.
+Find below a list of `qomd` commands added with the `x/incentives` module. You can obtain the full list by using the `qomd -h` command.
 
 ### Queries
 
@@ -19,7 +19,7 @@ The `query` commands allow users to query `incentives` state.
 Allows users to query all registered incentives.
 
 ```go
-evmosd query incentives incentives [flags]
+qomd query incentives incentives [flags]
 ```
 
 **`incentive`**
@@ -27,7 +27,7 @@ evmosd query incentives incentives [flags]
 Allows users to query an incentive for a given contract.
 
 ```go
-evmosd query incentives incentive CONTRACT_ADDRESS [flags]
+qomd query incentives incentive CONTRACT_ADDRESS [flags]
 ```
 
 **`gas-meters`**
@@ -35,7 +35,7 @@ evmosd query incentives incentive CONTRACT_ADDRESS [flags]
 Allows users to query all gas meters for a given incentive.
 
 ```bash
-evmosd query incentives gas-meters CONTRACT_ADDRESS [flags]
+qomd query incentives gas-meters CONTRACT_ADDRESS [flags]
 ```
 
 **`gas-meter`**
@@ -43,7 +43,7 @@ evmosd query incentives gas-meters CONTRACT_ADDRESS [flags]
 Allows users to query a gas meter for a given incentive and user.
 
 ```go
-evmosd query incentives gas-meter CONTRACT_ADDRESS PARTICIPANT_ADDRESS [flags]
+qomd query incentives gas-meter CONTRACT_ADDRESS PARTICIPANT_ADDRESS [flags]
 ```
 
 **`params`**
@@ -51,7 +51,7 @@ evmosd query incentives gas-meter CONTRACT_ADDRESS PARTICIPANT_ADDRESS [flags]
 Allows users to query incentives params.
 
 ```bash
-evmosd query incentives params [flags]
+qomd query incentives params [flags]
 ```
 
 ### Proposals
@@ -63,7 +63,7 @@ The `tx gov submit-legacy-proposal` commands allow users to query create a propo
 Allows users to submit a `RegisterIncentiveProposal`.
 
 ```bash
-evmosd tx gov submit-legacy-proposal register-incentive CONTRACT_ADDRESS ALLOCATION EPOCHS [flags]
+qomd tx gov submit-legacy-proposal register-incentive CONTRACT_ADDRESS ALLOCATION EPOCHS [flags]
 ```
 
 **`cancel-incentive`**
@@ -71,7 +71,7 @@ evmosd tx gov submit-legacy-proposal register-incentive CONTRACT_ADDRESS ALLOCAT
 Allows users to submit a `CanelIncentiveProposal`.
 
 ```bash
-evmosd tx gov submit-legacy-proposal cancel-incentive CONTRACT_ADDRESS [flags]
+qomd tx gov submit-legacy-proposal cancel-incentive CONTRACT_ADDRESS [flags]
 ```
 
 **`param-change`**
@@ -79,7 +79,7 @@ evmosd tx gov submit-legacy-proposal cancel-incentive CONTRACT_ADDRESS [flags]
 Allows users to submit a `ParameterChangeProposal``.
 
 ```bash
-evmosd tx gov submit-legacy-proposal param-change PROPOSAL_FILE [flags]
+qomd tx gov submit-legacy-proposal param-change PROPOSAL_FILE [flags]
 ```
 
 ## gRPC
