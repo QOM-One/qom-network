@@ -458,10 +458,10 @@ proto-format:
 	@echo "Formatting Protobuf files"
 	$(protoCosmosImage) find ./ -name *.proto -exec clang-format -i {} \;
 
-## NOTE: The linter configuration lives in .protolint.yaml
-#proto-lint:
-#	@echo "Linting Protobuf files"
-#	$(protolintImage) lint ./proto
+# NOTE: The linter configuration lives in .protolint.yaml
+proto-lint:
+	@echo "Linting Protobuf files"
+	$(protolintImage) lint ./proto
 
 proto-check-breaking:
 	@echo "Checking Protobuf files for breaking changes"
