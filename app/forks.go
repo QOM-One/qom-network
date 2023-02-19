@@ -17,12 +17,7 @@
 package app
 
 import (
-	"fmt"
-
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
-
-	"github.com/QOM-One/QomApp/types"
 )
 
 // ScheduleForkUpgrade executes any necessary fork logic for based upon the current
@@ -35,29 +30,29 @@ import (
 //  2. Release the software defined in the upgrade-info
 func (app *Qom) ScheduleForkUpgrade(ctx sdk.Context) {
 	// NOTE: there are no testnet forks for the existing versions
-	if !types.IsMainnet(ctx.ChainID()) {
-		return
-	}
+	// if !types.IsMainnet(ctx.ChainID()) {
+	//	return
+	// }
 
-	upgradePlan := upgradetypes.Plan{
-		Height: ctx.BlockHeight(),
-	}
+	// upgradePlan := upgradetypes.Plan{
+	//	Height: ctx.BlockHeight(),
+	// }
 
 	// handle mainnet forks with their corresponding upgrade name and info
-	switch ctx.BlockHeight() {
-	default:
-		// No-op
-		return
-	}
+	// switch ctx.BlockHeight() {
+	// default:
+	//	// No-op
+	//	return
+	// }
 
 	// schedule the upgrade plan to the current block hight, effectively performing
 	// a hard fork that uses the upgrade handler to manage the migration.
-	if err := app.UpgradeKeeper.ScheduleUpgrade(ctx, upgradePlan); err != nil {
-		panic(
-			fmt.Errorf(
-				"failed to schedule upgrade %s during BeginBlock at height %d: %w",
-				upgradePlan.Name, ctx.BlockHeight(), err,
-			),
-		)
-	}
+	// if err := app.UpgradeKeeper.ScheduleUpgrade(ctx, upgradePlan); err != nil {
+	//	panic(
+	//		fmt.Errorf(
+	//			"failed to schedule upgrade %s during BeginBlock at height %d: %w",
+	//			upgradePlan.Name, ctx.BlockHeight(), err,
+	//		),
+	//	)
+	// }
 }
