@@ -3,7 +3,7 @@ package qom.recovery.v1;
 
 import "cosmos/msg/v1/msg.proto";
 import "cosmos_proto/cosmos.proto";
-import "evmos/recovery/v1/genesis.proto";
+import "qom/recovery/v1/genesis.proto";
 import "gogoproto/gogo.proto";
 
 option go_package = "github.com/QOM-One/QomApp/x/recovery/types";

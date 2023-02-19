@@ -2,8 +2,8 @@ syntax = "proto3";
 package qom.revenue.v1;
 
 import "cosmos/base/query/v1beta1/pagination.proto";
-import "evmos/revenue/v1/genesis.proto";
-import "evmos/revenue/v1/revenue.proto";
+import "qom/revenue/v1/genesis.proto";
+import "qom/revenue/v1/revenue.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 
