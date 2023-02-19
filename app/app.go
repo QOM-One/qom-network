@@ -1116,7 +1116,6 @@ func initParamsKeeper(
 }
 
 func (app *Qom) setupUpgradeHandlers() {
-
 	// When a planned update height is reached, the old binary will panic
 	// writing on disk the height and name of the update that triggered it
 	// This will read that value, and execute the preparations for the upgrade.
