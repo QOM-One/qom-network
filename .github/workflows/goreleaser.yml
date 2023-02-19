@@ -1,5 +1,4 @@
 name: goreleaser
-project_name:"QOM"
 
 on:
   push:
