@@ -3,7 +3,7 @@ package qom.inflation.v1;
 
 import "gogoproto/gogo.proto";
 
-import "evmos/inflation/v1/inflation.proto";
+import "qom/inflation/v1/inflation.proto";
 
 option go_package = "github.com/QOM-One/QomApp/x/inflation/types";
 
