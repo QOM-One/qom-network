@@ -1,5 +1,8 @@
 #!/bin/bash
 
+## QOM ##
+
+
 KEYS[0]="dev0"
 KEYS[1]="dev1"
 KEYS[2]="dev2"
