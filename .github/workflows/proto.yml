@@ -8,7 +8,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+#    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - uses: technote-space/get-diff-action@v6.1.2
@@ -24,7 +25,8 @@ jobs:
         if: env.GIT_DIFF
 
   lint:
-    runs-on: ubuntu-latest
+#    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
@@ -34,7 +36,8 @@ jobs:
           input: "proto"
 
   break-check:
-    runs-on: ubuntu-latest
+#    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - uses: bufbuild/buf-setup-action@v1.12.0

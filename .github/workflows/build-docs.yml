@@ -11,7 +11,8 @@ on:
 jobs:
   check-docs-build:
     name: Check docs build
-    runs-on: ubuntu-latest
+#    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
         with:
