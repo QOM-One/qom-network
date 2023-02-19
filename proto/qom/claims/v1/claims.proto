@@ -47,6 +47,7 @@ message ClaimsRecordAddress {
 
 // ClaimsRecord defines the initial claimable airdrop amount and the list of
 // completed actions to claim the tokens.
+// test action
 message ClaimsRecord {
   // initial_claimable_amount for the user
   string initial_claimable_amount = 1
