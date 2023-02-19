@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#test
+#test 2
 
 KEYS[0]="dev0"
 KEYS[1]="dev1"
