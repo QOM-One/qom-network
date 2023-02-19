@@ -1,7 +1,7 @@
 syntax = "proto3";
 package qom.erc20.v1;
 
-import "evmos/erc20/v1/erc20.proto";
+import "qom/erc20/v1/erc20.proto";
 import "gogoproto/gogo.proto";
 
 option go_package = "github.com/QOM-One/QomApp/x/erc20/types";
