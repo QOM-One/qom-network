@@ -14,9 +14,10 @@ jobs:
   push:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: bufbuild/buf-setup-action@v1.12.0
+      - uses: actions/checkout@v2
+      - uses: bufbuild/buf-setup-action@v1
       # Push Evmos protos to the Buf Schema Registry
       - uses: bufbuild/buf-push-action@v1
         with:
           buf_token: ${{ secrets.BUF_TOKEN }}
+          draft: ${{ github.ref_name != 'main'}}
