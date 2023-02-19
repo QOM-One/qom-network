@@ -8,7 +8,7 @@ Learn how to query balances of IBC Cosmos Coins and ERC-20s on Evmos. {synopsis}
 
 This guide will cover the following query methods:
 
-- [`evmosd` & Tendermint RPC](#evmosd--tendermint-rpc)
+- [`qomd` & Tendermint RPC](#qomd--tendermint-rpc)
 - [JSON-RPC](#json-rpc)
 - [gRPC](#grpc)
 
@@ -16,12 +16,12 @@ This guide will cover the following query methods:
 **Note**: In this document, the command line is used to interact with endpoints. For dApp developers, using libraries such as [cosmjs](https://github.com/cosmos/cosmjs) and [evmosjs](../libraries/evmosjs.md) is recommended instead.
 :::
 
-## `evmosd` & Tendermint RPC
+## `qomd` & Tendermint RPC
 
-Upon [installation](../../validators/quickstart/installation.md) and [configuration](../../validators/quickstart/binary.md) of the Evmos Daemon, developers can query account balances using `evmosd` with the following CLI command:
+Upon [installation](../../validators/quickstart/installation.md) and [configuration](../../validators/quickstart/binary.md) of the Evmos Daemon, developers can query account balances using `qod` with the following CLI command:
 
 ```bash
-$ evmosd query bank balances $EVMOSADDRESS --count-total=$COUNTTOTAL --height=$HEIGHT --output=$OUTPUT --node=$NODE
+$ qomd query bank balances $EVMOSADDRESS --count-total=$COUNTTOTAL --height=$HEIGHT --output=$OUTPUT --node=$NODE
 balances:
 - amount: "1000000000000000000"
   denom: aevmos
@@ -43,7 +43,7 @@ where:
 Details of non-native currencies (ie. not `aevmos`) can be queried with the following CLI command:
 
 ```bash
-$ evmosd query erc20 token-pair $DENOM --node=$NODE --height=$HEIGHT --output=$OUTPUT
+$ qomd query erc20 token-pair $DENOM --node=$NODE --height=$HEIGHT --output=$OUTPUT
 token_pair:
   contract_owner: OWNER_MODULE
   denom: ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518

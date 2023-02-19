@@ -197,7 +197,7 @@ PEER="96557e26aabf3b23e8ff5282d03196892a7776fc@bd-evmos-mainnet-state-sync-us-01
 wget -O $HOME/genesis.json https://archive.evmos.org/mainnet/genesis.json 
 ```
 
-### Install evmosd
+### Install qomd
 
 ```bash
 git clone https://github.com/QOM-One/QomApp.git && \ 
@@ -210,27 +210,27 @@ make install
 Node init
 
 ```bash
-evmosd init $moniker --chain-id $CHAIN_ID
+qomd init $moniker --chain-id $CHAIN_ID
 ```
 
-Move genesis file to .evmosd/config folder
+Move genesis file to .qomd/config folder
 
 ```bash
-mv $HOME/genesis.json ~/.evmosd/config/
+mv $HOME/genesis.json ~/.qomd/config/
 ```
 
 Reset the node
 
 ```bash
-evmosd tendermint unsafe-reset-all --home $HOME/.evmosd
+qomd tendermint unsafe-reset-all --home $HOME/.qomd
 ```
 
 Change config files (set the node name, add persistent peers, set indexer = "null")
 
 ```bash
-sed -i -e "s%^moniker *=.*%moniker = \"$moniker\"%; " $HOME/.evmosd/config/config.toml
-sed -i -e "s%^indexer *=.*%indexer = \"null\"%; " $HOME/.evmosd/config/config.toml
-sed -i -e "s%^persistent_peers *=.*%persistent_peers = \"$PEER\"%; " $HOME/.evmosd/config/config.toml
+sed -i -e "s%^moniker *=.*%moniker = \"$moniker\"%; " $HOME/.qomd/config/config.toml
+sed -i -e "s%^indexer *=.*%indexer = \"null\"%; " $HOME/.qomd/config/config.toml
+sed -i -e "s%^persistent_peers *=.*%persistent_peers = \"$PEER\"%; " $HOME/.qomd/config/config.toml
 ```
 
 Set the variables for start from snapshot
@@ -264,41 +264,41 @@ s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 
-s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" ~/.evmosd/config/config.toml
+s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" ~/.qomd/config/config.toml
 ```
 
-### Create evmosd service
+### Create qomd service
 
 ```bash
 echo "[Unit]
-Description=Evmosd Node
+Description=qomd Node
 After=network.target
 #
 [Service]
 User=$USER
 Type=simple
-ExecStart=$(which evmosd) start
+ExecStart=$(which qomd) start
 Restart=on-failure
 LimitNOFILE=65535
 #
 [Install]
-WantedBy=multi-user.target" > $HOME/evmosd.service; sudo mv $HOME/evmosd.service /etc/systemd/system/
+WantedBy=multi-user.target" > $HOME/qomd.service; sudo mv $HOME/qomd.service /etc/systemd/system/
 ```
 
 ```bash
-sudo systemctl enable evmosd.service && sudo systemctl daemon-reload
+sudo systemctl enable qomd.service && sudo systemctl daemon-reload
 ```
 
-### Run evmosd
+### Run qomd
 
 ```bash
-sytemctl start evmosd
+sytemctl start qomd
 ```
 
 ### Check logs
 
 ```bash
-journalctl -u evmosd -f
+journalctl -u qomd -f
 ```
 
 When the node is started it will then attempt to find a state sync snapshot in the network, and restore it:
@@ -329,7 +329,7 @@ The node is now state synced, having joined the network in seconds
 ### Use this command to switch off your State Sync mode, after node fully synced to avoid problems in future node restarts!
 
 ```bash
-sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1false|" $HOME/.evmosd/config/config.toml
+sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1false|" $HOME/.qomd/config/config.toml
 ```
 
 :::tip

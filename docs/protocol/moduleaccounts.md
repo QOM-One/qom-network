@@ -26,7 +26,7 @@ This can be calculated with the [`GetEscrowAccount` function on IBC-go](https://
 **Note**: These escrow accounts are not listed when performing the query:
 
 ```shell
-evmosd q auth module-accounts
+qomd q auth module-accounts
 ```
 
 This happens because the [`GetModuleAccount` function](https://github.com/cosmos/cosmos-sdk/blob/74d7a0dfcd9f47d8a507205f82c264a269ef0612/x/auth/keeper/keeper.go#L194-L224) used on the query considers only the accounts on the [`permAddrs` map of the `AccountKeeper`](https://github.com/cosmos/cosmos-sdk/blob/74d7a0dfcd9f47d8a507205f82c264a269ef0612/x/auth/keeper/keeper.go#L54-L68).

@@ -41,7 +41,7 @@ Even though the transaction processing can be ordered by priority, the gossiping
 
 ## Configuration
 
-To use the a prioritized mempool, adjust `version = "v1"` in the node configuration at `~/.evmosd/config/config.toml`.
+To use the a prioritized mempool, adjust `version = "v1"` in the node configuration at `~/.qomd/config/config.toml`.
 The default value `"v0"` indicates the traditional FIFO mempool.
 
 ::: tip

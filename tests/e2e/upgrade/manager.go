@@ -165,7 +165,7 @@ func (m *Manager) WaitForHeight(ctx context.Context, height int) error {
 	}
 }
 
-// Makes system call to current node container environment with evmosd cli command to get current block height
+// Makes system call to current node container environment with qomd cli command to get current block height
 func (m *Manager) nodeHeight(ctx context.Context) (int, error) {
 	exec, err := m.CreateExec([]string{"qomd", "q", "block"}, m.ContainerID())
 	if err != nil {
