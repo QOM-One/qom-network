@@ -25,7 +25,7 @@ jobs:
         if: env.GIT_DIFF
 
   lint:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
