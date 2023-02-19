@@ -3,36 +3,36 @@ before:
   - go mod download
 
 builds:
-  - id: "qomd-darwin"
-    main: ./cmd/qomd
-    binary: bin/qomd
-    env:
-      - CGO_ENABLED=1
-      - CC=o64-clang
-      - CXX=o64-clang++
-    goos:
-      - darwin
-    goarch:
-      - amd64
-    flags:
-        - -tags=cgo
-    ldflags:
-      - -s -w -X github.com/cosmos/cosmos-sdk/version.Name=qom -X github.com/cosmos/cosmos-sdk/version.AppName=qomd -X github.com/cosmos/cosmos-sdk/version.Version={{.Version}} -X github.com/cosmos/cosmos-sdk/version.Commit={{.Commit}}
-  - id: "qomd-darwin-arm64"
-    main: ./cmd/qomd
-    binary: bin/qomd
-    env:
-      - CGO_ENABLED=1
-      - CC=oa64-clang
-      - CXX=oa64-clang++
-    goos:
-      - darwin
-    goarch:
-      - arm64
-    flags:
-      - -tags=cgo
-    ldflags:
-      - -s -w -X github.com/cosmos/cosmos-sdk/version.Name=qom -X github.com/cosmos/cosmos-sdk/version.AppName=qomd -X github.com/cosmos/cosmos-sdk/version.Version={{.Version}} -X github.com/cosmos/cosmos-sdk/version.Commit={{.Commit}}
+#  - id: "qomd-darwin"
+#    main: ./cmd/qomd
+#    binary: bin/qomd
+#    env:
+#      - CGO_ENABLED=1
+#      - CC=o64-clang
+#      - CXX=o64-clang++
+#    goos:
+#      - darwin
+#    goarch:
+#      - amd64
+#    flags:
+#        - -tags=cgo
+#    ldflags:
+#      - -s -w -X github.com/cosmos/cosmos-sdk/version.Name=qom -X github.com/cosmos/cosmos-sdk/version.AppName=qomd -X github.com/cosmos/cosmos-sdk/version.Version={{.Version}} -X github.com/cosmos/cosmos-sdk/version.Commit={{.Commit}}
+#  - id: "qomd-darwin-arm64"
+#    main: ./cmd/qomd
+#    binary: bin/qomd
+#    env:
+#      - CGO_ENABLED=1
+#      - CC=oa64-clang
+#      - CXX=oa64-clang++
+#    goos:
+#      - darwin
+#    goarch:
+#      - arm64
+#    flags:
+#      - -tags=cgo
+#    ldflags:
+#      - -s -w -X github.com/cosmos/cosmos-sdk/version.Name=qom -X github.com/cosmos/cosmos-sdk/version.AppName=qomd -X github.com/cosmos/cosmos-sdk/version.Version={{.Version}} -X github.com/cosmos/cosmos-sdk/version.Commit={{.Commit}}
   - id: "qomd-linux"
     main: ./cmd/qomd
     binary: bin/qomd
@@ -90,8 +90,8 @@ archives:
     - goos: windows
       format: zip
   builds:
-  - qomd-darwin
-  - qomd-darwin-arm64
+#  - qomd-darwin
+#  - qomd-darwin-arm64
   - qomd-windows
   - qomd-linux
   - qomd-linux-arm64
