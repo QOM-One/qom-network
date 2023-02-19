@@ -190,7 +190,7 @@ func init() {
 	proto.RegisterType((*V3Params)(nil), "evmos.claims.v1.V3Params")
 }
 
-func init() { proto.RegisterFile("evmos/claims/v1/genesis.proto", fileDescriptor_f2f8f1d6f18af278) }
+func init() { proto.RegisterFile("qom/claims/v1/genesis.proto", fileDescriptor_f2f8f1d6f18af278) }
 
 var fileDescriptor_f2f8f1d6f18af278 = []byte{
 	// 485 bytes of a gzipped FileDescriptorProto

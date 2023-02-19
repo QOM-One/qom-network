@@ -1,10 +1,10 @@
 swagger: '2.0'
 info:
-  title: Evmos Chain - gRPC Gateway docs
+  title: Qo Chain - gRPC Gateway docs
   description: A REST interface for state queries and transactions
   version: 1.0.0
 paths:
-  /evmos/claims/v1/claims_records:
+  /qom/claims/v1/claims_records:
     get:
       summary: ClaimsRecords returns all claims records
       operationId: ClaimsRecords
@@ -140,7 +140,7 @@ paths:
           type: boolean
       tags:
         - Query
-  /evmos/claims/v1/claims_records/{address}:
+  /qom/claims/v1/claims_records/{address}:
     get:
       summary: ClaimsRecord returns the claims record for a given address
       operationId: ClaimsRecord
@@ -224,7 +224,7 @@ paths:
           type: string
       tags:
         - Query
-  /evmos/claims/v1/params:
+  /qom/claims/v1/params:
     get:
       summary: Params returns the claims module parameters
       operationId: ClaimsParams

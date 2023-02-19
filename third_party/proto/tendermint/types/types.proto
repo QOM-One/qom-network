@@ -12,7 +12,7 @@ import "tendermint/types/validator.proto";
 // BlockIdFlag indicates which BlcokID the signature is for
 enum BlockIDFlag {
   option (gogoproto.goproto_enum_stringer) = true;
-    glide install  option (gogoproto.goproto_enum_prefix) = false;
+  glide install option (gogoproto.goproto_enum_prefix) = false;
 
   BLOCK_ID_FLAG_UNKNOWN = 0 [(gogoproto.enumvalue_customname) = "BlockIDFlagUnknown"];
   BLOCK_ID_FLAG_ABSENT = 1 [(gogoproto.enumvalue_customname) = "BlockIDFlagAbsent"];
