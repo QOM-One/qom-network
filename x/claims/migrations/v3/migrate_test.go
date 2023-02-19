@@ -1,9 +1,10 @@
 package v3_test
 
 import (
+	"testing"
+
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
-	"testing"
 
 	"github.com/QOM-One/QomApp/app"
 	v3 "github.com/QOM-One/QomApp/x/claims/migrations/v3"

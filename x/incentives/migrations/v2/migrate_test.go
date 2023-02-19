@@ -1,9 +1,10 @@
 package v2_test
 
 import (
+	"testing"
+
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
-	"testing"
 
 	"github.com/QOM-One/QomApp/app"
 	v2 "github.com/QOM-One/QomApp/x/incentives/migrations/v2"
