@@ -107,7 +107,7 @@ module.exports = {
       auto: false,
       nav: [
         {
-          title: "About Evmos",
+          title: "About QOM One",
           children: [
             {
               title: "Introduction",
@@ -115,7 +115,7 @@ module.exports = {
               path: "/about/intro",
             },
             {
-              title: "Evmos Ecosystem",
+              title: "QOM ONE Ecosystem",
               path: "https://evmos.org/ecosystem",
             },
           ],
@@ -139,7 +139,7 @@ module.exports = {
               path: "/users/keys",
             },
             {
-              title: "Evmos Governance",
+              title: "QOM One Governance",
               directory: true,
               path: "/users/governance",
             },
@@ -227,7 +227,7 @@ module.exports = {
               path: "/protocol/ibc",
             },
             {
-              title: "Evmos Go API",
+              title: "QOM One Go API",
               path: "https://pkg.go.dev/github.com/evmos/evmos",
             },
             {
@@ -235,7 +235,7 @@ module.exports = {
               path: "https://pkg.go.dev/github.com/evmos/ethermint",
             },
             {
-              title: "Evmos Protobuf",
+              title: "QOM One Protobuf",
               directory: false,
               path: "/protocol/proto-docs",
             },

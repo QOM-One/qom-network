@@ -26,7 +26,7 @@ Here’s a glance at some of the key features of QOM ONE:
 * Horizontal scalability via [IBC](https://cosmos.network/ibc)
 * Fast transaction finality
 
-Evmos enables these key features by:
+Qom One enables these key features by:
 
 * Implementing Tendermint Core's Application Blockchain Interface ([ABCI](https://docs.tendermint.com/master/spec/abci/)) to manage the blockchain
 * Leveraging [modules](https://docs.cosmos.network/main/building-modules/intro.html) and other mechanisms implemented by the [Cosmos SDK](https://docs.cosmos.network/).
@@ -41,7 +41,7 @@ software to seamlessly deploy smart contracts which interact with the rest of th
 
 | Property               | Value                                                      |
 | ---------------------- | ---------------------------------------------------------- |
-| Evmos Testnet          | `{{ $themeConfig.project.testnet_chain_id }}`              |
-| Evmos Mainnet          | `{{ $themeConfig.project.chain_id }}`                      |
+| Qom One Testnet          | `{{ $themeConfig.project.testnet_chain_id }}`              |
+| Qom One Mainnet          | `{{ $themeConfig.project.chain_id }}`                      |
 | Blockchain Explorer(s) | [List of Block Explorers](./../../developers/explorers.md) |
-| Block Time             | `~2s`                                                      |
+| Block Time             | `~5s`                                                      |
