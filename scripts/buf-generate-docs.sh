@@ -34,5 +34,5 @@ buf mod update $QOMPROTO
 buf push $QOMPROTO
 
 # two commit addresses should be printed to the command line
-# the evmos documentation will have links to the third party documentation
+# the qom documentation will have links to the third party documentation
 # third party documentation can be viewed by looking at the previous commit history in the buf repository, as well
