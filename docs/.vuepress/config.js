@@ -1,6 +1,6 @@
 module.exports = {
   theme: "cosmos",
-  title: "Evmos Documentation",
+  title: "QOM ONE Documentation",
   locales: {
     "/": {
       lang: "en-US",
@@ -93,7 +93,7 @@ module.exports = {
       cosmos_explorer_url: "https://www.mintscan.io/evmos",
     },
     logo: {
-      src: "/evmos-black.svg",
+      src: "/qom-logo.svg",
     },
     algolia: {
       id: process.env.ALGOLIA_ID || '',
