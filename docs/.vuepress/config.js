@@ -336,10 +336,10 @@ module.exports = {
       },
     },
     footer: {
-      logo: "/evmos-black.svg",
+      logo: "/qom-logo.svg",
       textLink: {
-        text: "evmos.org",
-        url: "https://evmos.org",
+        text: "qom.one",
+        url: "https://qom.one",
       },
       services: [
         {
