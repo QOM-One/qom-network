@@ -8,14 +8,14 @@ This document outlines the steps to join an existing testnet {synopsis}
 
 ## Pick a Testnet
 
-You specify the network you want to join by setting the **genesis file** and **seeds**. If you need more information about past networks, check our [testnets repo](https://github.com/evmos/testnets).
+You specify the network you want to join by setting the **genesis file** and **seeds**. If you need more information about past networks, check our [testnets repo](https://github.com/qom/testnets).
 
 | Testnet Chain ID | Description                       | Site                                                                       | Version                                                                                  | Status  |
 | ---------------- | --------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------- |
-| `evmos_9000-4`   | Evmos_9000-4 Testnet              | [Evmos 9000-4](https://github.com/evmos/testnets/tree/main/evmos_9000-4) | [`{{ $themeConfig.project.testnet_version }}`](https://github.com/evmos/evmos/releases) | `Live`  |
-| `evmos_9000-3`   | Evmos_9000-3 Testnet              | [Evmos 9000-3](https://github.com/evmos/testnets/tree/main/evmos_9000-3) | [`v1.0.0-beta1`](https://github.com/evmos/evmos/releases/tag/v1.0.0-beta1)             | `Stale` |
-| `evmos_9000-2`   | Olympus Mons Incentivized Testnet | [Olympus Mons](https://github.com/evmos/testnets/tree/main/olympus_mons) | [`v0.3.x`](https://github.com/evmos/evmos/releases)                                    | `Stale` |
-| `evmos_9000-1`   | Arsia Mons Testnet                | [Arsia Mons](https://github.com/evmos/testnets/tree/main/arsia_mons)     | [`v0.1.x`](https://github.com/evmos/evmos/releases)                                    | `Stale` |
+| `qom_7668378`   | qom_7668378 Testnet                |        [qom 9000-4](https://github.com/qom/testnets/tree/main/qom_7668378) | [`{{ $themeConfig.project.testnet_version }}`](https://github.com/qom/qom/releases) | `Live`  |
+| `qom_7668378`   | qom_7668378 Testnet                |        [qom 9000-3](https://github.com/qom/testnets/tree/main/qom_7668378) | [`v1.0.0-beta1`](https://github.com/qom/qom/releases/tag/v1.0.0-beta1)             | `Stale` |
+| `qom_7668378`   | Olympus Mons Incentivized Testnet  | [Olympus Mons](https://github.com/qom/testnets/tree/main/olympus_mons)     | [`v0.3.x`](https://github.com/qom/qom/releases)                                    | `Stale` |
+| `qom_7668378`   | Arsia Mons Testnet                 | [Arsia Mons](https://github.com/qom/testnets/tree/main/arsia_mons)         | [`v0.1.x`](https://github.com/qom/qom/releases)                                    | `Stale` |
 
 ## Install `qomd`
 
@@ -34,7 +34,7 @@ See the Official [Chain IDs](./../users/technical_concepts/chain_id.md#official-
 :::
 
 ```bash
-qomd config chain-id evmos_9000-4
+qomd config chain-id qom_7668378
 ```
 
 ## Initialize Node
@@ -42,7 +42,7 @@ qomd config chain-id evmos_9000-4
 We need to initialize the node to create all the necessary validator and node configuration files:
 
 ```bash
-qomd init <your_custom_moniker> --chain-id evmos_9000-4
+qomd init <your_custom_moniker> --chain-id qom_7668378
 ```
 
 ::: danger
@@ -56,11 +56,11 @@ In the `config` directory, the most important files for configuration are `app.t
 
 ### Copy the Genesis File
 
-Check the `genesis.json` file from the [`archive`](https://archive.evmos.dev/evmos_9000-4/genesis.json) and copy it over to the `config` directory: `~/.qomd/config/genesis.json`. This is a genesis file with the chain-id and genesis accounts balances.
+Check the `genesis.json` file from the [`archive`](https://archive.qom.dev/qom_7668378/genesis.json) and copy it over to the `config` directory: `~/.qomd/config/genesis.json`. This is a genesis file with the chain-id and genesis accounts balances.
 
 ```bash
 sudo apt install -y unzip wget
-wget -P ~/.qomd/config https://archive.evmos.dev/evmos_9000-4/genesis.json
+wget -P ~/.qomd/config https://archive.qom.dev/qom_7668378/genesis.json
 ```
 
 Then verify the correctness of the genesis configuration file:
@@ -71,7 +71,7 @@ qomd validate-genesis
 
 ### Add Seed Nodes
 
-Your node needs to know how to find [peers](https://docs.tendermint.com/v0.34/tendermint-core/using-tendermint.html#peers). You'll need to add healthy [seed nodes](https://docs.tendermint.com/v0.34/tendermint-core/using-tendermint.html#seed) to `$HOME/.qomd/config/config.toml`. The [`testnets`](https://github.com/evmos/testnets) repo contains links to some seed nodes.
+Your node needs to know how to find [peers](https://docs.tendermint.com/v0.34/tendermint-core/using-tendermint.html#peers). You'll need to add healthy [seed nodes](https://docs.tendermint.com/v0.34/tendermint-core/using-tendermint.html#seed) to `$HOME/.qomd/config/config.toml`. The [`testnets`](https://github.com/qom/testnets) repo contains links to some seed nodes.
 
 Edit the file located in `~/.qomd/config/config.toml` and the `seeds` to the following:
 
@@ -90,7 +90,7 @@ seeds = "<node-id>@<ip>:<p2p port>"
 You can use the following code to get seeds from the repo and add it to your config:
 
 ```bash
-SEEDS=`curl -sL https://raw.githubusercontent.com/tharsis/testnets/main/evmos_9000-4/seeds.txt | awk '{print $1}' | paste -s -d, -`
+SEEDS=`curl -sL https://raw.githubusercontent.com/tharsis/testnets/main/qom_7668378/seeds.txt | awk '{print $1}' | paste -s -d, -`
 sed -i.bak -e "s/^seeds =.*/seeds = \"$SEEDS\"/" ~/.qomd/config/config.toml
 ```
 
@@ -101,12 +101,12 @@ For more information on seeds and peers, you can the Tendermint [P2P documentati
 ### Add Persistent Peers
 
 We can set the [`persistent_peers`](https://docs.tendermint.com/v0.34/tendermint-core/using-tendermint.html#persistent-peer) field in `~/.qomd/config/config.toml` to specify peers that your node will maintain persistent connections with. You can retrieve them from the list of
-available peers on the [`testnets`](https://github.com/evmos/testnets) repo.
+available peers on the [`testnets`](https://github.com/qom/testnets) repo.
 
-A list of available persistent peers is also available in the `#find-peers` channel in the [Evmos Discord](https://discord.gg/evmos). You can get a random 10 entries from the `peers.txt` file in the `PEERS` variable by running the following command:
+A list of available persistent peers is also available in the `#find-peers` channel in the [qom Discord](https://discord.gg/qom). You can get a random 10 entries from the `peers.txt` file in the `PEERS` variable by running the following command:
 
 ```bash
-PEERS=`curl -sL https://raw.githubusercontent.com/tharsis/testnets/main/evmos_9000-4/peers.txt | sort -R | head -n 10 | awk '{print $1}' | paste -s -d, -`
+PEERS=`curl -sL https://raw.githubusercontent.com/tharsis/testnets/main/qom_7668378/peers.txt | sort -R | head -n 10 | awk '{print $1}' | paste -s -d, -`
 ```
 
 Use `sed` to include them into the configuration. You can also add them manually:
@@ -125,16 +125,16 @@ For more details on how to run your validator, follow [these](./setup/run_valida
 
 ```bash
 qomd tx staking create-validator \
-  --amount=1000000000000atevmos \
+  --amount=1000000000000atqom \
   --pubkey=$(qomd tendermint show-validator) \
-  --moniker="EvmosWhale" \
+  --moniker="qomWhale" \
   --chain-id=<chain_id> \
   --commission-rate="0.10" \
   --commission-max-rate="0.20" \
   --commission-max-change-rate="0.01" \
   --min-self-delegation="1000000" \
   --gas="auto" \
-  --gas-prices="0.025atevmos" \
+  --gas-prices="0.025atqom" \
   --from=<key_name>
 ```
 
@@ -183,7 +183,7 @@ qomd start
 
 ## Share your Peer
 
-You can share your peer to posting it in the `#find-peers` channel in the [Evmos Discord](https://discord.gg/evmos).
+You can share your peer to posting it in the `#find-peers` channel in the [QOM Telegram](https://discord.gg/qom).
 
 ::: tip
 To get your Node ID use
@@ -196,4 +196,4 @@ qomd tendermint show-node-id
 
 ## State Syncing a Node
 
-If you want to join the network using State Sync (quick, but not applicable for archive nodes), check our [State Sync](https://docs.evmos.org/validators/setup/statesync.html) page
+If you want to join the network using State Sync (quick, but not applicable for archive nodes), check our [State Sync](https://docs.qom.one/validators/setup/statesync.html) page

@@ -4,7 +4,7 @@ order: 5
 
 # Ledger
 
-Get started with your Ledger hardware wallet on Evmos {synopsis}
+Get started with your Ledger hardware wallet on Qom {synopsis}
 
 ## Pre-requisites
 
@@ -31,7 +31,7 @@ Get started with your Ledger hardware wallet on Evmos {synopsis}
 
 ## Ethereum Ledger App
 
-If you want to connect to Evmos mainnet and Evmos testnet, you can use the Ethereum Ledger app on Ledger Live by setting the chain ID.
+If you want to connect to Qom mainnet and Qom testnet, you can use the Ethereum Ledger app on Ledger Live by setting the chain ID.
 
 First, you will need to install the Ethereum Ledger app by following the instructions below:
 
@@ -48,8 +48,8 @@ In the table below you can find a list of Chain IDs to use with the Ethereum Led
 
 |               | EIP155 chain ID |
 | ------------- | --------------- |
-| Evmos mainnet | `9001`          |
-| Evmos testnet | `9000`          |
+| Qom mainnet | `9001`          |
+| Qom testnet | `9000`          |
 
 ## Import your Ledger Account
 
@@ -58,7 +58,7 @@ In the table below you can find a list of Chain IDs to use with the Ethereum Led
 Now that you've installed the app on Ledger Live, you can connect your Ledger to your computer and unlock it with your PIN-code and open the Ethereum app.
 
 ::: tip
-Follow our [Metamask Guide](./metamask.md) to add the Evmos Mainnet and Testnet to your Settings
+Follow our [Metamask Guide](./metamask.md) to add the Qom Mainnet and Testnet to your Settings
 :::
 
 Now you can import your Ledger account to MetaMask by using the following steps:
@@ -79,9 +79,9 @@ Now you can import your Ledger account to MetaMask by using the following steps:
 
 ![mm3.png](./../../img/mm3.png)
 
-### Evmos CLI
+### Qom CLI
 
-To use your Ledger with the Evmos CLI, first connect your device to your computer, unlock it using your PIN, and open the Ethereum app.
+To use your Ledger with the Qom CLI, first connect your device to your computer, unlock it using your PIN, and open the Ethereum app.
 
 Then, connect your Ledger to the CLI with `keys add` command, and select a name for your device:
 
@@ -94,7 +94,7 @@ qomd keys add NAME --ledger
 ```
 qomd keys add myledger --ledger
 
-- address: evmos1hnmrdr0jc2ve3ycxft0gcjjtrdkncpmmkeamf9
+- address: Qom1hnmrdr0jc2ve3ycxft0gcjjtrdkncpmmkeamf9
   name: myledger
   pubkey: '{"@type":"/ethermint.crypto.v1.ethsecp256k1.PubKey","key":"A19Ty8NGmXQj/oQ+LubST9eDIhEACmWXW6gdU8h60eXI"}'
   type: ledger
@@ -105,7 +105,7 @@ To sign any transaction, simply append `--from myledger` to the end of the comma
 **Example:**
 
 ```
-qomd tx bank send myledger evmos1hnmrdr0jc2ve3ycxft0gcjjtrdkncpmmkeamf9 100000aevmos --fees 2000aevmos --from myledger
+qomd tx bank send myledger Qom1hnmrdr0jc2ve3ycxft0gcjjtrdkncpmmkeamf9 100000aQom --fees 2000aQom --from myledger
 ```
 
 Now, you can use your Ledger as you would normally interact with the CLI.
@@ -116,11 +116,11 @@ In order to sign Cosmos transactions (staking, voting on proposals, IBC transfer
 
 EIP712 means that the signer will generate a signature for something like a JSON representation of the Cosmos transaction and that signature will be included in the Cosmos transaction itself.
 
-### Step-by Cosmos transaction using Evmos.me
+### Step-by Cosmos transaction using Qom.me
 
 1. **Get your address in both encodings**
 
-After connecting the Ledger wallet to Metamask and connecting to the [https://evmos.me](https://evmos.me) webpage, it will display our wallet formatted on `bech32` and `hex` representation, we need these values to make sure that the message that we are going to sign is the correct one.
+After connecting the Ledger wallet to Metamask and connecting to the [https://Qom.me](https://Qom.me) webpage, it will display our wallet formatted on `bech32` and `hex` representation, we need these values to make sure that the message that we are going to sign is the correct one.
 
 ![addresses.png](./../../img/addresses.png)
 
@@ -146,7 +146,7 @@ You can see the complete message to be signed
 - `fee`: amount to be paid to send the transaction.
 - `gas`: max gas that can be spent by this transaction (aka gas limit).
 - `memo`: transaction note or comment.
-- `msgs`: This is the content of the cosmos transaction, in this example, we need to make sure that we are using a MsgSend, and that the *to_address* is the one that we want to send the founds. Also, we can verify that we are actually sending *10000aevmos* to that wallet.
+- `msgs`: This is the content of the cosmos transaction, in this example, we need to make sure that we are using a MsgSend, and that the *to_address* is the one that we want to send the founds. Also, we can verify that we are actually sending *10000aQom* to that wallet.
 
 ### Ledger signing
 
@@ -166,20 +166,20 @@ The Ledger device will display the domain hash and message hash before asking yo
 
 After signing the message, that signature needs to be added to the cosmos transaction and broadcasted to the network.
 
-This step should be done automatically by the same service that generated the message, in this case, [evmos.me](http://evmos.me) will broadcast the transaction for you.
+This step should be done automatically by the same service that generated the message, in this case, [Qom.me](http://Qom.me) will broadcast the transaction for you.
 
 ![txsent.png](./../../img/txsent.png)
 
 ### Common errors
 
-- Make sure that the Ethereum Ledger app is installed. The Cosmos Ledger app is not supported on the Evmos chain at the moment (see [FAQ](#faq)).
+- Make sure that the Ethereum Ledger app is installed. The Cosmos Ledger app is not supported on the Qom chain at the moment (see [FAQ](#faq)).
 - Make sure you have created at least one Ethereum address on the Ledger Ethereum app.
 - Make sure the Ledger device is unlocked and with the Ledger Ethereum app opened before starting the importing process.
 
 ### Known issues
 
 - The denomination displayed as `ETH` when importing the wallet because we are using the Ethereum app.
-- If you have Metamask correctly configured, the balance on the extension will be displayed as `EVMOS`, but on the Ledger device it will be displayed as `ETH`.
+- If you have Metamask correctly configured, the balance on the extension will be displayed as `Qom`, but on the Ledger device it will be displayed as `ETH`.
 
 ::: warning
 **IMPORTANT:** Make sure you are on the correct network before signing any transaction!
@@ -189,7 +189,7 @@ This step should be done automatically by the same service that generated the me
 
 1. **How can I generate Cosmos `secp256k1` keys with Ledger?**
 
-Cosmos `secp256k1` keys are not supported on Evmos with Ledger. Only Ethereum keys (`eth_secp256k1`) can be generated with Ledger.
+Cosmos `secp256k1` keys are not supported on Qom with Ledger. Only Ethereum keys (`eth_secp256k1`) can be generated with Ledger.
 
 2. **My Ledger has trouble connecting or signing on the CLI**
 
@@ -197,7 +197,7 @@ The Ledger's connection to the CLI can fail for a number of reasons. Make sure t
 
 3. **I can’t use Metamask or Keplr with the Cosmos Ledger app**
 
-Since Evmos only support Ethereum keys and uses the same HD path as Ethereum, the Cosmos Ledger app doesn’t work to sign cosmos transactions.
+Since Qom only support Ethereum keys and uses the same HD path as Ethereum, the Cosmos Ledger app doesn’t work to sign cosmos transactions.
 
 <!-- 4. **I can’t use Ledger for my validator**
 

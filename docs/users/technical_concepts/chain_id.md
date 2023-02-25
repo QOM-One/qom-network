@@ -4,7 +4,7 @@ order: 3
 
 # Chain ID
 
-Learn about the Evmos chain-id format {synopsis}
+Learn about the Qom chain-id format {synopsis}
 
 ## Official Chain IDs
 
@@ -16,17 +16,17 @@ Learn about the Evmos chain-id format {synopsis}
 
 | Name                                            | Chain ID                                      | Identifier | EIP155 Number                         | Version Number                              |
 | ----------------------------------------------- | --------------------------------------------- | ---------- | ------------------------------------- | ------------------------------------------- |
-| Evmos {{ $themeConfig.project.version_number }} | `evmos_{{ $themeConfig.project.chain_id }}-2` | `evmos`    | `{{ $themeConfig.project.chain_id }}` | `{{ $themeConfig.project.version_number }}` |
-| Evmos 1                                         | `evmos_{{ $themeConfig.project.chain_id }}-1` | `evmos`    | `{{ $themeConfig.project.chain_id }}` | `1`                                         |
+| Qom {{ $themeConfig.project.version_number }} | `Qom_{{ $themeConfig.project.chain_id }}-2` | `Qom`    | `{{ $themeConfig.project.chain_id }}` | `{{ $themeConfig.project.version_number }}` |
+| Qom 1                                         | `Qom_{{ $themeConfig.project.chain_id }}-1` | `Qom`    | `{{ $themeConfig.project.chain_id }}` | `1`                                         |
 
 ### Testnet
 
 | Name                              | Chain ID                                              | Identifier | EIP155 Number                                 | Version Number                                      |
-| --------------------------------- | ----------------------------------------------------- | ---------- | --------------------------------------------- | --------------------------------------------------- |
-| Evmos Public Testnet              | `evmos_{{ $themeConfig.project.testnet_chain_id }}-4` | `evmos`    | `{{ $themeConfig.project.testnet_chain_id }}` | `{{ $themeConfig.project.testnet_version_number }}` |
-| Evmos Public Testnet              | `evmos_{{ $themeConfig.project.testnet_chain_id }}-3` | `evmos`    | `{{ $themeConfig.project.testnet_chain_id }}` | `3`                                                 |
-| Olympus Mons Incentivized Testnet | `evmos_{{ $themeConfig.project.testnet_chain_id }}-2` | `evmos`    | `{{ $themeConfig.project.testnet_chain_id }}` | `2`                                                 |
-| Arsia Mons Testnet                | `evmos_{{ $themeConfig.project.testnet_chain_id }}-1` | `evmos`    | `{{ $themeConfig.project.testnet_chain_id }}` | `1`                                                 |
+| --------------------------------- | ----------------------------------------------------- | ---------- | --------------------------------------------- | ---------------------------------------------------  |
+| Qom Public Testnet                | `Qom_{{ $themeConfig.project.testnet_chain_id }}-4` | `Qom`    | `{{ $themeConfig.project.testnet_chain_id }}`                | `{{ $themeConfig.project.testnet_version_number }}` |
+| Qom Public Testnet                | `Qom_{{ $themeConfig.project.testnet_chain_id }}-3` | `Qom`    | `{{ $themeConfig.project.testnet_chain_id }}`                | `3`                                                 |
+| Olympus Mons Incentivized Testnet | `Qom_{{ $themeConfig.project.testnet_chain_id }}-2` | `Qom`    | `{{ $themeConfig.project.testnet_chain_id }}`                | `2`                                                 |
+| Arsia Mons Testnet                | `Qom_{{ $themeConfig.project.testnet_chain_id }}-1` | `Qom`    | `{{ $themeConfig.project.testnet_chain_id }}`                | `1`                                                 |
 
 ::: tip
 You can also lookup the [EIP155](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md) `Chain ID` by referring to [chainlist.org](https://chainlist.org/).
@@ -37,11 +37,11 @@ You can also lookup the [EIP155](https://github.com/ethereum/EIPs/blob/master/EI
 ## The Chain Identifier
 
 Every chain must have a unique identifier or `chain-id`. Tendermint requires each application to
-define its own `chain-id` in the [genesis.json fields](https://docs.tendermint.com/master/spec/core/genesis.html#genesis-fields). However, in order to comply with both EIP155 and Cosmos standard for chain upgrades, Evmos-compatible chains must implement a special structure for their chain identifiers.
+define its own `chain-id` in the [genesis.json fields](https://docs.tendermint.com/master/spec/core/genesis.html#genesis-fields). However, in order to comply with both EIP155 and Cosmos standard for chain upgrades, Qom-compatible chains must implement a special structure for their chain identifiers.
 
 ## Structure
 
-The Evmos Chain ID contains 3 main components
+The Qom Chain ID contains 3 main components
 
 - **Identifier**: Unstructured string that defines the name of the application.
 - **EIP155 Number**: Immutable [EIP155](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md) `CHAIN_ID` that defines the replay attack protection number.
@@ -50,7 +50,7 @@ This number **MUST** be incremented every time the chain is upgraded or forked i
 
 ### Format
 
-The format for specifying and Evmos compatible chain-id in genesis is the following:
+The format for specifying and Qom compatible chain-id in genesis is the following:
 
 ```bash
 {identifier}_{EIP155}-{version}
@@ -60,7 +60,7 @@ The following table provides an example where the second row corresponds to an u
 
 | ChainID        | Identifier | EIP155 Number | Version Number |
 | -------------- | ---------- | ------------- | -------------- |
-| `evmos_9000-1` | evmos      | 9000          | 1              |
-| `evmos_9000-2` | evmos      | 9000          | 2              |
-| `...`          | ...        | ...           | ...            |
-| `evmos_9000-N` | evmos      | 9000          | N              |
+| `qom_7668378` | Qom         | 9000          | 1              |
+| `qom_7668378` | Qom         | 9000          | 2              |
+| `...`         | ...        | ...           | ...            |
+| `qom_7668378` | Qom         | 9000          | N              |
