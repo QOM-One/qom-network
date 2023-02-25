@@ -17,7 +17,7 @@ If you plan to use a Key Management System (KMS), you should go through these st
 
 ## Create Your Validator
 
-Your node consensus public key (`evmosvalconspub...`) can be used to create a new validator by staking EVMOS tokens. You can find your validator pubkey by running:
+Your node consensus public key (`qomvalconspub...`) can be used to create a new validator by staking QOM tokens. You can find your validator pubkey by running:
 
 ```bash
 qomd tendermint show-validator
@@ -33,7 +33,7 @@ To create your validator on testnet, just use the following command:
 
 ```bash
 qomd tx staking create-validator \
-  --amount=1000000atevmos \
+  --amount=1000000atqom \
   --pubkey=$(qomd tendermint show-validator) \
   --moniker="choose a moniker" \
   --chain-id=<chain_id> \
@@ -42,7 +42,7 @@ qomd tx staking create-validator \
   --commission-max-change-rate="0.01" \
   --min-self-delegation="1000000" \
   --gas="auto" \
-  --gas-prices="0.025atevmos" \
+  --gas-prices="0.025atqom" \
   --from=<key_name>
 ```
 
@@ -51,7 +51,7 @@ When specifying commission parameters, the `commission-max-change-rate` is used 
 :::
 
 ::: tip
-`Min-self-delegation` is a strictly positive integer that represents the minimum amount of self-delegated voting power your validator must always have. A `min-self-delegation` of `1000000` means your validator will never have a self-delegation lower than `1 atevmos`
+`Min-self-delegation` is a strictly positive integer that represents the minimum amount of self-delegated voting power your validator must always have. A `min-self-delegation` of `1000000` means your validator will never have a self-delegation lower than `1 atqom`
 :::
 
 You can confirm that you are in the validator set by using a third party explorer.
@@ -67,12 +67,12 @@ The `--identity` can be used as to verify identity with systems like Keybase or 
 ```bash
 qomd tx staking edit-validator
   --moniker="choose a moniker" \
-  --website="https://evmos.org" \
+  --website="https://qom.one" \
   --identity=6A0D65E29A4CBC8E \
   --details="To infinity and beyond!" \
   --chain-id=<chain_id> \
   --gas="auto" \
-  --gas-prices="0.025atevmos" \
+  --gas-prices="0.025atqom" \
   --from=<key_name> \
   --commission-rate="0.10"
 ```
@@ -119,7 +119,7 @@ Your validator is active if the following command returns anything:
 qomd query tendermint-validator-set | grep "$(qomd tendermint show-address)"
 ```
 
-You should now see your validator in one of Evmos explorers. You are looking for the `bech32` encoded `address` in the `~/.qomd/config/priv_validator.json` file.
+You should now see your validator in one of qom explorers. You are looking for the `bech32` encoded `address` in the `~/.qomd/config/priv_validator.json` file.
 
 ::: warning Note
 To be in the validator set, you need to have more total voting power than the 100th validator.
@@ -163,7 +163,7 @@ The default number of files Linux can open (per-process) is `1024`. `qomd` is kn
 ```toml
 # /etc/systemd/system/qomd.service
 [Unit]
-Description=Evmos Node
+Description=Qom Node
 After=network.target
 
 [Service]

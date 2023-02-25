@@ -4,7 +4,7 @@ order: 4
 
 # Run a Node
 
-Configure and run an Evmos node {synopsis}
+Configure and run an qom node {synopsis}
 
 ## Pre-requisite Readings
 
@@ -46,7 +46,7 @@ echo "your mnemonic here" | qomd keys add $KEY --recover
 ```
 
 ::: tip
-Evmos currently only supports 24 word mnemonics.
+qom currently only supports 24 word mnemonics.
 :::
 
 You can generate a new key/mnemonic with:
@@ -55,7 +55,7 @@ You can generate a new key/mnemonic with:
 qomd keys add $KEY
 ```
 
-To export your evmos key as an Ethereum private key (for use with [Metamask](./../../users/wallets/metamask.md) for example):
+To export your qom key as an Ethereum private key (for use with [Metamask](./../../users/wallets/metamask.md) for example):
 
 ```bash
 qomd keys unsafe-export-eth-key $KEY
@@ -71,7 +71,7 @@ qomd keys -h
 
 The instructions above include commands to use `test` as the `keyring-backend`. This is an unsecured
 keyring that doesn't require entering a password and should not be used in production. Otherwise,
-Evmos supports using a file or OS keyring backend for key storage. To create and use a file
+qom supports using a file or OS keyring backend for key storage. To create and use a file
 stored key instead of defaulting to the OS keyring, add the flag `--keyring-backend file` to any
 relevant command and the password prompt will occur through the command line. This can also be saved
 as a CLI config option with:
@@ -92,7 +92,7 @@ For more information about the Keyring and its backend options, click [here](./.
 - `$TRACESTORE` is the output file which contains KVStore tracing (eg. `store.txt`)
 
 ```bash
-qomd start --evm.tracer $TRACER --tracestore $TRACESTORE --pruning=nothing $TRACE --log_level $LOGLEVEL --minimum-gas-prices=0.0001aevmos --json-rpc.api eth,txpool,personal,net,debug,web3
+qomd start --evm.tracer $TRACER --tracestore $TRACESTORE --pruning=nothing $TRACE --log_level $LOGLEVEL --minimum-gas-prices=0.0001aqom --json-rpc.api eth,txpool,personal,net,debug,web3
 ```
 
 ## Clearing data from chain
@@ -140,10 +140,10 @@ global:
   scrape_interval: 10s
 
   external_labels:
-    monitor: 'evmos'
+    monitor: 'qom'
 
 scrape_configs:
-  - job_name: 'evmos'
+  - job_name: 'qom'
 
     scrape_interval: 10s
 
@@ -168,4 +168,4 @@ which will show the rate of transactions processed.
 
 ## Next {hide}
 
-Learn about running a Evmos [testnet](./../testnet.md) {hide}
+Learn about running a Qom [testnet](./../testnet.md) {hide}

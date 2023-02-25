@@ -50,12 +50,12 @@ cosmovisor run version
 qomd version
 ```
 
-### 2. Download the Evmos release
+### 2. Download the Qom release
 
 <!-- NOTE: Using a h4 tag here so the relative markdown link used at the top of this document works -->
 <h4 id="manual-download">2.a) Manual Download</h4>
 
-Cosmovisor will continually poll the `$DAEMON_HOME/data/upgrade-info.json` for new upgrade instructions. When an upgrade is [released](https://github.com/evmos/evmos/releases), node operators need to:
+Cosmovisor will continually poll the `$DAEMON_HOME/data/upgrade-info.json` for new upgrade instructions. When an upgrade is [released](https://github.com/qom/qomapp/releases), node operators need to:
 
 1. Download (**NOT INSTALL**) the binary for the new release
 2. Place it under `$DAEMON_HOME/cosmovisor/upgrades/<name>/bin`, where `<name>` is the URI-encoded name of the upgrade as specified in the Software Upgrade Plan.
@@ -65,11 +65,11 @@ Cosmovisor will continually poll the `$DAEMON_HOME/data/upgrade-info.json` for n
 ```json
 {
     "binaries": {
-        "darwin/arm64": "https://github.com/evmos/evmos/releases/download/v3.0.0/evmos_3.0.0_Darwin_arm64.tar.gz",
-        "darwin/x86_64": "https://github.com/evmos/evmos/releases/download/v3.0.0/evmos_3.0.0_Darwin_x86_64.tar.gz",
-        "linux/arm64": "https://github.com/evmos/evmos/releases/download/v3.0.0/evmos_3.0.0_Linux_arm64.tar.gz",
-        "linux/amd64": "https://github.com/evmos/evmos/releases/download/v3.0.0/evmos_3.0.0_Linux_amd64.tar.gz",
-        "windows/x86_64": "https://github.com/evmos/evmos/releases/download/v3.0.0/evmos_3.0.0_Windows_x86_64.zip"
+        "darwin/arm64": "https://github.com/qom/qom/releases/download/v3.0.0/qom_3.0.0_Darwin_arm64.tar.gz",
+        "darwin/x86_64": "https://github.com/qom/qom/releases/download/v3.0.0/qom_3.0.0_Darwin_x86_64.tar.gz",
+        "linux/arm64": "https://github.com/qom/qom/releases/download/v3.0.0/qom_3.0.0_Linux_arm64.tar.gz",
+        "linux/amd64": "https://github.com/qom/qom/releases/download/v3.0.0/qom_3.0.0_Linux_amd64.tar.gz",
+        "windows/x86_64": "https://github.com/qom/qom/releases/download/v3.0.0/qom_3.0.0_Windows_x86_64.zip"
     }
 }
 ```
@@ -116,7 +116,7 @@ You will need some way to keep the process always running. If you're on linux, y
 ```bash
 sudo tee /etc/systemd/system/qomd.service > /dev/null <<EOF
 [Unit]
-Description=Evmos Daemon
+Description=qom Daemon
 After=network-online.target
 
 [Service]

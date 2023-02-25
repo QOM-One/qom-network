@@ -20,11 +20,11 @@ Additionally, validators can choose how to manage the upgrade according to their
 
 ## Planned Upgrades
 
-Planned upgrades are coordinated scheduled upgrades that use the [upgrade module](https://docs.evmos.org/modules/upgrade/) logic. This facilitates smoothly upgrading Evmos to a new (breaking) software version as it automatically handles the state migration for the new release.
+Planned upgrades are coordinated scheduled upgrades that use the [upgrade module](https://docs.qom.one/modules/upgrade/) logic. This facilitates smoothly upgrading Qom to a new (breaking) software version as it automatically handles the state migration for the new release.
 
 ### Governance Proposal
 
-Governance Proposals are a mechanism for coordinating an upgrade at a given height or time using an [`SoftwareProposal`](https://docs.evmos.org/modules/upgrade/01_concepts.html#proposal).
+Governance Proposals are a mechanism for coordinating an upgrade at a given height or time using an [`SoftwareProposal`](https://docs.qom.one/modules/upgrade/01_concepts.html#proposal).
 
 ::: tip
 All governance proposals, including software upgrades, need to wait for the voting period to conclude before the upgrade can be executed. Consider this duration when submitting a software upgrade proposal.
@@ -55,7 +55,7 @@ The main consideration with unplanned upgrades is that the genesis state needs t
 
 ## Breaking and Non-Breaking Upgrades
 
-Upgrades can be categorized as breaking or non-breaking according to the Semantic versioning ([Semver](https://semver.org/)) of the corresponding software [release version](https://github.com/evmos/evmos/releases) (*i.e* `vX.Y.Z`):
+Upgrades can be categorized as breaking or non-breaking according to the Semantic versioning ([Semver](https://semver.org/)) of the corresponding software [release version](https://github.com/Qom/Qom/releases) (*i.e* `vX.Y.Z`):
 
 - **Major version (`X`)**: backward incompatible API and state machine breaking changes.
 - **Minor version (`Y`)**: new backward compatible features. These can be also be state machine breaking.
@@ -71,7 +71,7 @@ If the new version you are upgrading to has breaking changes, you will have to:
 
 This needs to be done to prevent [double signing or halting the chain during consensus](https://docs.tendermint.com/master/spec/consensus/signing.html#double-signing).
 
-To upgrade the genesis file, you can either fetch it from a trusted source or export it locally using the `qomd export` command.
+To upgrade the genesis file, you can either fetch it from a trusted source or export it locally using the `Qomd export` command.
 
 ### Minor Versions
 

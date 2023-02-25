@@ -17,7 +17,7 @@ If validators don't possess their database data, another validator should share 
 
 1. First, stop your node.
 
-2. Then, copy the contents of your backup data directory back to the `$EVMOS_HOME/data` directory (which, by default, should be `~/.qomd/data`).
+2. Then, copy the contents of your backup data directory back to the `$QOM_HOME/data` directory (which, by default, should be `~/.qomd/data`).
 
 ```bash
 # Assumes backup is stored in "backup" directory
@@ -25,10 +25,10 @@ rm -rf ~/.qomd/data
 mv backup/.qomd/data ~/.qomd/data
 ```
 
-3. Next, install the previous version of Evmos.
+3. Next, install the previous version of Qom One.
 
 ```bash
-# from evmos directory
+# from qom directory
 git checkout <prev_version>
 make install
 ## verify version

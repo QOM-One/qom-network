@@ -1,6 +1,6 @@
 # Updating the docs
 
-If you want to open a PR on the Cosmos SDK to update the documentation, please follow the guidelines in the [`CONTRIBUTING.md`](https://github.com/evmos/evmos/tree/main/CONTRIBUTING.md#updating-documentation)
+If you want to open a PR on the Cosmos SDK to update the documentation, please follow the guidelines in the [`CONTRIBUTING.md`](https://github.com/qomOne/qomOne/tree/main/CONTRIBUTING.md#updating-documentation)
 
 ## Translating
 
@@ -11,10 +11,10 @@ If you want to open a PR on the Cosmos SDK to update the documentation, please f
 
 ## Docs Build Workflow
 
-The documentation for Evmos is hosted at [docs.evmos.org](https://docs.evmos.org/)
+The documentation for Qom One is hosted at [docs.qom.one](https://docs.qom.one/)
 
 built from the files in this (`/docs`) directory for
-[master](https://github.com/evmos/evmos/tree/main/docs).
+[master](https://github.com/qomOne/qomOne/tree/main/docs).
 
 ### How It Works
 
