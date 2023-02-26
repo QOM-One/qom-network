@@ -295,7 +295,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /evmos/claims/v1/total_unclaimed:
+  /qom/claims/v1/total_unclaimed:
     get:
       summary: TotalUnclaimed queries the total unclaimed tokens from the airdrop
       operationId: TotalUnclaimed
@@ -352,7 +352,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /evmos/epochs/v1/current_epoch:
+ /qom/epochs/v1/current_epoch:
     get:
       summary: CurrentEpoch provide current epoch of specified identifier
       operationId: CurrentEpoch
@@ -394,7 +394,7 @@ paths:
           type: string
       tags:
         - Query
-  /evmos/epochs/v1/epochs:
+ /qom/epochs/v1/epochs:
     get:
       summary: EpochInfos provide running epochInfos
       operationId: EpochInfos
@@ -535,7 +535,7 @@ paths:
           type: boolean
       tags:
         - Query
-  /evmos/erc20/v1/params:
+ /qom/erc20/v1/params:
     get:
       summary: Params retrieves the erc20 module params
       operationId: ERC20Params
@@ -591,7 +591,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /evmos/erc20/v1/token_pairs:
+ /qom/erc20/v1/token_pairs:
     get:
       summary: TokenPairs retrieves registered token pairs
       operationId: TokenPairs
@@ -739,7 +739,7 @@ paths:
           type: boolean
       tags:
         - Query
-  /evmos/erc20/v1/token_pairs/{token}:
+ /qom/erc20/v1/token_pairs/{token}:
     get:
       summary: TokenPair retrieves a registered token pair
       operationId: TokenPair
@@ -820,7 +820,7 @@ paths:
           type: string
       tags:
         - Query
-  /evmos/incentives/v1/allocation_meters:
+ /qom/incentives/v1/allocation_meters:
     get:
       summary: |-
         AllocationMeters retrieves active allocation meters for a given
@@ -952,7 +952,7 @@ paths:
           type: boolean
       tags:
         - Query
-  /evmos/incentives/v1/allocation_meters/{denom}:
+ /qom/incentives/v1/allocation_meters/{denom}:
     get:
       summary: AllocationMeter Retrieves a active gas meter
       operationId: AllocationMeter
@@ -1011,7 +1011,7 @@ paths:
           type: string
       tags:
         - Query
-  /evmos/incentives/v1/gas_meters/{contract}:
+ /qom/incentives/v1/gas_meters/{contract}:
     get:
       summary: GasMeters retrieves active gas meters for a given contract
       operationId: GasMeters
@@ -1150,7 +1150,7 @@ paths:
           type: boolean
       tags:
         - Query
-  /evmos/incentives/v1/gas_meters/{contract}/{participant}:
+ /qom/incentives/v1/gas_meters/{contract}/{participant}:
     get:
       summary: GasMeter Retrieves a active gas meter
       operationId: GasMeter
@@ -1203,7 +1203,7 @@ paths:
           type: string
       tags:
         - Query
-  /evmos/incentives/v1/incentives:
+ /qom/incentives/v1/incentives:
     get:
       summary: Incentives retrieves registered incentives
       operationId: Incentives
@@ -1363,7 +1363,7 @@ paths:
           type: boolean
       tags:
         - Query
-  /evmos/incentives/v1/incentives/{contract}:
+ /qom/incentives/v1/incentives/{contract}:
     get:
       summary: Incentive retrieves a registered incentive
       operationId: Incentive
@@ -1452,7 +1452,7 @@ paths:
           type: string
       tags:
         - Query
-  /evmos/incentives/v1/params:
+ /qom/incentives/v1/params:
     get:
       summary: Params retrieves the incentives module params
       operationId: IncentivesParams
@@ -1507,7 +1507,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /evmos/inflation/v1/circulating_supply:
+ /qom/inflation/v1/circulating_supply:
     get:
       summary: |-
         CirculatingSupply retrieves the total number of tokens that are in
@@ -1563,7 +1563,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /evmos/inflation/v1/epoch_mint_provision:
+ /qom/inflation/v1/epoch_mint_provision:
     get:
       summary: EpochMintProvision retrieves current minting epoch provision value.
       operationId: EpochMintProvision
@@ -1610,7 +1610,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /evmos/inflation/v1/inflation_rate:
+ /qom/inflation/v1/inflation_rate:
     get:
       summary: InflationRate retrieves the inflation rate of the current period.
       operationId: InflationRate
@@ -1652,7 +1652,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /evmos/inflation/v1/params:
+ /qom/inflation/v1/params:
     get:
       summary: Params retrieves the total set of minting parameters.
       operationId: InflationParams
@@ -1745,7 +1745,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /evmos/inflation/v1/period:
+ /qom/inflation/v1/period:
     get:
       summary: Period retrieves current period.
       operationId: Period
@@ -1786,7 +1786,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /evmos/inflation/v1/skipped_epochs:
+ /qom/inflation/v1/skipped_epochs:
     get:
       summary: SkippedEpochs retrieves the total number of skipped epochs.
       operationId: SkippedEpochs
@@ -1829,7 +1829,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /evmos/vesting/v1/balances/{address}:
+ /qom/vesting/v1/balances/{address}:
     get:
       summary: Retrieves the unvested, vested and locked tokens for a vesting account
       operationId: Balances
@@ -1928,7 +1928,7 @@ paths:
           type: string
       tags:
         - Query
-  /evmos/recovery/v1/params:
+ /qom/recovery/v1/params:
     get:
       summary: Params retrieves the total set of recovery parameters.
       operationId: RecoveryParams
