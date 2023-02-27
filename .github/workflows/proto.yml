@@ -22,7 +22,7 @@ jobs:
             buf.gen.yaml
       - run: |
           make proto-gen
-        if: env.GIT_DIFF
+#        if: env.GIT_DIFF
 
   lint:
     runs-on: self-hosted
