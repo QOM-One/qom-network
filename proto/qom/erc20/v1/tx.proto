@@ -11,6 +11,7 @@ import "google/api/annotations.proto";
 option go_package = "github.com/QOM-One/QomApp/x/erc20/types";
 
 // Msg defines the erc20 Msg service.
+// test
 service Msg {
   // ConvertCoin mints a ERC20 representation of the native Cosmos coin denom
   // that is registered on the token mapping.
