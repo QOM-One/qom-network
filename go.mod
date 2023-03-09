@@ -5,6 +5,7 @@ go 1.19
 require (
 	cosmossdk.io/errors v1.0.0-beta.7
 	cosmossdk.io/math v1.0.0-beta.4
+	github.com/QOM-One/QomApp v1.0.0
 	github.com/armon/go-metrics v0.4.1
 	github.com/cosmos/cosmos-proto v1.0.0-beta.1
 	github.com/cosmos/cosmos-sdk v0.46.8
@@ -32,7 +33,7 @@ require (
 	go.opencensus.io v0.24.0
 	google.golang.org/genproto v0.0.0-20221118155620-16455021b5e6
 	google.golang.org/grpc v1.52.0
-	google.golang.org/protobuf v1.28.2-0.20220831092852-f930b1dc76e8
+	google.golang.org/protobuf v1.29.0
 )
 
 require (
@@ -50,7 +51,6 @@ require (
 	github.com/StackExchange/wmi v1.2.1 // indirect
 	github.com/VictoriaMetrics/fastcache v1.6.0 // indirect
 	github.com/Workiva/go-datastructures v1.0.53 // indirect
-	github.com/allegro/bigcache v1.2.1 // indirect
 	github.com/aws/aws-sdk-go v1.40.45 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bgentry/go-netrc v0.0.0-20140422174119-9fd32a8b3d3d // indirect
