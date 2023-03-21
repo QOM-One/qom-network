@@ -9,8 +9,8 @@ REST.
 
 ## CLI
 
-Find below a list of `evmosd` commands added with the `x/inflation` module. You
-can obtain the full list by using the `evmosd -h` command.
+Find below a list of `qomd` commands added with the `x/inflation` module. You
+can obtain the full list by using the `qomd -h` command.
 
 ### Queries
 
@@ -21,7 +21,7 @@ The `query` commands allow users to query `inflation` state.
 Allows users to query the current inflation period.
 
 ```bash
-evmosd query inflation period [flags]
+qomd query inflation period [flags]
 ```
 
 **`epoch-mint-provision`**
@@ -29,7 +29,7 @@ evmosd query inflation period [flags]
 Allows users to query the current inflation epoch provisions value.
 
 ```bash
-evmosd query inflation epoch-mint-provision [flags]
+qomd query inflation epoch-mint-provision [flags]
 ```
 
 **`skipped-epochs`**
@@ -37,7 +37,7 @@ evmosd query inflation epoch-mint-provision [flags]
 Allows users to query the current number of skipped epochs.
 
 ```bash
-evmosd query inflation skipped-epochs [flags]
+qomd query inflation skipped-epochs [flags]
 ```
 
 **`total-supply`**
@@ -45,7 +45,7 @@ evmosd query inflation skipped-epochs [flags]
 Allows users to query the total supply of tokens in circulation.
 
 ```bash
-evmosd query inflation total-supply [flags]
+qomd query inflation total-supply [flags]
 ```
 
 **`inflation-rate`**
@@ -53,7 +53,7 @@ evmosd query inflation total-supply [flags]
 Allows users to query the inflation rate of the current period.
 
 ```bash
-evmosd query inflation inflation-rate [flags]
+qomd query inflation inflation-rate [flags]
 ```
 
 **`params`**
@@ -61,7 +61,7 @@ evmosd query inflation inflation-rate [flags]
 Allows users to query the current inflation parameters.
 
 ```bash
-evmosd query inflation params [flags]
+qomd query inflation params [flags]
 ```
 
 ### Proposals
@@ -74,7 +74,7 @@ using the governance module CLI:
 Allows users to submit a `ParameterChangeProposal`.
 
 ```bash
-evmosd tx gov submit-legacy-proposal param-change [proposal-file] [flags]
+qomd tx gov submit-legacy-proposal param-change [proposal-file] [flags]
 ```
 
 ## gRPC

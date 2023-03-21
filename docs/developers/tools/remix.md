@@ -4,14 +4,14 @@ order: 1
 
 # Remix: Deploying a Smart Contract
 
-Learn how to deploy a simple Solidity-based smart contract to Evmos using the Remix in-browser IDE {synopsis}
+Learn how to deploy a simple Solidity-based smart contract to Qom One using the Remix in-browser IDE {synopsis}
 
-[Remix](http://remix.ethereum.org/) is an in-browser IDE for [Solidity](https://github.com/ethereum/solidity) smart contracts. In this guide, we will learn how to deploy a contract to a running Evmos network through Remix and interact with it.
+[Remix](http://remix.ethereum.org/) is an in-browser IDE for [Solidity](https://github.com/ethereum/solidity) smart contracts. In this guide, we will learn how to deploy a contract to a running Qom One network through Remix and interact with it.
 
 ## Connect to Remix
 
 ::: tip
-If you haven’t already, follow the steps in the [Metamask guide](./../../users/wallets/metamask.md) to import your Evmos private key into Metamask. Start the Evmos daemon and REST server.
+If you haven’t already, follow the steps in the [Metamask guide](./../../users/wallets/metamask.md) to import your Qom One private key into Metamask. Start the Qom One daemon and REST server.
 :::
 
 Go to [Remix](http://remix.ethereum.org/). There are some contracts in the File Explorer. Replace these with the source code to `Counter.sol` below. On the left-most bar, select the Solidity Compiler and compile the contract.

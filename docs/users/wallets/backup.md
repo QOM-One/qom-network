@@ -11,11 +11,11 @@ Learn how to backup your wallet's mnemonic and private key. {synopsis}
 When you create a new key, you'll recieve a mnemonic phrase that can be used to restore that key. Backup the mnemonic phrase:
 
 ```bash
-evmosd keys add dev0
+qomd keys add dev0
 {
   "name": "dev0",
   "type": "local",
-  "address": "evmos1n253dl2tgyhxjm592p580c38r4dn8023ctv28d",
+  "address": "qom1n253dl2tgyhxjm592p580c38r4dn8023ctv28d",
   "pubkey": '{"@type":"/ethermint.crypto.v1.ethsecp256k1.PubKey","key":"ArJhve4v5HkLm+F7ViASU/rAGx7YrwU4+XKV2MNJt+Cq"}',
   "mnemonic": ""
 }
@@ -29,13 +29,13 @@ It is the only way to recover your account if you ever forget your password.
 To restore the key:
 
 ```bash
-$ evmosd keys add dev0-restored --recover
+$ qomd keys add dev0-restored --recover
 > Enter your bip39 mnemonic
 banner genuine height east ghost oak toward reflect asset marble else explain foster car nest make van divide twice culture announce shuffle net peanut
 {
   "name": "dev0-restored",
   "type": "local",
-  "address": "evmos1n253dl2tgyhxjm592p580c38r4dn8023ctv28d",
+  "address": "qom1n253dl2tgyhxjm592p580c38r4dn8023ctv28d",
   "pubkey": '{"@type":"/ethermint.crypto.v1.ethsecp256k1.PubKey","key":"ArJhve4v5HkLm+F7ViASU/rAGx7YrwU4+XKV2MNJt+Cq"}'
 }
 ```
@@ -47,7 +47,7 @@ banner genuine height east ghost oak toward reflect asset marble else explain fo
 To backup this type of key without the mnemonic phrase, do the following:
 
 ```bash
-evmosd keys export dev0
+qomd keys export dev0
 Enter passphrase to decrypt your key:
 Enter passphrase to encrypt the exported key:
 -----BEGIN TENDERMINT PRIVATE KEY-----
@@ -77,7 +77,7 @@ type: secp256k1
 To backup this type of key without the mnemonic phrase, do the following:
 
 ```bash
-evmosd keys unsafe-export-eth-key dev0 > dev0.export
+qomd keys unsafe-export-eth-key dev0 > dev0.export
 **WARNING** this is an unsafe way to export your unencrypted private key, are you sure? [y/N]: y
 Enter keyring passphrase:
 ```
@@ -87,14 +87,14 @@ Enter keyring passphrase:
 ### Tendermint-Formatted Private Keys
 
 ```bash
-$ evmosd keys import dev0-imported ./dev0.export
+$ qomd keys import dev0-imported ./dev0.export
 Enter passphrase to decrypt your key:
 ```
 
 ### Ethereum-Formatted Private Keys
 
 ```
-$ evmosd keys unsafe-import-eth-key dev0-imported ./dev0.export
+$ qomd keys unsafe-import-eth-key dev0-imported ./dev0.export
 Enter passphrase to encrypt your key:
 ```
 
@@ -103,24 +103,24 @@ Enter passphrase to encrypt your key:
 Verify that your key has been restored using the following command:
 
 ```bash
-$ evmosd keys list
+$ qomd keys list
 [
   {
     "name": "dev0-imported",
     "type": "local",
-    "address": "evmos1n253dl2tgyhxjm592p580c38r4dn8023ctv28d",
+    "address": "qom1n253dl2tgyhxjm592p580c38r4dn8023ctv28d",
     "pubkey": '{"@type":"/ethermint.crypto.v1.ethsecp256k1.PubKey","key":"ArJhve4v5HkLm+F7ViASU/rAGx7YrwU4+XKV2MNJt+Cq"}'
   },
   {
     "name": "dev0-restored",
     "type": "local",
-    "address": "evmos1n253dl2tgyhxjm592p580c38r4dn8023ctv28d",
+    "address": "qom1n253dl2tgyhxjm592p580c38r4dn8023ctv28d",
     "pubkey": '{"@type":"/ethermint.crypto.v1.ethsecp256k1.PubKey","key":"ArJhve4v5HkLm+F7ViASU/rAGx7YrwU4+XKV2MNJt+Cq"}'
   },
   {
     "name": "dev0",
     "type": "local",
-    "address": "evmos1n253dl2tgyhxjm592p580c38r4dn8023ctv28d",
+    "address": "qom1n253dl2tgyhxjm592p580c38r4dn8023ctv28d",
     "pubkey": '{"@type":"/ethermint.crypto.v1.ethsecp256k1.PubKey","key":"ArJhve4v5HkLm+F7ViASU/rAGx7YrwU4+XKV2MNJt+Cq"}'
   }
 ]

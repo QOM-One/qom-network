@@ -27,35 +27,35 @@ Set up the Cosmovisor environment variables. We recommend setting these in your 
 
 ```bash
 echo "# Setup Cosmovisor" >> ~/.profile
-echo "export DAEMON_NAME=evmosd" >> ~/.profile
-echo "export DAEMON_HOME=$HOME/.evmosd" >> ~/.profile
+echo "export DAEMON_NAME=qomd" >> ~/.profile
+echo "export DAEMON_HOME=$HOME/.qomd" >> ~/.profile
 source ~/.profile
 ```
 
-After this, you must make the necessary folders for `cosmosvisor` in your `DAEMON_HOME` directory (`~/.evmosd`) and copy over the current binary.
+After this, you must make the necessary folders for `cosmosvisor` in your `DAEMON_HOME` directory (`~/.qomd`) and copy over the current binary.
 
 ```bash
-mkdir -p ~/.evmosd/cosmovisor
-mkdir -p ~/.evmosd/cosmovisor/genesis
-mkdir -p ~/.evmosd/cosmovisor/genesis/bin
-mkdir -p ~/.evmosd/cosmovisor/upgrades
+mkdir -p ~/.qomd/cosmovisor
+mkdir -p ~/.qomd/cosmovisor/genesis
+mkdir -p ~/.qomd/cosmovisor/genesis/bin
+mkdir -p ~/.qomd/cosmovisor/upgrades
 
-cp $GOPATH/bin/evmosd ~/.evmosd/cosmovisor/genesis/bin
+cp $GOPATH/bin/qomd ~/.qomd/cosmovisor/genesis/bin
 ```
 
-To check that you did this correctly, ensure your versions of `cosmovisor` and `evmosd` are the same:
+To check that you did this correctly, ensure your versions of `cosmovisor` and `qomd` are the same:
 
 ```bash
 cosmovisor run version
-evmosd version
+qomd version
 ```
 
-### 2. Download the Evmos release
+### 2. Download the Qom release
 
 <!-- NOTE: Using a h4 tag here so the relative markdown link used at the top of this document works -->
 <h4 id="manual-download">2.a) Manual Download</h4>
 
-Cosmovisor will continually poll the `$DAEMON_HOME/data/upgrade-info.json` for new upgrade instructions. When an upgrade is [released](https://github.com/evmos/evmos/releases), node operators need to:
+Cosmovisor will continually poll the `$DAEMON_HOME/data/upgrade-info.json` for new upgrade instructions. When an upgrade is [released](https://github.com/qom/qomapp/releases), node operators need to:
 
 1. Download (**NOT INSTALL**) the binary for the new release
 2. Place it under `$DAEMON_HOME/cosmovisor/upgrades/<name>/bin`, where `<name>` is the URI-encoded name of the upgrade as specified in the Software Upgrade Plan.
@@ -65,11 +65,11 @@ Cosmovisor will continually poll the `$DAEMON_HOME/data/upgrade-info.json` for n
 ```json
 {
     "binaries": {
-        "darwin/arm64": "https://github.com/evmos/evmos/releases/download/v3.0.0/evmos_3.0.0_Darwin_arm64.tar.gz",
-        "darwin/x86_64": "https://github.com/evmos/evmos/releases/download/v3.0.0/evmos_3.0.0_Darwin_x86_64.tar.gz",
-        "linux/arm64": "https://github.com/evmos/evmos/releases/download/v3.0.0/evmos_3.0.0_Linux_arm64.tar.gz",
-        "linux/amd64": "https://github.com/evmos/evmos/releases/download/v3.0.0/evmos_3.0.0_Linux_amd64.tar.gz",
-        "windows/x86_64": "https://github.com/evmos/evmos/releases/download/v3.0.0/evmos_3.0.0_Windows_x86_64.zip"
+        "darwin/arm64": "https://github.com/qom/qom/releases/download/v3.0.0/qom_3.0.0_Darwin_arm64.tar.gz",
+        "darwin/x86_64": "https://github.com/qom/qom/releases/download/v3.0.0/qom_3.0.0_Darwin_x86_64.tar.gz",
+        "linux/arm64": "https://github.com/qom/qom/releases/download/v3.0.0/qom_3.0.0_Linux_arm64.tar.gz",
+        "linux/amd64": "https://github.com/qom/qom/releases/download/v3.0.0/qom_3.0.0_Linux_amd64.tar.gz",
+        "windows/x86_64": "https://github.com/qom/qom/releases/download/v3.0.0/qom_3.0.0_Windows_x86_64.zip"
     }
 }
 ```
@@ -81,11 +81,11 @@ cosmovisor/
 ├── current/   # either genesis or upgrades/<name>
 ├── genesis
 │   └── bin
-│       └── evmosd
+│       └── qomd
 └── upgrades
     └── v3.0.0
         ├── bin
-        │   └── evmosd
+        │   └── qomd
         └── upgrade-info.json
 ```
 
@@ -114,9 +114,9 @@ cosmovisor run start
 You will need some way to keep the process always running. If you're on linux, you can do this by creating a service.
 
 ```bash
-sudo tee /etc/systemd/system/evmosd.service > /dev/null <<EOF
+sudo tee /etc/systemd/system/qomd.service > /dev/null <<EOF
 [Unit]
-Description=Evmos Daemon
+Description=qom Daemon
 After=network-online.target
 
 [Service]
@@ -126,8 +126,8 @@ Restart=always
 RestartSec=3
 LimitNOFILE=infinity
 
-Environment="DAEMON_HOME=$HOME/.evmosd"
-Environment="DAEMON_NAME=evmosd"
+Environment="DAEMON_HOME=$HOME/.qomd"
+Environment="DAEMON_NAME=qomd"
 Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=false"
 Environment="DAEMON_RESTART_AFTER_UPGRADE=true"
 
@@ -140,12 +140,12 @@ Then update and start the node
 
 ```bash
 sudo -S systemctl daemon-reload
-sudo -S systemctl enable evmosd
-sudo -S systemctl start evmosd
+sudo -S systemctl enable qomd
+sudo -S systemctl start qomd
 ```
 
 You can check the status with:
 
 ```bash
-systemctl status evmosd
+systemctl status qomd
 ```

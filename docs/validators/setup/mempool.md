@@ -23,7 +23,7 @@ This allows validators to choose transactions based on the associated fees or ot
 It is achieved by passing a `priority` field with each [`CheckTx` response](https://github.com/tendermint/tendermint/blob/17c94bb0dcb354c57f49cdcd1e62f4742752c803/proto/tendermint/abci/types.proto#L234),
 which is run on any transaction trying to enter the mempool.
 
-Evmos supports [EIP-1559](https://eips.ethereum.org/EIPS/eip-1559#simple-summary) EVM transactions through its
+QOM One supports [EIP-1559](https://eips.ethereum.org/EIPS/eip-1559#simple-summary) EVM transactions through its
 <!-- markdown-link-check-disable-next-line -->
 [feemarket](../../modules/feemarket/01_concepts.md) module.
 This transaction type uses a base fee and a selectable priority tip that add up to the total transaction fees.
@@ -41,7 +41,7 @@ Even though the transaction processing can be ordered by priority, the gossiping
 
 ## Configuration
 
-To use the a prioritized mempool, adjust `version = "v1"` in the node configuration at `~/.evmosd/config/config.toml`.
+To use the a prioritized mempool, adjust `version = "v1"` in the node configuration at `~/.qomd/config/config.toml`.
 The default value `"v0"` indicates the traditional FIFO mempool.
 
 ::: tip

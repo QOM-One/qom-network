@@ -1,6 +1,6 @@
 module.exports = {
   theme: "cosmos",
-  title: "Evmos Documentation",
+  title: "QOM ONE Documentation",
   locales: {
     "/": {
       lang: "en-US",
@@ -64,36 +64,35 @@ module.exports = {
     // ['link', { rel: "apple-touch-icon-precomposed", href: "/apple-touch-icon-precomposed.png" }],
   ],
   themeConfig: {
-    repo: "evmos/evmos",
-    docsRepo: "evmos/evmos",
+    repo: "qom/qom",
+    docsRepo: "qom/qom",
     docsBranch: "main",
     docsDir: "docs",
     editLinks: true,
     custom: true,
     project: {
-      name: "Evmos",
-      denom: "Evmos",
-      ticker: "EVMOS",
-      binary: "evmosd",
-      testnet_denom: "tEvmos",
-      testnet_ticker: "tEVMOS",
-      rpc_url: "https://eth.bd.evmos.org:8545",
-      rpc_url_testnet: "https://eth.bd.evmos.dev:8545",
+      name: "Qom One",
+      denom: "qom",
+      ticker: "QOM",
+      binary: "qomd",
+      testnet_denom: "tQom",
+      testnet_ticker: "tQom",
+      rpc_url: "https://rpc.qom.one",
+      rpc_url_testnet: "https://testnet.qom.one:8545",
       rpc_url_local: "http://localhost:8545/",
-      chain_id: "9001",
-      testnet_chain_id: "9000",
-      latest_version: "v10.0.1",
-      mainnet_version: "v10.0.1",
-      testnet_version: "v10.0.0-rc4",
-      version_number: "2",
-      testnet_version_number: "4",
-      testnet_evm_explorer_url: "https://evm.evmos.dev",
-      evm_explorer_url: "https://escan.live",
-      testnet_cosmos_explorer_url: "https://testnet.mintscan.io/evmos-testnet",
+      chain_id: "766",
+      testnet_chain_id: "7668378",
+      latest_version: "v1.0.0",
+      mainnet_version: "v1.0.0",
+      testnet_version: "v1.0.2",
+      version_number: "1",
+      testnet_version_number: "1",
+      testnet_evm_explorer_url: "https://testnet.qom.one",
+      testnet_cosmos_explorer_url: "https://ping.testnet.qom.one/qom",
       cosmos_explorer_url: "https://www.mintscan.io/evmos",
     },
     logo: {
-      src: "/evmos-black.svg",
+      src: "/qom-logo.svg",
     },
     algolia: {
       id: process.env.ALGOLIA_ID || '',
@@ -107,7 +106,7 @@ module.exports = {
       auto: false,
       nav: [
         {
-          title: "About Evmos",
+          title: "About QOM One",
           children: [
             {
               title: "Introduction",
@@ -115,7 +114,7 @@ module.exports = {
               path: "/about/intro",
             },
             {
-              title: "Evmos Ecosystem",
+              title: "QOM ONE Ecosystem",
               path: "https://evmos.org/ecosystem",
             },
           ],
@@ -139,7 +138,7 @@ module.exports = {
               path: "/users/keys",
             },
             {
-              title: "Evmos Governance",
+              title: "QOM One Governance",
               directory: true,
               path: "/users/governance",
             },
@@ -227,7 +226,7 @@ module.exports = {
               path: "/protocol/ibc",
             },
             {
-              title: "Evmos Go API",
+              title: "QOM One Go API",
               path: "https://pkg.go.dev/github.com/evmos/evmos",
             },
             {
@@ -235,7 +234,7 @@ module.exports = {
               path: "https://pkg.go.dev/github.com/evmos/ethermint",
             },
             {
-              title: "Evmos Protobuf",
+              title: "QOM One Protobuf",
               directory: false,
               path: "/protocol/proto-docs",
             },
@@ -304,12 +303,8 @@ module.exports = {
               path: "/developers/explorers",
             },
             {
-              title: "Mintscan",
-              path: "https://www.mintscan.io/evmos/",
-            },
-            {
-              title: "Escan",
-              path: "https://escan.live",
+              title: "Blockscout",
+              path: "https://testnet.qom.one/",
             },
           ],
         },
@@ -318,16 +313,10 @@ module.exports = {
     gutter: {
       title: "Help & Support",
       chat: {
-        title: "Discord Channel",
-        text: "Chat with Evmos users and team on Discord.",
-        url: "https://discord.gg/evmos",
+        title: "Telegram",
+        text: "Chat with Qom One users and community on telegram.",
+        url: "https://t.me/QOMONE",
         bg: "linear-gradient(103.75deg, #1B1E36 0%, #22253F 100%)",
-      },
-      forum: {
-        title: "Commonwealth Forum",
-        text: "Join the Evmos Commonwealth forum",
-        url: "https://commonwealth.im/evmos",
-        bg: "linear-gradient(221.79deg, #3D6B99 -1.08%, #336699 95.88%)",
       },
       github: {
         title: "Found an Issue?",
@@ -336,34 +325,30 @@ module.exports = {
       },
     },
     footer: {
-      logo: "/evmos-black.svg",
+      logo: "/qom-logo.svg",
       textLink: {
-        text: "evmos.org",
-        url: "https://evmos.org",
+        text: "qom.one",
+        url: "https://qom.one",
       },
       services: [
         {
           service: "github",
-          url: "https://github.com/evmos/evmos",
+          url: "https://github.com/qom/qomone",
         },
         {
           service: "twitter",
-          url: "https://twitter.com/EvmosOrg",
+          url: "https://twitter.com/qomone",
         },
         {
           service: "telegram",
-          url: "https://t.me/EvmosOrg",
+          url: "https://t.me/QOMONE",
         },
         {
-          service: "linkedin",
-          url: "https://www.linkedin.com/company/tharsis-finance/",
-        },
-        {
-          service: "medium",
-          url: "https://evmos.blog/",
+          service: "linktree",
+          url: "https://linktr.ee/qomlinks",
         },
       ],
-      smallprint: "This website is maintained by Tharsis Labs Ltd.",
+      smallprint: "This website is maintained by Qom One developers and community",
       links: [
         {
           title: "Ecosystem Documentation",
@@ -379,28 +364,6 @@ module.exports = {
             {
               title: "Tendermint Core Docs",
               url: "https://docs.tendermint.com",
-            },
-          ],
-        },
-        {
-          title: "Community",
-          children: [
-            {
-              title: "Evmos Discord Community",
-              url: "https://discord.gg/evmos",
-            },
-            {
-              title: "Evmos Commonwealth Forum",
-              url: "https://commonwealth.im/evmos",
-            },
-          ],
-        },
-        {
-          title: "Evmos",
-          children: [
-            {
-              title: "Jobs at Evmos",
-              url: "https://boards.eu.greenhouse.io/evmos",
             },
           ],
         },

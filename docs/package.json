@@ -18,7 +18,12 @@
     "ethereum",
     "blockchain",
     "cryptocurrency",
-    "evm"
+    "evm",
+    "qom",
+    "QL1",
+    "shiba",
+    "predator",
+    "qomone"
   ],
   "author": "Tharsis",
   "license": "ISC",
@@ -34,7 +39,8 @@
   },
   "devDependencies": {
     "node-sass": "^7.0.1",
-    "watchpack": "^2.3.1"
+    "watchpack": "^2.3.1",
+    "@volar/vue-language-plugin-pug": "latest"
   },
   "resolutions": {
     "@cosmos-ui/vue": "@evmos/docs-ui@*",

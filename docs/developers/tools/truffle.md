@@ -4,7 +4,7 @@ order: 3
 
 # Truffle: Deploying a Smart Contract
 
-Learn how to deploy a simple Solidity-based smart contract to Evmos using the Truffle environment {synopsis}
+Learn how to deploy a simple Solidity-based smart contract to Qom One using the Truffle environment {synopsis}
 
 [Truffle](https://www.trufflesuite.com/truffle) is a development framework for deploying and managing [Solidity](https://github.com/ethereum/solidity) smart contracts.
 

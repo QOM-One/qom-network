@@ -13,20 +13,20 @@ The keyring holds the private/public keypairs used to interact with the node. Fo
 You can use the following commands for help with the `keys` command and for more information about a particular subcommand, respectively:
 
 ```bash
-evmosd keys
+qomd keys
 ```
 
 ```bash
-evmosd keys [command] --help
+qomd keys [command] --help
 ```
 
 To create a new key in the keyring, run the `add` subcommand with a `<key_name>` argument. You will have to provide a password for the newly generated key. This key will be used in the next section.
 
 ```bash
-evmosd keys add dev0
+qomd keys add dev0
 
 # Put the generated address in a variable for later use.
-MY_VALIDATOR_ADDRESS=$(evmosd keys show dev0 -a)
+MY_VALIDATOR_ADDRESS=$(qomd keys show dev0 -a)
 ```
 
 This command generates a new 24-word mnemonic phrase, persists it to the relevant backend, and outputs information about the keypair. If this keypair will be used to hold value-bearing tokens, be sure to write down the mnemonic phrase somewhere safe!
@@ -80,10 +80,10 @@ for multiple prompts:
 
 ```bash
 # assuming that KEYPASSWD is set in the environment
-yes $KEYPASSWD | evmosd keys add me
-yes $KEYPASSWD | evmosd keys show me
-# start evmosd with keyring-backend flag
-evmosd --keyring-backend=file start
+yes $KEYPASSWD | qomd keys add me
+yes $KEYPASSWD | qomd keys show me
+# start qomd with keyring-backend flag
+qomd --keyring-backend=file start
 ```
 
 ::: tip
