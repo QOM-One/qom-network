@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/QOM-One/QomApp/testutil"
-	"github.com/QOM-One/QomApp/x/claims/types"
-	vestingtypes "github.com/QOM-One/QomApp/x/vesting/types"
+	"github.com/QOM-One/QomApp/claims/types"
+	vestingtypes "github.com/QOM-One/QomApp/vesting/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	distrtypes "github.com/cosmos/cosmos-sdk/x/distribution/types"

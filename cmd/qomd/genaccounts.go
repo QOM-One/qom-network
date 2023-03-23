@@ -41,8 +41,8 @@ import (
 
 	evmoskr "github.com/QOM-One/QomApp/crypto/keyring"
 
-	vestingcli "github.com/QOM-One/QomApp/x/vesting/client/cli"
-	vestingtypes "github.com/QOM-One/QomApp/x/vesting/types"
+	vestingcli "github.com/QOM-One/QomApp/vesting/client/cli"
+	vestingtypes "github.com/QOM-One/QomApp/vesting/types"
 )
 
 const (

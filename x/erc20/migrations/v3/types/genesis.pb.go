@@ -5,7 +5,7 @@ package v3types
 
 import (
 	fmt "fmt"
-	"github.com/QOM-One/QomApp/x/erc20/types"
+	"github.com/QOM-One/QomApp/erc20/types"
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	io "io"

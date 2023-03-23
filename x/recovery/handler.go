@@ -18,7 +18,7 @@ package recovery
 
 import (
 	errorsmod "cosmossdk.io/errors"
-	"github.com/QOM-One/QomApp/x/recovery/types"
+	"github.com/QOM-One/QomApp/recovery/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 )

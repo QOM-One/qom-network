@@ -3,7 +3,7 @@ package types
 import (
 	"testing"
 
-	epochstypes "github.com/QOM-One/QomApp/x/epochs/types"
+	epochstypes "github.com/QOM-One/QomApp/epochs/types"
 	"github.com/stretchr/testify/suite"
 )
 

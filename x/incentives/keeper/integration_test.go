@@ -15,7 +15,7 @@ import (
 	ethermint "github.com/evmos/ethermint/types"
 	evmtypes "github.com/evmos/ethermint/x/evm/types"
 
-	"github.com/QOM-One/QomApp/x/incentives/types"
+	"github.com/QOM-One/QomApp/incentives/types"
 )
 
 var _ = Describe("Performing EVM transactions", Ordered, func() {

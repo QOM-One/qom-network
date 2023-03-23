@@ -19,7 +19,7 @@ package keeper
 import (
 	"context"
 
-	"github.com/QOM-One/QomApp/x/inflation/types"
+	"github.com/QOM-One/QomApp/inflation/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

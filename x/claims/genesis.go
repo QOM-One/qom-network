@@ -23,8 +23,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/QOM-One/QomApp/x/claims/keeper"
-	"github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/claims/keeper"
+	"github.com/QOM-One/QomApp/claims/types"
 )
 
 // InitGenesis initializes the claim module's state from a provided genesis

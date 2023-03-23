@@ -34,9 +34,9 @@ import (
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/QOM-One/QomApp/x/incentives/client/cli"
-	"github.com/QOM-One/QomApp/x/incentives/keeper"
-	"github.com/QOM-One/QomApp/x/incentives/types"
+	"github.com/QOM-One/QomApp/incentives/client/cli"
+	"github.com/QOM-One/QomApp/incentives/keeper"
+	"github.com/QOM-One/QomApp/incentives/types"
 )
 
 // type check to ensure the interface is properly implemented

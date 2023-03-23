@@ -37,8 +37,8 @@ import (
 
 	"github.com/QOM-One/QomApp/app"
 	"github.com/QOM-One/QomApp/contracts"
-	epochstypes "github.com/QOM-One/QomApp/x/epochs/types"
-	"github.com/QOM-One/QomApp/x/vesting/types"
+	epochstypes "github.com/QOM-One/QomApp/epochs/types"
+	"github.com/QOM-One/QomApp/vesting/types"
 )
 
 var (

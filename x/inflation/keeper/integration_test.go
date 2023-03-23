@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/QOM-One/QomApp/x/inflation/types"
+	"github.com/QOM-One/QomApp/inflation/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	epochstypes "github.com/QOM-One/QomApp/x/epochs/types"
-	incentivestypes "github.com/QOM-One/QomApp/x/incentives/types"
+	epochstypes "github.com/QOM-One/QomApp/epochs/types"
+	incentivestypes "github.com/QOM-One/QomApp/incentives/types"
 )
 
 var (

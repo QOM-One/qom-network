@@ -22,8 +22,8 @@ import (
 	ethermint "github.com/evmos/ethermint/types"
 
 	evmos "github.com/QOM-One/QomApp/types"
-	incentivestypes "github.com/QOM-One/QomApp/x/incentives/types"
-	"github.com/QOM-One/QomApp/x/inflation/types"
+	incentivestypes "github.com/QOM-One/QomApp/incentives/types"
+	"github.com/QOM-One/QomApp/inflation/types"
 )
 
 // 200M token at year 4 allocated to the team

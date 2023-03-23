@@ -27,7 +27,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 
-	"github.com/QOM-One/QomApp/x/revenue/types"
+	"github.com/QOM-One/QomApp/revenue/types"
 )
 
 var _ types.MsgServer = &Keeper{}

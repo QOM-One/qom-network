@@ -10,7 +10,7 @@ import (
 	sdkvesting "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
 
 	"github.com/QOM-One/QomApp/testutil"
-	"github.com/QOM-One/QomApp/x/vesting/types"
+	"github.com/QOM-One/QomApp/vesting/types"
 	"github.com/evmos/ethermint/tests"
 )
 

@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/suite"
 
 	"github.com/QOM-One/QomApp/app"
-	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
+	claimstypes "github.com/QOM-One/QomApp/claims/types"
 	client "github.com/cosmos/cosmos-sdk/client"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"

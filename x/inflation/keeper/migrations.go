@@ -17,9 +17,9 @@
 package keeper
 
 import (
-	v2 "github.com/QOM-One/QomApp/x/inflation/migrations/v2"
-	v3 "github.com/QOM-One/QomApp/x/inflation/migrations/v3"
-	"github.com/QOM-One/QomApp/x/inflation/types"
+	v2 "github.com/QOM-One/QomApp/inflation/migrations/v2"
+	v3 "github.com/QOM-One/QomApp/inflation/migrations/v3"
+	"github.com/QOM-One/QomApp/inflation/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

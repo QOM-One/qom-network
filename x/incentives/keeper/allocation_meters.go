@@ -22,7 +22,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/QOM-One/QomApp/x/incentives/types"
+	"github.com/QOM-One/QomApp/incentives/types"
 )
 
 // GetAllAllocationMeters - get all registered AllocationMeters

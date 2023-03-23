@@ -20,7 +20,7 @@ import (
 	"context"
 
 	errorsmod "cosmossdk.io/errors"
-	"github.com/QOM-One/QomApp/x/inflation/types"
+	"github.com/QOM-One/QomApp/inflation/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 )

@@ -26,7 +26,7 @@ import (
 
 	"github.com/QOM-One/QomApp/ibc"
 	evmos "github.com/QOM-One/QomApp/types"
-	"github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/claims/types"
 )
 
 // OnAcknowledgementPacket performs an IBC send callback. Once a user submits an

@@ -23,7 +23,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/QOM-One/QomApp/x/epochs/types"
+	"github.com/QOM-One/QomApp/epochs/types"
 )
 
 // BeginBlocker of epochs module

@@ -20,7 +20,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/claims/types"
 )
 
 // GetClaimsRecord returns the claims record for a specific address

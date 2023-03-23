@@ -17,7 +17,7 @@
 package keeper
 
 import (
-	"github.com/QOM-One/QomApp/x/erc20/types"
+	"github.com/QOM-One/QomApp/erc20/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

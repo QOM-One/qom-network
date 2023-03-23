@@ -34,7 +34,7 @@ import (
 
 	"github.com/QOM-One/QomApp/ibc"
 	evmos "github.com/QOM-One/QomApp/types"
-	"github.com/QOM-One/QomApp/x/recovery/types"
+	"github.com/QOM-One/QomApp/recovery/types"
 )
 
 // OnRecvPacket performs an IBC receive callback. It returns the tokens that

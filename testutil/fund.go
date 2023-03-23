@@ -17,7 +17,7 @@
 package testutil
 
 import (
-	inflationtypes "github.com/QOM-One/QomApp/x/inflation/types"
+	inflationtypes "github.com/QOM-One/QomApp/inflation/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 )

@@ -9,7 +9,7 @@ import (
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 
 	"github.com/QOM-One/QomApp/contracts"
-	"github.com/QOM-One/QomApp/x/erc20/types"
+	"github.com/QOM-One/QomApp/erc20/types"
 	"github.com/evmos/ethermint/tests"
 )
 

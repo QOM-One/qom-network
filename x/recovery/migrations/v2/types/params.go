@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/QOM-One/QomApp/x/recovery/types"
+	"github.com/QOM-One/QomApp/recovery/types"
 
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 )

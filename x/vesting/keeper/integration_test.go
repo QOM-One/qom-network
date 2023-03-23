@@ -17,14 +17,14 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 
-	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
+	claimstypes "github.com/QOM-One/QomApp/claims/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	sdkvesting "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	evmtypes "github.com/evmos/ethermint/x/evm/types"
 
-	"github.com/QOM-One/QomApp/x/vesting/types"
+	"github.com/QOM-One/QomApp/vesting/types"
 )
 
 // Clawback vesting with Cliff and Lock. In this case the cliff is reached

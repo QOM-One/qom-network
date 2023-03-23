@@ -16,8 +16,8 @@ import (
 	feemarkettypes "github.com/evmos/ethermint/x/feemarket/types"
 
 	"github.com/QOM-One/QomApp/app"
-	"github.com/QOM-One/QomApp/x/recovery"
-	"github.com/QOM-One/QomApp/x/recovery/types"
+	"github.com/QOM-One/QomApp/recovery"
+	"github.com/QOM-One/QomApp/recovery/types"
 )
 
 type GenesisTestSuite struct {

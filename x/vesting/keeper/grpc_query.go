@@ -23,7 +23,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/QOM-One/QomApp/x/vesting/types"
+	"github.com/QOM-One/QomApp/vesting/types"
 )
 
 var _ types.QueryServer = Keeper{}

@@ -38,8 +38,8 @@ import (
 
 	"github.com/QOM-One/QomApp/app"
 	"github.com/QOM-One/QomApp/contracts"
-	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
-	"github.com/QOM-One/QomApp/x/erc20/types"
+	claimstypes "github.com/QOM-One/QomApp/claims/types"
+	"github.com/QOM-One/QomApp/erc20/types"
 
 	capabilitytypes "github.com/cosmos/cosmos-sdk/x/capability/types"
 	transfertypes "github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"

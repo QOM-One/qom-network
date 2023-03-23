@@ -25,7 +25,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/spf13/cobra"
 
-	"github.com/QOM-One/QomApp/x/incentives/types"
+	"github.com/QOM-One/QomApp/incentives/types"
 )
 
 // GetQueryCmd returns the parent command for all incentives CLI query commands.

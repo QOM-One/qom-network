@@ -19,7 +19,7 @@ package types
 import (
 	fmt "fmt"
 
-	epochstypes "github.com/QOM-One/QomApp/x/epochs/types"
+	epochstypes "github.com/QOM-One/QomApp/epochs/types"
 )
 
 // NewGenesisState creates a new GenesisState object

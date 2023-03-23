@@ -19,7 +19,7 @@ package types
 import (
 	"fmt"
 
-	"github.com/QOM-One/QomApp/x/revenue/types"
+	"github.com/QOM-One/QomApp/revenue/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"

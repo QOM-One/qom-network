@@ -4,7 +4,7 @@ package qom.revenue.v1;
 import "qom/revenue/v1/revenue.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/QOM-One/QomApp/x/revenue/types";
+option go_package = "github.com/QOM-One/QomApp/revenue/types";
 
 // GenesisState defines the module's genesis state.
 message GenesisState {

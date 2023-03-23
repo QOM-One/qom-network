@@ -17,8 +17,8 @@
 package keeper
 
 import (
-	v2 "github.com/QOM-One/QomApp/x/revenue/migrations/v2"
-	"github.com/QOM-One/QomApp/x/revenue/types"
+	v2 "github.com/QOM-One/QomApp/revenue/migrations/v2"
+	"github.com/QOM-One/QomApp/revenue/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

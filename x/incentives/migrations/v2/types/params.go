@@ -20,11 +20,11 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/QOM-One/QomApp/x/incentives/types"
+	"github.com/QOM-One/QomApp/incentives/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 
-	epochstypes "github.com/QOM-One/QomApp/x/epochs/types"
+	epochstypes "github.com/QOM-One/QomApp/epochs/types"
 )
 
 var _ types.LegacyParams = &V2Params{}

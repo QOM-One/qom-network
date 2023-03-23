@@ -19,7 +19,7 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/claims/types"
 )
 
 // GetParams returns the total set of claim parameters.

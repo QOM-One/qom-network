@@ -12,7 +12,7 @@ import (
 
 	transfertypes "github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"
 
-	"github.com/QOM-One/QomApp/x/recovery/types"
+	"github.com/QOM-One/QomApp/recovery/types"
 )
 
 var _ types.TransferKeeper = &MockTransferKeeper{}

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/QOM-One/QomApp/x/erc20/keeper"
+	"github.com/QOM-One/QomApp/erc20/keeper"
 
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 
@@ -24,10 +24,10 @@ import (
 	ibcmock "github.com/cosmos/ibc-go/v6/testing/mock"
 
 	"github.com/QOM-One/QomApp/contracts"
-	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
-	"github.com/QOM-One/QomApp/x/erc20/types"
-	inflationtypes "github.com/QOM-One/QomApp/x/inflation/types"
-	vestingtypes "github.com/QOM-One/QomApp/x/vesting/types"
+	claimstypes "github.com/QOM-One/QomApp/claims/types"
+	"github.com/QOM-One/QomApp/erc20/types"
+	inflationtypes "github.com/QOM-One/QomApp/inflation/types"
+	vestingtypes "github.com/QOM-One/QomApp/vesting/types"
 )
 
 var erc20Denom = "erc20/0xdac17f958d2ee523a2206206994597c13d831ec7"

@@ -26,7 +26,7 @@ import (
 	"github.com/cosmos/ibc-go/v6/modules/core/exported"
 
 	"github.com/QOM-One/QomApp/ibc"
-	"github.com/QOM-One/QomApp/x/erc20/keeper"
+	"github.com/QOM-One/QomApp/erc20/keeper"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 )
 

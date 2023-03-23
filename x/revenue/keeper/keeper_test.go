@@ -13,8 +13,8 @@ import (
 	feemarkettypes "github.com/evmos/ethermint/x/feemarket/types"
 
 	"github.com/QOM-One/QomApp/app"
-	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
-	"github.com/QOM-One/QomApp/x/revenue/types"
+	claimstypes "github.com/QOM-One/QomApp/claims/types"
+	"github.com/QOM-One/QomApp/revenue/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	sdk "github.com/cosmos/cosmos-sdk/types"

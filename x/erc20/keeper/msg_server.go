@@ -29,7 +29,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 
 	"github.com/QOM-One/QomApp/contracts"
-	"github.com/QOM-One/QomApp/x/erc20/types"
+	"github.com/QOM-One/QomApp/erc20/types"
 )
 
 var _ types.MsgServer = &Keeper{}

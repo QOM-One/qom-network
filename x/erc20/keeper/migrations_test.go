@@ -2,9 +2,9 @@ package keeper_test
 
 import (
 	"github.com/QOM-One/QomApp/app"
-	erc20keeper "github.com/QOM-One/QomApp/x/erc20/keeper"
-	v3types "github.com/QOM-One/QomApp/x/erc20/migrations/v3/types"
-	"github.com/QOM-One/QomApp/x/erc20/types"
+	erc20keeper "github.com/QOM-One/QomApp/erc20/keeper"
+	v3types "github.com/QOM-One/QomApp/erc20/migrations/v3/types"
+	"github.com/QOM-One/QomApp/erc20/types"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"

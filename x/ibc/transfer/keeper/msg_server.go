@@ -27,7 +27,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	erc20types "github.com/QOM-One/QomApp/x/erc20/types"
+	erc20types "github.com/QOM-One/QomApp/erc20/types"
 	"github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"
 )
 

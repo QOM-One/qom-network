@@ -17,8 +17,8 @@
 package keeper
 
 import (
-	v2 "github.com/QOM-One/QomApp/x/incentives/migrations/v2"
-	"github.com/QOM-One/QomApp/x/incentives/types"
+	v2 "github.com/QOM-One/QomApp/incentives/migrations/v2"
+	"github.com/QOM-One/QomApp/incentives/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

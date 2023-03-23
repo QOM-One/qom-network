@@ -6,9 +6,9 @@ import (
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 
-	v2 "github.com/QOM-One/QomApp/x/revenue/migrations/v2"
-	v2types "github.com/QOM-One/QomApp/x/revenue/migrations/v2/types"
-	"github.com/QOM-One/QomApp/x/revenue/types"
+	v2 "github.com/QOM-One/QomApp/revenue/migrations/v2"
+	v2types "github.com/QOM-One/QomApp/revenue/migrations/v2/types"
+	"github.com/QOM-One/QomApp/revenue/types"
 	"github.com/evmos/ethermint/encoding"
 
 	"github.com/cosmos/cosmos-sdk/testutil"

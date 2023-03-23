@@ -7,8 +7,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/QOM-One/QomApp/testutil"
-	erc20types "github.com/QOM-One/QomApp/x/erc20/types"
-	"github.com/QOM-One/QomApp/x/ibc/transfer/keeper"
+	erc20types "github.com/QOM-One/QomApp/erc20/types"
+	"github.com/QOM-One/QomApp/ibc/transfer/keeper"
 	"github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"
 	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
 	host "github.com/cosmos/ibc-go/v6/modules/core/24-host"

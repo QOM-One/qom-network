@@ -17,8 +17,8 @@ import (
 
 	"github.com/QOM-One/QomApp/app"
 	"github.com/QOM-One/QomApp/testutil"
-	"github.com/QOM-One/QomApp/x/claims"
-	"github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/claims"
+	"github.com/QOM-One/QomApp/claims/types"
 )
 
 type GenesisTestSuite struct {

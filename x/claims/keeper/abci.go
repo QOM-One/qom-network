@@ -24,7 +24,7 @@ import (
 	vestexported "github.com/cosmos/cosmos-sdk/x/auth/vesting/exported"
 	ethermint "github.com/evmos/ethermint/types"
 
-	"github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/claims/types"
 )
 
 // EndBlocker checks if the airdrop claiming period has ended in order to

@@ -14,7 +14,7 @@ import (
 
 	"github.com/QOM-One/QomApp/app"
 	"github.com/QOM-One/QomApp/testutil"
-	"github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/claims/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	sdk "github.com/cosmos/cosmos-sdk/types"

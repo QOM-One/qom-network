@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	epochstypes "github.com/QOM-One/QomApp/x/epochs/types"
+	epochstypes "github.com/QOM-One/QomApp/epochs/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

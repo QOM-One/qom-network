@@ -18,9 +18,9 @@ import (
 	ibctesting "github.com/QOM-One/QomApp/ibc/testing"
 
 	"github.com/QOM-One/QomApp/app"
-	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
-	inflationtypes "github.com/QOM-One/QomApp/x/inflation/types"
-	"github.com/QOM-One/QomApp/x/recovery/types"
+	claimstypes "github.com/QOM-One/QomApp/claims/types"
+	inflationtypes "github.com/QOM-One/QomApp/inflation/types"
+	"github.com/QOM-One/QomApp/recovery/types"
 	minttypes "github.com/cosmos/cosmos-sdk/x/mint/types"
 )
 

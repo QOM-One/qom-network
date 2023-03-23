@@ -35,9 +35,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 
-	"github.com/QOM-One/QomApp/x/recovery/client/cli"
-	"github.com/QOM-One/QomApp/x/recovery/keeper"
-	"github.com/QOM-One/QomApp/x/recovery/types"
+	"github.com/QOM-One/QomApp/recovery/client/cli"
+	"github.com/QOM-One/QomApp/recovery/keeper"
+	"github.com/QOM-One/QomApp/recovery/types"
 )
 
 // type check to ensure the interface is properly implemented

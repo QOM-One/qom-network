@@ -3,8 +3,8 @@ package keeper_test
 import (
 	"fmt"
 
-	incentivestypes "github.com/QOM-One/QomApp/x/incentives/types"
-	"github.com/QOM-One/QomApp/x/inflation/types"
+	incentivestypes "github.com/QOM-One/QomApp/incentives/types"
+	"github.com/QOM-One/QomApp/inflation/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	ethermint "github.com/evmos/ethermint/types"

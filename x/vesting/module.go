@@ -34,9 +34,9 @@ import (
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
 
-	"github.com/QOM-One/QomApp/x/vesting/client/cli"
-	"github.com/QOM-One/QomApp/x/vesting/keeper"
-	"github.com/QOM-One/QomApp/x/vesting/types"
+	"github.com/QOM-One/QomApp/vesting/client/cli"
+	"github.com/QOM-One/QomApp/vesting/keeper"
+	"github.com/QOM-One/QomApp/vesting/types"
 )
 
 var (

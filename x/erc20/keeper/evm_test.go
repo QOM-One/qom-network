@@ -12,8 +12,8 @@ import (
 	"github.com/stretchr/testify/mock"
 
 	"github.com/QOM-One/QomApp/contracts"
-	"github.com/QOM-One/QomApp/x/erc20/keeper"
-	"github.com/QOM-One/QomApp/x/erc20/types"
+	"github.com/QOM-One/QomApp/erc20/keeper"
+	"github.com/QOM-One/QomApp/erc20/types"
 )
 
 func (suite *KeeperTestSuite) TestQueryERC20() {

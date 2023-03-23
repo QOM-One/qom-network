@@ -21,8 +21,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/QOM-One/QomApp/x/epochs/keeper"
-	"github.com/QOM-One/QomApp/x/epochs/types"
+	"github.com/QOM-One/QomApp/epochs/keeper"
+	"github.com/QOM-One/QomApp/epochs/types"
 )
 
 // InitGenesis initializes the epochs module's state from a provided genesis

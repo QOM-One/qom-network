@@ -8,12 +8,12 @@ import (
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/evmos/ethermint/encoding"
 
-	v3types "github.com/QOM-One/QomApp/x/erc20/migrations/v3/types"
+	v3types "github.com/QOM-One/QomApp/erc20/migrations/v3/types"
 
-	"github.com/QOM-One/QomApp/x/erc20/types"
+	"github.com/QOM-One/QomApp/erc20/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/QOM-One/QomApp/x/erc20/migrations/v3"
+	"github.com/QOM-One/QomApp/erc20/migrations/v3"
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

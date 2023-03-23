@@ -6,7 +6,7 @@ import (
 	"github.com/evmos/ethermint/tests"
 
 	"github.com/QOM-One/QomApp/testutil"
-	"github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/claims/types"
 )
 
 func (suite *KeeperTestSuite) TestClaimsInvariant() {

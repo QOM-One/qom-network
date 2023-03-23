@@ -24,7 +24,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/tendermint/tendermint/libs/log"
 
-	"github.com/QOM-One/QomApp/x/epochs/types"
+	"github.com/QOM-One/QomApp/epochs/types"
 )
 
 // Keeper of this module maintains collections of epochs and hooks.

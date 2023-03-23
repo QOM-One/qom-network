@@ -19,7 +19,7 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/QOM-One/QomApp/x/revenue/types"
+	"github.com/QOM-One/QomApp/revenue/types"
 )
 
 // GetParams returns the total set of revenue parameters.

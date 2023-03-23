@@ -20,8 +20,8 @@ import (
 	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/QOM-One/QomApp/x/revenue/keeper"
-	"github.com/QOM-One/QomApp/x/revenue/types"
+	"github.com/QOM-One/QomApp/revenue/keeper"
+	"github.com/QOM-One/QomApp/revenue/types"
 )
 
 // InitGenesis import module genesis

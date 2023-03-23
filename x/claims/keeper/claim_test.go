@@ -6,7 +6,7 @@ import (
 
 	"cosmossdk.io/math"
 	"github.com/QOM-One/QomApp/testutil"
-	inflationtypes "github.com/QOM-One/QomApp/x/inflation/types"
+	inflationtypes "github.com/QOM-One/QomApp/inflation/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	distrtypes "github.com/cosmos/cosmos-sdk/x/distribution/types"
@@ -18,7 +18,7 @@ import (
 	"github.com/evmos/ethermint/tests"
 	ethermint "github.com/evmos/ethermint/types"
 
-	"github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/claims/types"
 )
 
 func (suite *KeeperTestSuite) TestGetClaimableAmountForAction() {

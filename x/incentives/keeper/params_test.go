@@ -1,6 +1,6 @@
 package keeper_test
 
-import "github.com/QOM-One/QomApp/x/incentives/types"
+import "github.com/QOM-One/QomApp/incentives/types"
 
 func (suite *KeeperTestSuite) TestParams() {
 	params := suite.app.IncentivesKeeper.GetParams(suite.ctx)

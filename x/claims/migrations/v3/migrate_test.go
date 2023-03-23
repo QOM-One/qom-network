@@ -7,9 +7,9 @@ import (
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 
 	"github.com/QOM-One/QomApp/app"
-	v3 "github.com/QOM-One/QomApp/x/claims/migrations/v3"
-	v3types "github.com/QOM-One/QomApp/x/claims/migrations/v3/types"
-	"github.com/QOM-One/QomApp/x/claims/types"
+	v3 "github.com/QOM-One/QomApp/claims/migrations/v3"
+	v3types "github.com/QOM-One/QomApp/claims/migrations/v3/types"
+	"github.com/QOM-One/QomApp/claims/types"
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/evmos/ethermint/encoding"

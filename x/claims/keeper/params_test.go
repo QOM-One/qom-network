@@ -1,7 +1,7 @@
 package keeper_test
 
 import (
-	"github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/claims/types"
 )
 
 func (suite *KeeperTestSuite) TestParams() {

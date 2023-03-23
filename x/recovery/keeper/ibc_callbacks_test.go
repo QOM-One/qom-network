@@ -19,11 +19,11 @@ import (
 	ibcgotesting "github.com/cosmos/ibc-go/v6/testing"
 	ibcmock "github.com/cosmos/ibc-go/v6/testing/mock"
 
-	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
-	incentivestypes "github.com/QOM-One/QomApp/x/incentives/types"
-	"github.com/QOM-One/QomApp/x/recovery/keeper"
-	"github.com/QOM-One/QomApp/x/recovery/types"
-	vestingtypes "github.com/QOM-One/QomApp/x/vesting/types"
+	claimstypes "github.com/QOM-One/QomApp/claims/types"
+	incentivestypes "github.com/QOM-One/QomApp/incentives/types"
+	"github.com/QOM-One/QomApp/recovery/keeper"
+	"github.com/QOM-One/QomApp/recovery/types"
+	vestingtypes "github.com/QOM-One/QomApp/vesting/types"
 )
 
 func (suite *KeeperTestSuite) TestOnRecvPacket() {

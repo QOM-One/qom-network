@@ -20,7 +20,7 @@ import (
 
 	"github.com/QOM-One/QomApp/app"
 	"github.com/QOM-One/QomApp/testutil"
-	"github.com/QOM-One/QomApp/x/erc20/types"
+	"github.com/QOM-One/QomApp/erc20/types"
 )
 
 var _ = Describe("Performing EVM transactions", Ordered, func() {

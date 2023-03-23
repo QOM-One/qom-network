@@ -20,7 +20,7 @@ import (
 	evm "github.com/evmos/ethermint/x/evm/types"
 
 	"github.com/QOM-One/QomApp/app"
-	"github.com/QOM-One/QomApp/x/epochs/types"
+	"github.com/QOM-One/QomApp/epochs/types"
 )
 
 var denomMint = evm.DefaultEVMDenom

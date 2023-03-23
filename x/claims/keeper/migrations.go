@@ -17,8 +17,8 @@
 package keeper
 
 import (
-	v3 "github.com/QOM-One/QomApp/x/claims/migrations/v3"
-	"github.com/QOM-One/QomApp/x/claims/types"
+	v3 "github.com/QOM-One/QomApp/claims/migrations/v3"
+	"github.com/QOM-One/QomApp/claims/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

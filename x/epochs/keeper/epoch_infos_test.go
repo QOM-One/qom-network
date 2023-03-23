@@ -3,7 +3,7 @@ package keeper_test
 import (
 	"time"
 
-	"github.com/QOM-One/QomApp/x/epochs/types"
+	"github.com/QOM-One/QomApp/epochs/types"
 )
 
 func (suite *KeeperTestSuite) TestEpochLifeCycle() {

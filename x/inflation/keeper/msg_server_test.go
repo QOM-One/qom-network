@@ -1,7 +1,7 @@
 package keeper_test
 
 import (
-	"github.com/QOM-One/QomApp/x/inflation/types"
+	"github.com/QOM-One/QomApp/inflation/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 )

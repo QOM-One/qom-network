@@ -15,7 +15,7 @@ import (
 	"github.com/QOM-One/QomApp/app"
 	ibctesting "github.com/QOM-One/QomApp/ibc/testing"
 	"github.com/QOM-One/QomApp/testutil"
-	"github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/claims/types"
 	"github.com/evmos/ethermint/tests"
 )
 

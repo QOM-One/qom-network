@@ -20,8 +20,8 @@ import (
 	evm "github.com/evmos/ethermint/x/evm/types"
 
 	"github.com/QOM-One/QomApp/app"
-	epochstypes "github.com/QOM-One/QomApp/x/epochs/types"
-	"github.com/QOM-One/QomApp/x/inflation/types"
+	epochstypes "github.com/QOM-One/QomApp/epochs/types"
+	"github.com/QOM-One/QomApp/inflation/types"
 )
 
 var denomMint = types.DefaultInflationDenom

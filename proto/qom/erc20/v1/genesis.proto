@@ -4,7 +4,7 @@ package qom.erc20.v1;
 import "qom/erc20/v1/erc20.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/QOM-One/QomApp/x/erc20/types";
+option go_package = "github.com/QOM-One/QomApp/erc20/types";
 
 // GenesisState defines the module's genesis state.
 message GenesisState {

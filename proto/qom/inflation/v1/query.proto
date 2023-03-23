@@ -6,7 +6,7 @@ import "qom/inflation/v1/genesis.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 
-option go_package = "github.com/QOM-One/QomApp/x/inflation/types";
+option go_package = "github.com/QOM-One/QomApp/inflation/types";
 
 // Query provides defines the gRPC querier service.
 service Query {

@@ -9,8 +9,8 @@ import (
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
 	simapp "github.com/QOM-One/QomApp/app"
-	"github.com/QOM-One/QomApp/x/epochs"
-	"github.com/QOM-One/QomApp/x/epochs/types"
+	"github.com/QOM-One/QomApp/epochs"
+	"github.com/QOM-One/QomApp/epochs/types"
 )
 
 func TestEpochsExportGenesis(t *testing.T) {

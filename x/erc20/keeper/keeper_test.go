@@ -47,9 +47,9 @@ import (
 	"github.com/QOM-One/QomApp/app"
 	"github.com/QOM-One/QomApp/contracts"
 	ibctesting "github.com/QOM-One/QomApp/ibc/testing"
-	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
-	"github.com/QOM-One/QomApp/x/erc20/types"
-	inflationtypes "github.com/QOM-One/QomApp/x/inflation/types"
+	claimstypes "github.com/QOM-One/QomApp/claims/types"
+	"github.com/QOM-One/QomApp/erc20/types"
+	inflationtypes "github.com/QOM-One/QomApp/inflation/types"
 
 	teststypes "github.com/QOM-One/QomApp/types/tests"
 	transfertypes "github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"

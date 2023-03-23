@@ -33,7 +33,7 @@ import (
 
 	ethermint "github.com/evmos/ethermint/types"
 
-	"github.com/QOM-One/QomApp/x/erc20/types"
+	"github.com/QOM-One/QomApp/erc20/types"
 )
 
 // NewTxCmd returns a root CLI command handler for erc20 transaction commands

@@ -3,7 +3,7 @@ package cli
 import (
 	"testing"
 
-	"github.com/QOM-One/QomApp/x/erc20/types"
+	"github.com/QOM-One/QomApp/erc20/types"
 	"github.com/stretchr/testify/require"
 )
 

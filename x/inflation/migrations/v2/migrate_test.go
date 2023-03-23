@@ -6,10 +6,10 @@ import (
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 
-	v2 "github.com/QOM-One/QomApp/x/inflation/migrations/v2"
-	"github.com/QOM-One/QomApp/x/inflation/types"
+	v2 "github.com/QOM-One/QomApp/inflation/migrations/v2"
+	"github.com/QOM-One/QomApp/inflation/types"
 
-	v2types "github.com/QOM-One/QomApp/x/inflation/migrations/v2/types"
+	v2types "github.com/QOM-One/QomApp/inflation/migrations/v2/types"
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/evmos/ethermint/app"

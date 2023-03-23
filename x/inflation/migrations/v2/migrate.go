@@ -17,8 +17,8 @@
 package v2
 
 import (
-	v2types "github.com/QOM-One/QomApp/x/inflation/migrations/v2/types"
-	"github.com/QOM-One/QomApp/x/inflation/types"
+	v2types "github.com/QOM-One/QomApp/inflation/migrations/v2/types"
+	"github.com/QOM-One/QomApp/inflation/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"

@@ -20,7 +20,7 @@ import (
 	dbm "github.com/tendermint/tm-db"
 
 	"github.com/QOM-One/QomApp/types"
-	claimstypes "github.com/QOM-One/QomApp/x/claims/types"
+	claimstypes "github.com/QOM-One/QomApp/claims/types"
 	"github.com/evmos/ethermint/encoding"
 )
 

@@ -6,7 +6,7 @@ import "cosmos_proto/cosmos.proto";
 import "qom/incentives/v1/genesis.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/QOM-One/QomApp/x/incentives/types";
+option go_package = "github.com/QOM-One/QomApp/incentives/types";
 
 // Msg defines the incentives Msg service.
 service Msg {

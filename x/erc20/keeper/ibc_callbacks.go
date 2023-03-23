@@ -30,7 +30,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 
 	"github.com/QOM-One/QomApp/ibc"
-	"github.com/QOM-One/QomApp/x/erc20/types"
+	"github.com/QOM-One/QomApp/erc20/types"
 )
 
 // OnRecvPacket performs the ICS20 middleware receive callback for automatically

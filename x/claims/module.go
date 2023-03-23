@@ -33,9 +33,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 
-	"github.com/QOM-One/QomApp/x/claims/client/cli"
-	"github.com/QOM-One/QomApp/x/claims/keeper"
-	"github.com/QOM-One/QomApp/x/claims/types"
+	"github.com/QOM-One/QomApp/claims/client/cli"
+	"github.com/QOM-One/QomApp/claims/keeper"
+	"github.com/QOM-One/QomApp/claims/types"
 )
 
 var (

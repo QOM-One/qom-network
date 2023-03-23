@@ -32,7 +32,7 @@ import (
 	"github.com/evmos/ethermint/x/evm/statedb"
 	evmtypes "github.com/evmos/ethermint/x/evm/types"
 
-	inflationtypes "github.com/QOM-One/QomApp/x/inflation/types"
+	inflationtypes "github.com/QOM-One/QomApp/inflation/types"
 )
 
 // AccountKeeper defines the expected interface needed to retrieve account info.
