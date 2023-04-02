@@ -34,14 +34,14 @@ import (
 	ibcgotesting "github.com/cosmos/ibc-go/v6/testing"
 	"github.com/cosmos/ibc-go/v6/testing/mock"
 
-	"github.com/evmos/evmos/v12/crypto/ethsecp256k1"
-	evmostypes "github.com/evmos/evmos/v12/types"
-	"github.com/evmos/evmos/v12/utils"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
+	"github.com/qom-one/qomapp/v1/crypto/ethsecp256k1"
+	evmostypes "github.com/qom-one/qomapp/v1/types"
+	"github.com/qom-one/qomapp/v1/utils"
+	evmtypes "github.com/qom-one/qomapp/v1/x/evm/types"
 )
 
 // ChainIDPrefix defines the default chain ID prefix for Evmos test chains
-var ChainIDPrefix = "evmos_9000-"
+var ChainIDPrefix = "qom_7668378-"
 
 func init() {
 	ibcgotesting.ChainIDPrefix = ChainIDPrefix

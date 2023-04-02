@@ -37,8 +37,8 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	tmrpctypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	"github.com/evmos/evmos/v12/rpc/types"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
+	"github.com/qom-one/qomapp/v1/rpc/types"
+	evmtypes "github.com/qom-one/qomapp/v1/x/evm/types"
 	"github.com/tendermint/tendermint/proto/tendermint/crypto"
 )
 

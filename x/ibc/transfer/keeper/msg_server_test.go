@@ -9,9 +9,9 @@ import (
 	"github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"
 	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
 	host "github.com/cosmos/ibc-go/v6/modules/core/24-host"
-	"github.com/evmos/evmos/v12/testutil"
-	erc20types "github.com/evmos/evmos/v12/x/erc20/types"
-	"github.com/evmos/evmos/v12/x/ibc/transfer/keeper"
+	"github.com/qom-one/qomapp/v1/testutil"
+	erc20types "github.com/qom-one/qomapp/v1/x/erc20/types"
+	"github.com/qom-one/qomapp/v1/x/ibc/transfer/keeper"
 	"github.com/stretchr/testify/mock"
 )
 
@@ -31,9 +31,9 @@ func (suite *KeeperTestSuite) TestTransfer() {
 			"pass - no token pair",
 			func() *types.MsgTransfer {
 				senderAcc := sdk.AccAddress(suite.address.Bytes())
-				transferMsg := types.NewMsgTransfer("transfer", "channel-0", sdk.NewCoin("aevmos", sdk.NewInt(10)), senderAcc.String(), "", timeoutHeight, 0, "")
+				transferMsg := types.NewMsgTransfer("transfer", "channel-0", sdk.NewCoin("aqom", sdk.NewInt(10)), senderAcc.String(), "", timeoutHeight, 0, "")
 
-				coins := sdk.NewCoins(sdk.NewCoin("aevmos", sdk.NewInt(10)))
+				coins := sdk.NewCoins(sdk.NewCoin("aom", sdk.NewInt(10)))
 				err := suite.app.BankKeeper.MintCoins(suite.ctx, erc20types.ModuleName, coins)
 				suite.Require().NoError(err)
 				err = suite.app.BankKeeper.SendCoinsFromModuleToAccount(suite.ctx, erc20types.ModuleName, senderAcc, coins)

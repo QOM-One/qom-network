@@ -6,10 +6,10 @@ import (
 
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	evmostypes "github.com/evmos/evmos/v12/types"
-	"github.com/evmos/evmos/v12/x/evm/keeper"
-	"github.com/evmos/evmos/v12/x/evm/statedb"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
+	evmostypes "github.com/qom-one/qomapp/v1/types"
+	"github.com/qom-one/qomapp/v1/x/evm/keeper"
+	"github.com/qom-one/qomapp/v1/x/evm/statedb"
+	evmtypes "github.com/qom-one/qomapp/v1/x/evm/types"
 
 	"github.com/ethereum/go-ethereum/common"
 
@@ -37,14 +37,14 @@ func (suite *KeeperTestSuite) TestWithChainID() {
 		},
 		{
 			"success - Evmos mainnet chain ID",
-			"evmos_9001-2",
-			9001,
+			"qom_766-2",
+			766,
 			false,
 		},
 		{
 			"success - Evmos testnet chain ID",
-			"evmos_9000-4",
-			9000,
+			"qom_7668378-4",
+			7668378,
 			false,
 		},
 	}

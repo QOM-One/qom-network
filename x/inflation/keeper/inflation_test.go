@@ -6,9 +6,9 @@ import (
 	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	evmostypes "github.com/evmos/evmos/v12/types"
-	incentivestypes "github.com/evmos/evmos/v12/x/incentives/types"
-	"github.com/evmos/evmos/v12/x/inflation/types"
+	evmostypes "github.com/qom-one/qomapp/v1/types"
+	incentivestypes "github.com/qom-one/qomapp/v1/x/incentives/types"
+	"github.com/qom-one/qomapp/v1/x/inflation/types"
 )
 
 func (suite *KeeperTestSuite) TestMintAndAllocateInflation() {
@@ -87,7 +87,7 @@ func (suite *KeeperTestSuite) TestMintAndAllocateInflation() {
 func (suite *KeeperTestSuite) TestGetCirculatingSupplyAndInflationRate() {
 	// the total bonded tokens for the 2 accounts initialized on the setup
 	bondedAmt := sdkmath.NewInt(1000100000000000000)
-	bondedCoins := sdk.NewDecCoin(evmostypes.AttoEvmos, bondedAmt)
+	bondedCoins := sdk.NewDecCoin(evmostypes.AttoQom, bondedAmt)
 
 	testCases := []struct {
 		name             string
@@ -127,7 +127,7 @@ func (suite *KeeperTestSuite) TestGetCirculatingSupplyAndInflationRate() {
 			suite.SetupTest() // reset
 
 			// Team allocation is only set on mainnet
-			suite.ctx = suite.ctx.WithChainID("evmos_9001-1")
+			suite.ctx = suite.ctx.WithChainID("qom_766-1")
 			tc.malleate()
 
 			// Mint coins to increase supply
@@ -179,7 +179,7 @@ func (suite *KeeperTestSuite) TestBondedRatio() {
 
 			// Team allocation is only set on mainnet
 			if tc.isMainnet {
-				suite.ctx = suite.ctx.WithChainID("evmos_9001-1")
+				suite.ctx = suite.ctx.WithChainID("qom_766-1")
 			} else {
 				suite.ctx = suite.ctx.WithChainID("evmos_9999-666")
 			}

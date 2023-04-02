@@ -7,11 +7,11 @@ import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
-	"github.com/evmos/evmos/v12/app"
-	"github.com/evmos/evmos/v12/encoding"
-	erc20keeper "github.com/evmos/evmos/v12/x/erc20/keeper"
-	v3types "github.com/evmos/evmos/v12/x/erc20/migrations/v3/types"
-	"github.com/evmos/evmos/v12/x/erc20/types"
+	"github.com/qom-one/qomapp/v1/app"
+	"github.com/qom-one/qomapp/v1/encoding"
+	erc20keeper "github.com/qom-one/qomapp/v1/x/erc20/keeper"
+	v3types "github.com/qom-one/qomapp/v1/x/erc20/migrations/v3/types"
+	"github.com/qom-one/qomapp/v1/x/erc20/types"
 )
 
 type mockSubspace struct {

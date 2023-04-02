@@ -18,15 +18,15 @@ import (
 	"github.com/stretchr/testify/suite"
 	tmrpctypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	"github.com/evmos/evmos/v12/app"
-	"github.com/evmos/evmos/v12/crypto/hd"
-	"github.com/evmos/evmos/v12/encoding"
-	"github.com/evmos/evmos/v12/indexer"
-	"github.com/evmos/evmos/v12/rpc/backend/mocks"
-	rpctypes "github.com/evmos/evmos/v12/rpc/types"
-	utiltx "github.com/evmos/evmos/v12/testutil/tx"
-	"github.com/evmos/evmos/v12/utils"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
+	"github.com/qom-one/qomapp/v1/app"
+	"github.com/qom-one/qomapp/v1/crypto/hd"
+	"github.com/qom-one/qomapp/v1/encoding"
+	"github.com/qom-one/qomapp/v1/indexer"
+	"github.com/qom-one/qomapp/v1/rpc/backend/mocks"
+	rpctypes "github.com/qom-one/qomapp/v1/rpc/types"
+	utiltx "github.com/qom-one/qomapp/v1/testutil/tx"
+	"github.com/qom-one/qomapp/v1/utils"
+	evmtypes "github.com/qom-one/qomapp/v1/x/evm/types"
 )
 
 type BackendTestSuite struct {

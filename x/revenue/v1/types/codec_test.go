@@ -25,9 +25,9 @@ func (suite *CodecTestSuite) TestRegisterInterfaces() {
 	impls := registry.ListImplementations(sdk.MsgInterfaceProtoName)
 	suite.Require().Equal(4, len(impls))
 	suite.Require().ElementsMatch([]string{
-		"/evmos.revenue.v1.MsgRegisterRevenue",
-		"/evmos.revenue.v1.MsgCancelRevenue",
-		"/evmos.revenue.v1.MsgUpdateRevenue",
-		"/evmos.revenue.v1.MsgUpdateParams",
+		"/qom.revenue.v1.MsgRegisterRevenue",
+		"/qom.revenue.v1.MsgCancelRevenue",
+		"/qom.revenue.v1.MsgUpdateRevenue",
+		"/qom.revenue.v1.MsgUpdateParams",
 	}, impls)
 }

@@ -25,7 +25,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 
-	"github.com/evmos/evmos/v12/types"
+	"github.com/qom-one/qomapp/v1/types"
 )
 
 func NewDynamicFeeTx(tx *ethtypes.Transaction) (*DynamicFeeTx, error) {
@@ -269,10 +269,10 @@ func (tx DynamicFeeTx) Validate() error {
 		)
 	}
 
-	if !(chainID.Cmp(big.NewInt(9001)) == 0 || chainID.Cmp(big.NewInt(9000)) == 0) {
+	if !(chainID.Cmp(big.NewInt(766)) == 0 || chainID.Cmp(big.NewInt(7668378)) == 0) {
 		return errorsmod.Wrapf(
 			errortypes.ErrInvalidChainID,
-			"chain ID must be 9000 or 9001 on Evmos, got %s", chainID,
+			"chain ID must be 7668378 or 766 on Qom, got %s", chainID,
 		)
 	}
 

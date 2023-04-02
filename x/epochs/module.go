@@ -36,9 +36,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 
-	"github.com/evmos/evmos/v12/x/epochs/client/cli"
-	"github.com/evmos/evmos/v12/x/epochs/keeper"
-	"github.com/evmos/evmos/v12/x/epochs/types"
+	"github.com/qom-one/qomapp/v1/x/epochs/client/cli"
+	"github.com/qom-one/qomapp/v1/x/epochs/keeper"
+	"github.com/qom-one/qomapp/v1/x/epochs/types"
 )
 
 var (

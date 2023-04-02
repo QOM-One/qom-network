@@ -10,10 +10,11 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
+
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	"github.com/evmos/evmos/v12/app"
-	"github.com/evmos/evmos/v12/x/claims/types"
-	evm "github.com/evmos/evmos/v12/x/evm/types"
+	"github.com/qom-one/qomapp/v1/app"
+	"github.com/qom-one/qomapp/v1/x/claims/types"
+	evm "github.com/qom-one/qomapp/v1/x/evm/types"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -24,7 +25,7 @@ type KeeperTestSuite struct {
 
 	ctx sdk.Context
 
-	app            *app.Evmos
+	app            *app.Qom
 	queryClient    types.QueryClient
 	queryClientEvm evm.QueryClient
 	address        common.Address

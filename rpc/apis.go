@@ -23,16 +23,16 @@ import (
 
 	"github.com/ethereum/go-ethereum/rpc"
 
-	"github.com/evmos/evmos/v12/rpc/backend"
-	"github.com/evmos/evmos/v12/rpc/namespaces/ethereum/debug"
-	"github.com/evmos/evmos/v12/rpc/namespaces/ethereum/eth"
-	"github.com/evmos/evmos/v12/rpc/namespaces/ethereum/eth/filters"
-	"github.com/evmos/evmos/v12/rpc/namespaces/ethereum/miner"
-	"github.com/evmos/evmos/v12/rpc/namespaces/ethereum/net"
-	"github.com/evmos/evmos/v12/rpc/namespaces/ethereum/personal"
-	"github.com/evmos/evmos/v12/rpc/namespaces/ethereum/txpool"
-	"github.com/evmos/evmos/v12/rpc/namespaces/ethereum/web3"
-	"github.com/evmos/evmos/v12/types"
+	"github.com/qom-one/qomapp/v1/rpc/backend"
+	"github.com/qom-one/qomapp/v1/rpc/namespaces/ethereum/debug"
+	"github.com/qom-one/qomapp/v1/rpc/namespaces/ethereum/eth"
+	"github.com/qom-one/qomapp/v1/rpc/namespaces/ethereum/eth/filters"
+	"github.com/qom-one/qomapp/v1/rpc/namespaces/ethereum/miner"
+	"github.com/qom-one/qomapp/v1/rpc/namespaces/ethereum/net"
+	"github.com/qom-one/qomapp/v1/rpc/namespaces/ethereum/personal"
+	"github.com/qom-one/qomapp/v1/rpc/namespaces/ethereum/txpool"
+	"github.com/qom-one/qomapp/v1/rpc/namespaces/ethereum/web3"
+	"github.com/qom-one/qomapp/v1/types"
 
 	rpcclient "github.com/tendermint/tendermint/rpc/jsonrpc/client"
 )

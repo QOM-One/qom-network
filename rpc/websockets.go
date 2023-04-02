@@ -41,11 +41,11 @@ import (
 	rpcclient "github.com/tendermint/tendermint/rpc/jsonrpc/client"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"github.com/evmos/evmos/v12/rpc/ethereum/pubsub"
-	rpcfilters "github.com/evmos/evmos/v12/rpc/namespaces/ethereum/eth/filters"
-	"github.com/evmos/evmos/v12/rpc/types"
-	"github.com/evmos/evmos/v12/server/config"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
+	"github.com/qom-one/qomapp/v1/rpc/ethereum/pubsub"
+	rpcfilters "github.com/qom-one/qomapp/v1/rpc/namespaces/ethereum/eth/filters"
+	"github.com/qom-one/qomapp/v1/rpc/types"
+	"github.com/qom-one/qomapp/v1/server/config"
+	evmtypes "github.com/qom-one/qomapp/v1/x/evm/types"
 )
 
 type WebsocketsServer interface {

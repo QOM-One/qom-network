@@ -13,12 +13,12 @@ import (
 	authsigning "github.com/cosmos/cosmos-sdk/x/auth/signing"
 	"github.com/cosmos/cosmos-sdk/x/authz"
 
-	"github.com/evmos/evmos/v12/app"
-	cosmosante "github.com/evmos/evmos/v12/app/ante/cosmos"
-	"github.com/evmos/evmos/v12/crypto/ethsecp256k1"
-	"github.com/evmos/evmos/v12/encoding"
-	testutil "github.com/evmos/evmos/v12/testutil"
-	testutiltx "github.com/evmos/evmos/v12/testutil/tx"
+	"github.com/qom-one/qomapp/v1/app"
+	cosmosante "github.com/qom-one/qomapp/v1/app/ante/cosmos"
+	"github.com/qom-one/qomapp/v1/crypto/ethsecp256k1"
+	"github.com/qom-one/qomapp/v1/encoding"
+	testutil "github.com/qom-one/qomapp/v1/testutil"
+	testutiltx "github.com/qom-one/qomapp/v1/testutil/tx"
 )
 
 func (suite *AnteTestSuite) CreateTestCosmosTxBuilder(gasPrice sdkmath.Int, denom string, msgs ...sdk.Msg) client.TxBuilder {

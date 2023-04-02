@@ -19,11 +19,11 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	evmostypes "github.com/evmos/evmos/v12/types"
+	evmostypes "github.com/qom-one/qomapp/v1/types"
 
-	utils "github.com/evmos/evmos/v12/utils"
-	incentivestypes "github.com/evmos/evmos/v12/x/incentives/types"
-	"github.com/evmos/evmos/v12/x/inflation/types"
+	utils "github.com/qom-one/qomapp/v1/utils"
+	incentivestypes "github.com/qom-one/qomapp/v1/x/incentives/types"
+	"github.com/qom-one/qomapp/v1/x/inflation/types"
 )
 
 // 200M token at year 4 allocated to the team

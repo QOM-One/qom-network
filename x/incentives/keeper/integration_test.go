@@ -4,18 +4,18 @@ import (
 	"math/big"
 	"time"
 
-	. "github.com/onsi/ginkgo/v2"
-	. "github.com/onsi/gomega"
-
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
 	"github.com/ethereum/go-ethereum/common"
 
-	evmostypes "github.com/evmos/evmos/v12/types"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
+	evmostypes "github.com/qom-one/qomapp/v1/types"
+	evmtypes "github.com/qom-one/qomapp/v1/x/evm/types"
 
-	"github.com/evmos/evmos/v12/x/incentives/types"
+	"github.com/qom-one/qomapp/v1/x/incentives/types"
+
+	. "github.com/onsi/ginkgo/v2"
+	. "github.com/onsi/gomega"
 )
 
 var _ = Describe("Performing EVM transactions", Ordered, func() {

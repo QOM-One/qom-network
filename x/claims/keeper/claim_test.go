@@ -12,13 +12,13 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/evmos/evmos/v12/crypto/ethsecp256k1"
-	"github.com/evmos/evmos/v12/testutil"
-	utiltx "github.com/evmos/evmos/v12/testutil/tx"
-	evmostypes "github.com/evmos/evmos/v12/types"
-	inflationtypes "github.com/evmos/evmos/v12/x/inflation/types"
+	"github.com/qom-one/qomapp/v1/crypto/ethsecp256k1"
+	"github.com/qom-one/qomapp/v1/testutil"
+	utiltx "github.com/qom-one/qomapp/v1/testutil/tx"
+	evmostypes "github.com/qom-one/qomapp/v1/types"
+	inflationtypes "github.com/qom-one/qomapp/v1/x/inflation/types"
 
-	"github.com/evmos/evmos/v12/x/claims/types"
+	"github.com/qom-one/qomapp/v1/x/claims/types"
 )
 
 func (suite *KeeperTestSuite) TestGetClaimableAmountForAction() {
@@ -1053,7 +1053,7 @@ func (suite *KeeperTestSuite) TestClawbackEmptyAccountsAirdrop() {
 	}{
 		{
 			name:           "address active",
-			address:        "evmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueuafmxps",
+			address:        "qom1qql8ag4cluz6r4dz28p3w00dnc9w8ueudpwdcu",
 			sequence:       1,
 			expectClawback: false,
 			claimsRecord: types.ClaimsRecord{
@@ -1063,7 +1063,7 @@ func (suite *KeeperTestSuite) TestClawbackEmptyAccountsAirdrop() {
 		},
 		{
 			name:           "address inactive",
-			address:        "evmos1x2w87cvt5mqjncav4lxy8yfreynn273xn5335v",
+			address:        "qom1x2w87cvt5mqjncav4lxy8yfreynn273xruy6dq",
 			sequence:       0,
 			expectClawback: true,
 			claimsRecord: types.ClaimsRecord{

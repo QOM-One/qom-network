@@ -25,9 +25,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
-	evmostypes "github.com/evmos/evmos/v12/types"
+	evmostypes "github.com/qom-one/qomapp/v1/types"
 
-	"github.com/evmos/evmos/v12/x/erc20/types"
+	"github.com/qom-one/qomapp/v1/x/erc20/types"
 )
 
 var _ types.QueryServer = Keeper{}

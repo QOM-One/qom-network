@@ -24,10 +24,10 @@ import (
 	"github.com/ethereum/go-ethereum/core"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 
-	evmostypes "github.com/evmos/evmos/v12/types"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
+	evmostypes "github.com/qom-one/qomapp/v1/types"
+	evmtypes "github.com/qom-one/qomapp/v1/x/evm/types"
 
-	"github.com/evmos/evmos/v12/x/incentives/types"
+	"github.com/qom-one/qomapp/v1/x/incentives/types"
 )
 
 var _ evmtypes.EvmHooks = Hooks{}

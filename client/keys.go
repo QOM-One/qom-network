@@ -25,8 +25,8 @@ import (
 	"github.com/tendermint/tendermint/libs/cli"
 
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
-	clientkeys "github.com/evmos/evmos/v12/client/keys"
-	"github.com/evmos/evmos/v12/crypto/hd"
+	clientkeys "github.com/qom-one/qomapp/v1/client/keys"
+	"github.com/qom-one/qomapp/v1/crypto/hd"
 )
 
 // KeyCommands registers a sub-tree of commands to interact with

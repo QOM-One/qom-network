@@ -10,7 +10,7 @@ import (
 	math_bits "math/bits"
 
 	_ "github.com/cosmos/gogoproto/gogoproto"
-	"github.com/evmos/evmos/v12/x/erc20/types"
+	"github.com/qom-one/qomapp/v1/x/erc20/types"
 	proto "github.com/gogo/protobuf/proto"
 )
 
@@ -149,11 +149,11 @@ func (m *V3Params) GetEnableEVMHook() bool {
 }
 
 func init() {
-	proto.RegisterType((*V3GenesisState)(nil), "evmos.erc20.v1.V3GenesisState")
-	proto.RegisterType((*V3Params)(nil), "evmos.erc20.v1.V3Params")
+	proto.RegisterType((*V3GenesisState)(nil), "qom.erc20.v1.V3GenesisState")
+	proto.RegisterType((*V3Params)(nil), "qom.erc20.v1.V3Params")
 }
 
-func init() { proto.RegisterFile("evmos/erc20/v1/genesis.proto", fileDescriptor_2f4674601b0d6987) }
+func init() { proto.RegisterFile("qom/erc20/v1/genesis.proto", fileDescriptor_2f4674601b0d6987) }
 
 var fileDescriptor_2f4674601b0d6987 = []byte{
 	// 302 bytes of a gzipped FileDescriptorProto

@@ -26,11 +26,11 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 
-	anteutils "github.com/evmos/evmos/v12/app/ante/utils"
-	"github.com/evmos/evmos/v12/types"
-	"github.com/evmos/evmos/v12/x/evm/keeper"
-	"github.com/evmos/evmos/v12/x/evm/statedb"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
+	anteutils "github.com/qom-one/qomapp/v1/app/ante/utils"
+	"github.com/qom-one/qomapp/v1/types"
+	"github.com/qom-one/qomapp/v1/x/evm/keeper"
+	"github.com/qom-one/qomapp/v1/x/evm/statedb"
+	evmtypes "github.com/qom-one/qomapp/v1/x/evm/types"
 
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"

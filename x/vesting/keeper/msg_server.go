@@ -18,12 +18,11 @@ package keeper
 
 import (
 	"context"
+	"github.com/armon/go-metrics"
 	"strconv"
 	"time"
 
-	evmostypes "github.com/evmos/evmos/v12/types"
-
-	"github.com/armon/go-metrics"
+	evmostypes "github.com/qom-one/qomapp/v1/types"
 
 	errorsmod "cosmossdk.io/errors"
 	"github.com/cosmos/cosmos-sdk/telemetry"
@@ -33,7 +32,7 @@ import (
 	vestingexported "github.com/cosmos/cosmos-sdk/x/auth/vesting/exported"
 	sdkvesting "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
 
-	"github.com/evmos/evmos/v12/x/vesting/types"
+	"github.com/qom-one/qomapp/v1/x/vesting/types"
 )
 
 var _ types.MsgServer = &Keeper{}

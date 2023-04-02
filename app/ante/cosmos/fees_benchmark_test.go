@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/evmos/evmos/v12/testutil"
-	testutiltx "github.com/evmos/evmos/v12/testutil/tx"
+	"github.com/qom-one/qomapp/v1/testutil"
+	testutiltx "github.com/qom-one/qomapp/v1/testutil/tx"
 )
 
 // This tests setup contains expensive operations.

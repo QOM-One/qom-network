@@ -132,7 +132,7 @@ func (m *Manager) RunNode(node *Node) error {
 			if c.State.ExitCode != 0 {
 				stdOut, stdErr, _ := m.GetLogs(resource.Container.ID)
 				return fmt.Errorf(
-					"can't start evmos node, container exit code: %d\n\n[error stream]:\n\n%s\n\n[output stream]:\n\n%s",
+					"can't start qom node, container exit code: %d\n\n[error stream]:\n\n%s\n\n[output stream]:\n\n%s",
 					c.State.ExitCode,
 					stdErr,
 					stdOut,
@@ -211,7 +211,7 @@ func (m *Manager) WaitForHeight(ctx context.Context, height int) (string, error)
 
 // GetNodeHeight calls the Evmos CLI in the current node container to get the current block height
 func (m *Manager) GetNodeHeight(ctx context.Context) (int, error) {
-	exec, err := m.CreateExec([]string{"evmosd", "q", "block"}, m.ContainerID())
+	exec, err := m.CreateExec([]string{"qomd", "q", "block"}, m.ContainerID())
 	if err != nil {
 		return 0, fmt.Errorf("create exec error: %w", err)
 	}
@@ -238,7 +238,7 @@ func (m *Manager) GetNodeHeight(ctx context.Context) (int, error) {
 		}
 	}
 	if errBuff.String() != "" {
-		return 0, fmt.Errorf("evmos query error: %s", errBuff.String())
+		return 0, fmt.Errorf("qom query error: %s", errBuff.String())
 	}
 	return h, nil
 }
@@ -246,7 +246,7 @@ func (m *Manager) GetNodeHeight(ctx context.Context) (int, error) {
 // GetNodeVersion calls the Evmos CLI in the current node container to get the
 // current node version
 func (m *Manager) GetNodeVersion(ctx context.Context) (string, error) {
-	exec, err := m.CreateExec([]string{"evmosd", "version"}, m.ContainerID())
+	exec, err := m.CreateExec([]string{"qomd", "version"}, m.ContainerID())
 	if err != nil {
 		return "", fmt.Errorf("create exec error: %w", err)
 	}

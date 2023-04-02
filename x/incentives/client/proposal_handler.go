@@ -19,7 +19,7 @@ package client
 import (
 	govclient "github.com/cosmos/cosmos-sdk/x/gov/client"
 
-	"github.com/evmos/evmos/v12/x/incentives/client/cli"
+	"github.com/qom-one/qomapp/v1/x/incentives/client/cli"
 )
 
 var (

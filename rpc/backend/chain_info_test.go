@@ -14,11 +14,11 @@ import (
 	"github.com/tendermint/tendermint/abci/types"
 	tmrpctypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	"github.com/evmos/evmos/v12/rpc/backend/mocks"
-	rpc "github.com/evmos/evmos/v12/rpc/types"
-	utiltx "github.com/evmos/evmos/v12/testutil/tx"
-	evmtypes "github.com/evmos/evmos/v12/x/evm/types"
-	feemarkettypes "github.com/evmos/evmos/v12/x/feemarket/types"
+	"github.com/qom-one/qomapp/v1/rpc/backend/mocks"
+	rpc "github.com/qom-one/qomapp/v1/rpc/types"
+	utiltx "github.com/qom-one/qomapp/v1/testutil/tx"
+	evmtypes "github.com/qom-one/qomapp/v1/x/evm/types"
+	feemarkettypes "github.com/qom-one/qomapp/v1/x/feemarket/types"
 )
 
 func (suite *BackendTestSuite) TestBaseFee() {
@@ -154,7 +154,7 @@ func (suite *BackendTestSuite) TestBaseFee() {
 }
 
 func (suite *BackendTestSuite) TestChainId() {
-	expChainID := (*hexutil.Big)(big.NewInt(9000))
+	expChainID := (*hexutil.Big)(big.NewInt(7668378))
 	testCases := []struct {
 		name         string
 		registerMock func()

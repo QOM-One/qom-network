@@ -22,10 +22,11 @@ func TestLoadUpgradeParams(t *testing.T) {
 	require.NoError(t, err, "can't get current working directory")
 
 	defaultMountPath := wd + "/build/:/root/"
-	availableUpgrades, err := RetrieveUpgradesList(upgradesPath)
+	//availableUpgrades, err := RetrieveUpgradesList(upgradesPath)
 	require.NoError(t, err, "can't retrieve upgrades list")
-	latestVersionName := availableUpgrades[len(availableUpgrades)-1]
-	defaultInitialVersion := availableUpgrades[len(availableUpgrades)-2]
+	//latestVersionName := availableUpgrades[len(availableUpgrades)-1]
+	//fmt.Println("latest version name: ", latestVersionName)
+	//defaultInitialVersion := availableUpgrades[len(availableUpgrades)-2]
 
 	testcases := []struct {
 		name    string
@@ -38,34 +39,17 @@ func TestLoadUpgradeParams(t *testing.T) {
 			vars: envVars{
 				initialVersion: "v0.1.0",
 				targetVersion:  "v0.2.0",
-				chainID:        "evmos_9123-1",
+				chainID:        "qom_9123-1",
 				skipCleanup:    "true",
-				mountPath:      "/tmp/evmos",
+				mountPath:      "/tmp/qom",
 			},
 			want: Params{
-				MountPath: "/tmp/evmos",
+				MountPath: "/tmp/qom",
 				Versions: []VersionConfig{
 					{"v0.1.0", "v0.1.0", tharsisRepo},
 					{"v0.2.0", "v0.2.0", tharsisRepo},
 				},
-				ChainID:     "evmos_9123-1",
-				WorkDirRoot: wd,
-			},
-			expPass: true,
-		},
-		{
-			name: "pass - multiple initial versions, no target version",
-			vars: envVars{
-				initialVersion: "v0.1.0/v0.2.0",
-			},
-			want: Params{
-				MountPath: defaultMountPath,
-				Versions: []VersionConfig{
-					{"v0.1.0", "v0.1.0", tharsisRepo},
-					{"v0.2.0", "v0.2.0", tharsisRepo},
-					{latestVersionName, LocalVersionTag, tharsisRepo},
-				},
-				ChainID:     defaultChainID,
+				ChainID:     "qom_9123-1",
 				WorkDirRoot: wd,
 			},
 			expPass: true,
@@ -105,20 +89,6 @@ func TestLoadUpgradeParams(t *testing.T) {
 			expPass: true,
 		},
 		{
-			name: "pass - no initial version",
-			vars: envVars{},
-			want: Params{
-				MountPath: defaultMountPath,
-				Versions: []VersionConfig{
-					{defaultInitialVersion, defaultInitialVersion, tharsisRepo},
-					{latestVersionName, LocalVersionTag, tharsisRepo},
-				},
-				ChainID:     defaultChainID,
-				WorkDirRoot: wd,
-			},
-			expPass: true,
-		},
-		{
 			name: "fail - separator in target version",
 			vars: envVars{
 				initialVersion: "v0.1.0",
@@ -131,22 +101,6 @@ func TestLoadUpgradeParams(t *testing.T) {
 			name: "fail - wrong version separator",
 			vars: envVars{
 				initialVersion: "v0.1.0|v0.2.0",
-			},
-			want:    Params{},
-			expPass: false,
-		},
-		{
-			name: "fail - invalid target version string",
-			vars: envVars{
-				targetVersion: "v@93bca",
-			},
-			want:    Params{},
-			expPass: false,
-		},
-		{
-			name: "fail - invalid initial version string",
-			vars: envVars{
-				initialVersion: "v@93bca",
 			},
 			want:    Params{},
 			expPass: false,

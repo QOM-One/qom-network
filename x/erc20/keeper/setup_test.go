@@ -14,10 +14,10 @@ import (
 	ibcgotesting "github.com/cosmos/ibc-go/v6/testing"
 	"github.com/ethereum/go-ethereum/common"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	"github.com/evmos/evmos/v12/app"
-	ibctesting "github.com/evmos/evmos/v12/ibc/testing"
-	"github.com/evmos/evmos/v12/x/erc20/types"
-	evm "github.com/evmos/evmos/v12/x/evm/types"
+	"github.com/qom-one/qomapp/v1/app"
+	ibctesting "github.com/qom-one/qomapp/v1/ibc/testing"
+	"github.com/qom-one/qomapp/v1/x/erc20/types"
+	evm "github.com/qom-one/qomapp/v1/x/evm/types"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -25,7 +25,7 @@ type KeeperTestSuite struct {
 	suite.Suite
 
 	ctx              sdk.Context
-	app              *app.Evmos
+	app              *app.Qom
 	queryClientEvm   evm.QueryClient
 	queryClient      types.QueryClient
 	address          common.Address

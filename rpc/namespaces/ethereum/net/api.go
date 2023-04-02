@@ -20,7 +20,7 @@ import (
 	"fmt"
 
 	"github.com/cosmos/cosmos-sdk/client"
-	"github.com/evmos/evmos/v12/types"
+	"github.com/qom-one/qomapp/v1/types"
 	rpcclient "github.com/tendermint/tendermint/rpc/client"
 )
 
