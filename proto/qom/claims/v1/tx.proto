@@ -6,7 +6,7 @@ import "cosmos_proto/cosmos.proto";
 import "gogoproto/gogo.proto";
 import "qom/claims/v1/genesis.proto";
 
-option go_package = "github.com/qom-one/qom/v1/x/claims/types";
+option go_package = "github.com/qom-one/qomapp/v1/x/claims/types";
 
 // Msg defines the claims Msg service.
 service Msg {

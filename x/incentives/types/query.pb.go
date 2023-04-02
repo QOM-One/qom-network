@@ -12,7 +12,6 @@ import (
 	_ "github.com/cosmos/gogoproto/gogoproto"
 	grpc1 "github.com/gogo/protobuf/grpc"
 	proto "github.com/gogo/protobuf/proto"
-	types1 "github.com/qom-one/qom/v1/x/incentives/types"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -681,7 +680,7 @@ var xxx_messageInfo_QueryParamsRequest proto.InternalMessageInfo
 // method.
 type QueryParamsResponse struct {
 	// params are the incentives module parameters
-	Params types1.Params `protobuf:"bytes,1,opt,name=params,proto3" json:"params"`
+	Params Params `protobuf:"bytes,1,opt,name=params,proto3" json:"params"`
 }
 
 func (m *QueryParamsResponse) Reset()         { *m = QueryParamsResponse{} }
@@ -717,11 +716,11 @@ func (m *QueryParamsResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_QueryParamsResponse proto.InternalMessageInfo
 
-func (m *QueryParamsResponse) GetParams() types1.Params {
+func (m *QueryParamsResponse) GetParams() Params {
 	if m != nil {
 		return m.Params
 	}
-	return types1.Params{}
+	return Params{}
 }
 
 func init() {

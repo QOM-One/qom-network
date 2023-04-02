@@ -5,7 +5,7 @@ import "gogoproto/gogo.proto";
 
 import "qom/inflation/v1/inflation.proto";
 
-option go_package = "github.com/qom-one/qom/v1/x/inflation/types";
+option go_package = "github.com/qom-one/qomapp/v1/x/inflation/types";
 
 // GenesisState defines the inflation module's genesis state.
 message GenesisState {
