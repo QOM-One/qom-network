@@ -1,0 +1,21 @@
+{
+  "metadata": [
+    {
+      "description": 1,
+      "denom_units": [
+        {
+          "denom": "aqom",
+          "exponent": 0
+        },
+        {
+          "denom": "qom",
+          "exponent": 18
+        }
+      ],
+      "base": "aqom",
+      "display": "aqom",
+      "name": "aqom",
+      "symbol": "QOM"
+    }
+  ]
+}
