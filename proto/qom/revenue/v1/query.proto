@@ -7,7 +7,7 @@ import "google/api/annotations.proto";
 import "qom/revenue/v1/genesis.proto";
 import "qom/revenue/v1/revenue.proto";
 
-option go_package = "github.com/qom-one/qomapp/v1/x/revenue/v1/types";
+option go_package = "github.com/qom-one/qom/v1/x/revenue/v1/types";
 
 // Query defines the gRPC querier service.
 service Query {
