@@ -490,15 +490,15 @@ localnet-build:
 # Start a 4-node testnet locally
 localnet-start: localnet-stop localnet-build
 	@if ! [ -f build/node0/$(QOM_BINARY)/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/qom:Z qom/node "./qomd testnet init-files --v 4 --chain-id qom_7668378-1 -o /qom --keyring-backend=test --starting-ip-address 192.167.10.2"; fi
-	docker-compose up -d
+	docker compose up -d
 
 # Stop testnet
 localnet-stop:
-	docker-compose down
+	docker compose down
 
 # Clean testnet
 localnet-clean:
-	docker-compose down
+	docker compose down
 	sudo rm -rf build/*
 
  # Reset testnet

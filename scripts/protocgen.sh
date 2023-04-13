@@ -11,6 +11,7 @@ proto_dirs=$(find ./proto -path -prune -o -name '*.proto' -print0 | xargs -0 -n1
 for dir in $proto_dirs; do
   proto_files=$(find "${dir}" -maxdepth 1 -name '*.proto')
   for file in $proto_files; do
+    echo $proto_files
     # Check if the go_package in the file is pointing to qomapp
     if grep -q "option go_package.*qomapp" "$file"; then
       buf generate --template proto/buf.gen.gogo.yaml "$file"
