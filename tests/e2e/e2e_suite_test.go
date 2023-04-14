@@ -53,7 +53,9 @@ func (s *IntegrationTestSuite) SetupSuite() {
 	s.T().Log("setting up e2e integration test suite...")
 	var err error
 
-	s.upgradeParams, err = upgrade.LoadUpgradeParams(upgradePath)
+	s.upgradeParams.ChainID = "qom-local"
+
+	//s.upgradeParams, err = upgrade.LoadUpgradeParams(upgradePath)
 	s.Require().NoError(err, "can't load upgrade params")
 
 	s.upgradeManager, err = upgrade.NewManager(defaultManagerNetwork)
