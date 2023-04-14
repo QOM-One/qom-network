@@ -823,7 +823,6 @@ func NewQom(
 	app.setAnteHandler(encodingConfig.TxConfig, maxGasWanted)
 	app.setPostHandler()
 	app.SetEndBlocker(app.EndBlocker)
-	//app.setupUpgradeHandlers()
 
 	if loadLatest {
 		if err := app.LoadLatestVersion(); err != nil {
@@ -1139,5 +1138,5 @@ func initParamsKeeper(
 	return paramsKeeper
 }
 
-func (app *Qom) setupUpgradeHandlers() {
-}
+// func (app *Qom) setupUpgradeHandlers() {
+// }
