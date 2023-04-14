@@ -22,11 +22,11 @@ func TestLoadUpgradeParams(t *testing.T) {
 	require.NoError(t, err, "can't get current working directory")
 
 	defaultMountPath := wd + "/build/:/root/"
-	//availableUpgrades, err := RetrieveUpgradesList(upgradesPath)
+	// availableUpgrades, err := RetrieveUpgradesList(upgradesPath)
 	require.NoError(t, err, "can't retrieve upgrades list")
-	//latestVersionName := availableUpgrades[len(availableUpgrades)-1]
-	//fmt.Println("latest version name: ", latestVersionName)
-	//defaultInitialVersion := availableUpgrades[len(availableUpgrades)-2]
+	// latestVersionName := availableUpgrades[len(availableUpgrades)-1]
+	// fmt.Println("latest version name: ", latestVersionName)
+	// defaultInitialVersion := availableUpgrades[len(availableUpgrades)-2]
 
 	testcases := []struct {
 		name    string
