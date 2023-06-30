@@ -4,7 +4,7 @@ parent:
 -->
 
 <div align="center">
-  <h1> Evmos </h1>
+  <h1> QL1 </h1>
 </div>
 
 <div align="center">
