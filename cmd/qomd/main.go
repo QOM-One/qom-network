@@ -7,8 +7,8 @@ import (
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/QOM-One/QomApp/v2/app"
-	cmdcfg "github.com/QOM-One/QomApp/v2/cmd/config"
+	"github.com/QOM-One/QomApp/v7/app"
+	cmdcfg "github.com/QOM-One/QomApp/v7/cmd/config"
 )
 
 func main() {

@@ -4,7 +4,7 @@ import (
 	"testing"
 	// sdk "github.com/cosmos/cosmos-sdk/types"
 	// "github.com/stretchr/testify/require"
-	// "github.com/QOM-One/QomApp/v2/x/govshuttle/types"
+	// "github.com/QOM-One/QomApp/v7/x/govshuttle/types"
 )
 
 func TestParamsQuery(t *testing.T) {

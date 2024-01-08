@@ -6,8 +6,8 @@ import (
 
 	//sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/QOM-One/QomApp/v7/x/govshuttle/types"
-	//"github.com/QOM-One/QomApp/v2/x/govshuttle/keeper"
-	//keepertest "github.com/QOM-One/QomApp/v2/testutil/keeper"
+	//"github.com/QOM-One/QomApp/v7/x/govshuttle/keeper"
+	//keepertest "github.com/QOM-One/QomApp/v7/testutil/keeper"
 )
 
 func setupMsgServer(t testing.TB) (types.MsgServer, context.Context) {

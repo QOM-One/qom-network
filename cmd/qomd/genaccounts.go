@@ -22,7 +22,7 @@ import (
 	ethermint "github.com/evmos/ethermint/types"
 	evmtypes "github.com/evmos/ethermint/x/evm/types"
 
-	cantokr "github.com/QOM-One/QomApp/v2/crypto/keyring"
+	cantokr "github.com/QOM-One/QomApp/v7/crypto/keyring"
 )
 
 // AddGenesisAccountCmd returns add-genesis-account cobra Command.

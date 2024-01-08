@@ -3,7 +3,7 @@ package govshuttle
 import (
 	"math/rand"
 
-	//"github.com/QOM-One/QomApp/v2/testutil/sample"
+	//"github.com/QOM-One/QomApp/v7/testutil/sample"
 	govshuttlesimulation "github.com/QOM-One/QomApp/v7/x/govshuttle/simulation"
 	"github.com/QOM-One/QomApp/v7/x/govshuttle/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
