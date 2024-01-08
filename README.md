@@ -1,6 +1,6 @@
 # Becoming A Validator
 
-**How to validate on the Canto Mainnet**
+**How to validate on the Qom Mainnet**
 
 *(qom_766-1)*
 
@@ -51,7 +51,7 @@ Or install individually:
 
 ```bash
 git clone https://github.com/QOM-One/QomApp.git
-cd Canto/cmd/qomd
+cd QomApp/cmd/qomd
 go install -tags ledger ./...
 sudo mv $HOME/go/bin/qomd /usr/bin/
 
@@ -67,7 +67,7 @@ Replace `<keyname>` below with whatever you'd like to name your key.
 
 Store a backup of your keys and mnemonic securely offline.
 
-Then save the generated public key config in the main Canto directory as `<key_name>.info`. It should look like this:
+Then save the generated public key config in the main Qom directory as `<key_name>.info`. It should look like this:
 
 ```
 
@@ -82,7 +82,7 @@ You'll use this file later when creating your validator txn.
 
 ## Set up validator
 
-Install qomd binary from `Canto` directory: 
+Install qomd binary from `Qom` directory: 
 
 `sudo make install`
 
@@ -94,7 +94,7 @@ If this runs successfully, it should dump a blob of JSON to the terminal.
 
 Download the Genesis file: 
 
-`wget https://raw.githubusercontent.com/Canto-Network/Canto/genesis/Networks/Mainnet/genesis.json -P $HOME/.qomd/config/` 
+`wget https://raw.githubusercontent.com/QOM-One/QomApp/genesis/Networks/Mainnet/genesis.json -P $HOME/.qomd/config/` 
 
 > _**Note:** If you later get `Error: couldn't read GenesisDoc file: open /root/.qomd/config/genesis.json: no such file or directory` put the genesis.json file wherever it wants instead, such as:
 > 

@@ -79,24 +79,24 @@ func (suite *TransferTestSuite) TestHandleMsgTransfer() {
 		sdk.NewCoin(ibcBase, sdk.NewInt(1000000000000)),
 		sdk.NewCoin("aqom", sdk.NewInt(10000000000)),
 	)
-	err := suite.chainB.App.(*app.Canto).BankKeeper.MintCoins(suite.chainB.GetContext(), inflationtypes.ModuleName, coins)
+	err := suite.chainB.App.(*app.Qom).BankKeeper.MintCoins(suite.chainB.GetContext(), inflationtypes.ModuleName, coins)
 	suite.Require().NoError(err)
-	err = suite.chainB.App.(*app.Canto).BankKeeper.SendCoinsFromModuleToAccount(suite.chainB.GetContext(), inflationtypes.ModuleName, suite.chainB.SenderAccount.GetAddress(), coins)
+	err = suite.chainB.App.(*app.Qom).BankKeeper.SendCoinsFromModuleToAccount(suite.chainB.GetContext(), inflationtypes.ModuleName, suite.chainB.SenderAccount.GetAddress(), coins)
 	suite.Require().NoError(err)
 
 	// Setup params for coinswap
-	coinswapKeeper := suite.chainB.App.(*app.Canto).GetCoinswapKeeper()
+	coinswapKeeper := suite.chainB.App.(*app.Qom).GetCoinswapKeeper()
 	coinswapKeeper.SetStandardDenom(suite.chainB.GetContext(), "aqom")
 	params := coinswapKeeper.GetParams(suite.chainB.GetContext())
 
 	params.MaxSwapAmount = sdk.NewCoins(sdk.NewCoin(ibcBase, sdk.NewInt(10000000)))
 	coinswapKeeper.SetParams(suite.chainB.GetContext(), params)
 
-	middlewareParams := suite.chainB.App.(*app.Canto).GetOnboardingKeeper().GetParams(suite.chainB.GetContext())
+	middlewareParams := suite.chainB.App.(*app.Qom).GetOnboardingKeeper().GetParams(suite.chainB.GetContext())
 	middlewareParams.AutoSwapThreshold = sdk.NewInt(4000000)
-	suite.chainB.App.(*app.Canto).GetOnboardingKeeper().SetParams(suite.chainB.GetContext(), middlewareParams)
+	suite.chainB.App.(*app.Qom).GetOnboardingKeeper().SetParams(suite.chainB.GetContext(), middlewareParams)
 
-	erc20Keeper := suite.chainB.App.(*app.Canto).GetErc20Keeper()
+	erc20Keeper := suite.chainB.App.(*app.Qom).GetErc20Keeper()
 	pair, err := erc20Keeper.RegisterCoin(suite.chainB.GetContext(), metadataIbc)
 	suite.Require().NoError(err)
 
@@ -130,8 +130,8 @@ func (suite *TransferTestSuite) TestHandleMsgTransfer() {
 	voucherDenomTrace := types.ParseDenomTrace(types.GetPrefixedDenom(packet.GetDestPort(), packet.GetDestChannel(), sdk.DefaultBondDenom))
 
 	// check balances on chainB before the IBC transfer
-	balanceVoucherBefore := suite.chainB.App.(*app.Canto).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), voucherDenomTrace.IBCDenom())
-	balanceCantoBefore := suite.chainB.App.(*app.Canto).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), "aqom")
+	balanceVoucherBefore := suite.chainB.App.(*app.Qom).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), voucherDenomTrace.IBCDenom())
+	balanceCantoBefore := suite.chainB.App.(*app.Qom).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), "aqom")
 	balanceErc20Before := erc20Keeper.BalanceOf(suite.chainB.GetContext(), contracts.ERC20MinterBurnerDecimalsContract.ABI, pair.GetERC20Contract(), common.BytesToAddress(suite.chainB.SenderAccount.GetAddress().Bytes()))
 
 	// relay send
@@ -146,8 +146,8 @@ func (suite *TransferTestSuite) TestHandleMsgTransfer() {
 	}
 
 	// check balances on chainB after the IBC transfer
-	balanceVoucher := suite.chainB.App.(*app.Canto).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), voucherDenomTrace.IBCDenom())
-	balanceCanto := suite.chainB.App.(*app.Canto).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), "aqom")
+	balanceVoucher := suite.chainB.App.(*app.Qom).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), voucherDenomTrace.IBCDenom())
+	balanceCanto := suite.chainB.App.(*app.Qom).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), "aqom")
 	balanceErc20 := erc20Keeper.BalanceOf(suite.chainB.GetContext(), contracts.ERC20MinterBurnerDecimalsContract.ABI, pair.GetERC20Contract(), common.BytesToAddress(suite.chainB.SenderAccount.GetAddress().Bytes()))
 
 	coinSentFromAToB := types.GetTransferCoin(path.EndpointB.ChannelConfig.PortID, path.EndpointB.ChannelID, sdk.DefaultBondDenom, amount)
@@ -189,8 +189,8 @@ func (suite *TransferTestSuite) TestHandleMsgTransfer() {
 	// auto swap should not happen
 	// auto convert all transferred IBC vouchers to ERC20
 	coinToSendToB = suite.chainA.GetSimApp().BankKeeper.GetBalance(suite.chainA.GetContext(), suite.chainA.SenderAccount.GetAddress(), sdk.DefaultBondDenom)
-	balanceVoucherBefore = suite.chainB.App.(*app.Canto).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), voucherDenomTrace.IBCDenom())
-	balanceCantoBefore = suite.chainB.App.(*app.Canto).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), "aqom")
+	balanceVoucherBefore = suite.chainB.App.(*app.Qom).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), voucherDenomTrace.IBCDenom())
+	balanceCantoBefore = suite.chainB.App.(*app.Qom).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), "aqom")
 	balanceErc20Before = erc20Keeper.BalanceOf(suite.chainB.GetContext(), contracts.ERC20MinterBurnerDecimalsContract.ABI, pair.GetERC20Contract(), common.BytesToAddress(suite.chainB.SenderAccount.GetAddress().Bytes()))
 
 	msg = types.NewMsgTransfer(path.EndpointA.ChannelConfig.PortID, path.EndpointA.ChannelID, coinToSendToB, suite.chainA.SenderAccount.GetAddress().String(), suite.chainB.SenderAccount.GetAddress().String(), timeoutHeight, 0)
@@ -213,8 +213,8 @@ func (suite *TransferTestSuite) TestHandleMsgTransfer() {
 	}
 
 	coinSentFromAToB = types.GetTransferCoin(path.EndpointB.ChannelConfig.PortID, path.EndpointB.ChannelID, sdk.DefaultBondDenom, coinToSendToB.Amount)
-	balanceVoucher = suite.chainB.App.(*app.Canto).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), voucherDenomTrace.IBCDenom())
-	balanceCanto = suite.chainB.App.(*app.Canto).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), "aqom")
+	balanceVoucher = suite.chainB.App.(*app.Qom).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), voucherDenomTrace.IBCDenom())
+	balanceCanto = suite.chainB.App.(*app.Qom).BankKeeper.GetBalance(suite.chainB.GetContext(), suite.chainB.SenderAccount.GetAddress(), "aqom")
 	balanceErc20 = erc20Keeper.BalanceOf(suite.chainB.GetContext(), contracts.ERC20MinterBurnerDecimalsContract.ABI, pair.GetERC20Contract(), common.BytesToAddress(suite.chainB.SenderAccount.GetAddress().Bytes()))
 
 	suite.Require().Equal(balanceCantoBefore, balanceCanto)

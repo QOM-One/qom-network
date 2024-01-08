@@ -126,7 +126,7 @@ func DefaultConfig() Config {
 // NewAppConstructor returns a new canto AppConstructor
 func NewAppConstructor(encodingCfg params.EncodingConfig) AppConstructor {
 	return func(val Validator) servertypes.Application {
-		return app.NewCanto(
+		return app.NewQom(
 			val.Ctx.Logger, dbm.NewMemDB(), nil, true, make(map[int64]bool), val.Ctx.Config.RootDir, 0,
 			false,
 			encodingCfg,

@@ -29,7 +29,7 @@ type KeeperTestSuite struct {
 
 	ctx sdk.Context
 
-	app            *app.Canto
+	app            *app.Qom
 	queryClient    types.QueryClient
 	queryClientEvm evm.QueryClient
 }

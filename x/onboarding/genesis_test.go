@@ -27,7 +27,7 @@ type GenesisTestSuite struct {
 
 	ctx sdk.Context
 
-	app     *app.Canto
+	app     *app.Qom
 	genesis types.GenesisState
 }
 

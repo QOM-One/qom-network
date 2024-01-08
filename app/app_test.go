@@ -18,9 +18,9 @@ import (
 	"github.com/QOM-One/QomApp/v7/types"
 )
 
-func TestCantoExport(t *testing.T) {
+func TestQomExport(t *testing.T) {
 	db := dbm.NewMemDB()
-	app := NewCanto(log.NewTMLogger(log.NewSyncWriter(os.Stdout)), db, nil, true, map[int64]bool{}, DefaultNodeHome, 0, false, encoding.MakeConfig(ModuleBasics), simapp.EmptyAppOptions{})
+	app := NewQom(log.NewTMLogger(log.NewSyncWriter(os.Stdout)), db, nil, true, map[int64]bool{}, DefaultNodeHome, 0, false, encoding.MakeConfig(ModuleBasics), simapp.EmptyAppOptions{})
 
 	genesisState := NewDefaultGenesisState()
 	stateBytes, err := json.MarshalIndent(genesisState, "", "  ")
@@ -37,7 +37,7 @@ func TestCantoExport(t *testing.T) {
 	app.Commit()
 
 	// Making a new app object with the db, so that initchain hasn't been called
-	app2 := NewCanto(log.NewTMLogger(log.NewSyncWriter(os.Stdout)), db, nil, true, map[int64]bool{}, DefaultNodeHome, 0, false, encoding.MakeConfig(ModuleBasics), simapp.EmptyAppOptions{})
+	app2 := NewQom(log.NewTMLogger(log.NewSyncWriter(os.Stdout)), db, nil, true, map[int64]bool{}, DefaultNodeHome, 0, false, encoding.MakeConfig(ModuleBasics), simapp.EmptyAppOptions{})
 	_, err = app2.ExportAppStateAndValidators(false, []string{})
 	require.NoError(t, err, "ExportAppStateAndValidators should not have an error")
 }

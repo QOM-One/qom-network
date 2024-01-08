@@ -35,7 +35,7 @@ type TestSuite struct {
 	suite.Suite
 
 	ctx         sdk.Context
-	app         *app.Canto
+	app         *app.Qom
 	keeper      keeper.Keeper
 	queryClient types.QueryClient
 	msgServer   types.MsgServer
@@ -90,7 +90,7 @@ func (suite *TestSuite) TestParams() {
 	}
 }
 
-func setupWithGenesisAccounts() *app.Canto {
+func setupWithGenesisAccounts() *app.Qom {
 	amountInitStandard, _ := sdk.NewIntFromString("30000000000000000000")
 	amountInitBTC, _ := sdk.NewIntFromString("3000000000")
 

@@ -39,7 +39,7 @@ type KeeperTestSuite struct {
 	suite.Suite
 	// use keeper for tests
 	ctx            sdk.Context
-	app            *app.Canto
+	app            *app.Qom
 	queryClient    types.QueryClient
 	queryClientEvm evmtypes.QueryClient
 	consAddress    sdk.ConsAddress

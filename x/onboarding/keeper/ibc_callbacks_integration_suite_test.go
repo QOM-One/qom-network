@@ -80,7 +80,7 @@ func (suite *IBCTestingSuite) SetupTest() {
 
 	params := types.DefaultParams()
 	params.EnableOnboarding = true
-	suite.cantoChain.App.(*app.Canto).OnboardingKeeper.SetParams(suite.cantoChain.GetContext(), params)
+	suite.cantoChain.App.(*app.Qom).OnboardingKeeper.SetParams(suite.cantoChain.GetContext(), params)
 
 	// Setup the paths between the chains
 	suite.pathGravitycanto = ibcgotesting.NewTransferPath(suite.IBCGravityChain, suite.cantoChain) // clientID, connectionID, channelID empty
@@ -102,18 +102,18 @@ func (suite *IBCTestingSuite) SetupTest() {
 
 // FundCantoChain mints coins and sends them to the cantoChain sender account
 func (suite *IBCTestingSuite) FundCantoChain(coins sdk.Coins) {
-	err := suite.cantoChain.App.(*app.Canto).BankKeeper.MintCoins(suite.cantoChain.GetContext(), inflationtypes.ModuleName, coins)
+	err := suite.cantoChain.App.(*app.Qom).BankKeeper.MintCoins(suite.cantoChain.GetContext(), inflationtypes.ModuleName, coins)
 	suite.Require().NoError(err)
-	err = suite.cantoChain.App.(*app.Canto).BankKeeper.SendCoinsFromModuleToAccount(suite.cantoChain.GetContext(), inflationtypes.ModuleName, suite.cantoChain.SenderAccount.GetAddress(), coins)
+	err = suite.cantoChain.App.(*app.Qom).BankKeeper.SendCoinsFromModuleToAccount(suite.cantoChain.GetContext(), inflationtypes.ModuleName, suite.cantoChain.SenderAccount.GetAddress(), coins)
 	suite.Require().NoError(err)
 }
 
 // setupRegisterCoin deploys an erc20 contract and creates the token pair
 func (suite *IBCTestingSuite) setupRegisterCoin(metadata banktypes.Metadata) *erc20types.TokenPair {
-	err := suite.cantoChain.App.(*app.Canto).BankKeeper.MintCoins(suite.cantoChain.GetContext(), inflationtypes.ModuleName, sdk.Coins{sdk.NewInt64Coin(metadata.Base, 1)})
+	err := suite.cantoChain.App.(*app.Qom).BankKeeper.MintCoins(suite.cantoChain.GetContext(), inflationtypes.ModuleName, sdk.Coins{sdk.NewInt64Coin(metadata.Base, 1)})
 	suite.Require().NoError(err)
 
-	pair, err := suite.cantoChain.App.(*app.Canto).Erc20Keeper.RegisterCoin(suite.cantoChain.GetContext(), metadata)
+	pair, err := suite.cantoChain.App.(*app.Qom).Erc20Keeper.RegisterCoin(suite.cantoChain.GetContext(), metadata)
 	suite.Require().NoError(err)
 	return pair
 }
@@ -125,7 +125,7 @@ func (suite *IBCTestingSuite) CreatePool(denom string) {
 	coins := sdk.NewCoins(coincanto, coinIBC)
 	suite.FundCantoChain(coins)
 
-	coinswapKeeper := suite.cantoChain.App.(*app.Canto).CoinswapKeeper
+	coinswapKeeper := suite.cantoChain.App.(*app.Qom).CoinswapKeeper
 	coinswapKeeper.SetStandardDenom(suite.cantoChain.GetContext(), "aqom")
 	coinswapParams := coinswapKeeper.GetParams(suite.cantoChain.GetContext())
 	coinswapParams.MaxSwapAmount = sdk.NewCoins(sdk.NewCoin(denom, sdk.NewIntWithDecimal(10, 6)))
@@ -141,7 +141,7 @@ func (suite *IBCTestingSuite) CreatePool(denom string) {
 	}
 
 	// Add liquidity to the pool
-	suite.cantoChain.App.(*app.Canto).CoinswapKeeper.AddLiquidity(suite.cantoChain.GetContext(), &msgAddLiquidity)
+	suite.cantoChain.App.(*app.Qom).CoinswapKeeper.AddLiquidity(suite.cantoChain.GetContext(), &msgAddLiquidity)
 }
 
 var (

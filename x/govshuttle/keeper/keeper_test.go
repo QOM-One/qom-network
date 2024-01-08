@@ -28,7 +28,7 @@ type KeeperTestSuite struct {
 	suite.Suite //top level testing suite
 
 	ctx     sdk.Context
-	app     *app.Canto
+	app     *app.Qom
 	address common.Address
 
 	queryClient    types.QueryClient

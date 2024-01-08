@@ -67,7 +67,7 @@ func SetupTestingApp() (TestingApp, map[string]json.RawMessage) {
 func SetupTestingCantoApp() (TestingApp, map[string]json.RawMessage) {
 	db := dbm.NewMemDB()
 	cfg := encoding.MakeConfig(cantoapp.ModuleBasics)
-	app := cantoapp.NewCanto(log.NewNopLogger(), db, nil, true, map[int64]bool{}, cantoapp.DefaultNodeHome, 5, false, cfg, simapp.EmptyAppOptions{})
+	app := cantoapp.NewQom(log.NewNopLogger(), db, nil, true, map[int64]bool{}, cantoapp.DefaultNodeHome, 5, false, cfg, simapp.EmptyAppOptions{})
 
 	return app, cantoapp.NewDefaultGenesisState()
 }

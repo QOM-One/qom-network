@@ -26,7 +26,7 @@ import (
 type UpgradeTestSuite struct {
 	suite.Suite
 	ctx         sdk.Context
-	app         *chain.Canto
+	app         *chain.Qom
 	consAddress sdk.ConsAddress
 }
 

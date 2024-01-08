@@ -54,7 +54,7 @@ type KeeperTestSuite struct {
 	suite.Suite
 
 	ctx              sdk.Context
-	app              *app.Canto
+	app              *app.Qom
 	queryClientEvm   evm.QueryClient
 	queryClient      types.QueryClient
 	address          common.Address

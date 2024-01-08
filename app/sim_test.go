@@ -30,7 +30,7 @@ import (
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	dbm "github.com/tendermint/tm-db"
 
-	cantoconfig "github.com/QOM-One/QomApp/v7/cmd/config"
+	qomconfig "github.com/QOM-One/QomApp/v7/cmd/config"
 	csrtypes "github.com/QOM-One/QomApp/v7/x/csr/types"
 	erc20types "github.com/QOM-One/QomApp/v7/x/erc20/types"
 	govshuttletypes "github.com/QOM-One/QomApp/v7/x/govshuttle/types"
@@ -61,7 +61,7 @@ func interBlockCacheOpt() func(app *baseapp.BaseApp) {
 }
 
 func TestFullAppSimulation(t *testing.T) {
-	config, db, dir, logger, skip, err := simapp.SetupSimulation("leveldb-cantoApp-sim", "Simulation")
+	config, db, dir, logger, skip, err := simapp.SetupSimulation("leveldb-qomApp-sim", "Simulation")
 	if skip {
 		t.Skip("skipping application simulation")
 	}
@@ -74,25 +74,25 @@ func TestFullAppSimulation(t *testing.T) {
 	}()
 
 	// TODO: shadowed
-	cantoApp := NewCanto(logger, db, nil, true, map[int64]bool{}, DefaultNodeHome, simapp.FlagPeriodValue,
+	qomApp := NewQom(logger, db, nil, true, map[int64]bool{}, DefaultNodeHome, simapp.FlagPeriodValue,
 		true, encoding.MakeConfig(ModuleBasics), simapp.EmptyAppOptions{}, fauxMerkleModeOpt)
-	require.Equal(t, cantoconfig.AppName, cantoApp.Name())
+	require.Equal(t, qomconfig.AppName, qomApp.Name())
 
 	// run randomized simulation
 	_, simParams, simErr := simulation.SimulateFromSeed(
 		t,
 		os.Stdout,
-		cantoApp.BaseApp,
-		AppStateFn(cantoApp.AppCodec(), cantoApp.SimulationManager()),
+		qomApp.BaseApp,
+		AppStateFn(qomApp.AppCodec(), qomApp.SimulationManager()),
 		RandomAccounts, // replace with own random account function if using keys other than secp256k1
-		simapp.SimulationOperations(cantoApp, cantoApp.AppCodec(), config),
-		cantoApp.ModuleAccountAddrs(),
+		simapp.SimulationOperations(qomApp, qomApp.AppCodec(), config),
+		qomApp.ModuleAccountAddrs(),
 		config,
-		cantoApp.AppCodec(),
+		qomApp.AppCodec(),
 	)
 
 	// export state and simParams before the simulation error is checked
-	err = simapp.CheckExportSimulation(cantoApp, config, simParams)
+	err = simapp.CheckExportSimulation(qomApp, config, simParams)
 	require.NoError(t, err)
 	require.NoError(t, simErr)
 
@@ -116,7 +116,7 @@ func TestAppImportExport(t *testing.T) {
 
 	sdk.DefaultPowerReduction = sdk.NewIntFromUint64(1000000)
 
-	app := NewCanto(
+	app := NewQom(
 		logger,
 		db,
 		nil,
@@ -129,7 +129,7 @@ func TestAppImportExport(t *testing.T) {
 		simapp.EmptyAppOptions{},
 		fauxMerkleModeOpt,
 	)
-	require.Equal(t, cantoconfig.AppName, app.Name())
+	require.Equal(t, qomconfig.AppName, app.Name())
 
 	// run randomized simulation
 	_, simParams, simErr := simulation.SimulateFromSeed(
@@ -168,7 +168,7 @@ func TestAppImportExport(t *testing.T) {
 		require.NoError(t, os.RemoveAll(newDir))
 	}()
 
-	newApp := NewCanto(
+	newApp := NewQom(
 		log.NewNopLogger(),
 		newDB,
 		nil,
@@ -181,7 +181,7 @@ func TestAppImportExport(t *testing.T) {
 		simapp.EmptyAppOptions{},
 		fauxMerkleModeOpt,
 	)
-	require.Equal(t, cantoconfig.AppName, newApp.Name())
+	require.Equal(t, qomconfig.AppName, newApp.Name())
 
 	var genesisState GenesisState
 	err = json.Unmarshal(exported.AppState, &genesisState)
@@ -262,7 +262,7 @@ func TestAppStateDeterminism(t *testing.T) {
 			}
 
 			db := dbm.NewMemDB()
-			app := NewCanto(
+			app := NewQom(
 				logger,
 				db,
 				nil,
@@ -321,7 +321,7 @@ func TestAppSimulationAfterImport(t *testing.T) {
 
 	sdk.DefaultPowerReduction = sdk.NewIntFromUint64(1000000)
 
-	app := NewCanto(
+	app := NewQom(
 		logger,
 		db,
 		nil,
@@ -334,7 +334,7 @@ func TestAppSimulationAfterImport(t *testing.T) {
 		simapp.EmptyAppOptions{},
 		fauxMerkleModeOpt,
 	)
-	require.Equal(t, cantoconfig.AppName, app.Name())
+	require.Equal(t, qomconfig.AppName, app.Name())
 
 	// Run randomized simulation
 	stopEarly, simParams, simErr := simulation.SimulateFromSeed(
@@ -378,7 +378,7 @@ func TestAppSimulationAfterImport(t *testing.T) {
 		require.NoError(t, os.RemoveAll(newDir))
 	}()
 
-	newApp := NewCanto(
+	newApp := NewQom(
 		log.NewNopLogger(),
 		newDB,
 		nil,
@@ -391,7 +391,7 @@ func TestAppSimulationAfterImport(t *testing.T) {
 		simapp.EmptyAppOptions{},
 		fauxMerkleModeOpt,
 	)
-	require.Equal(t, cantoconfig.AppName, newApp.Name())
+	require.Equal(t, qomconfig.AppName, newApp.Name())
 
 	var genesisState GenesisState
 	err = json.Unmarshal(exported.AppState, &genesisState)
