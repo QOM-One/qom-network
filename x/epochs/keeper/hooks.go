@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/Canto-Network/Canto/v7/x/epochs/types"
+	"github.com/QOM-One/QomApp/v7/x/epochs/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

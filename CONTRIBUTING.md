@@ -1,6 +1,6 @@
 # Basic Guidelines
 
-Canto is written in Go.  We prefer to use the latest version of go because this will prevent mixed runtimes, and thus, errors. 
+Qom is written in Go.  We prefer to use the latest version of go because this will prevent mixed runtimes, and thus, errors. 
 
 ## Dev Env setup
 * go v1.20.0
@@ -10,7 +10,7 @@ Canto is written in Go.  We prefer to use the latest version of go because this 
 
 ```bash
 git clone https://github.com/QOM-One/QomApp
-cd Canto
+cd Qom
 go install ./...
 code .
 ```

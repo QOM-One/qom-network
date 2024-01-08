@@ -43,9 +43,9 @@ import (
 	ethermint "github.com/evmos/ethermint/types"
 	evmtypes "github.com/evmos/ethermint/x/evm/types"
 
-	cmdcfg "github.com/Canto-Network/Canto/v7/cmd/config"
-	cantokr "github.com/Canto-Network/Canto/v7/crypto/keyring"
-	"github.com/Canto-Network/Canto/v7/testutil/network"
+	cmdcfg "github.com/QOM-One/QomApp/v7/cmd/config"
+	cantokr "github.com/QOM-One/QomApp/v7/crypto/keyring"
+	"github.com/QOM-One/QomApp/v7/testutil/network"
 )
 
 var (

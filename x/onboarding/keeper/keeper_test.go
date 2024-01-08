@@ -20,8 +20,8 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/evmos/ethermint/crypto/ethsecp256k1"
 
-	"github.com/Canto-Network/Canto/v7/app"
-	"github.com/Canto-Network/Canto/v7/x/onboarding/types"
+	"github.com/QOM-One/QomApp/v7/app"
+	"github.com/QOM-One/QomApp/v7/x/onboarding/types"
 )
 
 type KeeperTestSuite struct {

@@ -3,7 +3,7 @@ package types_test
 import (
 	"testing"
 
-	"github.com/Canto-Network/Canto/v7/x/csr/types"
+	"github.com/QOM-One/QomApp/v7/x/csr/types"
 	"github.com/stretchr/testify/suite"
 )
 

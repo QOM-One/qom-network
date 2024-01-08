@@ -116,7 +116,7 @@ Add persistent peers to `$HOME/.qomd/config/config.toml`:
 ```bash
 
 [Unit]
-Description=Canto Node
+Description=Qom Node
 After=network.target
 
 [Service]

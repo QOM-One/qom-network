@@ -20,14 +20,14 @@ import (
 	ibcgotesting "github.com/cosmos/ibc-go/v3/testing"
 	ibcmock "github.com/cosmos/ibc-go/v3/testing/mock"
 
-	"github.com/Canto-Network/Canto/v7/contracts"
-	"github.com/Canto-Network/Canto/v7/testutil"
-	coinswaptypes "github.com/Canto-Network/Canto/v7/x/coinswap/types"
-	erc20types "github.com/Canto-Network/Canto/v7/x/erc20/types"
-	inflationtypes "github.com/Canto-Network/Canto/v7/x/inflation/types"
-	"github.com/Canto-Network/Canto/v7/x/onboarding/keeper"
-	onboardingtest "github.com/Canto-Network/Canto/v7/x/onboarding/testutil"
-	"github.com/Canto-Network/Canto/v7/x/onboarding/types"
+	"github.com/QOM-One/QomApp/v7/contracts"
+	"github.com/QOM-One/QomApp/v7/testutil"
+	coinswaptypes "github.com/QOM-One/QomApp/v7/x/coinswap/types"
+	erc20types "github.com/QOM-One/QomApp/v7/x/erc20/types"
+	inflationtypes "github.com/QOM-One/QomApp/v7/x/inflation/types"
+	"github.com/QOM-One/QomApp/v7/x/onboarding/keeper"
+	onboardingtest "github.com/QOM-One/QomApp/v7/x/onboarding/testutil"
+	"github.com/QOM-One/QomApp/v7/x/onboarding/types"
 )
 
 var (

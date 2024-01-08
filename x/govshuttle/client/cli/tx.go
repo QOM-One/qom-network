@@ -15,7 +15,7 @@ import (
 
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/Canto-Network/Canto/v7/x/govshuttle/types"
+	"github.com/QOM-One/QomApp/v7/x/govshuttle/types"
 )
 
 var (

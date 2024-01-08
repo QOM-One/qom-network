@@ -1,5 +1,5 @@
 "[Unit]
-Description=Canto Node
+Description=Qom Node
 After=network.target
 [Service]
 Type=simple

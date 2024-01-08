@@ -5,10 +5,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
 
-	coinswapkeeper "github.com/Canto-Network/Canto/v7/x/coinswap/keeper"
-	coinswaptypes "github.com/Canto-Network/Canto/v7/x/coinswap/types"
-	onboardingkeeper "github.com/Canto-Network/Canto/v7/x/onboarding/keeper"
-	onboardingtypes "github.com/Canto-Network/Canto/v7/x/onboarding/types"
+	coinswapkeeper "github.com/QOM-One/QomApp/v7/x/coinswap/keeper"
+	coinswaptypes "github.com/QOM-One/QomApp/v7/x/coinswap/types"
+	onboardingkeeper "github.com/QOM-One/QomApp/v7/x/onboarding/keeper"
+	onboardingtypes "github.com/QOM-One/QomApp/v7/x/onboarding/types"
 )
 
 // CreateUpgradeHandler creates an SDK upgrade handler for v7

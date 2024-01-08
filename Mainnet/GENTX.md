@@ -34,7 +34,7 @@ qomd gentx <key_name> <token-amount>aqom --chain-id=<chain_id> --moniker=<your_m
 
 ### Restarting Your Node
 
-You do not need to reinitialize your Canto Node. Basically a hard fork on Cosmos is starting from block 1 with a new genesis file. All your configuration files can stay the same. Steps to ensure a safe restart
+You do not need to reinitialize your Qom Node. Basically a hard fork on Cosmos is starting from block 1 with a new genesis file. All your configuration files can stay the same. Steps to ensure a safe restart
 
 1) Backup your data directory. 
 * `mkdir $HOME/canto-backup` 

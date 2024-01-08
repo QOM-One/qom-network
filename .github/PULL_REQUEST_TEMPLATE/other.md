@@ -14,7 +14,7 @@ please add links to any relevant follow up issues.*
 
 I have...
 
-- [ ] targeted the correct branch (see [PR Targeting](https://github.com/canto-network/canto/blob/main/CONTRIBUTING.md#pr-targeting))
+- [ ] targeted the correct branch (see [PR Targeting](https://github.com/QOM-One/QomApp/blob/main/CONTRIBUTING.md#pr-targeting))
 - [ ] provided a link to the relevant issue or specification
 - [ ] reviewed "Files changed" and left comments if necessary
 

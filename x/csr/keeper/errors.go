@@ -3,7 +3,7 @@ package keeper
 // DONTCOVER
 
 import (
-	"github.com/Canto-Network/Canto/v7/x/csr/types"
+	"github.com/QOM-One/QomApp/v7/x/csr/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 

@@ -15,12 +15,12 @@ import (
 	"github.com/cosmos/ibc-go/v3/modules/apps/transfer/types"
 	clienttypes "github.com/cosmos/ibc-go/v3/modules/core/02-client/types"
 
-	"github.com/Canto-Network/Canto/v7/app"
-	"github.com/Canto-Network/Canto/v7/contracts"
-	ibctesting "github.com/Canto-Network/Canto/v7/ibc/testing"
-	coinswaptypes "github.com/Canto-Network/Canto/v7/x/coinswap/types"
-	inflationtypes "github.com/Canto-Network/Canto/v7/x/inflation/types"
-	onboardingtest "github.com/Canto-Network/Canto/v7/x/onboarding/testutil"
+	"github.com/QOM-One/QomApp/v7/app"
+	"github.com/QOM-One/QomApp/v7/contracts"
+	ibctesting "github.com/QOM-One/QomApp/v7/ibc/testing"
+	coinswaptypes "github.com/QOM-One/QomApp/v7/x/coinswap/types"
+	inflationtypes "github.com/QOM-One/QomApp/v7/x/inflation/types"
+	onboardingtest "github.com/QOM-One/QomApp/v7/x/onboarding/testutil"
 )
 
 var (

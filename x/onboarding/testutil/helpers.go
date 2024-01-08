@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 
-	ibcgotesting "github.com/Canto-Network/Canto/v7/ibc/testing"
+	ibcgotesting "github.com/QOM-One/QomApp/v7/ibc/testing"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	channeltypes "github.com/cosmos/ibc-go/v3/modules/core/04-channel/types"
 	"golang.org/x/exp/slices"

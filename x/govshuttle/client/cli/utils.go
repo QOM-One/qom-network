@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"path/filepath"
 
-	"github.com/Canto-Network/Canto/v7/x/govshuttle/types"
+	"github.com/QOM-One/QomApp/v7/x/govshuttle/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 )
 

@@ -3,7 +3,7 @@ package keeper_test
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/Canto-Network/Canto/v7/x/onboarding/types"
+	"github.com/QOM-One/QomApp/v7/x/onboarding/types"
 )
 
 func (suite *KeeperTestSuite) TestQueryParams() {
