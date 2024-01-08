@@ -21,9 +21,9 @@ import (
 )
 
 // OnRecvPacket performs an IBC receive callback.
-// It swaps the transferred IBC denom to acanto and
+// It swaps the transferred IBC denom to aqom and
 // convert the remaining balance to ERC20 tokens.
-// If the balance of acanto is greater than the predefined value,
+// If the balance of aqom is greater than the predefined value,
 // the swap is omitted and the entire transferred amount is converted to ERC20.
 func (k Keeper) OnRecvPacket(
 	ctx sdk.Context,

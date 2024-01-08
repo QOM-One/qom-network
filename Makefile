@@ -27,15 +27,15 @@ COMMIT := $(shell git log -1 --format='%H')
 LEDGER_ENABLED ?= true
 GOPATH ?= $(shell $(GO) env GOPATH)
 BINDIR ?= $(GOPATH)/bin
-canto_BINARY = cantod
-canto_DIR = cantod
+qom_BINARY = qomd
+qom_DIR = qomd
 BUILDDIR ?= $(CURDIR)/build
 SIMAPP = ./app
-HTTPS_GIT := https://github.com/canto/canto.git
+HTTPS_GIT := https://github.com/QOM-One/QomApp.git
 DOCKER := $(shell which docker)
 DOCKER_BUF := $(DOCKER) run --rm -v $(CURDIR):/workspace --workdir /workspace bufbuild/buf
-NAMESPACE := Canto
-PROJECT := canto
+NAMESPACE := Qom
+PROJECT := qom
 DOCKER_IMAGE := $(NAMESPACE)/$(PROJECT)
 COMMIT_HASH := $(shell git rev-parse --short=7 HEAD)
 DOCKER_TAG := $(COMMIT_HASH)
@@ -86,8 +86,8 @@ build_tags_comma_sep := $(subst $(whitespace),$(comma),$(build_tags))
 
 # process linker flags
 
-ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=canto \
-          -X github.com/cosmos/cosmos-sdk/version.AppName=$(canto_BINARY) \
+ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=qom \
+          -X github.com/cosmos/cosmos-sdk/version.AppName=$(qom_BINARY) \
           -X github.com/cosmos/cosmos-sdk/version.Version=$(VERSION) \
           -X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT) \
           -X "github.com/cosmos/cosmos-sdk/version.BuildTags=$(build_tags_comma_sep)" \
@@ -147,7 +147,7 @@ build-reproducible: go.sum
 	$(DOCKER) rm latest-build || true
 	$(DOCKER) run --volume=$(CURDIR):/sources:ro \
         --env TARGET_PLATFORMS='linux/amd64' \
-        --env APP=cantod \
+        --env APP=qomd \
         --env VERSION=$(VERSION) \
         --env COMMIT=$(COMMIT) \
         --env CGO_ENABLED=1 \
@@ -157,17 +157,16 @@ build-reproducible: go.sum
 
 
 build-docker:
-	# TODO replace with kaniko
 	$(DOCKER) build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
 	$(DOCKER) tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest
 	# docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:${COMMIT_HASH}
 	# update old container
-	$(DOCKER) rm canto || true
+	$(DOCKER) rm qom || true
 	# create a new container from the latest image
-	$(DOCKER) create --name canto -t -i ${DOCKER_IMAGE}:latest canto
+	$(DOCKER) create --name qom -t -i ${DOCKER_IMAGE}:latest qom
 	# move the binaries to the ./build directory
 	mkdir -p ./build/
-	$(DOCKER) cp canto:/usr/bin/cantod ./build/
+	$(DOCKER) cp qom:/usr/bin/qomd ./build/
 
 push-docker: build-docker
 	$(DOCKER) push ${DOCKER_IMAGE}:${DOCKER_TAG}
@@ -303,7 +302,7 @@ update-swagger-docs: statik
 .PHONY: update-swagger-docs
 
 godocs:
-	@echo "--> Wait a few seconds and visit http://localhost:6060/pkg/github.com/canto/canto/types"
+	@echo "--> Wait a few seconds and visit http://localhost:6060/pkg/github.com/qom-one/qomapp/types"
 	godoc -http=:6060
 
 # Start docs site at localhost:8080
@@ -389,8 +388,8 @@ test-sim-nondeterminism-long:
 
 test-sim-custom-genesis-fast:
 	@echo "Running custom genesis simulation..."
-	@echo "By default, ${HOME}/.$(canto_DIR)/config/genesis.json will be used."
-	@go test -mod=readonly $(SIMAPP) -run TestFullAppSimulation -Genesis=${HOME}/.$(canto_DIR)/config/genesis.json \
+	@echo "By default, ${HOME}/.$(qom_DIR)/config/genesis.json will be used."
+	@go test -mod=readonly $(SIMAPP) -run TestFullAppSimulation -Genesis=${HOME}/.$(qom_DIR)/config/genesis.json \
 		-Enabled=true -NumBlocks=100 -BlockSize=200 -Commit=true -Seed=5 -Period=1 -v -timeout 1h
 
 test-sim-import-export: runsim
@@ -413,8 +412,8 @@ test-sim-after-import-long: runsim
 
 test-sim-custom-genesis-multi-seed: runsim
 	@echo "Running multi-seed custom genesis simulation..."
-	@echo "By default, ${HOME}/.$(canto_DIR)/config/genesis.json will be used."
-	@$(BINDIR)/runsim -Genesis=${HOME}/.$(canto_DIR)/config/genesis.json -SimAppPkg=$(SIMAPP) -ExitOnFail 50 5 TestFullAppSimulation
+	@echo "By default, ${HOME}/.$(qom_DIR)/config/genesis.json will be used."
+	@$(BINDIR)/runsim -Genesis=${HOME}/.$(qom_DIR)/config/genesis.json -SimAppPkg=$(SIMAPP) -ExitOnFail 50 5 TestFullAppSimulation
 
 test-sim-multi-seed-long: runsim
 	@echo "Running long multi-seed application simulation. This may take awhile!"
@@ -471,7 +470,7 @@ lint-fix-contracts:
 format:
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -name '*.pb.go' | xargs gofmt -w -s
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -name '*.pb.go' | xargs misspell -w
-	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -name '*.pb.go' | xargs goimports -w -local github.com/canto/canto
+	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -name '*.pb.go' | xargs goimports -w -local github.com/qom/qom
 .PHONY: format
 
 ###############################################################################
@@ -561,13 +560,13 @@ ifeq ($(OS),Windows_NT)
 	mkdir localnet-setup &
 	@$(MAKE) localnet-build
 
-	IF not exist "build/node0/$(canto_BINARY)/config/genesis.json" docker run --rm -v $(CURDIR)/build\canto\Z cantod/node "./cantod testnet --v 4 -o /canto --keyring-backend=test --ip-addresses cantodnode0,cantodnode1,cantodnode2,cantodnode3"
+	IF not exist "build/node0/$(qom_BINARY)/config/genesis.json" docker run --rm -v $(CURDIR)/build\qom\Z qomd/node "./qomd testnet --v 4 -o /qom --keyring-backend=test --ip-addresses qomdnode0,qomdnode1,qomdnode2,qomdnode3"
 	docker-compose up -d
 else
 	mkdir -p localnet-setup
 	@$(MAKE) localnet-build
 
-	if ! [ -f localnet-setup/node0/$(canto_BINARY)/config/genesis.json ]; then docker run --rm -v $(CURDIR)/localnet-setup:/canto:Z cantod/node "./cantod testnet --v 4 -o /canto --keyring-backend=test --ip-addresses cantodnode0,cantodnode1,cantodnode2,cantodnode3"; fi
+	if ! [ -f localnet-setup/node0/$(qom_BINARY)/config/genesis.json ]; then docker run --rm -v $(CURDIR)/localnet-setup:/qom:Z qomd/node "./qomd testnet --v 4 -o /qom --keyring-backend=test --ip-addresses qomdnode0,qomdnode1,qomdnode2,qomdnode3"; fi
 	docker-compose up -d
 endif
 
@@ -584,22 +583,22 @@ localnet-clean:
 localnet-unsafe-reset:
 	docker-compose down
 ifeq ($(OS),Windows_NT)
-	@docker run --rm -v $(CURDIR)\localnet-setup\node0\cantod:canto\Z cantod/node "./cantod unsafe-reset-all --home=/canto"
-	@docker run --rm -v $(CURDIR)\localnet-setup\node1\cantod:canto\Z cantod/node "./cantod unsafe-reset-all --home=/canto"
-	@docker run --rm -v $(CURDIR)\localnet-setup\node2\cantod:canto\Z cantod/node "./cantod unsafe-reset-all --home=/canto"
-	@docker run --rm -v $(CURDIR)\localnet-setup\node3\cantod:canto\Z cantod/node "./cantod unsafe-reset-all --home=/canto"
+	@docker run --rm -v $(CURDIR)\localnet-setup\node0\qomd:qom\Z qomd/node "./qomd unsafe-reset-all --home=/qom"
+	@docker run --rm -v $(CURDIR)\localnet-setup\node1\qomd:qom\Z qomd/node "./qomd unsafe-reset-all --home=/qom"
+	@docker run --rm -v $(CURDIR)\localnet-setup\node2\qomd:qom\Z qomd/node "./qomd unsafe-reset-all --home=/qom"
+	@docker run --rm -v $(CURDIR)\localnet-setup\node3\qomd:qom\Z qomd/node "./qomd unsafe-reset-all --home=/qom"
 else
-	@docker run --rm -v $(CURDIR)/localnet-setup/node0/cantod:/canto:Z cantod/node "./cantod unsafe-reset-all --home=/canto"
-	@docker run --rm -v $(CURDIR)/localnet-setup/node1/cantod:/canto:Z cantod/node "./cantod unsafe-reset-all --home=/canto"
-	@docker run --rm -v $(CURDIR)/localnet-setup/node2/cantod:/canto:Z cantod/node "./cantod unsafe-reset-all --home=/canto"
-	@docker run --rm -v $(CURDIR)/localnet-setup/node3/cantod:/canto:Z cantod/node "./cantod unsafe-reset-all --home=/canto"
+	@docker run --rm -v $(CURDIR)/localnet-setup/node0/qomd:/qom:Z qomd/node "./qomd unsafe-reset-all --home=/qom"
+	@docker run --rm -v $(CURDIR)/localnet-setup/node1/qomd:/qom:Z qomd/node "./qomd unsafe-reset-all --home=/qom"
+	@docker run --rm -v $(CURDIR)/localnet-setup/node2/qomd:/qom:Z qomd/node "./qomd unsafe-reset-all --home=/qom"
+	@docker run --rm -v $(CURDIR)/localnet-setup/node3/qomd:/qom:Z qomd/node "./qomd unsafe-reset-all --home=/qom"
 endif
 
 # Clean testnet
 localnet-show-logstream:
 	docker-compose logs --tail=1000 -f
 
-.PHONY: build-docker-local-canto localnet-start localnet-stop
+.PHONY: build-docker-local-qom localnet-start localnet-stop
 
 ###############################################################################
 ###                        Compile Solidity Contracts                       ###

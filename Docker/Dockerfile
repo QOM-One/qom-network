@@ -23,29 +23,29 @@ RUN apt-get update &&\
 
 RUN snap install go --classic
 
-# builds out cantod
-RUN git clone https://github.com/Canto-Network/Canto-Testnet
-WORKDIR /Canto-Testnet/cmd/cantod
+# builds out qomd
+RUN git clone https://github.com/QOM-One/QomApp-Testnet
+WORKDIR /Canto-Testnet/cmd/qomd
 RUN go install -tags ledger ./... &&\
-    mv $HOME/go/bin/cantod /usr/bin/
+    mv $HOME/go/bin/qomd /usr/bin/
 
 # generate keys
-RUN cantod keys add $KEY_NAME
-    # cantod keys add $KEY_NAME --recover &&\
-    # cantod keys add $KEY_NAME --ledger 
+RUN qomd keys add $KEY_NAME
+    # qomd keys add $KEY_NAME --recover &&\
+    # qomd keys add $KEY_NAME --ledger
 
 # initialize node
-RUN cantod init $MONIKER --chain-id canto_9624-1
+RUN qomd init $MONIKER --chain-id canto_9624-1
 
 # get genesis file
-RUN wget https://github.com/Canto-Network/Canto-Testnet-v2/raw/main/genesis.json -P $HOME/.cantod/config/
-RUN sed -i 's/minimum-gas-prices = ""/minimum-gas-prices = "0.0001acanto"/g' $HOME/.cantod/config/app.toml
-RUN wget https://github.com/Canto-Network/Canto-Testnet-v2/raw/main/Docker/cantod.service -P $HOME/systemd/system/
+RUN wget https://github.com/QOM-One/QomApp-Testnet-v2/raw/main/genesis.json -P $HOME/.qomd/config/
+RUN sed -i 's/minimum-gas-prices = ""/minimum-gas-prices = "0.0001aqom"/g' $HOME/.qomd/config/app.toml
+RUN wget https://github.com/QOM-One/QomApp-Testnet-v2/raw/main/Docker/qomd.service -P $HOME/systemd/system/
 
-# run cantod
-WORKDIR /Canto-Testnet/cmd/cantod
+# run qomd
+WORKDIR /Canto-Testnet/cmd/qomd
 RUN sudo systemctl daemon-reload &&\
-    sudo systemctl enable cantod.service &&\
-    systemctl start cantod && journalctl -u cantod -f
+    sudo systemctl enable qomd.service &&\
+    systemctl start qomd && journalctl -u qomd -f
 
 ENTRYPOINT ["/bin/bash"]

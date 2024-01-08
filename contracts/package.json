@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/canto/canto.git"
+    "url": "git+https://github.com/QOM-One/QomApp.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/canto/canto/issues"
+    "url": "https://github.com/qom-one/qomapp/issues"
   },
-  "homepage": "https://github.com/canto/canto#readme"
+  "homepage": "https://github.com/qom-one/qomapp#readme"
 }

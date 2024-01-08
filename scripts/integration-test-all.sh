@@ -17,10 +17,10 @@ RPC_PORT="854"
 IP_ADDR="0.0.0.0"
 
 KEY="mykey"
-CHAINID="canto_9000-1"
+CHAINID="qom_9000-1"
 MONIKER="mymoniker"
 
-## default port prefixes for cantod
+## default port prefixes for qomd
 NODE_P2P_PORT="2660"
 NODE_PORT="2663"
 NODE_RPC_PORT="2666"
@@ -67,14 +67,14 @@ make build
 arr=()
 
 init_func() {
-    "$PWD"/build/cantod keys add $KEY"$i" --keyring-backend test --home "$DATA_DIR$i" --no-backup --algo "eth_secp256k1"
-    "$PWD"/build/cantod init $MONIKER --chain-id $CHAINID --home "$DATA_DIR$i"
-    "$PWD"/build/cantod add-genesis-account \
-    "$("$PWD"/build/cantod keys show "$KEY$i" --keyring-backend test -a --home "$DATA_DIR$i")" 1000000000000000000acanto,1000000000000000000stake \
+    "$PWD"/build/qomd keys add $KEY"$i" --keyring-backend test --home "$DATA_DIR$i" --no-backup --algo "eth_secp256k1"
+    "$PWD"/build/qomd init $MONIKER --chain-id $CHAINID --home "$DATA_DIR$i"
+    "$PWD"/build/qomd add-genesis-account \
+    "$("$PWD"/build/qomd keys show "$KEY$i" --keyring-backend test -a --home "$DATA_DIR$i")" 1000000000000000000aqom,1000000000000000000stake \
     --keyring-backend test --home "$DATA_DIR$i"
-    "$PWD"/build/cantod gentx "$KEY$i" 1000000000000000000stake --chain-id $CHAINID --keyring-backend test --home "$DATA_DIR$i"
-    "$PWD"/build/cantod collect-gentxs --home "$DATA_DIR$i"
-    "$PWD"/build/cantod validate-genesis --home "$DATA_DIR$i"
+    "$PWD"/build/qomd gentx "$KEY$i" 1000000000000000000stake --chain-id $CHAINID --keyring-backend test --home "$DATA_DIR$i"
+    "$PWD"/build/qomd collect-gentxs --home "$DATA_DIR$i"
+    "$PWD"/build/qomd validate-genesis --home "$DATA_DIR$i"
 
     if [[ $MODE == "pending" ]]; then
       ls $DATA_DIR$i
@@ -104,7 +104,7 @@ init_func() {
 
 start_func() {
     echo "starting canto node $i in background ..."
-    "$PWD"/build/cantod start --pruning=nothing --rpc.unsafe \
+    "$PWD"/build/qomd start --pruning=nothing --rpc.unsafe \
     --p2p.laddr tcp://$IP_ADDR:$NODE_P2P_PORT"$i" --address tcp://$IP_ADDR:$NODE_PORT"$i" --rpc.laddr tcp://$IP_ADDR:$NODE_RPC_PORT"$i" \
     --json-rpc.address=$IP_ADDR:$RPC_PORT"$i" \
     --keyring-backend test --home "$DATA_DIR$i" \

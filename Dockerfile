@@ -1,6 +1,6 @@
 FROM golang:stretch AS build-env
 
-WORKDIR /go/src/github.com/canto/canto
+WORKDIR /go/src/github.com/qom-one/qomapp
 
 RUN apt-get update -y
 RUN apt-get install git -y
@@ -16,8 +16,8 @@ RUN apt-get install ca-certificates jq -y
 
 WORKDIR /root
 
-COPY --from=build-env /go/src/github.com/canto/canto/build/cantod /usr/bin/cantod
+COPY --from=build-env /go/src/github.com/qom-one/qomapp/build/qomd /usr/bin/qomd
 
 EXPOSE 26656 26657 1317 9090
 
-CMD ["cantod"]
+CMD ["qomd"]

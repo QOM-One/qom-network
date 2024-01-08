@@ -10,16 +10,16 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/Canto-Network/Canto/v7/app"
-	cantod "github.com/Canto-Network/Canto/v7/cmd/cantod"
+	qomd "github.com/Canto-Network/Canto/v7/cmd/qomd"
 )
 
 func TestInitCmd(t *testing.T) {
-	rootCmd, _ := cantod.NewRootCmd()
+	rootCmd, _ := qomd.NewRootCmd()
 	rootCmd.SetArgs([]string{
 		"init",       // Test the init cmd
 		"canto-test", // Moniker
 		fmt.Sprintf("--%s=%s", cli.FlagOverwrite, "true"), // Overwrite genesis.json, in case it already exists
-		fmt.Sprintf("--%s=%s", flags.FlagChainID, "canto_9000-1"),
+		fmt.Sprintf("--%s=%s", flags.FlagChainID, "qom_9000-1"),
 	})
 
 	err := svrcmd.Execute(rootCmd, app.DefaultNodeHome)
@@ -27,7 +27,7 @@ func TestInitCmd(t *testing.T) {
 }
 
 func TestAddKeyLedgerCmd(t *testing.T) {
-	rootCmd, _ := cantod.NewRootCmd()
+	rootCmd, _ := qomd.NewRootCmd()
 	rootCmd.SetArgs([]string{
 		"keys",
 		"add",

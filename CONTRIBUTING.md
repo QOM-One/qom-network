@@ -9,7 +9,7 @@ Canto is written in Go.  We prefer to use the latest version of go because this 
 * Mac or Linux, no Windows
 
 ```bash
-git clone https://github.com/Canto-Network/Canto
+git clone https://github.com/QOM-One/QomApp
 cd Canto
 go install ./...
 code .
@@ -17,7 +17,7 @@ code .
 
 ## Branching & Releases
 
-* Each major version of canto should change the module path in go.mod.  
+* Each major version of qom should change the module path in go.mod.  
 * branches should be created for each non-state-breaking release, eg release/v5.0.x
 
 ### Pull Request Templates

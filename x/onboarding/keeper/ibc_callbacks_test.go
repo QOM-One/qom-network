@@ -112,8 +112,8 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 				packet = channeltypes.NewPacket(bz, 100, transfertypes.PortID, sourceChannel, transfertypes.PortID, cantoChannel, timeoutHeight, 0)
 			},
 			false,
-			sdk.NewCoins(sdk.NewCoin("acanto", sdk.ZeroInt())),
-			sdk.NewCoin("acanto", sdk.ZeroInt()),
+			sdk.NewCoins(sdk.NewCoin("aqom", sdk.ZeroInt())),
+			sdk.NewCoin("aqom", sdk.ZeroInt()),
 			sdk.NewCoin(uusdcIbcdenom, transferAmount),
 			sdk.ZeroInt(),
 		},
@@ -125,8 +125,8 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 				packet = channeltypes.NewPacket(bz, 100, transfertypes.PortID, sourceChannel, transfertypes.PortID, cantoChannel, timeoutHeight, 0)
 			},
 			false,
-			sdk.NewCoins(sdk.NewCoin("acanto", sdk.ZeroInt())),
-			sdk.NewCoin("acanto", sdk.ZeroInt()),
+			sdk.NewCoins(sdk.NewCoin("aqom", sdk.ZeroInt())),
+			sdk.NewCoin("aqom", sdk.ZeroInt()),
 			sdk.NewCoin(uusdcIbcdenom, transferAmount),
 			sdk.ZeroInt(),
 		},
@@ -141,8 +141,8 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 				packet = channeltypes.NewPacket(bz, 100, transfertypes.PortID, sourceChannel, transfertypes.PortID, cantoChannel, timeoutHeight, 0)
 			},
 			true,
-			sdk.NewCoins(sdk.NewCoin("acanto", sdk.ZeroInt())),
-			sdk.NewCoin("acanto", sdk.ZeroInt()),
+			sdk.NewCoins(sdk.NewCoin("aqom", sdk.ZeroInt())),
+			sdk.NewCoin("aqom", sdk.ZeroInt()),
 			sdk.NewCoin(uusdcIbcdenom, transferAmount),
 			sdk.ZeroInt(),
 		},
@@ -154,8 +154,8 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 				suite.app.OnboardingKeeper.SetParams(suite.ctx, params)
 			},
 			true,
-			sdk.NewCoins(sdk.NewCoin("acanto", sdk.ZeroInt())),
-			sdk.NewCoin("acanto", sdk.ZeroInt()),
+			sdk.NewCoins(sdk.NewCoin("aqom", sdk.ZeroInt())),
+			sdk.NewCoin("aqom", sdk.ZeroInt()),
 			sdk.NewCoin(uusdcIbcdenom, transferAmount),
 			sdk.ZeroInt(),
 		},
@@ -171,13 +171,13 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 				packet = channeltypes.NewPacket(bz, 100, transfertypes.PortID, sourceChannel, transfertypes.PortID, cantoChannel, timeoutHeight, 0)
 			},
 			true,
-			sdk.NewCoins(sdk.NewCoin("acanto", sdk.ZeroInt())),
-			sdk.NewCoin("acanto", sdk.ZeroInt()),
+			sdk.NewCoins(sdk.NewCoin("aqom", sdk.ZeroInt())),
+			sdk.NewCoin("aqom", sdk.ZeroInt()),
 			sdk.NewCoin(uusdtIbcdenom, sdk.ZeroInt()),
 			transferAmount,
 		},
 		{
-			"no swap / convert all transferred amount - no liquidity pool exists but acanto balance is already bigger than threshold",
+			"no swap / convert all transferred amount - no liquidity pool exists but aqom balance is already bigger than threshold",
 			func() {
 
 				denom = "uUSDT"
@@ -188,8 +188,8 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 				packet = channeltypes.NewPacket(bz, 100, transfertypes.PortID, sourceChannel, transfertypes.PortID, cantoChannel, timeoutHeight, 0)
 			},
 			true,
-			sdk.NewCoins(sdk.NewCoin("acanto", sdk.NewIntWithDecimal(4, 18))),
-			sdk.NewCoin("acanto", sdk.NewIntWithDecimal(4, 18)),
+			sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(4, 18))),
+			sdk.NewCoin("aqom", sdk.NewIntWithDecimal(4, 18)),
 			sdk.NewCoin(uusdtIbcdenom, sdk.ZeroInt()),
 			transferAmount,
 		},
@@ -205,13 +205,13 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 				packet = channeltypes.NewPacket(bz, 100, transfertypes.PortID, sourceChannel, transfertypes.PortID, cantoChannel, timeoutHeight, 0)
 			},
 			true,
-			sdk.NewCoins(sdk.NewCoin("acanto", sdk.ZeroInt())),
-			sdk.NewCoin("acanto", sdk.ZeroInt()),
+			sdk.NewCoins(sdk.NewCoin("aqom", sdk.ZeroInt())),
+			sdk.NewCoin("aqom", sdk.ZeroInt()),
 			sdk.NewCoin(uusdcIbcdenom, sdk.ZeroInt()),
 			sdk.NewIntWithDecimal(1, 6),
 		},
 		{
-			"no swap / convert all transferred amount - acanto balance is already bigger than threshold",
+			"no swap / convert all transferred amount - aqom balance is already bigger than threshold",
 			func() {
 				transferAmount = sdk.NewIntWithDecimal(25, 6)
 				transfer := transfertypes.NewFungibleTokenPacketData(denom, transferAmount.String(), secpAddrCosmos, ethsecpAddrcanto)
@@ -219,8 +219,8 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 				packet = channeltypes.NewPacket(bz, 100, transfertypes.PortID, sourceChannel, transfertypes.PortID, cantoChannel, timeoutHeight, 0)
 			},
 			true,
-			sdk.NewCoins(sdk.NewCoin("acanto", sdk.NewIntWithDecimal(4, 18))),
-			sdk.NewCoin("acanto", sdk.NewIntWithDecimal(4, 18)),
+			sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(4, 18))),
+			sdk.NewCoin("aqom", sdk.NewIntWithDecimal(4, 18)),
 			sdk.NewCoin(uusdcIbcdenom, sdk.ZeroInt()),
 			transferAmount,
 		},
@@ -234,8 +234,8 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 				packet = channeltypes.NewPacket(bz, 100, transfertypes.PortID, sourceChannel, transfertypes.PortID, cantoChannel, timeoutHeight, 0)
 			},
 			true,
-			sdk.NewCoins(sdk.NewCoin("acanto", sdk.ZeroInt())),
-			sdk.NewCoin("acanto", sdk.ZeroInt()),
+			sdk.NewCoins(sdk.NewCoin("aqom", sdk.ZeroInt())),
+			sdk.NewCoin("aqom", sdk.ZeroInt()),
 			sdk.NewCoin(uusdcIbcdenom, sdk.NewIntWithDecimal(25, 6)),
 			sdk.ZeroInt(),
 		},
@@ -249,13 +249,13 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 				packet = channeltypes.NewPacket(bz, 100, transfertypes.PortID, sourceChannel, transfertypes.PortID, cantoChannel, timeoutHeight, 0)
 			},
 			true,
-			sdk.NewCoins(sdk.NewCoin("acanto", sdk.ZeroInt())),
-			sdk.NewCoin("acanto", sdk.NewIntWithDecimal(4, 18)),
+			sdk.NewCoins(sdk.NewCoin("aqom", sdk.ZeroInt())),
+			sdk.NewCoin("aqom", sdk.NewIntWithDecimal(4, 18)),
 			sdk.NewCoin(uusdcIbcdenom, sdk.ZeroInt()),
 			sdk.NewInt(20998399),
 		},
 		{
-			"swap / convert remaining ibc token - swap and erc20 conversion are successful (acanto balance is positive but less than threshold)",
+			"swap / convert remaining ibc token - swap and erc20 conversion are successful (aqom balance is positive but less than threshold)",
 			func() {
 				transferAmount = sdk.NewIntWithDecimal(25, 6)
 				transfer := transfertypes.NewFungibleTokenPacketData(denom, transferAmount.String(), secpAddrCosmos, ethsecpAddrcanto)
@@ -263,8 +263,8 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 				packet = channeltypes.NewPacket(bz, 100, transfertypes.PortID, sourceChannel, transfertypes.PortID, cantoChannel, timeoutHeight, 0)
 			},
 			true,
-			sdk.NewCoins(sdk.NewCoin("acanto", sdk.NewIntWithDecimal(3, 18))),
-			sdk.NewCoin("acanto", sdk.NewIntWithDecimal(7, 18)),
+			sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(3, 18))),
+			sdk.NewCoin("aqom", sdk.NewIntWithDecimal(7, 18)),
 			sdk.NewCoin(uusdcIbcdenom, sdk.ZeroInt()),
 			sdk.NewInt(20998399),
 		},
@@ -278,13 +278,13 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 				packet = channeltypes.NewPacket(bz, 100, transfertypes.PortID, sourceChannel, transfertypes.PortID, cantoChannel, timeoutHeight, 0)
 			},
 			true,
-			sdk.NewCoins(sdk.NewCoin("acanto", sdk.ZeroInt()), sdk.NewCoin(uusdcIbcdenom, sdk.NewIntWithDecimal(1, 6))),
-			sdk.NewCoin("acanto", sdk.NewIntWithDecimal(4, 18)),
+			sdk.NewCoins(sdk.NewCoin("aqom", sdk.ZeroInt()), sdk.NewCoin(uusdcIbcdenom, sdk.NewIntWithDecimal(1, 6))),
+			sdk.NewCoin("aqom", sdk.NewIntWithDecimal(4, 18)),
 			sdk.NewCoin(uusdcIbcdenom, sdk.NewIntWithDecimal(1, 6)),
 			sdk.NewInt(20998399),
 		},
 		{
-			"swap / convert remaining ibc token - swap and erc20 conversion are successful (acanto and ibc token balance is bigger than 0)",
+			"swap / convert remaining ibc token - swap and erc20 conversion are successful (aqom and ibc token balance is bigger than 0)",
 			func() {
 				transferAmount = sdk.NewIntWithDecimal(25, 6)
 				transfer := transfertypes.NewFungibleTokenPacketData(denom, transferAmount.String(), secpAddrCosmos, ethsecpAddrcanto)
@@ -292,8 +292,8 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 				packet = channeltypes.NewPacket(bz, 100, transfertypes.PortID, sourceChannel, transfertypes.PortID, cantoChannel, timeoutHeight, 0)
 			},
 			true,
-			sdk.NewCoins(sdk.NewCoin("acanto", sdk.NewIntWithDecimal(3, 18)), sdk.NewCoin(uusdcIbcdenom, sdk.NewIntWithDecimal(1, 6))),
-			sdk.NewCoin("acanto", sdk.NewIntWithDecimal(7, 18)),
+			sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(3, 18)), sdk.NewCoin(uusdcIbcdenom, sdk.NewIntWithDecimal(1, 6))),
+			sdk.NewCoin("aqom", sdk.NewIntWithDecimal(7, 18)),
 			sdk.NewCoin(uusdcIbcdenom, sdk.NewIntWithDecimal(1, 6)),
 			sdk.NewInt(20998399),
 		},
@@ -310,8 +310,8 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 				packet = channeltypes.NewPacket(bz, 100, transfertypes.PortID, sourceChannel, transfertypes.PortID, cantoChannel, timeoutHeight, 0)
 			},
 			true,
-			sdk.NewCoins(sdk.NewCoin("acanto", sdk.NewIntWithDecimal(3, 18))),
-			sdk.NewCoin("acanto", sdk.NewIntWithDecimal(3, 18)),
+			sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(3, 18))),
+			sdk.NewCoin("aqom", sdk.NewIntWithDecimal(3, 18)),
 			sdk.NewCoin(uusdcIbcdenom, sdk.ZeroInt()),
 			transferAmount,
 		},
@@ -331,8 +331,8 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 
 			},
 			true,
-			sdk.NewCoins(sdk.NewCoin("acanto", sdk.ZeroInt())),
-			sdk.NewCoin("acanto", sdk.NewIntWithDecimal(4, 18)),
+			sdk.NewCoins(sdk.NewCoin("aqom", sdk.ZeroInt())),
+			sdk.NewCoin("aqom", sdk.NewIntWithDecimal(4, 18)),
 			sdk.NewCoin(uusdcIbcdenom, sdk.NewInt(20998399)),
 			sdk.NewInt(0),
 		},
@@ -341,13 +341,13 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 		suite.Run(fmt.Sprintf("Case %s", tc.name), func() {
 			suite.SetupTest() // reset
 
-			// Setup liquidity pool (acanto/uUSDC)
-			suite.app.CoinswapKeeper.SetStandardDenom(suite.ctx, "acanto")
+			// Setup liquidity pool (aqom/uUSDC)
+			suite.app.CoinswapKeeper.SetStandardDenom(suite.ctx, "aqom")
 			coinswapParams := suite.app.CoinswapKeeper.GetParams(suite.ctx)
 			coinswapParams.MaxSwapAmount = sdk.NewCoins(sdk.NewCoin(uusdcIbcdenom, sdk.NewIntWithDecimal(10, 6)))
 			suite.app.CoinswapKeeper.SetParams(suite.ctx, coinswapParams)
 
-			testutil.FundAccount(suite.app.BankKeeper, suite.ctx, secpAddr, sdk.NewCoins(sdk.NewCoin("acanto", sdk.NewIntWithDecimal(10000, 18)), sdk.NewCoin(uusdcIbcdenom, sdk.NewIntWithDecimal(10000, 6))))
+			testutil.FundAccount(suite.app.BankKeeper, suite.ctx, secpAddr, sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(10000, 18)), sdk.NewCoin(uusdcIbcdenom, sdk.NewIntWithDecimal(10000, 6))))
 
 			msgAddLiquidity := coinswaptypes.MsgAddLiquidity{
 				MaxToken:         sdk.NewCoin(uusdcIbcdenom, sdk.NewIntWithDecimal(10000, 6)),
@@ -430,7 +430,7 @@ func (suite *KeeperTestSuite) TestOnRecvPacket() {
 			}
 
 			// Check balances
-			cantoBalance := suite.app.BankKeeper.GetBalance(suite.ctx, ethsecpAddr, "acanto")
+			cantoBalance := suite.app.BankKeeper.GetBalance(suite.ctx, ethsecpAddr, "aqom")
 			voucherBalance := suite.app.BankKeeper.GetBalance(suite.ctx, ethsecpAddr, ibcDenom)
 			erc20balance := big.NewInt(0)
 

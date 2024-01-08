@@ -65,7 +65,7 @@ func TestFullAppSimulation(t *testing.T) {
 	if skip {
 		t.Skip("skipping application simulation")
 	}
-	config.ChainID = "canto_9000-1"
+	config.ChainID = "qom_9000-1"
 	require.NoError(t, err, "simulation setup failed")
 
 	defer func() {
@@ -106,7 +106,7 @@ func TestAppImportExport(t *testing.T) {
 	if skip {
 		t.Skip("skipping application import/export simulation")
 	}
-	config.ChainID = "canto_9000-1"
+	config.ChainID = "qom_9000-1"
 	require.NoError(t, err, "simulation setup failed")
 
 	defer func() {
@@ -243,7 +243,7 @@ func TestAppStateDeterminism(t *testing.T) {
 	config.ExportParamsPath = ""
 	config.OnOperation = false
 	config.AllInvariants = false
-	config.ChainID = "canto_9000-1"
+	config.ChainID = "qom_9000-1"
 
 	numSeeds := config.NumBlocks / 10
 	numTimesToRunPerSeed := 2
@@ -312,7 +312,7 @@ func TestAppSimulationAfterImport(t *testing.T) {
 		t.Skip("skipping application simulation after import")
 	}
 	require.NoError(t, err, "simulation setup failed")
-	config.ChainID = "canto_9000-1"
+	config.ChainID = "qom_9000-1"
 
 	defer func() {
 		db.Close()

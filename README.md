@@ -2,10 +2,10 @@
 
 **How to validate on the Canto Mainnet**
 
-*(canto_7700-1)*
+*(qom_766-1)*
 
-> Genesis file [Published](https://github.com/Canto-Network/Canto/raw/main/Mainnet/genesis.json)
-> Peers list [Published](https://github.com/Canto-Network/Canto/blob/main/Mainnet/peers.txt)
+> Genesis file [Published](https://github.com/QOM-One/QomApp/raw/main/Mainnet/genesis.json)
+> Peers list [Published](https://github.com/QOM-One/QomApp/blob/main/Mainnet/peers.txt)
 
 ## Hardware Requirements
 
@@ -45,15 +45,15 @@ Or install individually:
 * gcc: `pacman -S gcc`
 * make: `pacman -S make`
 
-## Install `cantod`
+## Install `qomd`
 
 ### Clone git repository
 
 ```bash
-git clone https://github.com/Canto-Network/Canto.git
-cd Canto/cmd/cantod
+git clone https://github.com/QOM-One/QomApp.git
+cd Canto/cmd/qomd
 go install -tags ledger ./...
-sudo mv $HOME/go/bin/cantod /usr/bin/
+sudo mv $HOME/go/bin/qomd /usr/bin/
 
 ```
 
@@ -61,9 +61,9 @@ sudo mv $HOME/go/bin/cantod /usr/bin/
 
 Replace `<keyname>` below with whatever you'd like to name your key.
 
-*  `cantod keys add <key_name>`
-*  `cantod keys add <key_name> --recover` to regenerate keys with your mnemonic
-*  `cantod keys add <key_name> --ledger` to generate keys with ledger device
+*  `qomd keys add <key_name>`
+*  `qomd keys add <key_name> --recover` to regenerate keys with your mnemonic
+*  `qomd keys add <key_name> --ledger` to generate keys with ledger device
 
 Store a backup of your keys and mnemonic securely offline.
 
@@ -82,35 +82,35 @@ You'll use this file later when creating your validator txn.
 
 ## Set up validator
 
-Install cantod binary from `Canto` directory: 
+Install qomd binary from `Canto` directory: 
 
 `sudo make install`
 
 Initialize the node. Replace `<moniker>` with whatever you'd like to name your validator.
 
-`cantod init <moniker> --chain-id canto_7700-1`
+`qomd init <moniker> --chain-id qom_766-1`
 
 If this runs successfully, it should dump a blob of JSON to the terminal.
 
 Download the Genesis file: 
 
-`wget https://raw.githubusercontent.com/Canto-Network/Canto/genesis/Networks/Mainnet/genesis.json -P $HOME/.cantod/config/` 
+`wget https://raw.githubusercontent.com/Canto-Network/Canto/genesis/Networks/Mainnet/genesis.json -P $HOME/.qomd/config/` 
 
-> _**Note:** If you later get `Error: couldn't read GenesisDoc file: open /root/.cantod/config/genesis.json: no such file or directory` put the genesis.json file wherever it wants instead, such as:
+> _**Note:** If you later get `Error: couldn't read GenesisDoc file: open /root/.qomd/config/genesis.json: no such file or directory` put the genesis.json file wherever it wants instead, such as:
 > 
-> `sudo wget https://github.com/Canto-Network/Canto/raw/main/Mainnet/genesis.json -P/root/.cantod/config/`
+> `sudo wget https://github.com/QOM-One/QomApp/raw/main/Mainnet/genesis.json -P/root/.qomd/config/`
 
-Edit the minimum-gas-prices in `${HOME}/.cantod/config/app.toml`:
+Edit the minimum-gas-prices in `${HOME}/.qomd/config/app.toml`:
 
-`sed -i 's/minimum-gas-prices = "0acanto"/minimum-gas-prices = "0.0001acanto"/g' $HOME/.cantod/config/app.toml`
+`sed -i 's/minimum-gas-prices = "0aqom"/minimum-gas-prices = "0.0001aqom"/g' $HOME/.qomd/config/app.toml`
 
-Add persistent peers to `$HOME/.cantod/config/config.toml`:
-`sed -i 's/persistent_peers = ""/persistent_peers = "ec770ae4fd0fb4871b9a7c09f61764a0b010b293@164.90.134.106:26656"/g' $HOME/.cantod/config/config.toml`
+Add persistent peers to `$HOME/.qomd/config/config.toml`:
+`sed -i 's/persistent_peers = ""/persistent_peers = "ec770ae4fd0fb4871b9a7c09f61764a0b010b293@164.90.134.106:26656"/g' $HOME/.qomd/config/config.toml`
 
-### Set `cantod` to run automatically
+### Set `qomd` to run automatically
 
-* Start `cantod` by creating a systemd service to run the node in the background: 
-* Edit the file: `sudo nano /etc/systemd/system/cantod.service`
+* Start `qomd` by creating a systemd service to run the node in the background: 
+* Edit the file: `sudo nano /etc/systemd/system/qomd.service`
 * Then copy and paste the following text into your service file. Be sure to edit as you see fit.
 
 ```bash
@@ -123,7 +123,7 @@ After=network.target
 Type=simple
 User=root
 WorkingDirectory=/root/
-ExecStart=/root/go/bin/cantod start --trace --log_level info --json-rpc.api eth,txpool,net,debug,web3 --api.enable
+ExecStart=/root/go/bin/qomd start --trace --log_level info --json-rpc.api eth,txpool,net,debug,web3 --api.enable
 Restart=on-failure
 StartLimitInterval=0
 RestartSec=3
@@ -143,11 +143,11 @@ Reload the service files:
 
 Create the symlinlk: 
 
-`sudo systemctl enable cantod.service`
+`sudo systemctl enable qomd.service`
 
 Start the node: 
 
-`sudo systemctl start cantod && journalctl -u cantod -f`
+`sudo systemctl start qomd && journalctl -u qomd -f`
 
 You should then get several lines of log files and then see: `No addresses to dial. Falling back to seeds module=pex server=node`
 
@@ -162,13 +162,13 @@ Modify the following items below, removing the `<>`
 - `<DESCRIPTION>` is whatever you'd like in the description field for your node
 - `<SECURITY_CONTACT_EMAIL>` is the email you want to use in the event of a security incident
 - `<YOUR_WEBSITE>` the website you want associated with your node
-- `<TOKEN_DELEGATION>` is the amount of tokens staked by your node (`1acanto` should work here, but you'll also need to make sure your address contains tokens.)
+- `<TOKEN_DELEGATION>` is the amount of tokens staked by your node (`1aqom` should work here, but you'll also need to make sure your address contains tokens.)
 
 ```bash
 
-cantod tx staking create-validator \
+qomd tx staking create-validator \
 --from <KEY_NAME> \
---chain-id canto_7700-1 \
+--chain-id qom_766-1 \
 --moniker="<VALIDATOR_NAME>" \
 --commission-max-change-rate=0.01 \
 --commission-max-rate=1.0 \
@@ -176,9 +176,9 @@ cantod tx staking create-validator \
 --details="<DESCRIPTION>" \
 --security-contact="<SECURITY_CONTACT_EMAIL>" \
 --website="<YOUR_WEBSITE>" \
---pubkey $(cantod tendermint show-validator) \
+--pubkey $(qomd tendermint show-validator) \
 --min-self-delegation="1" \
---amount <TOKEN_DELEGATION>acanto \
---fees 20acanto
+--amount <TOKEN_DELEGATION>aqom \
+--fees 20aqom
 
 ```

@@ -2,18 +2,18 @@
 
 ### Install & Initialize
 
--   Install cantod binary
+-   Install qomd binary
 
 -   Initialize canto node directory
 
 ```bash
-cantod init <node_name> --chain-id canto_7700-1
+qomd init <node_name> --chain-id qom_766-1
 ```
 
--   Download the [genesis file](https://github.com/Canto-Network/Canto/raw/genesis/Networks/Mainnet/genesis.json)
+-   Download the [genesis file](https://github.com/QOM-One/QomApp/raw/genesis/Networks/Mainnet/genesis.json)
 
 ```bash
-wget https://github.com/Canto-Network/Canto/raw/genesis/Networks/Mainnet/genesis.json -b $HOME/.cantod/config
+wget https://github.com/QOM-One/QomApp/raw/genesis/Networks/Mainnet/genesis.json -b $HOME/.qomd/config
 ```
 
 ### Create & Submit a GENTX file + genesis.json
@@ -21,14 +21,14 @@ wget https://github.com/Canto-Network/Canto/raw/genesis/Networks/Mainnet/genesis
 A GENTX is a genesis transaction that adds a validator node to the genesis file.
 
 ```bash
-cantod gentx <key_name> <token-amount>acanto --chain-id=canto_7700-1 --moniker=<your_moniker> --commission-max-change-rate=0.01 --commission-max-rate=0.10 --commission-rate=0.05 --details="<details here>" --security-contact="<email>" --website="<website>"
+qomd gentx <key_name> <token-amount>aqom --chain-id=qom_766-1 --moniker=<your_moniker> --commission-max-change-rate=0.01 --commission-max-rate=0.10 --commission-rate=0.05 --details="<details here>" --security-contact="<email>" --website="<website>"
 ```
 
--   Fork [Canto](https://github.com/Canto-Network/Canto)
+-   Fork [Canto](https://github.com/QOM-One/QomApp)
 
--   Copy the contents of `${HOME}/.cantod/config/gentx/gentx-XXXXXXXX.json` to `$HOME/Canto/Mainnet/Gentx/<yourvalidatorname>.json`
+-   Copy the contents of `${HOME}/.qomd/config/gentx/gentx-XXXXXXXX.json` to `$HOME/Canto/Mainnet/Gentx/<yourvalidatorname>.json`
 
--   Create a pull request to the genesis branch of the [repository](https://github.com/Canto-Network/Canto/Mainnet/gentx)
+-   Create a pull request to the genesis branch of the [repository](https://github.com/QOM-One/QomApp/Mainnet/gentx)
 
 ### Restarting Your Node
 
@@ -38,11 +38,11 @@ You do not need to reinitialize your Canto Node. Basically a hard fork on Cosmos
 
 -   `mkdir $HOME/canto-backup`
 
--   `cp $HOME/.cantod/data $HOME/canto-backup/`
+-   `cp $HOME/.qomd/data $HOME/canto-backup/`
 
 2. Remove old genesis
 
--   `rm $HOME/.cantod/genesis.json`
+-   `rm $HOME/.qomd/genesis.json`
 
 3. Download new genesis
 
@@ -50,15 +50,15 @@ You do not need to reinitialize your Canto Node. Basically a hard fork on Cosmos
 
 4. Remove old data
 
--   `rm -rf $HOME/.cantod/data`
+-   `rm -rf $HOME/.qomd/data`
 
 6. Create a new data directory
 
--   `mkdir $HOME/.cantod/data`
+-   `mkdir $HOME/.qomd/data`
 
 7. copy the contents of the `priv_validator_state.json` file 
 
--   `nano $HOME/.cantod/data/priv_validator_state.json`
+-   `nano $HOME/.qomd/data/priv_validator_state.json`
 
 -   Copy the json string and paste into the file
  {
@@ -75,23 +75,23 @@ If you do not reinitialize then your peer id and ip address will remain the same
 cd $HOME/Canto
 git checkout <branch>
 make install
-mv $HOME/go/bin/cantod /usr/bin/
+mv $HOME/go/bin/qomd /usr/bin/
 ```
 
 9. Restart your node
 
--   `systemctl restart cantod`
+-   `systemctl restart qomd`
 
 ## Emergency Reversion
 
-1. Move your backup data directory into your .cantod directory
+1. Move your backup data directory into your .qomd directory
 
 -   `mv HOME/canto-backup/data $HOME/.canto/`
 
 2. Download the old genesis file
 
--   `wget https://github.com/Canto-Network/Canto/raw/main/Mainnet/genesis.json -b $HOME/.cantod/config/`
+-   `wget https://github.com/QOM-One/QomApp/raw/main/Mainnet/genesis.json -b $HOME/.qomd/config/`
 
 3. Restart your node
 
--   `systemctl restart cantod`
+-   `systemctl restart qomd`

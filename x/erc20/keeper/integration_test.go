@@ -101,7 +101,7 @@ var _ = Describe("ERC20: Converting", Ordered, func() {
 			coin = sdk.NewCoin(pair.Denom, amt)
 
 			// denom := s.app.ClaimsKeeper.GetParams(s.ctx).ClaimsDenom
-			denom := "acanto"
+			denom := "aqom"
 
 			err := testutil.FundAccount(s.app.BankKeeper, s.ctx, accAddr, sdk.NewCoins(sdk.NewCoin(denom, sdk.TokensFromConsensusPower(100, ethermint.PowerReduction))))
 			s.Require().NoError(err)
@@ -162,7 +162,7 @@ var _ = Describe("ERC20: Converting", Ordered, func() {
 			coin = sdk.NewCoin(pair.Denom, amt)
 
 			// denom := s.app.ClaimsKeeper.GetParams(s.ctx).ClaimsDenom
-			denom := "acanto" //use default denom for claimsDenom
+			denom := "aqom" //use default denom for claimsDenom
 
 			err := testutil.FundAccount(s.app.BankKeeper, s.ctx, accAddr, sdk.NewCoins(sdk.NewCoin(denom, sdk.NewInt(1000))))
 			s.Require().NoError(err)
@@ -239,7 +239,7 @@ func deliverTx(priv *ethsecp256k1.PrivKey, msgs ...sdk.Msg) abci.ResponseDeliver
 	encodingConfig := encoding.MakeConfig(app.ModuleBasics)
 	accountAddress := sdk.AccAddress(priv.PubKey().Address().Bytes())
 	// denom := s.app.ClaimsKeeper.GetParams(s.ctx).ClaimsDenom
-	denom := "acanto"
+	denom := "aqom"
 
 	txBuilder := encodingConfig.TxConfig.NewTxBuilder()
 
