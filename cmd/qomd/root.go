@@ -38,9 +38,9 @@ import (
 	servercfg "github.com/evmos/ethermint/server/config"
 	srvflags "github.com/evmos/ethermint/server/flags"
 
-	"github.com/QOM-One/QomApp/v2/app"
-	cmdcfg "github.com/QOM-One/QomApp/v2/cmd/config"
-	cantokr "github.com/QOM-One/QomApp/v2/crypto/keyring"
+	"github.com/QOM-One/QomApp/v7/app"
+	cmdcfg "github.com/QOM-One/QomApp/v7/cmd/config"
+	cantokr "github.com/QOM-One/QomApp/v7/crypto/keyring"
 )
 
 const (
