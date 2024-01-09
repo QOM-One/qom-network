@@ -1,0 +1,16 @@
+syntax = "proto3";
+package qom.coinswap.v1;
+
+import "gogoproto/gogo.proto";
+import "qom/coinswap/v1/coinswap.proto";
+
+option go_package = "github.com/QOM-One/QomApp/v7/x/coinswap/types";
+
+// GenesisState defines the coinswap module's genesis state
+message GenesisState {
+  Params params = 1 [ (gogoproto.nullable) = false ];
+  string standard_denom = 2
+      [ (gogoproto.moretags) = "yaml:\"standard_denom\"" ];
+  repeated Pool pool = 3 [ (gogoproto.nullable) = false ];
+  uint64 sequence = 4;
+}
