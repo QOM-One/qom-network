@@ -7,10 +7,10 @@
   },
   "apis": [
     {
-      "url": "./tmp-swagger-gen/canto/epochs/v1/query.swagger.json"
+      "url": "./tmp-swagger-gen/qom/epochs/v1/query.swagger.json"
     },
     {
-      "url": "./tmp-swagger-gen/canto/erc20/v1/query.swagger.json",
+      "url": "./tmp-swagger-gen/qom/erc20/v1/query.swagger.json",
       "operationIds": {
         "rename": {
           "Params": "ERC20Params"
@@ -18,7 +18,7 @@
       }
     },
     {
-      "url": "./tmp-swagger-gen/canto/inflation/v1/query.swagger.json",
+      "url": "./tmp-swagger-gen/qom/inflation/v1/query.swagger.json",
       "operationIds": {
         "rename": {
           "Params": "InflationParams",
@@ -44,7 +44,7 @@
       }
     },
     {
-      "url": "./tmp-swagger-gen/canto/onboarding/v1/query.swagger.json",
+      "url": "./tmp-swagger-gen/qom/onboarding/v1/query.swagger.json",
       "operationIds": {
         "rename": {
           "Params": "OnboardingParams"
@@ -52,7 +52,7 @@
       }
     },
     {
-      "url": "./tmp-swagger-gen/canto/coinswap/v1/query.swagger.json",
+      "url": "./tmp-swagger-gen/qom/coinswap/v1/query.swagger.json",
       "operationIds": {
         "rename": {
           "Params": "CoinswapParams"

@@ -4,8 +4,8 @@ package canto.csr.v1;
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
-import "canto/csr/v1/params.proto";
-import "canto/csr/v1/csr.proto";
+import "qom/csr/v1/params.proto";
+import "qom/csr/v1/csr.proto";
 
 option go_package = "github.com/QOM-One/QomApp/v7/x/csr/types";
 

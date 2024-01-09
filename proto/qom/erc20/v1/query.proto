@@ -2,8 +2,8 @@ syntax = "proto3";
 package canto.erc20.v1;
 
 import "cosmos/base/query/v1beta1/pagination.proto";
-import "canto/erc20/v1/genesis.proto";
-import "canto/erc20/v1/erc20.proto";
+import "qom/erc20/v1/genesis.proto";
+import "qom/erc20/v1/erc20.proto";
 import "google/api/annotations.proto";
 import "gogoproto/gogo.proto";
 

@@ -1,7 +1,7 @@
 syntax = "proto3";
 package canto.erc20.v1;
 
-import "canto/erc20/v1/erc20.proto";
+import "qom/erc20/v1/erc20.proto";
 import "gogoproto/gogo.proto";
 
 option go_package = "github.com/QOM-One/QomApp/v7/x/erc20/types";

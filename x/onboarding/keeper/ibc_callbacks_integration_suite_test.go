@@ -100,7 +100,7 @@ func (suite *IBCTestingSuite) SetupTest() {
 	suite.IBCCosmosChain.CurrentHeader.ProposerAddress = suite.IBCCosmosChain.LastHeader.ValidatorSet.Proposer.Address
 }
 
-// FundCantoChain mints coins and sends them to the qomChain sender account
+// FundQomChain mints coins and sends them to the qomChain sender account
 func (suite *IBCTestingSuite) FundCantoChain(coins sdk.Coins) {
 	err := suite.qomChain.App.(*app.Qom).BankKeeper.MintCoins(suite.qomChain.GetContext(), inflationtypes.ModuleName, coins)
 	suite.Require().NoError(err)
@@ -120,9 +120,9 @@ func (suite *IBCTestingSuite) setupRegisterCoin(metadata banktypes.Metadata) *er
 
 // CreatePool creates a pool with aqom and the given denom
 func (suite *IBCTestingSuite) CreatePool(denom string) {
-	coincanto := sdk.NewCoin("aqom", sdk.NewIntWithDecimal(10000, 18))
+	coinqom := sdk.NewCoin("aqom", sdk.NewIntWithDecimal(10000, 18))
 	coinIBC := sdk.NewCoin(denom, sdk.NewIntWithDecimal(10000, 6))
-	coins := sdk.NewCoins(coincanto, coinIBC)
+	coins := sdk.NewCoins(coinqom, coinIBC)
 	suite.FundCantoChain(coins)
 
 	coinswapKeeper := suite.qomChain.App.(*app.Qom).CoinswapKeeper

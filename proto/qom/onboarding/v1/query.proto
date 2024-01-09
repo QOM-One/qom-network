@@ -3,7 +3,7 @@ package canto.onboarding.v1;
 
 import "google/api/annotations.proto";
 import "gogoproto/gogo.proto";
-import "canto/onboarding/v1/genesis.proto";
+import "qom/onboarding/v1/genesis.proto";
 
 option go_package = "github.com/QOM-One/QomApp/v7/x/onboarding/types";
 

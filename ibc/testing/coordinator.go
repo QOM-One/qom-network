@@ -190,7 +190,7 @@ func GetChainID(index int) string {
 
 // GetChainID returns the chainID used for the provided index.
 func GetChainIDQom(index int) string {
-	return ChainIDPrefixCanto + strconv.Itoa(index)
+	return ChainIDPrefixQom + strconv.Itoa(index)
 }
 
 // CommitBlock commits a block on the provided indexes and then increments the global time.

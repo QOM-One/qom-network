@@ -4,7 +4,7 @@ info:
   description: A REST interface for state queries and transactions
   version: 1.0.0
 paths:
-  /canto/epochs/v1/current_epoch:
+  /canto/qom/v1/current_epoch:
     get:
       summary: CurrentEpoch provide current epoch of specified identifier
       operationId: CurrentEpoch
@@ -46,7 +46,7 @@ paths:
           type: string
       tags:
         - Query
-  /canto/epochs/v1/epochs:
+  /qom/epochs/v1/epochs:
     get:
       summary: EpochInfos provide running epochInfos
       operationId: EpochInfos

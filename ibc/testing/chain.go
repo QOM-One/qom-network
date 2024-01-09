@@ -55,7 +55,7 @@ type SenderAccount struct {
 }
 
 // ChainIDPrefix defines the default chain ID prefix for canto test chains
-var ChainIDPrefixCanto = "qom_9000-"
+var ChainIDPrefixQom = "qom_9000-"
 
 // TestChain is a testing struct that wraps a simapp with the last TM Header, the current ABCI
 // header and the validators of the TestChain. It also contains a field called ChainID. This
