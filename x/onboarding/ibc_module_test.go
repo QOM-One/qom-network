@@ -54,7 +54,7 @@ type TransferTestSuite struct {
 func (suite *TransferTestSuite) SetupTest() {
 	suite.coordinator = ibctesting.NewCoordinator(suite.T(), 1, 1)
 	suite.chainA = suite.coordinator.GetChain(ibctesting.GetChainID(2))
-	suite.chainB = suite.coordinator.GetChain(ibctesting.GetChainIDCanto(1))
+	suite.chainB = suite.coordinator.GetChain(ibctesting.GetChainIDQom(1))
 }
 
 func NewTransferPath(chainA, chainB *ibctesting.TestChain) *ibctesting.Path {
@@ -168,7 +168,7 @@ func (suite *TransferTestSuite) TestHandleMsgTransfer() {
 	suite.Require().Equal(coinSentFromAToB.Amount.Sub(swapAmount), sdk.NewIntFromBigInt(balanceErc20))
 
 	// IBC transfer to blocked address
-	blockedAddr := "canto10d07y265gmmuvt4z0w9aw880jnsr700jg5j4zm"
+	blockedAddr := "qom10d07y265gmmuvt4z0w9aw880jnsr700jgthq4h"
 	coinToSendToB = suite.chainA.GetSimApp().BankKeeper.GetBalance(suite.chainA.GetContext(), suite.chainA.SenderAccount.GetAddress(), sdk.DefaultBondDenom)
 	msg = types.NewMsgTransfer(path.EndpointA.ChannelConfig.PortID, path.EndpointA.ChannelID, coinToSendToB, suite.chainA.SenderAccount.GetAddress().String(), blockedAddr, timeoutHeight, 0)
 

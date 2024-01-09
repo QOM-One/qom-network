@@ -31,7 +31,7 @@ type IBCTestingSuite struct {
 	coordinator *ibcgotesting.Coordinator
 
 	// testing chains used for convenience and readability
-	cantoChain      *ibcgotesting.TestChain
+	qomChain        *ibcgotesting.TestChain
 	IBCGravityChain *ibcgotesting.TestChain
 	IBCCosmosChain  *ibcgotesting.TestChain
 
@@ -54,10 +54,10 @@ func TestIBCTestingSuite(t *testing.T) {
 func (suite *IBCTestingSuite) SetupTest() {
 	// initializes 3 test chains
 	suite.coordinator = ibcgotesting.NewCoordinator(suite.T(), 1, 2)
-	suite.cantoChain = suite.coordinator.GetChain(ibcgotesting.GetChainIDCanto(1))
+	suite.qomChain = suite.coordinator.GetChain(ibcgotesting.GetChainIDQom(1))
 	suite.IBCGravityChain = suite.coordinator.GetChain(ibcgotesting.GetChainID(2))
 	suite.IBCCosmosChain = suite.coordinator.GetChain(ibcgotesting.GetChainID(3))
-	suite.coordinator.CommitNBlocks(suite.cantoChain, 2)
+	suite.coordinator.CommitNBlocks(suite.qomChain, 2)
 	suite.coordinator.CommitNBlocks(suite.IBCGravityChain, 2)
 	suite.coordinator.CommitNBlocks(suite.IBCCosmosChain, 2)
 
@@ -80,11 +80,11 @@ func (suite *IBCTestingSuite) SetupTest() {
 
 	params := types.DefaultParams()
 	params.EnableOnboarding = true
-	suite.cantoChain.App.(*app.Qom).OnboardingKeeper.SetParams(suite.cantoChain.GetContext(), params)
+	suite.qomChain.App.(*app.Qom).OnboardingKeeper.SetParams(suite.qomChain.GetContext(), params)
 
 	// Setup the paths between the chains
-	suite.pathGravityqom = ibcgotesting.NewTransferPath(suite.IBCGravityChain, suite.cantoChain) // clientID, connectionID, channelID empty
-	suite.pathCosmosqom = ibcgotesting.NewTransferPath(suite.IBCCosmosChain, suite.cantoChain)
+	suite.pathGravityqom = ibcgotesting.NewTransferPath(suite.IBCGravityChain, suite.qomChain) // clientID, connectionID, channelID empty
+	suite.pathCosmosqom = ibcgotesting.NewTransferPath(suite.IBCCosmosChain, suite.qomChain)
 	suite.pathGravityCosmos = ibcgotesting.NewTransferPath(suite.IBCCosmosChain, suite.IBCGravityChain)
 	suite.coordinator.Setup(suite.pathGravityqom) // clientID, connectionID, channelID filled
 	suite.coordinator.Setup(suite.pathCosmosqom)
@@ -95,25 +95,25 @@ func (suite *IBCTestingSuite) SetupTest() {
 
 	// Set the proposer address for the current header
 	// It because EVMKeeper.GetCoinbaseAddress requires ProposerAddress in block header
-	suite.cantoChain.CurrentHeader.ProposerAddress = suite.cantoChain.LastHeader.ValidatorSet.Proposer.Address
+	suite.qomChain.CurrentHeader.ProposerAddress = suite.qomChain.LastHeader.ValidatorSet.Proposer.Address
 	suite.IBCGravityChain.CurrentHeader.ProposerAddress = suite.IBCGravityChain.LastHeader.ValidatorSet.Proposer.Address
 	suite.IBCCosmosChain.CurrentHeader.ProposerAddress = suite.IBCCosmosChain.LastHeader.ValidatorSet.Proposer.Address
 }
 
-// FundCantoChain mints coins and sends them to the cantoChain sender account
+// FundCantoChain mints coins and sends them to the qomChain sender account
 func (suite *IBCTestingSuite) FundCantoChain(coins sdk.Coins) {
-	err := suite.cantoChain.App.(*app.Qom).BankKeeper.MintCoins(suite.cantoChain.GetContext(), inflationtypes.ModuleName, coins)
+	err := suite.qomChain.App.(*app.Qom).BankKeeper.MintCoins(suite.qomChain.GetContext(), inflationtypes.ModuleName, coins)
 	suite.Require().NoError(err)
-	err = suite.cantoChain.App.(*app.Qom).BankKeeper.SendCoinsFromModuleToAccount(suite.cantoChain.GetContext(), inflationtypes.ModuleName, suite.cantoChain.SenderAccount.GetAddress(), coins)
+	err = suite.qomChain.App.(*app.Qom).BankKeeper.SendCoinsFromModuleToAccount(suite.qomChain.GetContext(), inflationtypes.ModuleName, suite.qomChain.SenderAccount.GetAddress(), coins)
 	suite.Require().NoError(err)
 }
 
 // setupRegisterCoin deploys an erc20 contract and creates the token pair
 func (suite *IBCTestingSuite) setupRegisterCoin(metadata banktypes.Metadata) *erc20types.TokenPair {
-	err := suite.cantoChain.App.(*app.Qom).BankKeeper.MintCoins(suite.cantoChain.GetContext(), inflationtypes.ModuleName, sdk.Coins{sdk.NewInt64Coin(metadata.Base, 1)})
+	err := suite.qomChain.App.(*app.Qom).BankKeeper.MintCoins(suite.qomChain.GetContext(), inflationtypes.ModuleName, sdk.Coins{sdk.NewInt64Coin(metadata.Base, 1)})
 	suite.Require().NoError(err)
 
-	pair, err := suite.cantoChain.App.(*app.Qom).Erc20Keeper.RegisterCoin(suite.cantoChain.GetContext(), metadata)
+	pair, err := suite.qomChain.App.(*app.Qom).Erc20Keeper.RegisterCoin(suite.qomChain.GetContext(), metadata)
 	suite.Require().NoError(err)
 	return pair
 }
@@ -125,11 +125,11 @@ func (suite *IBCTestingSuite) CreatePool(denom string) {
 	coins := sdk.NewCoins(coincanto, coinIBC)
 	suite.FundCantoChain(coins)
 
-	coinswapKeeper := suite.cantoChain.App.(*app.Qom).CoinswapKeeper
-	coinswapKeeper.SetStandardDenom(suite.cantoChain.GetContext(), "aqom")
-	coinswapParams := coinswapKeeper.GetParams(suite.cantoChain.GetContext())
+	coinswapKeeper := suite.qomChain.App.(*app.Qom).CoinswapKeeper
+	coinswapKeeper.SetStandardDenom(suite.qomChain.GetContext(), "aqom")
+	coinswapParams := coinswapKeeper.GetParams(suite.qomChain.GetContext())
 	coinswapParams.MaxSwapAmount = sdk.NewCoins(sdk.NewCoin(denom, sdk.NewIntWithDecimal(10, 6)))
-	coinswapKeeper.SetParams(suite.cantoChain.GetContext(), coinswapParams)
+	coinswapKeeper.SetParams(suite.qomChain.GetContext(), coinswapParams)
 
 	// Create a message to add liquidity to the pool
 	msgAddLiquidity := coinswaptypes.MsgAddLiquidity{
@@ -137,11 +137,11 @@ func (suite *IBCTestingSuite) CreatePool(denom string) {
 		ExactStandardAmt: sdk.NewIntWithDecimal(10000, 18),
 		MinLiquidity:     sdk.NewInt(1),
 		Deadline:         time.Now().Add(time.Minute * 10).Unix(),
-		Sender:           suite.cantoChain.SenderAccount.GetAddress().String(),
+		Sender:           suite.qomChain.SenderAccount.GetAddress().String(),
 	}
 
 	// Add liquidity to the pool
-	suite.cantoChain.App.(*app.Qom).CoinswapKeeper.AddLiquidity(suite.cantoChain.GetContext(), &msgAddLiquidity)
+	suite.qomChain.App.(*app.Qom).CoinswapKeeper.AddLiquidity(suite.qomChain.GetContext(), &msgAddLiquidity)
 }
 
 var (

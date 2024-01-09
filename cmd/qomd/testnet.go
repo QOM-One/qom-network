@@ -44,7 +44,7 @@ import (
 	evmtypes "github.com/evmos/ethermint/x/evm/types"
 
 	cmdcfg "github.com/QOM-One/QomApp/v7/cmd/config"
-	cantokr "github.com/QOM-One/QomApp/v7/crypto/keyring"
+	qomkr "github.com/QOM-One/QomApp/v7/crypto/keyring"
 	"github.com/QOM-One/QomApp/v7/testutil/network"
 )
 
@@ -263,7 +263,7 @@ func initTestnetFiles(
 		memo := fmt.Sprintf("%s@%s:26656", nodeIDs[i], ip)
 		genFiles = append(genFiles, nodeConfig.GenesisFile())
 
-		kb, err := keyring.New(sdk.KeyringServiceName(), args.keyringBackend, nodeDir, inBuf, cantokr.Option())
+		kb, err := keyring.New(sdk.KeyringServiceName(), args.keyringBackend, nodeDir, inBuf, qomkr.Option())
 		if err != nil {
 			return err
 		}

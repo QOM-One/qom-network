@@ -34,11 +34,11 @@ func NewCoordinator(t *testing.T, nEVMChains, mCosmosChains int) *Coordinator {
 	}
 
 	// setup EVM chains
-	DefaultTestingAppInit = CantoTestingAppInit
+	DefaultTestingAppInit = QomTestingAppInit
 
 	for i := 1; i <= nEVMChains; i++ {
-		chainID := GetChainIDCanto(i)
-		chains[chainID] = NewTestChainCanto(t, coord, chainID)
+		chainID := GetChainIDQom(i)
+		chains[chainID] = NewTestChainQom(t, coord, chainID)
 	}
 
 	// setup Cosmos chains
@@ -189,7 +189,7 @@ func GetChainID(index int) string {
 }
 
 // GetChainID returns the chainID used for the provided index.
-func GetChainIDCanto(index int) string {
+func GetChainIDQom(index int) string {
 	return ChainIDPrefixCanto + strconv.Itoa(index)
 }
 

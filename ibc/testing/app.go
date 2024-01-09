@@ -31,12 +31,12 @@ import (
 	tmtypes "github.com/tendermint/tendermint/types"
 	dbm "github.com/tendermint/tm-db"
 
-	cantoapp "github.com/QOM-One/QomApp/v7/app"
+	qomapp "github.com/QOM-One/QomApp/v7/app"
 )
 
 var DefaultTestingAppInit func() (TestingApp, map[string]json.RawMessage) = SetupTestingApp
 
-var CantoTestingAppInit func() (TestingApp, map[string]json.RawMessage) = SetupTestingCantoApp
+var QomTestingAppInit func() (TestingApp, map[string]json.RawMessage) = SetupTestingQomApp
 
 type TestingApp interface {
 	abci.Application
@@ -64,12 +64,12 @@ func SetupTestingApp() (TestingApp, map[string]json.RawMessage) {
 }
 
 // SetupTestingApp initializes the IBC-go testing application
-func SetupTestingCantoApp() (TestingApp, map[string]json.RawMessage) {
+func SetupTestingQomApp() (TestingApp, map[string]json.RawMessage) {
 	db := dbm.NewMemDB()
-	cfg := encoding.MakeConfig(cantoapp.ModuleBasics)
-	app := cantoapp.NewQom(log.NewNopLogger(), db, nil, true, map[int64]bool{}, cantoapp.DefaultNodeHome, 5, false, cfg, simapp.EmptyAppOptions{})
+	cfg := encoding.MakeConfig(qomapp.ModuleBasics)
+	app := qomapp.NewQom(log.NewNopLogger(), db, nil, true, map[int64]bool{}, qomapp.DefaultNodeHome, 5, false, cfg, simapp.EmptyAppOptions{})
 
-	return app, cantoapp.NewDefaultGenesisState()
+	return app, qomapp.NewDefaultGenesisState()
 }
 
 func SetupWithGenesisValSet(t *testing.T, valSet *tmtypes.ValidatorSet, genAccs []authtypes.GenesisAccount, chainID string, powerReduction sdk.Int, balances ...banktypes.Balance) TestingApp {
@@ -163,7 +163,7 @@ func SetupWithGenesisValSet(t *testing.T, valSet *tmtypes.ValidatorSet, genAccs 
 // that also act as delegators. For simplicity, each validator is bonded with a delegation
 // of one consensus engine unit (10^6) in the default token of the simapp from first genesis
 // account. A Nop logger is set in SimApp.
-func SetupWithGenesisValSetCanto(t *testing.T, valSet *tmtypes.ValidatorSet, genAccs []authtypes.GenesisAccount, chainID string, balances ...banktypes.Balance) TestingApp {
+func SetupWithGenesisValSetQom(t *testing.T, valSet *tmtypes.ValidatorSet, genAccs []authtypes.GenesisAccount, chainID string, balances ...banktypes.Balance) TestingApp {
 	app, genesisState := DefaultTestingAppInit()
 	// set genesis accounts
 	authGenesis := authtypes.NewGenesisState(authtypes.DefaultParams(), genAccs)
@@ -224,7 +224,7 @@ func SetupWithGenesisValSetCanto(t *testing.T, valSet *tmtypes.ValidatorSet, gen
 		abci.RequestInitChain{
 			ChainId:         chainID,
 			Validators:      []abci.ValidatorUpdate{},
-			ConsensusParams: cantoapp.DefaultConsensusParams,
+			ConsensusParams: qomapp.DefaultConsensusParams,
 			AppStateBytes:   stateBytes,
 		},
 	)
