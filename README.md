@@ -1,7 +1,7 @@
 # Becoming A Validator
 
 **How to validate on the Qom Mainnet**
-
+# TODO
 *(qom_766-1)*
 
 > Genesis file [Published](https://github.com/QOM-One/QomApp/raw/main/Mainnet/genesis.json)
