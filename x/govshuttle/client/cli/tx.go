@@ -47,7 +47,7 @@ func NewLendingMarketProposalCmd() *cobra.Command {
 		Use:   "lending-market [metadata]",
 		Args:  cobra.ExactArgs(1),
 		Short: "Submit a lending market proposal",
-		Long: `Submit a proposal for the Canto Lending Market along with an initial deposit.
+		Long: `Submit a proposal for the Qom Lending Market along with an initial deposit.
 Upon passing, the
 The proposal details must be supplied via a JSON file.`,
 		Example: fmt.Sprintf(`$ %s tx gov submit-proposal lending-market <path/to/metadata.json> --from=<key_or_address> --title=<title> --description=<description>
@@ -57,7 +57,7 @@ Where metadata.json contains (example):
 {
 	"Account": ["address_1", "address_2"],
         "PropId":  1,
-	"values": ["canto", "osmo"],
+	"values": ["qom", "osmo"],
 	"calldatas: ["calldata1", "calldata2"],
 	"signatures": ["func1", "func2"]
 }`, version.AppName,
@@ -130,8 +130,8 @@ func NewTreasuryProposalCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "treasury-proposal [metadata]",
 		Args:  cobra.ExactArgs(1),
-		Short: "Submit a proposal to the Canto Treasury",
-		Long: `Submit a proposal for the Canto Treasury along with an initial deposit.
+		Short: "Submit a proposal to the Qom Treasury",
+		Long: `Submit a proposal for the Qom Treasury along with an initial deposit.
 Upon passing, the
 The proposal details must be supplied via a JSON file.`,
 		Example: fmt.Sprintf(`$ %s tx gov submit-proposal treasury-proposal <path/to/metadata.json> --from=<key_or_address> --title=<title> --description=<description>
@@ -142,7 +142,7 @@ Where metadata.json contains (example):
 	"recipient": "0xfffffff...",
         "PropID":  1,
 	"amount": 1,
-	"denom": "canto/note"
+	"denom": "qom/note"
 }`, version.AppName,
 		),
 		RunE: func(cmd *cobra.Command, args []string) error {

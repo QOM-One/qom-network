@@ -24,11 +24,11 @@ A GENTX is a genesis transaction that adds a validator node to the genesis file.
 ```bash
 qomd gentx <key_name> <token-amount>aqom --chain-id=<chain_id> --moniker=<your_moniker> --commission-max-change-rate=0.01 --commission-max-rate=0.10 --commission-rate=0.05 --details="<details here>" --security-contact="<email>" --website="<website>"
 ```
-* Fork [Canto](https://github.com/QOM-One/QomApp)
+* Fork [Qom](https://github.com/QOM-One/QomApp)
 
-* Copy the contents of `${HOME}/.qomd/config/gentx/gentx-XXXXXXXX.json` to `$HOME/Canto/Mainnet/gentx/<yourvalidatorname>.json`
+* Copy the contents of `${HOME}/.qomd/config/gentx/gentx-XXXXXXXX.json` to `$HOME/Qom/Mainnet/gentx/<yourvalidatorname>.json`
 
-* Copy the genesis.json file `${HOME}/.qomd/config/genesis.json` to `$HOME/Canto/Mainnet/Genesis-Files/`
+* Copy the genesis.json file `${HOME}/.qomd/config/genesis.json` to `$HOME/Qom/Mainnet/Genesis-Files/`
 
 * Create a pull request to the main branch of the [repository](https://github.com/QOM-One/QomApp/Mainnet/gentx)
 
@@ -37,9 +37,9 @@ qomd gentx <key_name> <token-amount>aqom --chain-id=<chain_id> --moniker=<your_m
 You do not need to reinitialize your Qom Node. Basically a hard fork on Cosmos is starting from block 1 with a new genesis file. All your configuration files can stay the same. Steps to ensure a safe restart
 
 1) Backup your data directory. 
-* `mkdir $HOME/canto-backup` 
+* `mkdir $HOME/qom-backup` 
 
-* `cp $HOME/.qomd/data $HOME/canto-backup/`
+* `cp $HOME/.qomd/data $HOME/qom-backup/`
 
 2) Remove old genesis 
 
@@ -61,7 +61,7 @@ If you do not reinitialize then your peer id and ip address will remain the same
 
 7) Download the new binary
 ```
-cd $HOME/Canto
+cd $HOME/Qom
 git checkout <branch>
 make install
 mv $HOME/go/bin/qomd /usr/bin/
@@ -76,7 +76,7 @@ mv $HOME/go/bin/qomd /usr/bin/
 
 1) Move your backup data directory into your .qomd directory 
 
-* `mv HOME/canto-backup/data $HOME/.canto/`
+* `mv HOME/qom-backup/data $HOME/.qom/`
 
 2) Download the old genesis file
 

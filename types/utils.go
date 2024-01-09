@@ -13,18 +13,18 @@ import (
 )
 
 const (
-	// MainnetChainID defines the canto EIP155 chain ID for mainnet
-	MainnetChainID = "canto_9001"
-	// TestnetChainID defines the canto EIP155 chain ID for testnet
-	TestnetChainID = "canto_9000"
+	// MainnetChainID defines the qom EIP155 chain ID for mainnet
+	MainnetChainID = "qom_9001"
+	// TestnetChainID defines the qom EIP155 chain ID for testnet
+	TestnetChainID = "qom_9000"
 )
 
-// IsMainnet returns true if the chain-id has the canto mainnet EIP155 chain prefix.
+// IsMainnet returns true if the chain-id has the qom mainnet EIP155 chain prefix.
 func IsMainnet(chainID string) bool {
 	return strings.HasPrefix(chainID, MainnetChainID)
 }
 
-// IsTestnet returns true if the chain-id has the canto testnet EIP155 chain prefix.
+// IsTestnet returns true if the chain-id has the qom testnet EIP155 chain prefix.
 func IsTestnet(chainID string) bool {
 	return strings.HasPrefix(chainID, TestnetChainID)
 }
@@ -59,7 +59,7 @@ func IsSupportedKey(pubkey cryptotypes.PubKey) bool {
 
 // GetqomAddressFromBech32 returns the sdk.Account address of given address,
 // while also changing bech32 human readable prefix (HRP) to the value set on
-// the global sdk.Config (eg: `canto`).
+// the global sdk.Config (eg: `qom`).
 // The function fails if the provided bech32 address is invalid.
 func GetqomAddressFromBech32(address string) (sdk.AccAddress, error) {
 	bech32Prefix := strings.SplitN(address, "1", 2)[0]

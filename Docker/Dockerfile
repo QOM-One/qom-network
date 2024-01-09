@@ -25,7 +25,7 @@ RUN snap install go --classic
 
 # builds out qomd
 RUN git clone https://github.com/QOM-One/QomApp-Testnet
-WORKDIR /Canto-Testnet/cmd/qomd
+WORKDIR /Qom-Testnet/cmd/qomd
 RUN go install -tags ledger ./... &&\
     mv $HOME/go/bin/qomd /usr/bin/
 
@@ -43,7 +43,7 @@ RUN sed -i 's/minimum-gas-prices = ""/minimum-gas-prices = "0.0001aqom"/g' $HOME
 RUN wget https://github.com/QOM-One/QomApp-Testnet-v2/raw/main/Docker/qomd.service -P $HOME/systemd/system/
 
 # run qomd
-WORKDIR /Canto-Testnet/cmd/qomd
+WORKDIR /Qom-Testnet/cmd/qomd
 RUN sudo systemctl daemon-reload &&\
     sudo systemctl enable qomd.service &&\
     systemctl start qomd && journalctl -u qomd -f

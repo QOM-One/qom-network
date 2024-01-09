@@ -34,7 +34,7 @@ func (k Keeper) OnRecvPacket(
 
 	// It always returns original ACK
 	// meaning that even if the swap or conversion fails, it does not revert IBC transfer
-	// and the asset transferred to the Canto network will still remain in the Canto network
+	// and the asset transferred to the Qom network will still remain in the Qom network
 
 	params := k.GetParams(ctx)
 	if !params.EnableOnboarding {
@@ -53,7 +53,7 @@ func (k Keeper) OnRecvPacket(
 		return ack
 	}
 
-	// Get recipient addresses in `canto1` and the original bech32 format
+	// Get recipient addresses in `qom1` and the original bech32 format
 	_, recipient, senderBech32, recipientBech32, err := ibc.GetTransferSenderRecipient(packet)
 	if err != nil {
 		return channeltypes.NewErrorAcknowledgement(err.Error())

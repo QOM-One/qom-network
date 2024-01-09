@@ -25,7 +25,7 @@ type Coordinator struct {
 	Chains      map[string]*TestChain
 }
 
-// NewCoordinator initializes Coordinator with N EVM TestChain's (canto apps) and M Cosmos chains (Simulation Apps)
+// NewCoordinator initializes Coordinator with N EVM TestChain's (qom apps) and M Cosmos chains (Simulation Apps)
 func NewCoordinator(t *testing.T, nEVMChains, mCosmosChains int) *Coordinator {
 	chains := make(map[string]*TestChain)
 	coord := &Coordinator{

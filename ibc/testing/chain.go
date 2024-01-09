@@ -54,7 +54,7 @@ type SenderAccount struct {
 	SenderAccount authtypes.AccountI
 }
 
-// ChainIDPrefix defines the default chain ID prefix for canto test chains
+// ChainIDPrefix defines the default chain ID prefix for qom test chains
 var ChainIDPrefixQom = "qom_9000-"
 
 // TestChain is a testing struct that wraps a simapp with the last TM Header, the current ABCI

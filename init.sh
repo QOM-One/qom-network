@@ -49,8 +49,8 @@ cat $HOME/.qomd/config/genesis.json | jq '.consensus_params["block"]["max_gas"]=
 # cat $HOME/.qomd/config/genesis.json | jq -r --arg current_date "$current_date" '.app_state["claims"]["params"]["duration_until_decay"]="100000s"' > $HOME/.qomd/config/tmp_genesis.json && mv $HOME/.qomd/config/tmp_genesis.json $HOME/.qomd/config/genesis.json
 
 # # Claim module account:
-# # 0xA61808Fe40fEb8B3433778BBC2ecECCAA47c8c47 || canto15cvq3ljql6utxseh0zau9m8ve2j8erz84vyscz
-# cat $HOME/.qomd/config/genesis.json | jq -r --arg amount_to_claim "$amount_to_claim" '.app_state["bank"]["balances"] += [{"address":"canto15cvq3ljql6utxseh0zau9m8ve2j8erz84vyscz","coins":[{"denom":"aqom", "amount":$amount_to_claim}]}]' > $HOME/.qomd/config/tmp_genesis.json && mv $HOME/.qomd/config/tmp_genesis.json $HOME/.qomd/config/genesis.json
+# # 0xA61808Fe40fEb8B3433778BBC2ecECCAA47c8c47 || qom15cvq3ljql6utxseh0zau9m8ve2j8erz84np90w
+# cat $HOME/.qomd/config/genesis.json | jq -r --arg amount_to_claim "$amount_to_claim" '.app_state["bank"]["balances"] += [{"address":"qom15cvq3ljql6utxseh0zau9m8ve2j8erz84np90w","coins":[{"denom":"aqom", "amount":$amount_to_claim}]}]' > $HOME/.qomd/config/tmp_genesis.json && mv $HOME/.qomd/config/tmp_genesis.json $HOME/.qomd/config/genesis.json
 
 # disable produce empty block
 if [[ "$OSTYPE" == "darwin"* ]]; then

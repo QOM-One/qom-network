@@ -19,7 +19,7 @@ var (
 	_ govtypes.Content = &TreasuryProposal{}
 )
 
-//Register Compound Proposal type as a valid proposal type in goveranance module
+// Register Compound Proposal type as a valid proposal type in goveranance module
 func init() {
 	govtypes.RegisterProposalType(ProposalTypeLendingMarket)
 	govtypes.RegisterProposalType(ProposalTypeTreasury)
@@ -82,7 +82,7 @@ func (tp *TreasuryProposal) ValidateBasic() error {
 	tm := tp.GetMetadata()
 	s := strings.ToLower(tm.GetDenom())
 
-	if s != "canto" && s != "note" {
+	if s != "qom" && s != "note" {
 		return sdkerrors.Wrapf(govtypes.ErrInvalidProposalContent, "%s is not a valid denom string", tm.GetDenom())
 	}
 

@@ -52,15 +52,15 @@ done
 
 set -euxo pipefail
 
-DATA_DIR=$(mktemp -d -t canto-datadir.XXXXX)
+DATA_DIR=$(mktemp -d -t qom-datadir.XXXXX)
 
 if [[ ! "$DATA_DIR" ]]; then
     echo "Could not create $DATA_DIR"
     exit 1
 fi
 
-# Compile canto
-echo "compiling canto"
+# Compile qom
+echo "compiling qom"
 make build
 
 # PID array declaration
@@ -103,17 +103,17 @@ init_func() {
 }
 
 start_func() {
-    echo "starting canto node $i in background ..."
+    echo "starting qom node $i in background ..."
     "$PWD"/build/qomd start --pruning=nothing --rpc.unsafe \
     --p2p.laddr tcp://$IP_ADDR:$NODE_P2P_PORT"$i" --address tcp://$IP_ADDR:$NODE_PORT"$i" --rpc.laddr tcp://$IP_ADDR:$NODE_RPC_PORT"$i" \
     --json-rpc.address=$IP_ADDR:$RPC_PORT"$i" \
     --keyring-backend test --home "$DATA_DIR$i" \
     >"$DATA_DIR"/node"$i".log 2>&1 & disown
 
-    canto_PID=$!
-    echo "started canto node, pid=$canto_PID"
+    qom_PID=$!
+    echo "started qom node, pid=$qom_PID"
     # add PID to array
-    arr+=("$canto_PID")
+    arr+=("$qom_PID")
 
     if [[ $MODE == "pending" ]]; then
       echo "waiting for the first block..."
@@ -147,7 +147,7 @@ if [[ -z $TEST || $TEST == "rpc" ||  $TEST == "pending" ]]; then
 
     for i in $(seq 1 "$TEST_QTD"); do
         HOST_RPC=http://$IP_ADDR:$RPC_PORT"$i"
-        echo "going to test canto node $HOST_RPC ..."
+        echo "going to test qom node $HOST_RPC ..."
         MODE=$MODE HOST=$HOST_RPC go test ./tests/... -timeout=$time_out -v -short
 
         RPC_FAIL=$?
@@ -156,12 +156,12 @@ if [[ -z $TEST || $TEST == "rpc" ||  $TEST == "pending" ]]; then
 fi
 
 stop_func() {
-    canto_PID=$i
-    echo "shutting down node, pid=$canto_PID ..."
+    qom_PID=$i
+    echo "shutting down node, pid=$qom_PID ..."
 
-    # Shutdown canto node
-    kill -9 "$canto_PID"
-    wait "$canto_PID"
+    # Shutdown qom node
+    kill -9 "$qom_PID"
+    wait "$qom_PID"
 
     if [ $REMOVE_DATA_DIR == "true" ]
     then

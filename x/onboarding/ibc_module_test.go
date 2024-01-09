@@ -155,7 +155,7 @@ func (suite *TransferTestSuite) TestHandleMsgTransfer() {
 	// Check that the IBC voucher balance is same
 	suite.Require().Equal(balanceVoucherBefore, balanceVoucher)
 
-	// check whether the canto is swapped and the amount is greater than the threshold
+	// check whether the qom is swapped and the amount is greater than the threshold
 	if balanceQomBefore.Amount.LT(middlewareParams.AutoSwapThreshold) {
 		suite.Require().Equal(balanceQom.Amount, balanceQomBefore.Amount.Add(middlewareParams.AutoSwapThreshold))
 	} else {

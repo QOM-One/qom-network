@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-/// @notice Implementation of CIP-001 https://github.com/Canto-Improvement-Proposals/CIPs/blob/main/CIP-001.md
+/// @notice Implementation of CIP-001 https://github.com/QOM-Improvement-Proposals/CIPs/blob/main/CIP-001.md
 /// @dev Every contract is responsible to register itself in the constructor by calling `register(address)`.
 ///      If contract is using proxy pattern, it's possible to register retroactively, however past fees will be lost.
 ///      Recipient withdraws fees by calling `withdraw(uint256,address,uint256)`.

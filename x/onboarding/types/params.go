@@ -12,7 +12,7 @@ var (
 	ParamStoreKeyEnableOnboarding     = []byte("EnableOnboarding")
 	ParamStoreKeyAutoSwapThreshold    = []byte("AutoSwapThreshold")
 	ParamsStoreKeyWhitelistedChannels = []byte("WhitelistedChannels")
-	DefaultAutoSwapThreshold          = sdk.NewIntWithDecimal(4, 18) // 4 Canto
+	DefaultAutoSwapThreshold          = sdk.NewIntWithDecimal(4, 18) // 4 Qom
 	DefaultWhitelistedChannels        = []string{"channel-0"}
 )
 

@@ -103,7 +103,7 @@ func (k Keeper) RegisterERC20(
 }
 
 // CreateCoinMetadata generates the metadata to represent the ERC20 token on
-// canto.
+// qom.
 func (k Keeper) CreateCoinMetadata(
 	ctx sdk.Context,
 	contract common.Address,

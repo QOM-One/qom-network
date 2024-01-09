@@ -16,7 +16,7 @@ import (
 
 func init() {
 	cfg := sdk.GetConfig()
-	cfg.SetBech32PrefixForAccount("canto", "cantopub")
+	cfg.SetBech32PrefixForAccount("qom", "qompub")
 }
 
 func TestIsSupportedKeys(t *testing.T) {
@@ -87,32 +87,32 @@ func TestGetqomAddressFromBech32(t *testing.T) {
 		},
 		{
 			"invalid bech32 address",
-			"canto",
+			"qom",
 			"",
 			true,
 		},
 		{
 			"invalid address bytes",
-			"canto1123",
+			"qom1123",
 			"",
 			true,
 		},
 		{
-			"canto address",
-			"canto1qql8ag4cluz6r4dz28p3w00dnc9w8ueud7tc0s",
-			"canto1qql8ag4cluz6r4dz28p3w00dnc9w8ueud7tc0s",
+			"qom address",
+			"qom1qql8ag4cluz6r4dz28p3w00dnc9w8ueudpwdcu",
+			"qom1qql8ag4cluz6r4dz28p3w00dnc9w8ueudpwdcu",
 			false,
 		},
 		{
 			"cosmos address",
 			"cosmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueulg2gmc",
-			"canto1qql8ag4cluz6r4dz28p3w00dnc9w8ueud7tc0s",
+			"qom1qql8ag4cluz6r4dz28p3w00dnc9w8ueudpwdcu",
 			false,
 		},
 		{
 			"osmosis address",
 			"osmo1qql8ag4cluz6r4dz28p3w00dnc9w8ueuhnecd2",
-			"canto1qql8ag4cluz6r4dz28p3w00dnc9w8ueud7tc0s",
+			"qom1qql8ag4cluz6r4dz28p3w00dnc9w8ueudpwdcu",
 			false,
 		},
 	}

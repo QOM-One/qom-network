@@ -101,7 +101,7 @@ func (suite *IBCTestingSuite) SetupTest() {
 }
 
 // FundQomChain mints coins and sends them to the qomChain sender account
-func (suite *IBCTestingSuite) FundCantoChain(coins sdk.Coins) {
+func (suite *IBCTestingSuite) FundQomChain(coins sdk.Coins) {
 	err := suite.qomChain.App.(*app.Qom).BankKeeper.MintCoins(suite.qomChain.GetContext(), inflationtypes.ModuleName, coins)
 	suite.Require().NoError(err)
 	err = suite.qomChain.App.(*app.Qom).BankKeeper.SendCoinsFromModuleToAccount(suite.qomChain.GetContext(), inflationtypes.ModuleName, suite.qomChain.SenderAccount.GetAddress(), coins)
@@ -123,7 +123,7 @@ func (suite *IBCTestingSuite) CreatePool(denom string) {
 	coinqom := sdk.NewCoin("aqom", sdk.NewIntWithDecimal(10000, 18))
 	coinIBC := sdk.NewCoin(denom, sdk.NewIntWithDecimal(10000, 6))
 	coins := sdk.NewCoins(coinqom, coinIBC)
-	suite.FundCantoChain(coins)
+	suite.FundQomChain(coins)
 
 	coinswapKeeper := suite.qomChain.App.(*app.Qom).CoinswapKeeper
 	coinswapKeeper.SetStandardDenom(suite.qomChain.GetContext(), "aqom")

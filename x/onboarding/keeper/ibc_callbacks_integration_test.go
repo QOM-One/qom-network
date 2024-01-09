@@ -14,7 +14,7 @@ import (
 )
 
 var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap and convert", Ordered, func() {
-	coincanto := sdk.NewCoin("aqom", sdk.ZeroInt())
+	coinqom := sdk.NewCoin("aqom", sdk.ZeroInt())
 	ibcBalance := sdk.NewCoin(uusdcIbcdenom, sdk.NewIntWithDecimal(10000, 6))
 	coinUsdc := sdk.NewCoin("uUSDC", sdk.NewIntWithDecimal(10000, 6))
 	coinAtom := sdk.NewCoin("uatom", sdk.NewIntWithDecimal(10000, 6))
@@ -36,7 +36,7 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 			// deploy ERC20 contract and register token pair
 			tokenPair = s.setupRegisterCoin(metadataIbcUSDC)
 
-			// send coins from Cosmos to canto
+			// send coins from Cosmos to qom
 			sender = s.IBCCosmosChain.SenderAccount.GetAddress().String()
 			receiver = s.qomChain.SenderAccount.GetAddress().String()
 			senderAcc = sdk.MustAccAddressFromBech32(sender)
@@ -46,7 +46,7 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 		})
 		It("No swap and convert operation - aqom balance should be 0", func() {
 			nativeqom := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, "aqom")
-			Expect(nativeqom).To(Equal(coincanto))
+			Expect(nativeqom).To(Equal(coinqom))
 		})
 		It("Qom chain's IBC voucher balance should be same with the transferred amount", func() {
 			ibcAtom := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, uatomIbcdenom)
@@ -69,7 +69,7 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 				senderAcc = sdk.MustAccAddressFromBech32(sender)
 				receiverAcc = sdk.MustAccAddressFromBech32(receiver)
 
-				s.FundCantoChain(sdk.NewCoins(ibcBalance))
+				s.FundQomChain(sdk.NewCoins(ibcBalance))
 
 			})
 
@@ -78,8 +78,8 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 					result = s.SendAndReceiveMessage(s.pathGravityqom, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
 				})
 				It("No swap: aqom balance should be 0", func() {
-					nativecanto := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, "aqom")
-					Expect(nativecanto).To(Equal(coincanto))
+					nativeqom := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, "aqom")
+					Expect(nativeqom).To(Equal(coinqom))
 				})
 				It("Convert: Qom chain's IBC voucher balance should be same with the original balance", func() {
 					ibcUsdc := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, uusdcIbcdenom)
@@ -107,8 +107,8 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 						result = s.SendAndReceiveMessage(s.pathGravityqom, s.IBCGravityChain, "uUSDC", 1000000, sender, receiver, 1)
 					})
 					It("No swap: Balance of aqom should be same with the original aqom balance (0)", func() {
-						nativecanto := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, "aqom")
-						Expect(nativecanto).To(Equal(sdk.NewCoin("aqom", sdk.ZeroInt())))
+						nativeqom := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, "aqom")
+						Expect(nativeqom).To(Equal(sdk.NewCoin("aqom", sdk.ZeroInt())))
 					})
 					It("Convert: Qom chain's IBC voucher balance should be same with the original balance", func() {
 						ibcUsdc := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, uusdcIbcdenom)
@@ -133,8 +133,8 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 					})
 					It("Swap: balance of aqom should be same with the auto swap threshold", func() {
 						autoSwapThreshold := s.qomChain.App.(*app.Qom).OnboardingKeeper.GetParams(s.qomChain.GetContext()).AutoSwapThreshold
-						nativecanto := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, "aqom")
-						Expect(nativecanto).To(Equal(sdk.NewCoin("aqom", autoSwapThreshold)))
+						nativeqom := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, "aqom")
+						Expect(nativeqom).To(Equal(sdk.NewCoin("aqom", autoSwapThreshold)))
 					})
 					It("Convert: Qom chain's IBC voucher balance should be same with the original balance", func() {
 						ibcUsdc := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, uusdcIbcdenom)
@@ -156,15 +156,15 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 					})
 				})
 
-				When("Qom chain's aqom balance is between 0 and auto swap threshold (3canto)", func() {
+				When("Qom chain's aqom balance is between 0 and auto swap threshold (3qom)", func() {
 					BeforeEach(func() {
-						s.FundCantoChain(sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(3, 18))))
+						s.FundQomChain(sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(3, 18))))
 						result = s.SendAndReceiveMessage(s.pathGravityqom, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
 					})
 					It("Auto swap operation: balance of aqom should be same with the sum of original aqom balance and auto swap threshold", func() {
 						autoSwapThreshold := s.qomChain.App.(*app.Qom).OnboardingKeeper.GetParams(s.qomChain.GetContext()).AutoSwapThreshold
-						nativecanto := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, "aqom")
-						Expect(nativecanto).To(Equal(sdk.NewCoin("aqom", autoSwapThreshold.Add(sdk.NewIntWithDecimal(3, 18)))))
+						nativeqom := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, "aqom")
+						Expect(nativeqom).To(Equal(sdk.NewCoin("aqom", autoSwapThreshold.Add(sdk.NewIntWithDecimal(3, 18)))))
 					})
 					It("Convert: Qom chain's IBC voucher balance should be same with the original balance", func() {
 						ibcUsdc := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, uusdcIbcdenom)
@@ -185,14 +185,14 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 						Expect(erc20balance).To(Equal(convertAmount.BigInt()))
 					})
 				})
-				When("Qom chain's aqom balance is bigger than the auto swap threshold (4canto)", func() {
+				When("Qom chain's aqom balance is bigger than the auto swap threshold (4qom)", func() {
 					BeforeEach(func() {
-						s.FundCantoChain(sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(4, 18))))
+						s.FundQomChain(sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(4, 18))))
 						result = s.SendAndReceiveMessage(s.pathGravityqom, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
 					})
-					It("No swap: balance of aqom should be same with the original aqom balance (4canto)", func() {
-						nativecanto := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, "aqom")
-						Expect(nativecanto).To(Equal(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(4, 18))))
+					It("No swap: balance of aqom should be same with the original aqom balance (4qom)", func() {
+						nativeqom := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, "aqom")
+						Expect(nativeqom).To(Equal(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(4, 18))))
 					})
 					It("Convert: Qom chain's IBC voucher balance should be same with the original balance", func() {
 						ibcUsdc := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, uusdcIbcdenom)
@@ -224,15 +224,15 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 				receiverAcc = sdk.MustAccAddressFromBech32(receiver)
 
 				s.CreatePool(uusdcIbcdenom)
-				s.FundCantoChain(sdk.NewCoins(ibcBalance))
-				s.FundCantoChain(sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(3, 18))))
+				s.FundQomChain(sdk.NewCoins(ibcBalance))
+				s.FundQomChain(sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(3, 18))))
 				result = s.SendAndReceiveMessage(s.pathGravityqom, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
 
 			})
 			It("Auto swap operation: balance of aqom should be same with the sum of original aqom balance and auto swap threshold", func() {
 				autoSwapThreshold := s.qomChain.App.(*app.Qom).OnboardingKeeper.GetParams(s.qomChain.GetContext()).AutoSwapThreshold
-				nativecanto := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, "aqom")
-				Expect(nativecanto).To(Equal(sdk.NewCoin("aqom", autoSwapThreshold.Add(sdk.NewIntWithDecimal(3, 18)))))
+				nativeqom := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, "aqom")
+				Expect(nativeqom).To(Equal(sdk.NewCoin("aqom", autoSwapThreshold.Add(sdk.NewIntWithDecimal(3, 18)))))
 			})
 			It("No convert: Qom chain's IBC voucher balance should be same with (original balance + transferred amount - swapped amount)", func() {
 				events := result.GetEvents()
@@ -250,14 +250,14 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 				receiverAcc = sdk.MustAccAddressFromBech32(receiver)
 
 				s.CreatePool(uusdcIbcdenom)
-				s.FundCantoChain(sdk.NewCoins(ibcBalance))
-				s.FundCantoChain(sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(3, 18))))
+				s.FundQomChain(sdk.NewCoins(ibcBalance))
+				s.FundQomChain(sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(3, 18))))
 				result = s.SendAndReceiveMessage(s.pathGravityqom, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
 			})
 			It("Auto swap operation: balance of aqom should be same with the sum of original aqom balance and auto swap threshold", func() {
 				autoSwapThreshold := s.qomChain.App.(*app.Qom).OnboardingKeeper.GetParams(s.qomChain.GetContext()).AutoSwapThreshold
-				nativecanto := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, "aqom")
-				Expect(nativecanto).To(Equal(sdk.NewCoin("aqom", autoSwapThreshold.Add(sdk.NewIntWithDecimal(3, 18)))))
+				nativeqom := s.qomChain.App.(*app.Qom).BankKeeper.GetBalance(s.qomChain.GetContext(), receiverAcc, "aqom")
+				Expect(nativeqom).To(Equal(sdk.NewCoin("aqom", autoSwapThreshold.Add(sdk.NewIntWithDecimal(3, 18)))))
 			})
 			It("No convert: Qom chain's IBC voucher balance should be same with (original balance + transferred amount - swapped amount)", func() {
 				events := result.GetEvents()

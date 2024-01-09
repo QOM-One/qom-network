@@ -14,7 +14,7 @@ import (
 
 func init() {
 	cfg := sdk.GetConfig()
-	cfg.SetBech32PrefixForAccount("canto", "cantopub")
+	cfg.SetBech32PrefixForAccount("qom", "qompub")
 }
 
 func TestGetTransferSenderRecipient(t *testing.T) {
@@ -55,7 +55,7 @@ func TestGetTransferSenderRecipient(t *testing.T) {
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
 						Sender:   "cosmos1",
-						Receiver: "canto1x2w87cvt5mqjncav4lxy8yfreynn273xrrp06v",
+						Receiver: "qom1x2w87cvt5mqjncav4lxy8yfreynn273xruy6dq",
 						Amount:   "123456",
 					},
 				),
@@ -69,7 +69,7 @@ func TestGetTransferSenderRecipient(t *testing.T) {
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
 						Sender:   "cosmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueulg2gmc",
-						Receiver: "canto1",
+						Receiver: "qom1",
 						Amount:   "123456",
 					},
 				),
@@ -78,48 +78,48 @@ func TestGetTransferSenderRecipient(t *testing.T) {
 			true,
 		},
 		{
-			"valid - cosmos sender, canto recipient",
+			"valid - cosmos sender, qom recipient",
 			channeltypes.Packet{
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
 						Sender:   "cosmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueulg2gmc",
-						Receiver: "canto1x2w87cvt5mqjncav4lxy8yfreynn273xrrp06v",
+						Receiver: "qom1x2w87cvt5mqjncav4lxy8yfreynn273xruy6dq",
 						Amount:   "123456",
 					},
 				),
 			},
-			"canto1qql8ag4cluz6r4dz28p3w00dnc9w8ueud7tc0s",
-			"canto1x2w87cvt5mqjncav4lxy8yfreynn273xrrp06v",
+			"qom1qql8ag4cluz6r4dz28p3w00dnc9w8ueudpwdcu",
+			"qom1x2w87cvt5mqjncav4lxy8yfreynn273xruy6dq",
 			false,
 		},
 		{
-			"valid - canto sender, cosmos recipient",
+			"valid - qom sender, cosmos recipient",
 			channeltypes.Packet{
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
-						Sender:   "canto1x2w87cvt5mqjncav4lxy8yfreynn273xrrp06v",
+						Sender:   "qom1x2w87cvt5mqjncav4lxy8yfreynn273xruy6dq",
 						Receiver: "cosmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueulg2gmc",
 						Amount:   "123456",
 					},
 				),
 			},
-			"canto1x2w87cvt5mqjncav4lxy8yfreynn273xrrp06v",
-			"canto1qql8ag4cluz6r4dz28p3w00dnc9w8ueud7tc0s",
+			"qom1x2w87cvt5mqjncav4lxy8yfreynn273xruy6dq",
+			"qom1qql8ag4cluz6r4dz28p3w00dnc9w8ueudpwdcu",
 			false,
 		},
 		{
-			"valid - osmosis sender, canto recipient",
+			"valid - osmosis sender, qom recipient",
 			channeltypes.Packet{
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
 						Sender:   "osmo1qql8ag4cluz6r4dz28p3w00dnc9w8ueuhnecd2",
-						Receiver: "canto1x2w87cvt5mqjncav4lxy8yfreynn273xrrp06v",
+						Receiver: "qom1x2w87cvt5mqjncav4lxy8yfreynn273xruy6dq",
 						Amount:   "123456",
 					},
 				),
 			},
-			"canto1qql8ag4cluz6r4dz28p3w00dnc9w8ueud7tc0s",
-			"canto1x2w87cvt5mqjncav4lxy8yfreynn273xrrp06v",
+			"qom1qql8ag4cluz6r4dz28p3w00dnc9w8ueudpwdcu",
+			"qom1x2w87cvt5mqjncav4lxy8yfreynn273xruy6dq",
 			false,
 		},
 	}
@@ -164,7 +164,7 @@ func TestGetTransferAmount(t *testing.T) {
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
 						Sender:   "cosmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueulg2gmc",
-						Receiver: "canto1x2w87cvt5mqjncav4lxy8yfreynn273xrrp06v",
+						Receiver: "qom1x2w87cvt5mqjncav4lxy8yfreynn273xruy6dq",
 						Amount:   "",
 					},
 				),
@@ -178,7 +178,7 @@ func TestGetTransferAmount(t *testing.T) {
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
 						Sender:   "cosmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueulg2gmc",
-						Receiver: "canto1x2w87cvt5mqjncav4lxy8yfreynn273xrrp06v",
+						Receiver: "qom1x2w87cvt5mqjncav4lxy8yfreynn273xruy6dq",
 						Amount:   "test",
 					},
 				),
@@ -192,7 +192,7 @@ func TestGetTransferAmount(t *testing.T) {
 				Data: transfertypes.ModuleCdc.MustMarshalJSON(
 					&transfertypes.FungibleTokenPacketData{
 						Sender:   "cosmos1qql8ag4cluz6r4dz28p3w00dnc9w8ueulg2gmc",
-						Receiver: "canto1x2w87cvt5mqjncav4lxy8yfreynn273xrrp06v",
+						Receiver: "qom1x2w87cvt5mqjncav4lxy8yfreynn273xruy6dq",
 						Amount:   "10000",
 					},
 				),
