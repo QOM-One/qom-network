@@ -41,7 +41,7 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 			receiver = s.cantoChain.SenderAccount.GetAddress().String()
 			senderAcc = sdk.MustAccAddressFromBech32(sender)
 			receiverAcc = sdk.MustAccAddressFromBech32(receiver)
-			result = s.SendAndReceiveMessage(s.pathCosmoscanto, s.IBCCosmosChain, "uatom", 10000000000, sender, receiver, 1)
+			result = s.SendAndReceiveMessage(s.pathCosmosqom, s.IBCCosmosChain, "uatom", 10000000000, sender, receiver, 1)
 
 		})
 		It("No swap and convert operation - aqom balance should be 0", func() {
@@ -75,7 +75,7 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 
 			Context("when no swap pool exists", func() {
 				BeforeEach(func() {
-					result = s.SendAndReceiveMessage(s.pathGravitycanto, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
+					result = s.SendAndReceiveMessage(s.pathGravityqom, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
 				})
 				It("No swap: aqom balance should be 0", func() {
 					nativecanto := s.cantoChain.App.(*app.Qom).BankKeeper.GetBalance(s.cantoChain.GetContext(), receiverAcc, "aqom")
@@ -104,7 +104,7 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 				})
 				When("aqom balance is 0 and not enough IBC token transferred to swap aqom", func() {
 					BeforeEach(func() {
-						result = s.SendAndReceiveMessage(s.pathGravitycanto, s.IBCGravityChain, "uUSDC", 1000000, sender, receiver, 1)
+						result = s.SendAndReceiveMessage(s.pathGravityqom, s.IBCGravityChain, "uUSDC", 1000000, sender, receiver, 1)
 					})
 					It("No swap: Balance of aqom should be same with the original aqom balance (0)", func() {
 						nativecanto := s.cantoChain.App.(*app.Qom).BankKeeper.GetBalance(s.cantoChain.GetContext(), receiverAcc, "aqom")
@@ -129,7 +129,7 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 
 				When("Qom chain's aqom balance is 0", func() {
 					BeforeEach(func() {
-						result = s.SendAndReceiveMessage(s.pathGravitycanto, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
+						result = s.SendAndReceiveMessage(s.pathGravityqom, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
 					})
 					It("Swap: balance of aqom should be same with the auto swap threshold", func() {
 						autoSwapThreshold := s.cantoChain.App.(*app.Qom).OnboardingKeeper.GetParams(s.cantoChain.GetContext()).AutoSwapThreshold
@@ -159,7 +159,7 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 				When("Qom chain's aqom balance is between 0 and auto swap threshold (3canto)", func() {
 					BeforeEach(func() {
 						s.FundCantoChain(sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(3, 18))))
-						result = s.SendAndReceiveMessage(s.pathGravitycanto, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
+						result = s.SendAndReceiveMessage(s.pathGravityqom, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
 					})
 					It("Auto swap operation: balance of aqom should be same with the sum of original aqom balance and auto swap threshold", func() {
 						autoSwapThreshold := s.cantoChain.App.(*app.Qom).OnboardingKeeper.GetParams(s.cantoChain.GetContext()).AutoSwapThreshold
@@ -188,7 +188,7 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 				When("Qom chain's aqom balance is bigger than the auto swap threshold (4canto)", func() {
 					BeforeEach(func() {
 						s.FundCantoChain(sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(4, 18))))
-						result = s.SendAndReceiveMessage(s.pathGravitycanto, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
+						result = s.SendAndReceiveMessage(s.pathGravityqom, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
 					})
 					It("No swap: balance of aqom should be same with the original aqom balance (4canto)", func() {
 						nativecanto := s.cantoChain.App.(*app.Qom).BankKeeper.GetBalance(s.cantoChain.GetContext(), receiverAcc, "aqom")
@@ -226,7 +226,7 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 				s.CreatePool(uusdcIbcdenom)
 				s.FundCantoChain(sdk.NewCoins(ibcBalance))
 				s.FundCantoChain(sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(3, 18))))
-				result = s.SendAndReceiveMessage(s.pathGravitycanto, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
+				result = s.SendAndReceiveMessage(s.pathGravityqom, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
 
 			})
 			It("Auto swap operation: balance of aqom should be same with the sum of original aqom balance and auto swap threshold", func() {
@@ -252,7 +252,7 @@ var _ = Describe("Onboarding: Performing an IBC Transfer followed by autoswap an
 				s.CreatePool(uusdcIbcdenom)
 				s.FundCantoChain(sdk.NewCoins(ibcBalance))
 				s.FundCantoChain(sdk.NewCoins(sdk.NewCoin("aqom", sdk.NewIntWithDecimal(3, 18))))
-				result = s.SendAndReceiveMessage(s.pathGravitycanto, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
+				result = s.SendAndReceiveMessage(s.pathGravityqom, s.IBCGravityChain, "uUSDC", 10000000000, sender, receiver, 1)
 			})
 			It("Auto swap operation: balance of aqom should be same with the sum of original aqom balance and auto swap threshold", func() {
 				autoSwapThreshold := s.cantoChain.App.(*app.Qom).OnboardingKeeper.GetParams(s.cantoChain.GetContext()).AutoSwapThreshold

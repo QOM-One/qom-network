@@ -24,7 +24,7 @@ qomd config chain-id $CHAINID
 qomd keys add $KEY --keyring-backend $KEYRING --algo $KEYALGO
 qomd keys add $KEY2 --keyring-backend $KEYRING --algo $KEYALGO
 
-# Set moniker and chain-id for Canto (Moniker can be anything, chain-id must be an integer)
+# Set moniker and chain-id for Qom (Moniker can be anything, chain-id must be an integer)
 qomd init $MONIKER --chain-id $CHAINID
 
 # Change parameter token denominations to aqom

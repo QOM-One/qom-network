@@ -9,7 +9,7 @@ import (
 const (
 	AppName = "qomd"
 	// Bech32Prefix defines the Bech32 prefix used for EthAccounts
-	Bech32Prefix = "canto"
+	Bech32Prefix = "qom"
 
 	// Bech32PrefixAccAddr defines the Bech32 prefix of an account's address
 	Bech32PrefixAccAddr = Bech32Prefix
@@ -27,8 +27,8 @@ const (
 
 const (
 	// DisplayDenom defines the denomination displayed to users in client applications.
-	DisplayDenom = "canto"
-	// BaseDenom defines to the default denomination used in canto (staking, EVM, governance, etc.)
+	DisplayDenom = "qom"
+	// BaseDenom defines to the default denomination used in qom (staking, EVM, governance, etc.)
 	BaseDenom = "aqom"
 )
 

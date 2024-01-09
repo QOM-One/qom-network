@@ -87,7 +87,7 @@ func (suite *KeeperTestSuite) SetupApp() {
 	suite.consAddress = sdk.ConsAddress(privCons.PubKey().Address())
 	suite.ctx = suite.app.BaseApp.NewContext(false, tmproto.Header{
 		Height:          1,
-		ChainID:         "canto_9001-1",
+		ChainID:         "qom_9001-1",
 		Time:            time.Now().UTC(),
 		ProposerAddress: suite.consAddress.Bytes(),
 

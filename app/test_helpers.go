@@ -30,7 +30,7 @@ func init() {
 }
 
 // DefaultConsensusParams defines the default Tendermint consensus params used in
-// canto testing.
+// qom testing.
 var DefaultConsensusParams = &abci.ConsensusParams{
 	Block: &abci.BlockParams{
 		MaxBytes: 200000,
@@ -55,7 +55,7 @@ func init() {
 	config.SetBip44CoinType(cfg)
 }
 
-// Setup initializes a new canto. A Nop logger is set in canto.
+// Setup initializes a new qom. A Nop logger is set in qom.
 func Setup(
 	isCheckTx bool,
 	feemarketGenesis *feemarkettypes.GenesisState,

@@ -40,7 +40,7 @@ func (s *UpgradeTestSuite) SetupTest() {
 	s.app = chain.Setup(false, feemarkettypes.DefaultGenesisState())
 
 	s.ctx = s.app.BaseApp.NewContext(false, tmproto.Header{
-		ChainID:         "canto_9001-1",
+		ChainID:         "qom_9001-1",
 		Height:          1,
 		Time:            time.Date(2023, 5, 9, 8, 0, 0, 0, time.UTC),
 		ProposerAddress: s.consAddress.Bytes(),

@@ -35,8 +35,8 @@ type IBCTestingSuite struct {
 	IBCGravityChain *ibcgotesting.TestChain
 	IBCCosmosChain  *ibcgotesting.TestChain
 
-	pathGravitycanto  *ibcgotesting.Path
-	pathCosmoscanto   *ibcgotesting.Path
+	pathGravityqom    *ibcgotesting.Path
+	pathCosmosqom     *ibcgotesting.Path
 	pathGravityCosmos *ibcgotesting.Path
 }
 
@@ -83,15 +83,15 @@ func (suite *IBCTestingSuite) SetupTest() {
 	suite.cantoChain.App.(*app.Qom).OnboardingKeeper.SetParams(suite.cantoChain.GetContext(), params)
 
 	// Setup the paths between the chains
-	suite.pathGravitycanto = ibcgotesting.NewTransferPath(suite.IBCGravityChain, suite.cantoChain) // clientID, connectionID, channelID empty
-	suite.pathCosmoscanto = ibcgotesting.NewTransferPath(suite.IBCCosmosChain, suite.cantoChain)
+	suite.pathGravityqom = ibcgotesting.NewTransferPath(suite.IBCGravityChain, suite.cantoChain) // clientID, connectionID, channelID empty
+	suite.pathCosmosqom = ibcgotesting.NewTransferPath(suite.IBCCosmosChain, suite.cantoChain)
 	suite.pathGravityCosmos = ibcgotesting.NewTransferPath(suite.IBCCosmosChain, suite.IBCGravityChain)
-	suite.coordinator.Setup(suite.pathGravitycanto) // clientID, connectionID, channelID filled
-	suite.coordinator.Setup(suite.pathCosmoscanto)
+	suite.coordinator.Setup(suite.pathGravityqom) // clientID, connectionID, channelID filled
+	suite.coordinator.Setup(suite.pathCosmosqom)
 	suite.coordinator.Setup(suite.pathGravityCosmos)
-	suite.Require().Equal("07-tendermint-0", suite.pathGravitycanto.EndpointA.ClientID)
-	suite.Require().Equal("connection-0", suite.pathGravitycanto.EndpointA.ConnectionID)
-	suite.Require().Equal("channel-0", suite.pathGravitycanto.EndpointA.ChannelID)
+	suite.Require().Equal("07-tendermint-0", suite.pathGravityqom.EndpointA.ClientID)
+	suite.Require().Equal("connection-0", suite.pathGravityqom.EndpointA.ConnectionID)
+	suite.Require().Equal("channel-0", suite.pathGravityqom.EndpointA.ChannelID)
 
 	// Set the proposer address for the current header
 	// It because EVMKeeper.GetCoinbaseAddress requires ProposerAddress in block header
