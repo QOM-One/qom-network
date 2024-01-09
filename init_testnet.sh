@@ -84,8 +84,8 @@ qomd add-genesis-account $KEY3 1000000000000000000000000000aqom --keyring-backen
 #validators_supply=$(cat $HOME/.qomd/config/genesis.json | jq -r '.app_state["bank"]["supply"][0]["amount"]')
 # Bc is required to add this big numbers
 # total_supply=$(bc <<< "$amount_to_claim+$validators_supply")
-total_supply=3050000000000000000000000000
-cat $HOME/.qomd/config/genesis.json | jq -r --arg total_supply "$total_supply" '.app_state["bank"]["supply"][0]["amount"]=$total_supply' > $HOME/.qomd/config/tmp_genesis.json && mv $HOME/.qomd/config/tmp_genesis.json $HOME/.qomd/config/genesis.json
+#total_supply=3050000000000000000000000000
+#cat $HOME/.qomd/config/genesis.json | jq -r --arg total_supply "$total_supply" '.app_state["bank"]["supply"][0]["amount"]=$total_supply' > $HOME/.qomd/config/tmp_genesis.json && mv $HOME/.qomd/config/tmp_genesis.json $HOME/.qomd/config/genesis.json
 
 echo $KEYRING
 echo $KEY1
