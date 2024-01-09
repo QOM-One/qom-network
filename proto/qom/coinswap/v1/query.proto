@@ -13,20 +13,20 @@ option go_package = "github.com/QOM-One/QomApp/v7/x/coinswap/types";
 service Query {
   // Params returns parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/canto/coinswap/params";
+    option (google.api.http).get = "/qom/coinswap/params";
   }
 
   // LiquidityPool returns the liquidity pool for the provided
   // lpt_denom
   rpc LiquidityPool(QueryLiquidityPoolRequest)
       returns (QueryLiquidityPoolResponse) {
-    option (google.api.http).get = "/canto/coinswap/pools/{lpt_denom}";
+    option (google.api.http).get = "/qom/coinswap/pools/{lpt_denom}";
   }
 
   // LiquidityPools returns all the liquidity pools available
   rpc LiquidityPools(QueryLiquidityPoolsRequest)
       returns (QueryLiquidityPoolsResponse) {
-    option (google.api.http).get = "/canto/coinswap/pools";
+    option (google.api.http).get = "/qom/coinswap/pools";
   }
 }
 

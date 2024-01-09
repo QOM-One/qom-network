@@ -11,7 +11,7 @@ option go_package = "github.com/QOM-One/QomApp/v7/x/onboarding/types";
 service Query {
   // Params retrieves the total set of onboarding parameters.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/canto/onboarding/v1/params";
+    option (google.api.http).get = "/qom/onboarding/v1/params";
   }
 }
 

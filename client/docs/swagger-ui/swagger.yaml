@@ -1,51 +1,9 @@
 swagger: '2.0'
 info:
-  title: canto Chain - gRPC Gateway docs
+  title: Qom Chain - gRPC Gateway docs
   description: A REST interface for state queries and transactions
   version: 1.0.0
 paths:
-  /canto/qom/v1/current_epoch:
-    get:
-      summary: CurrentEpoch provide current epoch of specified identifier
-      operationId: CurrentEpoch
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              current_epoch:
-                type: string
-                format: int64
-        default:
-          description: An unexpected error response
-          schema:
-            type: object
-            properties:
-              error:
-                type: string
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    type_url:
-                      type: string
-                    value:
-                      type: string
-                      format: byte
-      parameters:
-        - name: identifier
-          in: query
-          required: false
-          type: string
-      tags:
-        - Query
   /qom/epochs/v1/epochs:
     get:
       summary: EpochInfos provide running epochInfos
@@ -190,7 +148,49 @@ paths:
           format: boolean
       tags:
         - Query
-  /canto/erc20/v1/params:
+  /qom/qom/v1/current_epoch:
+    get:
+      summary: CurrentEpoch provide current epoch of specified identifier
+      operationId: CurrentEpoch
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              current_epoch:
+                type: string
+                format: int64
+        default:
+          description: An unexpected error response
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type_url:
+                      type: string
+                    value:
+                      type: string
+                      format: byte
+      parameters:
+        - name: identifier
+          in: query
+          required: false
+          type: string
+      tags:
+        - Query
+  /qom/erc20/v1/params:
     get:
       summary: Params retrieves the erc20 module params
       operationId: ERC20Params
@@ -248,7 +248,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /canto/erc20/v1/token_pairs:
+  /qom/erc20/v1/token_pairs:
     get:
       summary: TokenPairs retrieves registered token pairs
       operationId: TokenPairs
@@ -399,7 +399,7 @@ paths:
           format: boolean
       tags:
         - Query
-  '/canto/erc20/v1/token_pairs/{token}':
+  '/qom/erc20/v1/token_pairs/{token}':
     get:
       summary: TokenPair retrieves a registered token pair
       operationId: TokenPair
@@ -481,7 +481,7 @@ paths:
           type: string
       tags:
         - Query
-  /canto/inflation/v1/circulating_supply:
+  /qom/inflation/v1/circulating_supply:
     get:
       summary: |-
         CirculatingSupply retrieves the total number of tokens that are in
@@ -537,7 +537,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /canto/inflation/v1/epoch_mint_provision:
+  /qom/inflation/v1/epoch_mint_provision:
     get:
       summary: EpochMintProvision retrieves current minting epoch provision value.
       operationId: EpochMintProvision
@@ -584,7 +584,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /canto/inflation/v1/inflation_rate:
+  /qom/inflation/v1/inflation_rate:
     get:
       summary: InflationRate retrieves the inflation rate of the current period.
       operationId: InflationRate
@@ -626,7 +626,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /canto/inflation/v1/params:
+  /qom/inflation/v1/params:
     get:
       summary: Params retrieves the total set of minting parameters.
       operationId: InflationParams
@@ -725,7 +725,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /canto/inflation/v1/period:
+  /qom/inflation/v1/period:
     get:
       summary: Period retrieves current period.
       operationId: Period
@@ -766,7 +766,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /canto/inflation/v1/skipped_epochs:
+  /qom/inflation/v1/skipped_epochs:
     get:
       summary: SkippedEpochs retrieves the total number of skipped epochs.
       operationId: SkippedEpochs
@@ -4170,7 +4170,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /canto/onboarding/v1/params:
+  /qom/onboarding/v1/params:
     get:
       summary: Params retrieves the total set of onboarding parameters.
       operationId: OnboardingParams
@@ -4222,7 +4222,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /canto/coinswap/params:
+  /qom/coinswap/params:
     get:
       summary: Params returns parameters of the module.
       operationId: CoinswapParams
@@ -4314,7 +4314,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /canto/coinswap/pools:
+  /qom/coinswap/pools:
     get:
       summary: LiquidityPools returns all the liquidity pools available
       operationId: LiquidityPools
@@ -4500,7 +4500,7 @@ paths:
           format: boolean
       tags:
         - Query
-  '/canto/coinswap/pools/{lpt_denom}':
+  '/qom/coinswap/pools/{lpt_denom}':
     get:
       summary: |-
         LiquidityPool returns the liquidity pool for the provided

@@ -14,7 +14,7 @@ option go_package = "github.com/QOM-One/QomApp/v7/x/govshuttle/types";
 service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/canto/govshuttle/params";
+    option (google.api.http).get = "/qom/govshuttle/params";
   }
   // this line is used by starport scaffolding # 2
 }

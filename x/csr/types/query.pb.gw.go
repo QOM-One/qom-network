@@ -462,15 +462,15 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 }
 
 var (
-	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"canto", "v1", "csr", "params"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"qom", "v1", "csr", "params"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_CSRs_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"canto", "v1", "csr", "csrs"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_CSRs_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"qom", "v1", "csr", "csrs"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_CSRByNFT_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"canto", "v1", "csr", "nft", "nftId"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_CSRByNFT_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"qom", "v1", "csr", "nft", "nftId"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_CSRByContract_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"canto", "v1", "csr", "contract", "address"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_CSRByContract_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"qom", "v1", "csr", "contract", "address"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_Turnstile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"canto", "v1", "csr", "turnstile"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_Turnstile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"qom", "v1", "csr", "turnstile"}, "", runtime.AssumeColonVerbOpt(false)))
 )
 
 var (
