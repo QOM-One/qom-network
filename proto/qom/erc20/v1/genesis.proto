@@ -1,5 +1,5 @@
 syntax = "proto3";
-package canto.erc20.v1;
+package qom.erc20.v1;
 
 import "qom/erc20/v1/erc20.proto";
 import "gogoproto/gogo.proto";

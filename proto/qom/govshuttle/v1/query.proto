@@ -1,5 +1,5 @@
 syntax = "proto3";
-package canto.govshuttle.v1;
+package qom.govshuttle.v1;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";

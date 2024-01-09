@@ -1,5 +1,5 @@
 syntax = "proto3";
-package canto.coinswap.v1;
+package qom.coinswap.v1;
 
 import "gogoproto/gogo.proto";
 import "qom/coinswap/v1/coinswap.proto";

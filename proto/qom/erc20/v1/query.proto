@@ -1,5 +1,5 @@
 syntax = "proto3";
-package canto.erc20.v1;
+package qom.erc20.v1;
 
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "qom/erc20/v1/genesis.proto";

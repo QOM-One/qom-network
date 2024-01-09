@@ -4,7 +4,7 @@
 
 * Install qomd binary
 
-* Initialize canto node directory 
+* Initialize qom node directory 
 ```bash
 qomd init <node_name> --chain-id <chain_id>
 ```

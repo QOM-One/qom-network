@@ -32964,86 +32964,6 @@ paths:
       tags:
         - Service
 definitions:
-  canto.epochs.v1.EpochInfo:
-    type: object
-    properties:
-      identifier:
-        type: string
-      start_time:
-        type: string
-        format: date-time
-      duration:
-        type: string
-      current_epoch:
-        type: string
-        format: int64
-      current_epoch_start_time:
-        type: string
-        format: date-time
-      epoch_counting_started:
-        type: boolean
-        format: boolean
-      current_epoch_start_height:
-        type: string
-        format: int64
-  canto.epochs.v1.QueryCurrentEpochResponse:
-    type: object
-    properties:
-      current_epoch:
-        type: string
-        format: int64
-  canto.epochs.v1.QueryEpochsInfoResponse:
-    type: object
-    properties:
-      epochs:
-        type: array
-        items:
-          type: object
-          properties:
-            identifier:
-              type: string
-            start_time:
-              type: string
-              format: date-time
-            duration:
-              type: string
-            current_epoch:
-              type: string
-              format: int64
-            current_epoch_start_time:
-              type: string
-              format: date-time
-            epoch_counting_started:
-              type: boolean
-              format: boolean
-            current_epoch_start_height:
-              type: string
-              format: int64
-      pagination:
-        type: object
-        properties:
-          next_key:
-            type: string
-            format: byte
-            title: |-
-              next_key is the key to be passed to PageRequest.key to
-              query the next page most efficiently
-          total:
-            type: string
-            format: uint64
-            title: >-
-              total is total number of results available if
-              PageRequest.count_total
-
-              was set, its value is undefined otherwise
-        description: |-
-          PageResponse is to be embedded in gRPC response messages where the
-          corresponding request message has used PageRequest.
-
-           message SomeResponse {
-                   repeated Bar results = 1;
-                   PageResponse page = 2;
-           }
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
@@ -33451,7 +33371,87 @@ definitions:
                   "@type": "type.googleapis.com/google.protobuf.Duration",
                   "value": "1.212s"
                 }
-  canto.erc20.v1.Owner:
+  qom.epochs.v1.EpochInfo:
+    type: object
+    properties:
+      identifier:
+        type: string
+      start_time:
+        type: string
+        format: date-time
+      duration:
+        type: string
+      current_epoch:
+        type: string
+        format: int64
+      current_epoch_start_time:
+        type: string
+        format: date-time
+      epoch_counting_started:
+        type: boolean
+        format: boolean
+      current_epoch_start_height:
+        type: string
+        format: int64
+  qom.epochs.v1.QueryCurrentEpochResponse:
+    type: object
+    properties:
+      current_epoch:
+        type: string
+        format: int64
+  qom.epochs.v1.QueryEpochsInfoResponse:
+    type: object
+    properties:
+      epochs:
+        type: array
+        items:
+          type: object
+          properties:
+            identifier:
+              type: string
+            start_time:
+              type: string
+              format: date-time
+            duration:
+              type: string
+            current_epoch:
+              type: string
+              format: int64
+            current_epoch_start_time:
+              type: string
+              format: date-time
+            epoch_counting_started:
+              type: boolean
+              format: boolean
+            current_epoch_start_height:
+              type: string
+              format: int64
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  qom.erc20.v1.Owner:
     type: string
     enum:
       - OWNER_UNSPECIFIED
@@ -33464,7 +33464,7 @@ definitions:
        - OWNER_UNSPECIFIED: OWNER_UNSPECIFIED defines an invalid/undefined owner.
        - OWNER_MODULE: OWNER_MODULE erc20 is owned by the erc20 module account.
        - OWNER_EXTERNAL: EXTERNAL erc20 is owned by an external account.
-  canto.erc20.v1.Params:
+  qom.erc20.v1.Params:
     type: object
     properties:
       enable_erc20:
@@ -33482,7 +33482,7 @@ definitions:
 
           ModuleAddress Ethereum address.
     title: Params defines the erc20 module params
-  canto.erc20.v1.QueryParamsResponse:
+  qom.erc20.v1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -33508,7 +33508,7 @@ definitions:
     description: |-
       QueryParamsResponse is the response type for the Query/Params RPC
       method.
-  canto.erc20.v1.QueryTokenPairResponse:
+  qom.erc20.v1.QueryTokenPairResponse:
     type: object
     properties:
       token_pair:
@@ -33547,7 +33547,7 @@ definitions:
     description: |-
       QueryTokenPairResponse is the response type for the Query/TokenPair RPC
       method.
-  canto.erc20.v1.QueryTokenPairsResponse:
+  qom.erc20.v1.QueryTokenPairsResponse:
     type: object
     properties:
       token_pairs:
@@ -33606,7 +33606,7 @@ definitions:
     description: |-
       QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
       method.
-  canto.erc20.v1.TokenPair:
+  qom.erc20.v1.TokenPair:
     type: object
     properties:
       erc20_address:
@@ -33639,7 +33639,19 @@ definitions:
       TokenPair defines an instance that records a pairing consisting of a
       native
        Cosmos Coin and an ERC20 token address.
-  canto.inflation.v1.ExponentialCalculation:
+  cosmos.base.v1beta1.DecCoin:
+    type: object
+    properties:
+      denom:
+        type: string
+      amount:
+        type: string
+    description: |-
+      DecCoin defines a token with a denomination and a decimal amount.
+
+      NOTE: The amount field is an Dec which implements the custom method
+      signatures required by gogoproto.
+  qom.inflation.v1.ExponentialCalculation:
     type: object
     properties:
       a:
@@ -33668,7 +33680,7 @@ definitions:
       bondedRatio *
 
       (max_variance / bonding_target))
-  canto.inflation.v1.InflationDistribution:
+  qom.inflation.v1.InflationDistribution:
     type: object
     properties:
       staking_rewards:
@@ -33712,7 +33724,7 @@ definitions:
       mintDistribution1 = distribution1 / (1 - teamVestingDistribution)
 
       0.5333333         = 40%           / (1 - 25%)
-  canto.inflation.v1.Params:
+  qom.inflation.v1.Params:
     type: object
     properties:
       mint_denom:
@@ -33772,7 +33784,7 @@ definitions:
         format: boolean
         title: parameter to enable inflation and halt increasing the skipped_epochs
     description: Params holds parameters for the inflation module.
-  canto.inflation.v1.QueryCirculatingSupplyResponse:
+  qom.inflation.v1.QueryCirculatingSupplyResponse:
     type: object
     properties:
       circulating_supply:
@@ -33791,7 +33803,7 @@ definitions:
     description: |-
       QueryCirculatingSupplyResponse is the response type for the
       Query/CirculatingSupply RPC method.
-  canto.inflation.v1.QueryEpochMintProvisionResponse:
+  qom.inflation.v1.QueryEpochMintProvisionResponse:
     type: object
     properties:
       epoch_mint_provision:
@@ -33805,7 +33817,7 @@ definitions:
     description: |-
       QueryEpochMintProvisionResponse is the response type for the
       Query/EpochMintProvision RPC method.
-  canto.inflation.v1.QueryInflationRateResponse:
+  qom.inflation.v1.QueryInflationRateResponse:
     type: object
     properties:
       inflation_rate:
@@ -33816,7 +33828,7 @@ definitions:
       Query/InflationRate
 
       RPC method.
-  canto.inflation.v1.QueryParamsResponse:
+  qom.inflation.v1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -33882,7 +33894,7 @@ definitions:
               parameter to enable inflation and halt increasing the
               skipped_epochs
     description: QueryParamsResponse is the response type for the Query/Params RPC method.
-  canto.inflation.v1.QueryPeriodResponse:
+  qom.inflation.v1.QueryPeriodResponse:
     type: object
     properties:
       period:
@@ -33890,7 +33902,7 @@ definitions:
         format: uint64
         description: period is the current minting per epoch provision value.
     description: QueryPeriodResponse is the response type for the Query/Period RPC method.
-  canto.inflation.v1.QuerySkippedEpochsResponse:
+  qom.inflation.v1.QuerySkippedEpochsResponse:
     type: object
     properties:
       skipped_epochs:
@@ -33902,18 +33914,6 @@ definitions:
       Query/SkippedEpochs
 
       RPC method.
-  cosmos.base.v1beta1.DecCoin:
-    type: object
-    properties:
-      denom:
-        type: string
-      amount:
-        type: string
-    description: |-
-      DecCoin defines a token with a denomination and a decimal amount.
-
-      NOTE: The amount field is an Dec which implements the custom method
-      signatures required by gogoproto.
   ethermint.evm.v1.ChainConfig:
     type: object
     properties:
@@ -34838,7 +34838,7 @@ definitions:
     description: >-
       QueryParamsResponse defines the response type for querying x/evm
       parameters.
-  canto.onboarding.v1.Params:
+  qom.onboarding.v1.Params:
     type: object
     properties:
       enable_onboarding:
@@ -34852,7 +34852,7 @@ definitions:
         items:
           type: string
     title: Params holds parameters for the onboarding module
-  canto.onboarding.v1.QueryParamsResponse:
+  qom.onboarding.v1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -34871,7 +34871,19 @@ definitions:
               type: string
         title: Params holds parameters for the onboarding module
     description: QueryParamsResponse is the response type for the Query/Params RPC method.
-  canto.coinswap.v1.Params:
+  cosmos.base.v1beta1.Coin:
+    type: object
+    properties:
+      denom:
+        type: string
+      amount:
+        type: string
+    description: |-
+      Coin defines a token with a denomination and an amount.
+
+      NOTE: The amount field is an Int which implements the custom method
+      signatures required by gogoproto.
+  qom.coinswap.v1.Params:
     type: object
     properties:
       fee:
@@ -34917,7 +34929,7 @@ definitions:
             NOTE: The amount field is an Int which implements the custom method
             signatures required by gogoproto.
     title: Params defines token module's parameters
-  canto.coinswap.v1.PoolInfo:
+  qom.coinswap.v1.PoolInfo:
     type: object
     properties:
       id:
@@ -34967,7 +34979,7 @@ definitions:
       fee:
         type: string
         title: liquidity pool fee
-  canto.coinswap.v1.QueryLiquidityPoolResponse:
+  qom.coinswap.v1.QueryLiquidityPoolResponse:
     type: object
     properties:
       pool:
@@ -35034,7 +35046,7 @@ definitions:
       RPC
 
       method
-  canto.coinswap.v1.QueryLiquidityPoolsResponse:
+  qom.coinswap.v1.QueryLiquidityPoolsResponse:
     type: object
     properties:
       pools:
@@ -35128,7 +35140,7 @@ definitions:
       RPC
 
       method
-  canto.coinswap.v1.QueryParamsResponse:
+  qom.coinswap.v1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -35187,18 +35199,6 @@ definitions:
                 signatures required by gogoproto.
         title: Params defines token module's parameters
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  cosmos.base.v1beta1.Coin:
-    type: object
-    properties:
-      denom:
-        type: string
-      amount:
-        type: string
-    description: |-
-      Coin defines a token with a denomination and an amount.
-
-      NOTE: The amount field is an Int which implements the custom method
-      signatures required by gogoproto.
   ibc.applications.transfer.v1.DenomTrace:
     type: object
     properties:

@@ -1,5 +1,5 @@
 syntax = "proto3";
-package canto.onboarding.v1;
+package qom.onboarding.v1;
 
 import "google/api/annotations.proto";
 import "gogoproto/gogo.proto";

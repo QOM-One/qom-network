@@ -7,7 +7,7 @@ ARG KEY_NAME <add your keyname>
 ARG MONIKER <add your moniker>
 
 # add the network id
-ARG NETWORK_ID canto_9624-1
+ARG NETWORK_ID qom_9624-1
 
 # arbitrary validator metadata
 ARG DETAILS <details as string>
@@ -35,7 +35,7 @@ RUN qomd keys add $KEY_NAME
     # qomd keys add $KEY_NAME --ledger
 
 # initialize node
-RUN qomd init $MONIKER --chain-id canto_9624-1
+RUN qomd init $MONIKER --chain-id qom_9624-1
 
 # get genesis file
 RUN wget https://github.com/QOM-One/QomApp-Testnet-v2/raw/main/genesis.json -P $HOME/.qomd/config/

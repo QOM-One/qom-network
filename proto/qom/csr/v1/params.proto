@@ -1,5 +1,5 @@
 syntax = "proto3";
-package canto.csr.v1;
+package qom.csr.v1;
 
 import "gogoproto/gogo.proto";
 
