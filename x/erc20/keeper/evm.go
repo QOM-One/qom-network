@@ -1,22 +1,39 @@
+// Copyright 2022 Evmos Foundation
+// This file is part of the Evmos Network packages.
+//
+// Evmos is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// The Evmos packages are distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with the Evmos packages. If not, see https://github.com/evmos/evmos/blob/main/LICENSE
+
 package keeper
 
 import (
 	"encoding/json"
 	"math/big"
 
+	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/evmos/ethermint/server/config"
-	evmtypes "github.com/evmos/ethermint/x/evm/types"
+	"github.com/qom-one/qomapp/v1/server/config"
+	evmtypes "github.com/qom-one/qomapp/v1/x/evm/types"
 
-	"github.com/QOM-One/QomApp/v7/contracts"
-	"github.com/QOM-One/QomApp/v7/x/erc20/types"
+	"github.com/qom-one/qomapp/v1/contracts"
+	"github.com/qom-one/qomapp/v1/x/erc20/types"
 )
 
 // DeployERC20Contract creates and deploys an ERC20 contract on the EVM with the
@@ -37,7 +54,7 @@ func (k Keeper) DeployERC20Contract(
 		decimals,
 	)
 	if err != nil {
-		return common.Address{}, sdkerrors.Wrapf(types.ErrABIPack, "coin metadata is invalid %s: %s", coinMetadata.Name, err.Error())
+		return common.Address{}, errorsmod.Wrapf(types.ErrABIPack, "coin metadata is invalid %s: %s", coinMetadata.Name, err.Error())
 	}
 
 	data := make([]byte, len(contracts.ERC20MinterBurnerDecimalsContract.Bin)+len(ctorArgs))
@@ -52,7 +69,7 @@ func (k Keeper) DeployERC20Contract(
 	contractAddr := crypto.CreateAddress(types.ModuleAddress, nonce)
 	_, err = k.CallEVMWithData(ctx, types.ModuleAddress, nil, data, true)
 	if err != nil {
-		return common.Address{}, sdkerrors.Wrapf(err, "failed to deploy contract for %s", coinMetadata.Name)
+		return common.Address{}, errorsmod.Wrapf(err, "failed to deploy contract for %s", coinMetadata.Name)
 	}
 
 	return contractAddr, nil
@@ -78,7 +95,7 @@ func (k Keeper) QueryERC20(
 	}
 
 	if err := erc20.UnpackIntoInterface(&nameRes, "name", res.Ret); err != nil {
-		return types.ERC20Data{}, sdkerrors.Wrapf(
+		return types.ERC20Data{}, errorsmod.Wrapf(
 			types.ErrABIUnpack, "failed to unpack name: %s", err.Error(),
 		)
 	}
@@ -90,7 +107,7 @@ func (k Keeper) QueryERC20(
 	}
 
 	if err := erc20.UnpackIntoInterface(&symbolRes, "symbol", res.Ret); err != nil {
-		return types.ERC20Data{}, sdkerrors.Wrapf(
+		return types.ERC20Data{}, errorsmod.Wrapf(
 			types.ErrABIUnpack, "failed to unpack symbol: %s", err.Error(),
 		)
 	}
@@ -102,7 +119,7 @@ func (k Keeper) QueryERC20(
 	}
 
 	if err := erc20.UnpackIntoInterface(&decimalRes, "decimals", res.Ret); err != nil {
-		return types.ERC20Data{}, sdkerrors.Wrapf(
+		return types.ERC20Data{}, errorsmod.Wrapf(
 			types.ErrABIUnpack, "failed to unpack decimals: %s", err.Error(),
 		)
 	}
@@ -145,15 +162,15 @@ func (k Keeper) CallEVM(
 ) (*evmtypes.MsgEthereumTxResponse, error) {
 	data, err := abi.Pack(method, args...)
 	if err != nil {
-		return nil, sdkerrors.Wrap(
+		return nil, errorsmod.Wrap(
 			types.ErrABIPack,
-			sdkerrors.Wrap(err, "failed to create transaction data").Error(),
+			errorsmod.Wrap(err, "failed to create transaction data").Error(),
 		)
 	}
 
 	resp, err := k.CallEVMWithData(ctx, from, &contract, data, commit)
 	if err != nil {
-		return nil, sdkerrors.Wrapf(err, "contract call failed: method '%s', contract '%s'", method, contract)
+		return nil, errorsmod.Wrapf(err, "contract call failed: method '%s', contract '%s'", method, contract)
 	}
 	return resp, nil
 }
@@ -179,7 +196,7 @@ func (k Keeper) CallEVMWithData(
 			Data: (*hexutil.Bytes)(&data),
 		})
 		if err != nil {
-			return nil, sdkerrors.Wrapf(sdkerrors.ErrJSONMarshal, "failed to marshal tx args: %s", err.Error())
+			return nil, errorsmod.Wrapf(errortypes.ErrJSONMarshal, "failed to marshal tx args: %s", err.Error())
 		}
 
 		gasRes, err := k.evmKeeper.EstimateGas(sdk.WrapSDKContext(ctx), &evmtypes.EthCallRequest{
@@ -212,7 +229,7 @@ func (k Keeper) CallEVMWithData(
 	}
 
 	if res.Failed() {
-		return nil, sdkerrors.Wrap(evmtypes.ErrVMExecution, res.VmError)
+		return nil, errorsmod.Wrap(evmtypes.ErrVMExecution, res.VmError)
 	}
 
 	return res, nil
@@ -230,7 +247,7 @@ func (k Keeper) monitorApprovalEvent(res *evmtypes.MsgEthereumTxResponse) error 
 
 	for _, log := range res.Logs {
 		if log.Topics[0] == logApprovalSigHash.Hex() {
-			return sdkerrors.Wrapf(
+			return errorsmod.Wrapf(
 				types.ErrUnexpectedEvent, "unexpected Approval event",
 			)
 		}

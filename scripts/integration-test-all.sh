@@ -16,11 +16,11 @@ REMOVE_DATA_DIR=false
 RPC_PORT="854"
 IP_ADDR="0.0.0.0"
 
-KEY="mykey"
-CHAINID="qom_9000-1"
+KEY="dev0"
+CHAINID="qom_7668378-1"
 MONIKER="mymoniker"
 
-## default port prefixes for qomd
+## default port prefixes for evmosd
 NODE_P2P_PORT="2660"
 NODE_PORT="2663"
 NODE_RPC_PORT="2666"
@@ -59,8 +59,8 @@ if [[ ! "$DATA_DIR" ]]; then
     exit 1
 fi
 
-# Compile qom
-echo "compiling qom"
+# Compile evmos
+echo "compiling evmos"
 make build
 
 # PID array declaration
@@ -103,17 +103,17 @@ init_func() {
 }
 
 start_func() {
-    echo "starting qom node $i in background ..."
+    echo "starting evmos node $i in background ..."
     "$PWD"/build/qomd start --pruning=nothing --rpc.unsafe \
     --p2p.laddr tcp://$IP_ADDR:$NODE_P2P_PORT"$i" --address tcp://$IP_ADDR:$NODE_PORT"$i" --rpc.laddr tcp://$IP_ADDR:$NODE_RPC_PORT"$i" \
     --json-rpc.address=$IP_ADDR:$RPC_PORT"$i" \
     --keyring-backend test --home "$DATA_DIR$i" \
     >"$DATA_DIR"/node"$i".log 2>&1 & disown
 
-    qom_PID=$!
-    echo "started qom node, pid=$qom_PID"
+    EVMOS_PID=$!
+    echo "started evmos node, pid=$EVMOS_PID"
     # add PID to array
-    arr+=("$qom_PID")
+    arr+=("$EVMOS_PID")
 
     if [[ $MODE == "pending" ]]; then
       echo "waiting for the first block..."
@@ -147,7 +147,7 @@ if [[ -z $TEST || $TEST == "rpc" ||  $TEST == "pending" ]]; then
 
     for i in $(seq 1 "$TEST_QTD"); do
         HOST_RPC=http://$IP_ADDR:$RPC_PORT"$i"
-        echo "going to test qom node $HOST_RPC ..."
+        echo "going to test evmos node $HOST_RPC ..."
         MODE=$MODE HOST=$HOST_RPC go test ./tests/... -timeout=$time_out -v -short
 
         RPC_FAIL=$?
@@ -156,12 +156,12 @@ if [[ -z $TEST || $TEST == "rpc" ||  $TEST == "pending" ]]; then
 fi
 
 stop_func() {
-    qom_PID=$i
-    echo "shutting down node, pid=$qom_PID ..."
+    EVMOS_PID=$i
+    echo "shutting down node, pid=$EVMOS_PID ..."
 
-    # Shutdown qom node
-    kill -9 "$qom_PID"
-    wait "$qom_PID"
+    # Shutdown evmos node
+    kill -9 "$EVMOS_PID"
+    wait "$EVMOS_PID"
 
     if [ $REMOVE_DATA_DIR == "true" ]
     then

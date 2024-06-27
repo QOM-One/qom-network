@@ -1,13 +1,13 @@
 #!/bin/bash
 
-KEY="mykey"
-CHAINID="qom_9000-1"
+KEY="dev0"
+CHAINID="qom_7668378-1"
 MONIKER="mymoniker"
 DATA_DIR=$(mktemp -d -t qom-datadir.XXXXX)
 
 echo "create and add new keys"
 ./qomd keys add $KEY --home $DATA_DIR --no-backup --chain-id $CHAINID --algo "eth_secp256k1" --keyring-backend test
-echo "init qom with moniker=$MONIKER and chain-id=$CHAINID"
+echo "init Evmos with moniker=$MONIKER and chain-id=$CHAINID"
 ./qomd init $MONIKER --chain-id $CHAINID --home $DATA_DIR
 echo "prepare genesis: Allocate genesis accounts"
 ./qomd add-genesis-account \

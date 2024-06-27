@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/QOM-One/QomApp/v7/x/epochs"
-	"github.com/QOM-One/QomApp/v7/x/epochs/types"
+	"github.com/qom-one/qomapp/v1/x/epochs"
+	"github.com/qom-one/qomapp/v1/x/epochs/types"
 )
 
 func (suite *KeeperTestSuite) TestEpochInfoChangesBeginBlockerAndInitGenesis() {
@@ -77,7 +77,7 @@ func (suite *KeeperTestSuite) TestEpochInfoChangesBeginBlockerAndInitGenesis() {
 				suite.Require().True(found)
 			},
 		},
-		{
+		{ //nolint:dupl
 			expCurrentEpochStartHeight: 3,
 			expCurrentEpochStartTime:   now.Add(time.Hour * 24 * 31),
 			expCurrentEpoch:            2,
@@ -93,7 +93,7 @@ func (suite *KeeperTestSuite) TestEpochInfoChangesBeginBlockerAndInitGenesis() {
 				suite.Require().True(found)
 			},
 		},
-		{
+		{ //nolint:dupl
 			expCurrentEpochStartHeight: 3,
 			expCurrentEpochStartTime:   now.Add(time.Hour * 24 * 31),
 			expCurrentEpoch:            2,

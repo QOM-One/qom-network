@@ -1,13 +1,28 @@
+// Copyright 2022 Evmos Foundation
+// This file is part of the Evmos Network packages.
+//
+// Evmos is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// The Evmos packages are distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with the Evmos packages. If not, see https://github.com/evmos/evmos/blob/main/LICENSE
+
 package config
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	ethermint "github.com/evmos/ethermint/types"
+	"github.com/qom-one/qomapp/v1/types"
 )
 
 const (
-	AppName = "qomd"
 	// Bech32Prefix defines the Bech32 prefix used for EthAccounts
 	Bech32Prefix = "qom"
 
@@ -28,7 +43,7 @@ const (
 const (
 	// DisplayDenom defines the denomination displayed to users in client applications.
 	DisplayDenom = "qom"
-	// BaseDenom defines to the default denomination used in qom (staking, EVM, governance, etc.)
+	// BaseDenom defines to the default denomination used in Evmos (staking, EVM, governance, etc.)
 	BaseDenom = "aqom"
 )
 
@@ -41,9 +56,9 @@ func SetBech32Prefixes(config *sdk.Config) {
 
 // SetBip44CoinType sets the global coin type to be used in hierarchical deterministic wallets.
 func SetBip44CoinType(config *sdk.Config) {
-	config.SetCoinType(ethermint.Bip44CoinType)
-	config.SetPurpose(sdk.Purpose)                      // Shared
-	config.SetFullFundraiserPath(ethermint.BIP44HDPath) // nolint: staticcheck
+	config.SetCoinType(types.Bip44CoinType)
+	config.SetPurpose(sdk.Purpose)                  // Shared
+	config.SetFullFundraiserPath(types.BIP44HDPath) //nolint: staticcheck
 }
 
 // RegisterDenoms registers the base and display denominations to the SDK.
@@ -52,7 +67,7 @@ func RegisterDenoms() {
 		panic(err)
 	}
 
-	if err := sdk.RegisterDenom(BaseDenom, sdk.NewDecWithPrec(1, ethermint.BaseDenomUnit)); err != nil {
+	if err := sdk.RegisterDenom(BaseDenom, sdk.NewDecWithPrec(1, types.BaseDenomUnit)); err != nil {
 		panic(err)
 	}
 }

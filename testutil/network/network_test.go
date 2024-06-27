@@ -11,10 +11,10 @@ import (
 	"github.com/stretchr/testify/suite"
 
 	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/evmos/ethermint/server/config"
-	"github.com/evmos/ethermint/testutil/network"
+	"github.com/qom-one/qomapp/v1/server/config"
+	"github.com/qom-one/qomapp/v1/testutil/network"
 
-	qomnetwork "github.com/QOM-One/QomApp/v7/testutil/network"
+	evmosnetwork "github.com/qom-one/qomapp/v1/testutil/network"
 )
 
 type IntegrationTestSuite struct {
@@ -27,7 +27,7 @@ func (s *IntegrationTestSuite) SetupSuite() {
 	s.T().Log("setting up integration test suite")
 
 	var err error
-	cfg := qomnetwork.DefaultConfig()
+	cfg := evmosnetwork.DefaultConfig()
 	cfg.JSONRPCAddress = config.DefaultJSONRPCAddress
 	cfg.NumValidators = 1
 

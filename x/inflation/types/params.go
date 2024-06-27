@@ -1,3 +1,19 @@
+// Copyright 2022 Evmos Foundation
+// This file is part of the Evmos Network packages.
+//
+// Evmos is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// The Evmos packages are distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with the Evmos packages. If not, see https://github.com/evmos/evmos/blob/main/LICENSE
+
 package types
 
 import (
@@ -6,23 +22,27 @@ import (
 	"strings"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
+	evm "github.com/qom-one/qomapp/v1/x/evm/types"
 )
 
-var DefaultInflationDenom = "aqom"
+var ParamsKey = []byte("Params")
 
-// Parameter store keys
 var (
-	ParamStoreKeyMintDenom              = []byte("ParamStoreKeyMintDenom")
-	ParamStoreKeyExponentialCalculation = []byte("ParamStoreKeyExponentialCalculation")
-	ParamStoreKeyInflationDistribution  = []byte("ParamStoreKeyInflationDistribution")
-	ParamStoreKeyEnableInflation        = []byte("ParamStoreKeyEnableInflation")
+	DefaultInflationDenom         = evm.DefaultEVMDenom
+	DefaultInflation              = true
+	DefaultExponentialCalculation = ExponentialCalculation{
+		A:             sdk.NewDec(int64(300_000_000)),
+		R:             sdk.NewDecWithPrec(50, 2), // 50%
+		C:             sdk.NewDec(int64(9_375_000)),
+		BondingTarget: sdk.NewDecWithPrec(66, 2), // 66%
+		MaxVariance:   sdk.ZeroDec(),             // 0%
+	}
+	DefaultInflationDistribution = InflationDistribution{
+		StakingRewards:  sdk.NewDecWithPrec(533333334, 9), // 0.53 = 40% / (1 - 25%)
+		UsageIncentives: sdk.NewDecWithPrec(333333333, 9), // 0.33 = 25% / (1 - 25%)
+		CommunityPool:   sdk.NewDecWithPrec(133333333, 9), // 0.13 = 10% / (1 - 25%)
+	}
 )
-
-// ParamTable for inflation module
-func ParamKeyTable() paramtypes.KeyTable {
-	return paramtypes.NewKeyTable().RegisterParamSet(&Params{})
-}
 
 func NewParams(
 	mintDenom string,
@@ -38,32 +58,13 @@ func NewParams(
 	}
 }
 
-// default minting module parameter
+// default minting module parameters
 func DefaultParams() Params {
 	return Params{
-		MintDenom: "aqom",
-		ExponentialCalculation: ExponentialCalculation{
-			A:             sdk.NewDec(int64(16_304_348)),
-			R:             sdk.NewDecWithPrec(35, 2), // 35%
-			C:             sdk.ZeroDec(),
-			BondingTarget: sdk.NewDecWithPrec(80, 2), // not relevant; max variance is 0
-			MaxVariance:   sdk.ZeroDec(),             // 0%
-		},
-		InflationDistribution: InflationDistribution{
-			StakingRewards: sdk.NewDecWithPrec(1000000000, 9), // 0.53 = 40% / (1 - 25%)
-			CommunityPool:  sdk.ZeroDec(),                     // 0.13 = 10% / (1 - 25%)
-		},
-		EnableInflation: false,
-	}
-}
-
-// Implements params.ParamSet
-func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
-	return paramtypes.ParamSetPairs{
-		paramtypes.NewParamSetPair(ParamStoreKeyMintDenom, &p.MintDenom, validateMintDenom),
-		paramtypes.NewParamSetPair(ParamStoreKeyExponentialCalculation, &p.ExponentialCalculation, validateExponentialCalculation),
-		paramtypes.NewParamSetPair(ParamStoreKeyInflationDistribution, &p.InflationDistribution, validateInflationDistribution),
-		paramtypes.NewParamSetPair(ParamStoreKeyEnableInflation, &p.EnableInflation, validateBool),
+		MintDenom:              DefaultInflationDenom,
+		ExponentialCalculation: DefaultExponentialCalculation,
+		InflationDistribution:  DefaultInflationDistribution,
+		EnableInflation:        DefaultInflation,
 	}
 }
 
@@ -76,11 +77,8 @@ func validateMintDenom(i interface{}) error {
 	if strings.TrimSpace(v) == "" {
 		return errors.New("mint denom cannot be blank")
 	}
-	if err := sdk.ValidateDenom(v); err != nil {
-		return err
-	}
 
-	return nil
+	return sdk.ValidateDenom(v)
 }
 
 func validateExponentialCalculation(i interface{}) error {
@@ -135,11 +133,15 @@ func validateInflationDistribution(i interface{}) error {
 		return errors.New("staking distribution ratio must not be negative")
 	}
 
+	if v.UsageIncentives.IsNegative() {
+		return errors.New("pool incentives distribution ratio must not be negative")
+	}
+
 	if v.CommunityPool.IsNegative() {
 		return errors.New("community pool distribution ratio must not be negative")
 	}
 
-	totalProportions := v.StakingRewards.Add(v.CommunityPool)
+	totalProportions := v.StakingRewards.Add(v.UsageIncentives).Add(v.CommunityPool)
 	if !totalProportions.Equal(sdk.NewDec(1)) {
 		return errors.New("total distributions ratio should be 1")
 	}

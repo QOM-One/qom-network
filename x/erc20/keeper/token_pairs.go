@@ -1,3 +1,19 @@
+// Copyright 2022 Evmos Foundation
+// This file is part of the Evmos Network packages.
+//
+// Evmos is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// The Evmos packages are distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with the Evmos packages. If not, see https://github.com/evmos/evmos/blob/main/LICENSE
+
 package keeper
 
 import (
@@ -5,13 +21,23 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/common"
 
-	"github.com/QOM-One/QomApp/v7/x/erc20/types"
+	"github.com/qom-one/qomapp/v1/x/erc20/types"
 )
 
 // GetTokenPairs - get all registered token tokenPairs
 func (k Keeper) GetTokenPairs(ctx sdk.Context) []types.TokenPair {
 	tokenPairs := []types.TokenPair{}
 
+	k.IterateTokenPairs(ctx, func(tokenPair types.TokenPair) (stop bool) {
+		tokenPairs = append(tokenPairs, tokenPair)
+		return false
+	})
+
+	return tokenPairs
+}
+
+// IterateTokenPairs iterates over all the stored token pairs
+func (k Keeper) IterateTokenPairs(ctx sdk.Context, cb func(tokenPair types.TokenPair) (stop bool)) {
 	store := ctx.KVStore(k.storeKey)
 	iterator := sdk.KVStorePrefixIterator(store, types.KeyPrefixTokenPair)
 	defer iterator.Close()
@@ -20,13 +46,14 @@ func (k Keeper) GetTokenPairs(ctx sdk.Context) []types.TokenPair {
 		var tokenPair types.TokenPair
 		k.cdc.MustUnmarshal(iterator.Value(), &tokenPair)
 
-		tokenPairs = append(tokenPairs, tokenPair)
+		if cb(tokenPair) {
+			break
+		}
 	}
-
-	return tokenPairs
 }
 
 // GetTokenPairID returns the pair id from either of the registered tokens.
+// Hex address or Denom can be used as token argument.
 func (k Keeper) GetTokenPairID(ctx sdk.Context, token string) []byte {
 	if common.IsHexAddress(token) {
 		addr := common.HexToAddress(token)
@@ -35,7 +62,7 @@ func (k Keeper) GetTokenPairID(ctx sdk.Context, token string) []byte {
 	return k.GetDenomMap(ctx, token)
 }
 
-// GetTokenPair - get registered token pair from the identifier
+// GetTokenPair gets a registered token pair from the identifier.
 func (k Keeper) GetTokenPair(ctx sdk.Context, id []byte) (types.TokenPair, bool) {
 	if id == nil {
 		return types.TokenPair{}, false

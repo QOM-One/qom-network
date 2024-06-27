@@ -1,18 +1,33 @@
+// Copyright 2022 Evmos Foundation
+// This file is part of the Evmos Network packages.
+//
+// Evmos is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// The Evmos packages are distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with the Evmos packages. If not, see https://github.com/evmos/evmos/blob/main/LICENSE
+
 package keeper
 
 import (
 	"bytes"
-	// nolint: typecheck
 	"math/big"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core"
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
-	evmtypes "github.com/evmos/ethermint/x/evm/types"
+	evmtypes "github.com/qom-one/qomapp/v1/x/evm/types"
 
-	"github.com/QOM-One/QomApp/v7/contracts"
-	"github.com/QOM-One/QomApp/v7/x/erc20/types"
+	"github.com/qom-one/qomapp/v1/contracts"
+	"github.com/qom-one/qomapp/v1/x/erc20/types"
 )
 
 var _ evmtypes.EvmHooks = Hooks{}
@@ -27,6 +42,12 @@ func (k Keeper) Hooks() Hooks {
 	return Hooks{k}
 }
 
+// PostTxProcessing is a wrapper for calling the EVM PostTxProcessing hook on
+// the module keeper
+func (h Hooks) PostTxProcessing(ctx sdk.Context, msg core.Message, receipt *ethtypes.Receipt) error {
+	return h.k.PostTxProcessing(ctx, msg, receipt)
+}
+
 // PostTxProcessing implements EvmHooks.PostTxProcessing. The EVM hooks allows
 // users to convert ERC20s to Cosmos Coins by sending an Ethereum tx transfer to
 // the module account address. This hook applies to both token pairs that have
@@ -38,12 +59,12 @@ func (k Keeper) Hooks() Hooks {
 // Note that the PostTxProcessing hook is only called by sending an EVM
 // transaction that triggers `ApplyTransaction`. A cosmos tx with a
 // `ConvertERC20` msg does not trigger the hook as it only calls `ApplyMessage`.
-func (h Hooks) PostTxProcessing(
+func (k Keeper) PostTxProcessing(
 	ctx sdk.Context,
-	msg core.Message,
+	_ core.Message,
 	receipt *ethtypes.Receipt,
 ) error {
-	params := h.k.GetParams(ctx)
+	params := k.GetParams(ctx)
 	if !params.EnableErc20 || !params.EnableEVMHook {
 		// no error is returned to avoid reverting the tx and allow for other post
 		// processing txs to pass and
@@ -67,13 +88,13 @@ func (h Hooks) PostTxProcessing(
 
 		// Check if event is a `Transfer` event.
 		if event.Name != types.ERC20EventTransfer {
-			h.k.Logger(ctx).Info("emitted event", "name", event.Name, "signature", event.Sig)
+			k.Logger(ctx).Info("emitted event", "name", event.Name, "signature", event.Sig)
 			continue
 		}
 
 		transferEvent, err := erc20.Unpack(event.Name, log.Data)
 		if err != nil {
-			h.k.Logger(ctx).Error("failed to unpack transfer event", "error", err.Error())
+			k.Logger(ctx).Error("failed to unpack transfer event", "error", err.Error())
 			continue
 		}
 
@@ -89,12 +110,12 @@ func (h Hooks) PostTxProcessing(
 
 		// Check that the contract is a registered token pair
 		contractAddr := log.Address
-		id := h.k.GetERC20Map(ctx, contractAddr)
+		id := k.GetERC20Map(ctx, contractAddr)
 		if len(id) == 0 {
 			continue
 		}
 
-		pair, found := h.k.GetTokenPair(ctx, id)
+		pair, found := k.GetTokenPair(ctx, id)
 		if !found {
 			continue
 		}
@@ -109,7 +130,7 @@ func (h Hooks) PostTxProcessing(
 		if !pair.Enabled {
 			// continue to allow transfers for the ERC20 in case the token pair is
 			// disabled
-			h.k.Logger(ctx).Debug(
+			k.Logger(ctx).Debug(
 				"ERC20 token -> Cosmos coin conversion is disabled for pair",
 				"coin", pair.Denom, "contract", pair.Erc20Address,
 			)
@@ -123,15 +144,15 @@ func (h Hooks) PostTxProcessing(
 		// registered token wants to mint a Cosmos coin.
 		switch pair.ContractOwner {
 		case types.OWNER_MODULE:
-			_, err = h.k.CallEVM(ctx, erc20, types.ModuleAddress, contractAddr, true, "burn", tokens)
+			_, err = k.CallEVM(ctx, erc20, types.ModuleAddress, contractAddr, true, "burn", tokens)
 		case types.OWNER_EXTERNAL:
-			err = h.k.bankKeeper.MintCoins(ctx, types.ModuleName, coins)
+			err = k.bankKeeper.MintCoins(ctx, types.ModuleName, coins)
 		default:
 			err = types.ErrUndefinedOwner
 		}
 
 		if err != nil {
-			h.k.Logger(ctx).Debug(
+			k.Logger(ctx).Debug(
 				"failed to process EVM hook for ER20 -> coin conversion",
 				"coin", pair.Denom, "contract", pair.Erc20Address, "error", err.Error(),
 			)
@@ -143,8 +164,8 @@ func (h Hooks) PostTxProcessing(
 		recipient := sdk.AccAddress(from.Bytes())
 
 		// transfer the tokens from ModuleAccount to sender address
-		if err := h.k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, recipient, coins); err != nil {
-			h.k.Logger(ctx).Debug(
+		if err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, recipient, coins); err != nil {
+			k.Logger(ctx).Debug(
 				"failed to process EVM hook for ER20 -> coin conversion",
 				"tx-hash", receipt.TxHash.Hex(), "log-idx", i,
 				"coin", pair.Denom, "contract", pair.Erc20Address, "error", err.Error(),

@@ -4,7 +4,8 @@ import (
 	"bytes"
 	"fmt"
 
-	channeltypes "github.com/cosmos/ibc-go/v3/modules/core/04-channel/types"
+	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
+	ibctesting "github.com/cosmos/ibc-go/v6/testing"
 )
 
 // Path contains two endpoints representing two chains connected over IBC
@@ -16,7 +17,7 @@ type Path struct {
 // NewPath constructs an endpoint for each chain using the default values
 // for the endpoints. Each endpoint is updated to have a pointer to the
 // counterparty endpoint.
-func NewPath(chainA, chainB *TestChain) *Path {
+func NewPath(chainA, chainB *ibctesting.TestChain) *Path {
 	endpointA := NewDefaultEndpoint(chainA)
 	endpointB := NewDefaultEndpoint(chainB)
 
@@ -52,16 +53,12 @@ func (path *Path) RelayPacket(packet channeltypes.Packet) error {
 			return err
 		}
 
-		ack, err := ParseAckFromEvents(res.GetEvents())
+		ack, err := ibctesting.ParseAckFromEvents(res.GetEvents())
 		if err != nil {
 			return err
 		}
 
-		if err := path.EndpointA.AcknowledgePacket(packet, ack); err != nil {
-			return err
-		}
-
-		return nil
+		return path.EndpointA.AcknowledgePacket(packet, ack)
 	}
 
 	pc = path.EndpointB.Chain.App.GetIBCKeeper().ChannelKeeper.GetPacketCommitment(path.EndpointB.Chain.GetContext(), packet.GetSourcePort(), packet.GetSourceChannel(), packet.GetSequence())
@@ -77,15 +74,12 @@ func (path *Path) RelayPacket(packet channeltypes.Packet) error {
 			return err
 		}
 
-		ack, err := ParseAckFromEvents(res.GetEvents())
+		ack, err := ibctesting.ParseAckFromEvents(res.GetEvents())
 		if err != nil {
 			return err
 		}
 
-		if err := path.EndpointB.AcknowledgePacket(packet, ack); err != nil {
-			return err
-		}
-		return nil
+		return path.EndpointB.AcknowledgePacket(packet, ack)
 	}
 
 	return fmt.Errorf("packet commitment does not exist on either endpoint for provided packet")

@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -16,22 +15,19 @@ func TestParamsTestSuite(t *testing.T) {
 	suite.Run(t, new(ParamsTestSuite))
 }
 
-func (suite *ParamsTestSuite) TestParamKeyTable() {
-	suite.Require().IsType(paramtypes.KeyTable{}, ParamKeyTable())
-}
-
 func (suite *ParamsTestSuite) TestParamsValidate() {
 	validExponentialCalculation := ExponentialCalculation{
-		A:             sdk.NewDec(int64(16_304_348)),
-		R:             sdk.NewDecWithPrec(35, 2),
-		C:             sdk.ZeroDec(),
-		BondingTarget: sdk.NewDecWithPrec(66, 2),
-		MaxVariance:   sdk.ZeroDec(),
+		A:             sdk.NewDec(int64(300_000_000)),
+		R:             sdk.NewDecWithPrec(5, 1),
+		C:             sdk.NewDec(int64(9_375_000)),
+		BondingTarget: sdk.NewDecWithPrec(50, 2),
+		MaxVariance:   sdk.NewDecWithPrec(20, 2),
 	}
 
 	validInflationDistribution := InflationDistribution{
-		StakingRewards: sdk.NewDecWithPrec(1000000, 6),
-		CommunityPool:  sdk.ZeroDec(),
+		StakingRewards:  sdk.NewDecWithPrec(533334, 6),
+		UsageIncentives: sdk.NewDecWithPrec(333333, 6),
+		CommunityPool:   sdk.NewDecWithPrec(133333, 6),
 	}
 
 	testCases := []struct {
@@ -202,8 +198,9 @@ func (suite *ParamsTestSuite) TestParamsValidate() {
 				MintDenom:              "aqom",
 				ExponentialCalculation: validExponentialCalculation,
 				InflationDistribution: InflationDistribution{
-					StakingRewards: sdk.OneDec().Neg(),
-					CommunityPool:  sdk.NewDecWithPrec(133333, 6),
+					StakingRewards:  sdk.OneDec().Neg(),
+					UsageIncentives: sdk.NewDecWithPrec(333333, 6),
+					CommunityPool:   sdk.NewDecWithPrec(133333, 6),
 				},
 				EnableInflation: true,
 			},
@@ -215,8 +212,9 @@ func (suite *ParamsTestSuite) TestParamsValidate() {
 				MintDenom:              "aqom",
 				ExponentialCalculation: validExponentialCalculation,
 				InflationDistribution: InflationDistribution{
-					StakingRewards: sdk.NewDecWithPrec(533334, 6),
-					CommunityPool:  sdk.NewDecWithPrec(133333, 6),
+					StakingRewards:  sdk.NewDecWithPrec(533334, 6),
+					UsageIncentives: sdk.OneDec().Neg(),
+					CommunityPool:   sdk.NewDecWithPrec(133333, 6),
 				},
 				EnableInflation: true,
 			},
@@ -228,8 +226,9 @@ func (suite *ParamsTestSuite) TestParamsValidate() {
 				MintDenom:              "aqom",
 				ExponentialCalculation: validExponentialCalculation,
 				InflationDistribution: InflationDistribution{
-					StakingRewards: sdk.NewDecWithPrec(533334, 6),
-					CommunityPool:  sdk.OneDec().Neg(),
+					StakingRewards:  sdk.NewDecWithPrec(533334, 6),
+					UsageIncentives: sdk.NewDecWithPrec(333333, 6),
+					CommunityPool:   sdk.OneDec().Neg(),
 				},
 				EnableInflation: true,
 			},
@@ -241,8 +240,9 @@ func (suite *ParamsTestSuite) TestParamsValidate() {
 				MintDenom:              "aqom",
 				ExponentialCalculation: validExponentialCalculation,
 				InflationDistribution: InflationDistribution{
-					StakingRewards: sdk.NewDecWithPrec(533333, 6),
-					CommunityPool:  sdk.NewDecWithPrec(133333, 6),
+					StakingRewards:  sdk.NewDecWithPrec(533333, 6),
+					UsageIncentives: sdk.NewDecWithPrec(333333, 6),
+					CommunityPool:   sdk.NewDecWithPrec(133333, 6),
 				},
 				EnableInflation: true,
 			},

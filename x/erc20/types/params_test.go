@@ -1,9 +1,9 @@
-package types
+package types_test
 
 import (
 	"testing"
 
-	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
+	"github.com/qom-one/qomapp/v1/x/erc20/types"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -15,25 +15,21 @@ func TestParamsTestSuite(t *testing.T) {
 	suite.Run(t, new(ParamsTestSuite))
 }
 
-func (suite *ParamsTestSuite) TestParamKeyTable() {
-	suite.Require().IsType(paramtypes.KeyTable{}, ParamKeyTable())
-}
-
 func (suite *ParamsTestSuite) TestParamsValidate() {
 	testCases := []struct {
 		name     string
-		params   Params
+		params   types.Params
 		expError bool
 	}{
-		{"default", DefaultParams(), false},
+		{"default", types.DefaultParams(), false},
 		{
 			"valid",
-			NewParams(true, true),
+			types.NewParams(true, true),
 			false,
 		},
 		{
 			"empty",
-			Params{},
+			types.Params{},
 			false,
 		},
 	}
@@ -50,6 +46,6 @@ func (suite *ParamsTestSuite) TestParamsValidate() {
 }
 
 func (suite *ParamsTestSuite) TestParamsValidatePriv() {
-	suite.Require().Error(validateBool(1))
-	suite.Require().NoError(validateBool(true))
+	suite.Require().Error(types.ValidateBool(1))
+	suite.Require().NoError(types.ValidateBool(true))
 }

@@ -1,44 +1,24 @@
 #!/usr/bin/make -f
 
-###
-# Find OS and Go environment
-# GO contains the Go binary
-# FS contains the OS file separator
-###
-ifeq ($(OS),Windows_NT)
-  GO := $(shell where go.exe 2> NUL)
-  FS := \\
-else
-  GO := $(shell command -v go 2> /dev/null)
-  FS := /
-endif
-
-ifeq ($(GO),)
-  $(error could not find go. Is it in PATH? $(GO))
-endif
-
 PACKAGES_NOSIMULATION=$(shell go list ./... | grep -v '/simulation')
-PACKAGES_SIMTEST=$(shell go list ./... | grep '/simulation')
-DIFF_TAG=$(shell git rev-list --tags="v*" --max-count=1 --not $(shell git rev-list --tags="v*" "HEAD..origin"))
-DEFAULT_TAG=$(shell git rev-list --tags="v*" --max-count=1)
-VERSION ?= $(shell echo $(shell git describe --tags $(or $(DIFF_TAG), $(DEFAULT_TAG))) | sed 's/^v//')
+VERSION ?= $(shell echo $(shell git describe --tags --always) | sed 's/^v//')
 TMVERSION := $(shell go list -m github.com/tendermint/tendermint | sed 's:.* ::')
 COMMIT := $(shell git log -1 --format='%H')
 LEDGER_ENABLED ?= true
-GOPATH ?= $(shell $(GO) env GOPATH)
 BINDIR ?= $(GOPATH)/bin
-qom_BINARY = qomd
-qom_DIR = qomd
+QOM_BINARY = qomd
+QOM_DIR = qom
 BUILDDIR ?= $(CURDIR)/build
-SIMAPP = ./app
 HTTPS_GIT := https://github.com/QOM-One/QomApp.git
 DOCKER := $(shell which docker)
-DOCKER_BUF := $(DOCKER) run --rm -v $(CURDIR):/workspace --workdir /workspace bufbuild/buf
-NAMESPACE := Qom
-PROJECT := qom
+NAMESPACE := qomone
+PROJECT := app
 DOCKER_IMAGE := $(NAMESPACE)/$(PROJECT)
 COMMIT_HASH := $(shell git rev-parse --short=7 HEAD)
 DOCKER_TAG := $(COMMIT_HASH)
+# e2e env
+MOUNT_PATH := $(shell pwd)/build/:/root/
+E2E_SKIP_CLEANUP := false
 
 export GO111MODULE = on
 
@@ -79,18 +59,12 @@ endif
 build_tags += $(BUILD_TAGS)
 build_tags := $(strip $(build_tags))
 
-whitespace :=
-whitespace += $(whitespace)
-comma := ,
-build_tags_comma_sep := $(subst $(whitespace),$(comma),$(build_tags))
-
 # process linker flags
 
 ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=qom \
-          -X github.com/cosmos/cosmos-sdk/version.AppName=$(qom_BINARY) \
+          -X github.com/cosmos/cosmos-sdk/version.AppName=$(QOM_BINARY) \
           -X github.com/cosmos/cosmos-sdk/version.Version=$(VERSION) \
           -X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT) \
-          -X "github.com/cosmos/cosmos-sdk/version.BuildTags=$(build_tags_comma_sep)" \
           -X github.com/tendermint/tendermint/version.TMCoreSemVer=$(TMVERSION)
 
 # DB backend selection
@@ -103,14 +77,20 @@ endif
 # handle rocksdb
 ifeq (rocksdb,$(findstring rocksdb,$(COSMOS_BUILD_OPTIONS)))
   CGO_ENABLED=1
-  BUILD_TAGS += rocksdb
+  build_tags += rocksdb
   ldflags += -X github.com/cosmos/cosmos-sdk/types.DBBackend=rocksdb
 endif
 # handle boltdb
 ifeq (boltdb,$(findstring boltdb,$(COSMOS_BUILD_OPTIONS)))
-  BUILD_TAGS += boltdb
+  build_tags += boltdb
   ldflags += -X github.com/cosmos/cosmos-sdk/types.DBBackend=boltdb
 endif
+
+# add build tags to linker flags
+whitespace := $(subst ,, )
+comma := ,
+build_tags_comma_sep := $(subst $(whitespace),$(comma),$(build_tags))
+ldflags += -X "github.com/cosmos/cosmos-sdk/version.BuildTags=$(build_tags_comma_sep)"
 
 ifeq (,$(findstring nostrip,$(COSMOS_BUILD_OPTIONS)))
   ldflags += -w -s
@@ -122,6 +102,12 @@ BUILD_FLAGS := -tags "$(build_tags)" -ldflags '$(ldflags)'
 # check for nostrip option
 ifeq (,$(findstring nostrip,$(COSMOS_BUILD_OPTIONS)))
   BUILD_FLAGS += -trimpath
+endif
+
+# check if no optimization option is passed
+# used for remote debugging
+ifneq (,$(findstring nooptimization,$(COSMOS_BUILD_OPTIONS)))
+  BUILD_FLAGS += -gcflags "all=-N -l"
 endif
 
 # # The below include contains the tools and runsim targets.
@@ -157,6 +143,7 @@ build-reproducible: go.sum
 
 
 build-docker:
+	# TODO replace with kaniko
 	$(DOCKER) build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
 	$(DOCKER) tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest
 	# docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:${COMMIT_HASH}
@@ -185,7 +172,7 @@ clean:
 
 all: build
 
-build-all: tools build lint test
+build-all: tools build lint test vulncheck
 
 .PHONY: distclean clean build-all
 
@@ -205,45 +192,45 @@ RUNSIM         = $(TOOLS_DESTDIR)/runsim
 runsim: $(RUNSIM)
 $(RUNSIM):
 	@echo "Installing runsim..."
-	@(cd /tmp && go install github.com/cosmos/tools/cmd/runsim@v1.0.0)
+	@(cd /tmp && ${GO_MOD} go install github.com/cosmos/tools/cmd/runsim@master)
 
 statik: $(STATIK)
 $(STATIK):
 	@echo "Installing statik..."
-	@(cd /tmp && go get github.com/rakyll/statik@v0.1.6)
+	@(cd /tmp && go install github.com/rakyll/statik@v0.1.6)
 
 contract-tools:
 ifeq (, $(shell which stringer))
 	@echo "Installing stringer..."
-	@go get golang.org/x/tools/cmd/stringer
+	@go install golang.org/x/tools/cmd/stringer@latest
 else
 	@echo "stringer already installed; skipping..."
 endif
 
 ifeq (, $(shell which go-bindata))
 	@echo "Installing go-bindata..."
-	@go get github.com/kevinburke/go-bindata/go-bindata
+	@go install github.com/kevinburke/go-bindata/go-bindata@latest
 else
 	@echo "go-bindata already installed; skipping..."
 endif
 
 ifeq (, $(shell which gencodec))
 	@echo "Installing gencodec..."
-	@go get github.com/fjl/gencodec
+	@go install github.com/fjl/gencodec@latest
 else
 	@echo "gencodec already installed; skipping..."
 endif
 
 ifeq (, $(shell which protoc-gen-go))
 	@echo "Installing protoc-gen-go..."
-	@go get github.com/fjl/gencodec
+	@go install github.com/fjl/gencodec@latest
 	@go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 else
 	@echo "protoc-gen-go already installed; skipping..."
 endif
 
 ifeq (, $(shell which protoc-gen-go-grpc))
-	@go install google.golang.org/grpc/cmd/protoc-gen-go-grpc
+	@go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 else
 	@echo "protoc-gen-go-grpc already installed; skipping..."
 endif
@@ -255,16 +242,8 @@ else
 	@echo "solcjs already installed; skipping..."
 endif
 
-docs-tools:
-ifeq (, $(shell which yarn))
-	@echo "Installing yarn..."
-	@npm install -g yarn
-else
-	@echo "yarn already installed; skipping..."
-endif
-
 tools: tools-stamp
-tools-stamp: contract-tools docs-tools proto-tools statik runsim
+tools-stamp: contract-tools docs-tools statik runsim
 	# Create dummy file to satisfy dependency and avoid
 	# rebuilding when this Makefile target is hit twice
 	# in a row.
@@ -274,18 +253,16 @@ tools-clean:
 	rm -f $(RUNSIM)
 	rm -f tools-stamp
 
-docs-tools-stamp: docs-tools
-	# Create dummy file to satisfy dependency and avoid
-	# rebuilding when this Makefile target is hit twice
-	# in a row.
-	touch $@
-
-.PHONY: runsim statik tools contract-tools docs-tools proto-tools  tools-stamp tools-clean docs-tools-stamp
+.PHONY: runsim statik tools contract-tools tools-stamp tools-clean
 
 go.sum: go.mod
 	echo "Ensure dependencies have not been modified ..." >&2
 	go mod verify
 	go mod tidy
+
+vulncheck: $(BUILDDIR)/
+	GOBIN=$(BUILDDIR) go install golang.org/x/vuln/cmd/govulncheck@latest
+	$(BUILDDIR)/govulncheck ./...
 
 ###############################################################################
 ###                              Documentation                              ###
@@ -302,36 +279,8 @@ update-swagger-docs: statik
 .PHONY: update-swagger-docs
 
 godocs:
-	@echo "--> Wait a few seconds and visit http://localhost:6060/pkg/github.com/qom-one/qomapp/types"
+	@echo "--> Wait a few seconds and visit http://localhost:6060/pkg/github.com/qom-one/qomapp"
 	godoc -http=:6060
-
-# Start docs site at localhost:8080
-docs-serve:
-	@cd docs && \
-	yarn && \
-	yarn run serve
-
-# Build the site into docs/.vuepress/dist
-build-docs:
-	@$(MAKE) docs-tools-stamp && \
-	cd docs && \
-	yarn && \
-	yarn run build
-
-# This builds a docs site for each branch/tag in `./docs/versions`
-# and copies each site to a version prefixed path. The last entry inside
-# the `versions` file will be the default root index.html.
-build-docs-versioned:
-	@$(MAKE) docs-tools-stamp && \
-	cd docs && \
-	while read -r branch path_prefix; do \
-		(git checkout $${branch} && npm install && VUEPRESS_BASE="/$${path_prefix}/" npm run build) ; \
-		mkdir -p ~/output/$${path_prefix} ; \
-		cp -r .vuepress/dist/* ~/output/$${path_prefix}/ ; \
-		cp ~/output/$${path_prefix}/index.html ~/output ; \
-	done < versions ;
-
-.PHONY: docs-serve build-docs build-docs-versioned
 
 ###############################################################################
 ###                           Tests & Simulation                            ###
@@ -339,22 +288,35 @@ build-docs-versioned:
 
 test: test-unit
 test-all: test-unit test-race
-PACKAGES_UNIT=$(shell go list ./...)
+# For unit tests we don't want to execute the upgrade tests in tests/e2e but
+# we want to include all unit tests in the subfolders (tests/e2e/*)
+PACKAGES_UNIT=$(shell go list ./... | grep -v '/tests/e2e$$')
 TEST_PACKAGES=./...
 TEST_TARGETS := test-unit test-unit-cover test-race
 
 # Test runs-specific rules. To add a new test target, just add
 # a new rule, customise ARGS or TEST_PACKAGES ad libitum, and
 # append the new rule to the TEST_TARGETS list.
-test-unit: ARGS=-timeout=30m -race
+test-unit: ARGS=-timeout=15m -race
 test-unit: TEST_PACKAGES=$(PACKAGES_UNIT)
 
 test-race: ARGS=-race
 test-race: TEST_PACKAGES=$(PACKAGES_NOSIMULATION)
 $(TEST_TARGETS): run-tests
 
-test-unit-cover: ARGS=-timeout=30m -race -coverprofile=coverage.txt -covermode=atomic
+test-unit-cover: ARGS=-timeout=15m -race -coverprofile=coverage.txt -covermode=atomic
 test-unit-cover: TEST_PACKAGES=$(PACKAGES_UNIT)
+
+test-e2e:
+	@if [ -z "$(TARGET_VERSION)" ]; then \
+		echo "Building docker image from local codebase"; \
+		make build-docker; \
+	fi
+	@mkdir -p ./build
+	@rm -rf build/.qomd
+	@INITIAL_VERSION=$(INITIAL_VERSION) TARGET_VERSION=$(TARGET_VERSION) \
+	E2E_SKIP_CLEANUP=$(E2E_SKIP_CLEANUP) MOUNT_PATH=$(MOUNT_PATH) CHAIN_ID=$(CHAIN_ID) \
+	go test -v ./tests/e2e -run ^TestIntegrationTestSuite$
 
 run-tests:
 ifneq (,$(shell which tparse 2>/dev/null))
@@ -375,69 +337,6 @@ test-rpc-pending:
 	./scripts/integration-test-all.sh -t "pending" -q 1 -z 1 -s 2 -m "pending" -r "true"
 
 .PHONY: run-tests test test-all test-import test-rpc $(TEST_TARGETS)
-
-test-sim-nondeterminism:
-	@echo "Running non-determinism test..."
-	@go test -mod=readonly $(SIMAPP) -run TestAppStateDeterminism -Enabled=true \
-		-NumBlocks=20 -BlockSize=100 -Commit=true -Seed=42 -Period=1 -v -timeout 10m
-
-test-sim-nondeterminism-long:
-	@echo "Running non-determinism-long test..."
-	@go test -mod=readonly $(SIMAPP) -run TestAppStateDeterminism -Enabled=true \
-		-NumBlocks=100 -BlockSize=200 -Commit=true -Seed=42 -Period=1 -v -timeout 10h
-
-test-sim-custom-genesis-fast:
-	@echo "Running custom genesis simulation..."
-	@echo "By default, ${HOME}/.$(qom_DIR)/config/genesis.json will be used."
-	@go test -mod=readonly $(SIMAPP) -run TestFullAppSimulation -Genesis=${HOME}/.$(qom_DIR)/config/genesis.json \
-		-Enabled=true -NumBlocks=100 -BlockSize=200 -Commit=true -Seed=5 -Period=1 -v -timeout 1h
-
-test-sim-import-export: runsim
-	@echo "Running application import/export simulation. This may take several minutes..."
-	@$(BINDIR)/runsim -Jobs=4 -SimAppPkg=$(SIMAPP) -Seeds=1,10,100,1000 -ExitOnFail 50 5 TestAppImportExport
-
-test-sim-import-export-long: runsim
-	@echo "Running application simulation-import-export-long. This may take several minutes..."
-	$(eval SEED := $(shell awk 'BEGIN{srand(); for (i=1; i<=50; i++) {n=int(10000*rand())+1; printf "%d%s", n, (i==50 ? "" : ",")}}'))
-	@$(BINDIR)/runsim -Jobs=4 -SimAppPkg=$(SIMAPP) -Seeds="$(SEED)" -ExitOnFail 500 5 TestAppImportExport
-
-test-sim-after-import: runsim
-	@echo "Running application simulation-after-import. This may take several minutes..."
-	@$(BINDIR)/runsim -Jobs=4 -SimAppPkg=$(SIMAPP) -Seeds=1,10,100,1000 -ExitOnFail 50 5 TestAppSimulationAfterImport
-
-test-sim-after-import-long: runsim
-	@echo "Running application simulation-after-import-long. This may take several minutes..."
-	$(eval SEED := $(shell awk 'BEGIN{srand(); for (i=1; i<=50; i++) {n=int(10000*rand())+1; printf "%d%s", n, (i==50 ? "" : ",")}}'))
-	@$(BINDIR)/runsim -Jobs=4 -SimAppPkg=$(SIMAPP) -Seeds="$(SEED)" -ExitOnFail 500 5 TestAppSimulationAfterImport
-
-test-sim-custom-genesis-multi-seed: runsim
-	@echo "Running multi-seed custom genesis simulation..."
-	@echo "By default, ${HOME}/.$(qom_DIR)/config/genesis.json will be used."
-	@$(BINDIR)/runsim -Genesis=${HOME}/.$(qom_DIR)/config/genesis.json -SimAppPkg=$(SIMAPP) -ExitOnFail 50 5 TestFullAppSimulation
-
-test-sim-multi-seed-long: runsim
-	@echo "Running long multi-seed application simulation. This may take awhile!"
-	@$(BINDIR)/runsim -Jobs=4 -SimAppPkg=$(SIMAPP) -ExitOnFail 500 10 TestFullAppSimulation
-
-test-sim-multi-seed-short: runsim
-	@echo "Running short multi-seed application simulation. This may take awhile!"
-	@$(BINDIR)/runsim -Jobs=4 -SimAppPkg=$(SIMAPP) -ExitOnFail 50 5 TestFullAppSimulation
-
-test-sim-benchmark-invariants:
-	@echo "Running simulation invariant benchmarks..."
-	@go test -mod=readonly $(SIMAPP) -benchmem -bench=BenchmarkInvariants -run=^$ \
-	-Enabled=true -NumBlocks=1000 -BlockSize=200 \
-	-Period=1 -Commit=true -Seed=57 -v -timeout 24h
-
-.PHONY: \
-test-sim-nondeterminism \
-test-sim-custom-genesis-fast \
-test-sim-import-export \
-test-sim-after-import \
-test-sim-custom-genesis-multi-seed \
-test-sim-multi-seed-short \
-test-sim-multi-seed-long \
-test-sim-benchmark-invariants
 
 benchmark:
 	@go test -mod=readonly -bench=. $(PACKAGES_NOSIMULATION)
@@ -468,83 +367,117 @@ lint-fix-contracts:
 .PHONY: lint lint-fix
 
 format:
-	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -name '*.pb.go' | xargs gofmt -w -s
-	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -name '*.pb.go' | xargs misspell -w
-	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -name '*.pb.go' | xargs goimports -w -local github.com/qom/qom
+	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -path "./client/docs/statik/statik.go" -not -name '*.pb.go' | xargs gofumpt -w -l
+
 .PHONY: format
 
 ###############################################################################
 ###                                Protobuf                                 ###
 ###############################################################################
 
-containerProtoVer=v0.2
-containerProtoImage=tendermintdev/sdk-proto-gen:$(containerProtoVer)
-containerProtoGen=cosmos-sdk-proto-gen-$(containerProtoVer)
-containerProtoGenSwagger=cosmos-sdk-proto-gen-swagger-$(containerProtoVer)
-containerProtoFmt=cosmos-sdk-proto-fmt-$(containerProtoVer)
+# ------
+# NOTE: Link to the tendermintdev/sdk-proto-gen docker images:
+#       https://hub.docker.com/r/tendermintdev/sdk-proto-gen/tags
+#
+protoVer=v0.7
+protoImageName=tendermintdev/sdk-proto-gen:$(protoVer)
+protoImage=$(DOCKER) run --network host --rm -v $(CURDIR):/workspace --workdir /workspace $(protoImageName)
+# ------
+# NOTE: cosmos/proto-builder image is needed because clang-format is not installed
+#       on the tendermintdev/sdk-proto-gen docker image.
+#		Link to the cosmos/proto-builder docker images:
+#       https://github.com/cosmos/cosmos-sdk/pkgs/container/proto-builder
+#
+protoCosmosVer=0.11.2
+protoCosmosName=ghcr.io/cosmos/proto-builder:$(protoCosmosVer)
+protoCosmosImage=$(DOCKER) run --network host --rm -v $(CURDIR):/workspace --workdir /workspace $(protoCosmosName)
+# ------
+# NOTE: Link to the yoheimuta/protolint docker images:
+#       https://hub.docker.com/r/yoheimuta/protolint/tags
+#
+protolintVer=0.42.2
+protolintName=yoheimuta/protolint:$(protolintVer)
+protolintImage=$(DOCKER) run --network host --rm -v $(CURDIR):/workspace --workdir /workspace $(protolintName)
 
-proto-all: proto-format proto-gen proto-swagger-gen update-swagger-docs
+
+# ------
+# NOTE: If you are experiencing problems running these commands, try deleting
+#       the docker images and execute the desired command again.
+#
+proto-all: proto-format proto-lint proto-gen
 
 proto-gen:
 	@echo "Generating Protobuf files"
-	@if docker ps -a --format '{{.Names}}' | grep -Eq "^${containerProtoGen}$$"; then docker start -a $(containerProtoGen); else docker run --name $(containerProtoGen) -v $(CURDIR):/workspace --workdir /workspace $(containerProtoImage) \
-		sh ./scripts/protocgen.sh; fi
+	$(protoImage) sh ./scripts/protocgen.sh
 
 proto-swagger-gen:
+	@echo "Downloading Protobuf dependencies"
+	@make proto-download-deps
 	@echo "Generating Protobuf Swagger"
-	@if docker ps -a --format '{{.Names}}' | grep -Eq "^${containerProtoGenSwagger}$$"; then docker start -a $(containerProtoGenSwagger); else docker run --name $(containerProtoGenSwagger) -v $(CURDIR):/workspace --workdir /workspace $(containerProtoImage) \
-		sh ./scripts/protoc-swagger-gen.sh; fi
+	$(protoCosmosImage) sh ./scripts/protoc-swagger-gen.sh
 
 proto-format:
 	@echo "Formatting Protobuf files"
-	@if docker ps -a --format '{{.Names}}' | grep -Eq "^${containerProtoFmt}$$"; then docker start -a $(containerProtoFmt); else docker run --name $(containerProtoFmt) -v $(CURDIR):/workspace --workdir /workspace tendermintdev/docker-build-proto \
-		find ./ -not -path "./third_party/*" -name "*.proto" -exec clang-format -i {} \; ; fi
+	$(protoCosmosImage) find ./ -name *.proto -exec clang-format -i {} \;
 
+# NOTE: The linter configuration lives in .protolint.yaml
 proto-lint:
-	@$(DOCKER_BUF) lint --error-format=json
+	@echo "Linting Protobuf files"
+	$(protolintImage) lint ./proto
 
-.PHONY: proto-all proto-gen proto-swagger-gen proto-format
+proto-check-breaking:
+	@echo "Checking Protobuf files for breaking changes"
+	$(protoImage) buf breaking --against $(HTTPS_GIT)#branch=main
+
+SWAGGER_DIR=./swagger-proto
+THIRD_PARTY_DIR=$(SWAGGER_DIR)/third_party
+
+proto-download-deps:
+	mkdir -p "$(THIRD_PARTY_DIR)/cosmos_tmp" && \
+	cd "$(THIRD_PARTY_DIR)/cosmos_tmp" && \
+	git init && \
+	git remote add origin "https://github.com/cosmos/cosmos-sdk.git" && \
+	git config core.sparseCheckout true && \
+	printf "proto\nthird_party\n" > .git/info/sparse-checkout && \
+	git pull origin main && \
+	rm -f ./proto/buf.* && \
+	mv ./proto/* ..
+	rm -rf "$(THIRD_PARTY_DIR)/cosmos_tmp"
+
+	mkdir -p "$(THIRD_PARTY_DIR)/ibc_tmp" && \
+	cd "$(THIRD_PARTY_DIR)/ibc_tmp" && \
+	git init && \
+	git remote add origin "https://github.com/cosmos/ibc-go.git" && \
+	git config core.sparseCheckout true && \
+	printf "proto\n" > .git/info/sparse-checkout && \
+	git pull origin main && \
+	rm -f ./proto/buf.* && \
+	mv ./proto/* ..
+	rm -rf "$(THIRD_PARTY_DIR)/ibc_tmp"
+
+	mkdir -p "$(THIRD_PARTY_DIR)/cosmos_proto_tmp" && \
+	cd "$(THIRD_PARTY_DIR)/cosmos_proto_tmp" && \
+	git init && \
+	git remote add origin "https://github.com/cosmos/cosmos-proto.git" && \
+	git config core.sparseCheckout true && \
+	printf "proto\n" > .git/info/sparse-checkout && \
+	git pull origin main && \
+	rm -f ./proto/buf.* && \
+	mv ./proto/* ..
+	rm -rf "$(THIRD_PARTY_DIR)/cosmos_proto_tmp"
+
+	mkdir -p "$(THIRD_PARTY_DIR)/gogoproto" && \
+	curl -SSL https://raw.githubusercontent.com/cosmos/gogoproto/main/gogoproto/gogo.proto > "$(THIRD_PARTY_DIR)/gogoproto/gogo.proto"
+
+	mkdir -p "$(THIRD_PARTY_DIR)/google/api" && \
+	curl -sSL https://raw.githubusercontent.com/googleapis/googleapis/master/google/api/annotations.proto > "$(THIRD_PARTY_DIR)/google/api/annotations.proto"
+	curl -sSL https://raw.githubusercontent.com/googleapis/googleapis/master/google/api/http.proto > "$(THIRD_PARTY_DIR)/google/api/http.proto"
+
+	mkdir -p "$(THIRD_PARTY_DIR)/cosmos/ics23/v1" && \
+	curl -sSL https://raw.githubusercontent.com/cosmos/ics23/master/proto/cosmos/ics23/v1/proofs.proto > "$(THIRD_PARTY_DIR)/cosmos/ics23/v1/proofs.proto"
 
 
-TM_URL              = https://raw.githubusercontent.com/tendermint/tendermint/v0.34.15/proto/tendermint
-GOGO_PROTO_URL      = https://raw.githubusercontent.com/regen-network/protobuf/cosmos
-COSMOS_SDK_URL      = https://raw.githubusercontent.com/cosmos/cosmos-sdk/v0.45.1
-ETHERMINT_URL      	= https://raw.githubusercontent.comCanto-Network/ethermint-v2/v0.10.0
-IBC_GO_URL      		= https://raw.githubusercontent.com/cosmos/ibc-go/v3.0.0-rc0
-COSMOS_PROTO_URL    = https://raw.githubusercontent.com/regen-network/cosmos-proto/master
-
-TM_CRYPTO_TYPES     = third_party/proto/tendermint/crypto
-TM_ABCI_TYPES       = third_party/proto/tendermint/abci
-TM_TYPES            = third_party/proto/tendermint/types
-
-GOGO_PROTO_TYPES    = third_party/proto/gogoproto
-
-COSMOS_PROTO_TYPES  = third_party/proto/cosmos_proto
-
-proto-update-deps:
-	@mkdir -p $(GOGO_PROTO_TYPES)
-	@curl -sSL $(GOGO_PROTO_URL)/gogoproto/gogo.proto > $(GOGO_PROTO_TYPES)/gogo.proto
-
-	@mkdir -p $(COSMOS_PROTO_TYPES)
-	@curl -sSL $(COSMOS_PROTO_URL)/cosmos.proto > $(COSMOS_PROTO_TYPES)/cosmos.proto
-
-## Importing of tendermint protobuf definitions currently requires the
-## use of `sed` in order to build properly with cosmos-sdk's proto file layout
-## (which is the standard Buf.build FILE_LAYOUT)
-## Issue link: https://github.com/tendermint/tendermint/issues/5021
-	@mkdir -p $(TM_ABCI_TYPES)
-	@curl -sSL $(TM_URL)/abci/types.proto > $(TM_ABCI_TYPES)/types.proto
-
-	@mkdir -p $(TM_TYPES)
-	@curl -sSL $(TM_URL)/types/types.proto > $(TM_TYPES)/types.proto
-
-	@mkdir -p $(TM_CRYPTO_TYPES)
-	@curl -sSL $(TM_URL)/crypto/proof.proto > $(TM_CRYPTO_TYPES)/proof.proto
-	@curl -sSL $(TM_URL)/crypto/keys.proto > $(TM_CRYPTO_TYPES)/keys.proto
-
-
-
-.PHONY: proto-all proto-gen proto-gen-any proto-swagger-gen proto-format proto-lint proto-check-breaking proto-update-deps
+.PHONY: proto-all proto-gen proto-format proto-lint proto-check-breaking a
 
 ###############################################################################
 ###                                Localnet                                 ###
@@ -555,20 +488,9 @@ localnet-build:
 	@$(MAKE) -C networks/local
 
 # Start a 4-node testnet locally
-localnet-start: localnet-stop
-ifeq ($(OS),Windows_NT)
-	mkdir localnet-setup &
-	@$(MAKE) localnet-build
-
-	IF not exist "build/node0/$(qom_BINARY)/config/genesis.json" docker run --rm -v $(CURDIR)/build\qom\Z qomd/node "./qomd testnet --v 4 -o /qom --keyring-backend=test --ip-addresses qomdnode0,qomdnode1,qomdnode2,qomdnode3"
+localnet-start: localnet-stop localnet-build
+	@if ! [ -f build/node0/$(QOM_BINARY)/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/qom:Z qom/node "./qomd testnet init-files --v 4 -o /qom --keyring-backend=test --starting-ip-address 192.167.10.2"; fi
 	docker-compose up -d
-else
-	mkdir -p localnet-setup
-	@$(MAKE) localnet-build
-
-	if ! [ -f localnet-setup/node0/$(qom_BINARY)/config/genesis.json ]; then docker run --rm -v $(CURDIR)/localnet-setup:/qom:Z qomd/node "./qomd testnet --v 4 -o /qom --keyring-backend=test --ip-addresses qomdnode0,qomdnode1,qomdnode2,qomdnode3"; fi
-	docker-compose up -d
-endif
 
 # Stop testnet
 localnet-stop:
@@ -577,28 +499,65 @@ localnet-stop:
 # Clean testnet
 localnet-clean:
 	docker-compose down
-	sudo rm -rf localnet-setup
+	sudo rm -rf build/*
 
  # Reset testnet
 localnet-unsafe-reset:
 	docker-compose down
 ifeq ($(OS),Windows_NT)
-	@docker run --rm -v $(CURDIR)\localnet-setup\node0\qomd:qom\Z qomd/node "./qomd unsafe-reset-all --home=/qom"
-	@docker run --rm -v $(CURDIR)\localnet-setup\node1\qomd:qom\Z qomd/node "./qomd unsafe-reset-all --home=/qom"
-	@docker run --rm -v $(CURDIR)\localnet-setup\node2\qomd:qom\Z qomd/node "./qomd unsafe-reset-all --home=/qom"
-	@docker run --rm -v $(CURDIR)\localnet-setup\node3\qomd:qom\Z qomd/node "./qomd unsafe-reset-all --home=/qom"
+	@docker run --rm -v $(CURDIR)\build\node0\qomd:/qom\Z qom/node "./qomd tendermint unsafe-reset-all --home=/qom"
+	@docker run --rm -v $(CURDIR)\build\node1\qomd:/qom\Z qom/node "./qomd tendermint unsafe-reset-all --home=/qom"
+	@docker run --rm -v $(CURDIR)\build\node2\qomd:/qom\Z qom/node "./qomd tendermint unsafe-reset-all --home=/qom"
+	@docker run --rm -v $(CURDIR)\build\node3\qomd:/qom\Z qom/node "./qomd tendermint unsafe-reset-all --home=/qom"
 else
-	@docker run --rm -v $(CURDIR)/localnet-setup/node0/qomd:/qom:Z qomd/node "./qomd unsafe-reset-all --home=/qom"
-	@docker run --rm -v $(CURDIR)/localnet-setup/node1/qomd:/qom:Z qomd/node "./qomd unsafe-reset-all --home=/qom"
-	@docker run --rm -v $(CURDIR)/localnet-setup/node2/qomd:/qom:Z qomd/node "./qomd unsafe-reset-all --home=/qom"
-	@docker run --rm -v $(CURDIR)/localnet-setup/node3/qomd:/qom:Z qomd/node "./qomd unsafe-reset-all --home=/qom"
+	@docker run --rm -v $(CURDIR)/build/node0/qomd:/qom:Z qom/node "./qomd tendermint unsafe-reset-all --home=/qom"
+	@docker run --rm -v $(CURDIR)/build/node1/qomd:/qom:Z qom/node "./qomd tendermint unsafe-reset-all --home=/qom"
+	@docker run --rm -v $(CURDIR)/build/node2/qomd:/qom:Z qom/node "./qomd tendermint unsafe-reset-all --home=/qom"
+	@docker run --rm -v $(CURDIR)/build/node3/qomd:/qom:Z qom/node "./qomd tendermint unsafe-reset-all --home=/qom"
 endif
 
 # Clean testnet
 localnet-show-logstream:
 	docker-compose logs --tail=1000 -f
 
-.PHONY: build-docker-local-qom localnet-start localnet-stop
+.PHONY: localnet-build localnet-start localnet-stop
+
+###############################################################################
+###                                Releasing                                ###
+###############################################################################
+
+PACKAGE_NAME:=github.com/qom-one/qomapp
+GOLANG_CROSS_VERSION  = v1.20
+GOPATH ?= '$(HOME)/go'
+release-dry-run:
+	docker run \
+		--rm \
+		--privileged \
+		-e CGO_ENABLED=1 \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-v `pwd`:/go/src/$(PACKAGE_NAME) \
+		-v ${GOPATH}/pkg:/go/pkg \
+		-w /go/src/$(PACKAGE_NAME) \
+		ghcr.io/goreleaser/goreleaser-cross:${GOLANG_CROSS_VERSION} \
+		--clean --skip-validate --skip-publish --snapshot
+
+release:
+	@if [ ! -f ".release-env" ]; then \
+		echo "\033[91m.release-env is required for release\033[0m";\
+		exit 1;\
+	fi
+	docker run \
+		--rm \
+		--privileged \
+		-e CGO_ENABLED=1 \
+		--env-file .release-env \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-v `pwd`:/go/src/$(PACKAGE_NAME) \
+		-w /go/src/$(PACKAGE_NAME) \
+		ghcr.io/goreleaser/goreleaser-cross:${GOLANG_CROSS_VERSION} \
+		release --clean --skip-validate
+
+.PHONY: release-dry-run release
 
 ###############################################################################
 ###                        Compile Solidity Contracts                       ###

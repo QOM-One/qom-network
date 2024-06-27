@@ -5,16 +5,16 @@ import (
 	"encoding/json"
 
 	"github.com/ethereum/go-ethereum/common"
-	evmtypes "github.com/evmos/ethermint/x/evm/types"
+	evmtypes "github.com/qom-one/qomapp/v1/x/evm/types"
 
-	"github.com/QOM-One/QomApp/v7/x/erc20/types"
+	"github.com/qom-one/qomapp/v1/x/erc20/types"
 )
 
 // This is an evil token. Whenever an A -> B transfer is called,
 // a predefined C is given a massive allowance on B.
 var (
 	//go:embed compiled_contracts/ERC20DirectBalanceManipulation.json
-	ERC20DirectBalanceManipulationJSON []byte // nolint: golint
+	ERC20DirectBalanceManipulationJSON []byte //nolint: golint
 
 	// ERC20DirectBalanceManipulationContract is the compiled erc20 contract
 	ERC20DirectBalanceManipulationContract evmtypes.CompiledContract

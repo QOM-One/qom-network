@@ -9,8 +9,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/genutil/client/cli"
 	"github.com/stretchr/testify/require"
 
-	"github.com/QOM-One/QomApp/v7/app"
-	qomd "github.com/QOM-One/QomApp/v7/cmd/qomd"
+	"github.com/qom-one/qomapp/v1/app"
+	qomd "github.com/qom-one/qomapp/v1/cmd/qomd"
+	"github.com/qom-one/qomapp/v1/utils"
 )
 
 func TestInitCmd(t *testing.T) {
@@ -19,10 +20,10 @@ func TestInitCmd(t *testing.T) {
 		"init",     // Test the init cmd
 		"qom-test", // Moniker
 		fmt.Sprintf("--%s=%s", cli.FlagOverwrite, "true"), // Overwrite genesis.json, in case it already exists
-		fmt.Sprintf("--%s=%s", flags.FlagChainID, "qom_7668378-1"),
+		fmt.Sprintf("--%s=%s", flags.FlagChainID, utils.TestnetChainID+"-1"),
 	})
 
-	err := svrcmd.Execute(rootCmd, app.DefaultNodeHome)
+	err := svrcmd.Execute(rootCmd, "qomd", app.DefaultNodeHome)
 	require.NoError(t, err)
 }
 
@@ -31,10 +32,10 @@ func TestAddKeyLedgerCmd(t *testing.T) {
 	rootCmd.SetArgs([]string{
 		"keys",
 		"add",
-		"mykey",
+		"dev0",
 		fmt.Sprintf("--%s", flags.FlagUseLedger),
 	})
 
-	err := svrcmd.Execute(rootCmd, app.DefaultNodeHome)
+	err := svrcmd.Execute(rootCmd, "EVMOSD", app.DefaultNodeHome)
 	require.Error(t, err)
 }

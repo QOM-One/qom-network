@@ -3,8 +3,8 @@ package keeper_test
 import (
 	"fmt"
 
-	epochstypes "github.com/QOM-One/QomApp/v7/x/epochs/types"
-	"github.com/QOM-One/QomApp/v7/x/inflation/types"
+	epochstypes "github.com/qom-one/qomapp/v1/x/epochs/types"
+	"github.com/qom-one/qomapp/v1/x/inflation/types"
 )
 
 func (suite *KeeperTestSuite) TestSetGetEpochIdentifier() {

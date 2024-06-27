@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	epochstypes "github.com/QOM-One/QomApp/v7/x/epochs/types"
-	"github.com/QOM-One/QomApp/v7/x/inflation/types"
+	epochstypes "github.com/qom-one/qomapp/v1/x/epochs/types"
+	"github.com/qom-one/qomapp/v1/x/inflation/types"
 )
 
 func (suite *KeeperTestSuite) TestEpochIdentifierAfterEpochEnd() {
@@ -31,7 +31,8 @@ func (suite *KeeperTestSuite) TestEpochIdentifierAfterEpochEnd() {
 
 			params := suite.app.InflationKeeper.GetParams(suite.ctx)
 			params.EnableInflation = true
-			suite.app.InflationKeeper.SetParams(suite.ctx, params)
+			err := suite.app.InflationKeeper.SetParams(suite.ctx, params)
+			suite.Require().NoError(err)
 
 			futureCtx := suite.ctx.WithBlockTime(time.Now().Add(time.Hour))
 			newHeight := suite.app.LastBlockHeight() + 1
@@ -46,7 +47,7 @@ func (suite *KeeperTestSuite) TestEpochIdentifierAfterEpochEnd() {
 			feePoolNew := suite.app.DistrKeeper.GetFeePool(suite.ctx)
 			if tc.expDistribution {
 				// Actual distribution portions are tested elsewhere; we just want to verify the value of the pool is greater here
-				suite.Require().Equal(feePoolNew.CommunityPool.AmountOf(denomMint).BigInt().Uint64(),
+				suite.Require().Greater(feePoolNew.CommunityPool.AmountOf(denomMint).BigInt().Uint64(),
 					feePoolOrigin.CommunityPool.AmountOf(denomMint).BigInt().Uint64())
 			} else {
 				suite.Require().Equal(feePoolNew.CommunityPool.AmountOf(denomMint), feePoolOrigin.CommunityPool.AmountOf(denomMint))
@@ -186,20 +187,21 @@ func (suite *KeeperTestSuite) TestPeriodChangesSkippedEpochsAfterEpochEnd() {
 
 			params := suite.app.InflationKeeper.GetParams(suite.ctx)
 			params.EnableInflation = true
-			suite.app.InflationKeeper.SetParams(suite.ctx, params)
+			err := suite.app.InflationKeeper.SetParams(suite.ctx, params)
+			suite.Require().NoError(err)
 
 			// Before hook
 			if !tc.enableInflation {
 				params.EnableInflation = false
-				suite.app.InflationKeeper.SetParams(suite.ctx, params)
+				err = suite.app.InflationKeeper.SetParams(suite.ctx, params)
+				suite.Require().NoError(err)
 			}
 
 			suite.app.InflationKeeper.SetSkippedEpochs(suite.ctx, tc.skippedEpochs)
 			suite.app.InflationKeeper.SetPeriod(suite.ctx, uint64(tc.currentPeriod))
 			currentSkippedEpochs := suite.app.InflationKeeper.GetSkippedEpochs(suite.ctx)
 			currentPeriod := suite.app.InflationKeeper.GetPeriod(suite.ctx)
-			originalProvision, found := suite.app.InflationKeeper.GetEpochMintProvision(suite.ctx)
-			suite.Require().True(found)
+			originalProvision := suite.app.InflationKeeper.GetEpochMintProvision(suite.ctx)
 
 			// Perform Epoch Hooks
 			futureCtx := suite.ctx.WithBlockTime(time.Now().Add(time.Minute))
@@ -209,8 +211,7 @@ func (suite *KeeperTestSuite) TestPeriodChangesSkippedEpochsAfterEpochEnd() {
 			period := suite.app.InflationKeeper.GetPeriod(suite.ctx)
 
 			if tc.periodChanges {
-				newProvision, found := suite.app.InflationKeeper.GetEpochMintProvision(suite.ctx)
-				suite.Require().True(found)
+				newProvision := suite.app.InflationKeeper.GetEpochMintProvision(suite.ctx)
 				expectedProvision := types.CalculateEpochMintProvision(
 					suite.app.InflationKeeper.GetParams(suite.ctx),
 					period,

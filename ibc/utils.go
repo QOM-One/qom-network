@@ -1,13 +1,30 @@
+// Copyright 2022 Evmos Foundation
+// This file is part of the Evmos Network packages.
+//
+// Evmos is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// The Evmos packages are distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with the Evmos packages. If not, see https://github.com/evmos/evmos/blob/main/LICENSE
+
 package ibc
 
 import (
+	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	errortypes "github.com/cosmos/cosmos-sdk/types/errors"
 
-	transfertypes "github.com/cosmos/ibc-go/v3/modules/apps/transfer/types"
-	channeltypes "github.com/cosmos/ibc-go/v3/modules/core/04-channel/types"
+	transfertypes "github.com/cosmos/ibc-go/v6/modules/apps/transfer/types"
+	channeltypes "github.com/cosmos/ibc-go/v6/modules/core/04-channel/types"
 
-	qom "github.com/QOM-One/QomApp/v7/types"
+	"github.com/qom-one/qomapp/v1/utils"
 )
 
 // GetTransferSenderRecipient returns the sender and recipient sdk.AccAddresses
@@ -24,40 +41,40 @@ func GetTransferSenderRecipient(packet channeltypes.Packet) (
 	// unmarshal packet data to obtain the sender and recipient
 	var data transfertypes.FungibleTokenPacketData
 	if err := transfertypes.ModuleCdc.UnmarshalJSON(packet.GetData(), &data); err != nil {
-		return nil, nil, "", "", sdkerrors.Wrapf(sdkerrors.ErrUnknownRequest, "cannot unmarshal ICS-20 transfer packet data")
+		return nil, nil, "", "", errorsmod.Wrapf(errortypes.ErrUnknownRequest, "cannot unmarshal ICS-20 transfer packet data")
 	}
 
 	// validate the sender bech32 address from the counterparty chain
-	// and change the bech32 human readable prefix (HRP) of the sender to `qomqom`
-	sender, err = qom.GetqomAddressFromBech32(data.Sender)
+	// and change the bech32 human readable prefix (HRP) of the sender to `evmos`
+	sender, err = utils.GetQomAddressFromBech32(data.Sender)
 	if err != nil {
-		return nil, nil, "", "", sdkerrors.Wrap(err, "invalid sender")
+		return nil, nil, "", "", errorsmod.Wrap(err, "invalid sender")
 	}
 
 	// validate the recipient bech32 address from the counterparty chain
-	// and change the bech32 human readable prefix (HRP) of the recipient to `qomqom`
-	recipient, err = qom.GetqomAddressFromBech32(data.Receiver)
+	// and change the bech32 human readable prefix (HRP) of the recipient to `evmos`
+	recipient, err = utils.GetQomAddressFromBech32(data.Receiver)
 	if err != nil {
-		return nil, nil, "", "", sdkerrors.Wrap(err, "invalid recipient")
+		return nil, nil, "", "", errorsmod.Wrap(err, "invalid recipient")
 	}
 
 	return sender, recipient, data.Sender, data.Receiver, nil
 }
 
-// GetTransferAmount returns the amount from an ICS20 FungibleTokenPacketData.
+// GetTransferAmount returns the amount from an ICS20 FungibleTokenPacketData as a string.
 func GetTransferAmount(packet channeltypes.Packet) (string, error) {
 	// unmarshal packet data to obtain the sender and recipient
 	var data transfertypes.FungibleTokenPacketData
 	if err := transfertypes.ModuleCdc.UnmarshalJSON(packet.GetData(), &data); err != nil {
-		return "", sdkerrors.Wrapf(sdkerrors.ErrUnknownRequest, "cannot unmarshal ICS-20 transfer packet data")
+		return "", errorsmod.Wrapf(errortypes.ErrUnknownRequest, "cannot unmarshal ICS-20 transfer packet data")
 	}
 
 	if data.Amount == "" {
-		return "", sdkerrors.Wrapf(sdkerrors.ErrInvalidCoins, "empty amount")
+		return "", errorsmod.Wrapf(errortypes.ErrInvalidCoins, "empty amount")
 	}
 
 	if _, ok := sdk.NewIntFromString(data.Amount); !ok {
-		return "", sdkerrors.Wrapf(sdkerrors.ErrInvalidCoins, "invalid amount")
+		return "", errorsmod.Wrapf(errortypes.ErrInvalidCoins, "invalid amount")
 	}
 
 	return data.Amount, nil
@@ -104,6 +121,18 @@ func GetReceivedCoin(srcPort, srcChannel, dstPort, dstChannel, rawDenom, rawAmt 
 
 	return sdk.Coin{
 		Denom:  voucherDenom,
+		Amount: amount,
+	}
+}
+
+// GetSentCoin returns the sent coin from an ICS20 FungibleTokenPacketData.
+func GetSentCoin(rawDenom, rawAmt string) sdk.Coin {
+	// NOTE: Denom and amount are already validated
+	amount, _ := sdk.NewIntFromString(rawAmt)
+	trace := transfertypes.ParseDenomTrace(rawDenom)
+
+	return sdk.Coin{
+		Denom:  trace.IBCDenom(),
 		Amount: amount,
 	}
 }

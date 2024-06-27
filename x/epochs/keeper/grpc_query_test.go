@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/QOM-One/QomApp/v7/x/epochs/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
+	"github.com/qom-one/qomapp/v1/x/epochs/types"
 )
 
 func (suite *KeeperTestSuite) TestEpochInfo() {

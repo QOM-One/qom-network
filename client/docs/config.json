@@ -1,16 +1,24 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Qom Chain - gRPC Gateway docs",
+    "title": "Evmos Chain - gRPC Gateway docs",
     "description": "A REST interface for state queries and transactions",
     "version": "1.0.0"
   },
   "apis": [
     {
-      "url": "./tmp-swagger-gen/qom/epochs/v1/query.swagger.json"
+      "url": "./tmp-swagger-gen/evmos/claims/v1/query.swagger.json",
+      "operationIds": {
+        "rename": {
+          "Params": "ClaimsParams"
+        }
+      }
     },
     {
-      "url": "./tmp-swagger-gen/qom/erc20/v1/query.swagger.json",
+      "url": "./tmp-swagger-gen/evmos/epochs/v1/query.swagger.json"
+    },
+    {
+      "url": "./tmp-swagger-gen/evmos/erc20/v1/query.swagger.json",
       "operationIds": {
         "rename": {
           "Params": "ERC20Params"
@@ -18,11 +26,30 @@
       }
     },
     {
-      "url": "./tmp-swagger-gen/qom/inflation/v1/query.swagger.json",
+      "url": "./tmp-swagger-gen/evmos/incentives/v1/query.swagger.json",
+      "operationIds": {
+        "rename": {
+          "Params": "IncentivesParams"
+        }
+      }
+    },
+    {
+      "url": "./tmp-swagger-gen/evmos/inflation/v1/query.swagger.json",
       "operationIds": {
         "rename": {
           "Params": "InflationParams",
           "TotalSupply": "InflationTotalSupply"
+        }
+      }
+    },
+    {
+      "url": "./tmp-swagger-gen/evmos/vesting/v1/query.swagger.json"
+    },
+    {
+      "url": "./tmp-swagger-gen/evmos/recovery/v1/query.swagger.json",
+      "operationIds": {
+        "rename": {
+          "Params": "RecoveryParams"
         }
       }
     },
@@ -40,22 +67,6 @@
         "rename": {
           "Params": "FeeMarketParams",
           "BaseFee": "FeeMarketBaseFee"
-        }
-      }
-    },
-    {
-      "url": "./tmp-swagger-gen/qom/onboarding/v1/query.swagger.json",
-      "operationIds": {
-        "rename": {
-          "Params": "OnboardingParams"
-        }
-      }
-    },
-    {
-      "url": "./tmp-swagger-gen/qom/coinswap/v1/query.swagger.json",
-      "operationIds": {
-        "rename": {
-          "Params": "CoinswapParams"
         }
       }
     },
@@ -132,6 +143,21 @@
       "operationIds": {
         "rename": {
           "Params": "GovParams"
+        }
+      }
+    },
+    {
+      "url": "./tmp-swagger-gen/cosmos/gov/v1/query.swagger.json",
+      "operationIds": {
+        "rename": {
+          "Params": "GovV1Params",
+          "Proposal": "GovV1Proposal",
+          "Proposals": "GovV1Proposal",
+          "Vote": "GovV1Vote",
+          "Votes": "GovV1Votes",
+          "Deposit": "GovV1Deposit",
+          "Deposits": "GovV1Deposit",
+          "TallyResult": "GovV1TallyResult"
         }
       }
     },
